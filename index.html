@@ -6,7 +6,7 @@
 <style>
 :root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--blue:#1f4e78;--blue2:#2c6b9f;--line:#dbe2ea;--good:#e2f0d9;--bad:#fde2e2;--soft:#eef3f8}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:linear-gradient(135deg,#17365d,#1f4e78);color:#fff;padding:24px 20px}.wrap{max-width:1100px;margin:auto}h1{margin:0 0 6px;font-size:28px}.sub{opacity:.86}
+header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:24px 20px}.wrap{max-width:1100px;margin:auto}h1{margin:0 0 6px;font-size:28px}.sub{opacity:.86}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{background:#e9eef5;color:#17365d}.tab.active{background:var(--blue);color:#fff}
 button{border:0;border-radius:10px;padding:10px 14px;background:var(--blue);color:#fff;cursor:pointer;font:inherit}button.secondary{background:var(--soft);color:#17365d}button:disabled{opacity:.45;cursor:not-allowed}
 .panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 18px rgba(23,54,93,.06)}
@@ -67,7 +67,7 @@ footer{padding:30px 20px;color:var(--muted);text-align:center}@media(max-width:8
 
 .summary-library,.quiz-library{margin:14px 0 18px;padding:14px 16px;background:#f8fafc;border:1px solid var(--line);border-radius:14px}
 .library-list{margin:8px 0 0;padding-left:24px}.library-list li{margin:10px 0}
-.library-link{background:none!important;color:#17365d!important;padding:2px 0!important;text-align:left;font-weight:800;font-size:17px;text-decoration:underline;text-underline-offset:3px}
+.library-link{background:none!important;color:var(--blue)!important;padding:2px 0!important;text-align:left;font-weight:800;font-size:17px;text-decoration:underline;text-underline-offset:3px}
 .library-link.active{color:#2c6b9f!important}
 .summary-doc{display:none}.summary-doc.active{display:block}
 .slide-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 7px 22px rgba(23,54,93,.06);scroll-margin-top:18px}
@@ -83,7 +83,7 @@ footer{padding:30px 20px;color:var(--muted);text-align:center}@media(max-width:8
 .lecture-figure{margin:15px 0 6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:hidden}
 .lecture-figure svg{width:100%;height:auto;display:block;max-height:360px}
 .lecture-figure figcaption{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px}
-.open-page{display:inline-block;margin-left:8px;font-size:12px;font-weight:700;color:#2c6b9f;text-decoration:none;border:1px solid #bfd1e1;border-radius:999px;padding:4px 8px;background:#fff}
+.open-page{display:inline-block;margin-left:8px;font-size:12px;font-weight:700;color:var(--blue);text-decoration:none;border:1px solid #bfd1e1;border-radius:999px;padding:4px 8px;background:#fff}
 .open-page:hover{background:#eef5fb}
 .device-note{margin-top:12px;padding:10px 12px;background:#eef5fb;border:1px solid #bdd3e6;border-radius:10px;font-size:12px;line-height:1.55;color:#29445f}
 
@@ -407,7 +407,7 @@ body.flat-cards .card,body.flat-cards .slide-card,body.flat-cards .summary-card{
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:820px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:840px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -458,8 +458,9 @@ DEDICATED STUDY PAGES
 
 LOGIN / SESSION
 - Keep a successful local login active for 24 hours on the same browser/device so opening dedicated Summary/Quiz links in new tabs does not require another login.
-- After 24 hours, require login again.
+- After 24 hours, require login again, including tabs that stayed open continuously.
 - Logging out should immediately clear the remembered session.
+- Cross-tab state on the same browser/origin should stay consistent where practical: theme/progress changes should be reflected without creating separate user data.
 - The current username/PIN profile system is LOCAL to each browser/device; the same username on an iPad is not automatically the Mac profile.
 - Until a real cloud backend is configured, cross-device transfer is manual: Export full backup on device A → create/select a local profile on device B → Import full backup.
 - Do not pretend localStorage is cloud-synced. True automatic Mac/iPad sync requires a backend such as Supabase/Firebase or another authenticated database.
@@ -553,7 +554,7 @@ const summaryNames={
 const summaryDocs={s1:"sum-l1-1-42",s2:"sum-l1-1-42",s3:"sum-l1-1-42",s4:"sum-l1-1-42",s5:"sum-l1-43-70",s6:"sum-l1-43-70",s7:"sum-l1-43-70",s8:"sum-l1-43-70"};
 const scoreMap={"Not Started":0,"Learning":25,"Learned · Not Reviewed":50,"Reviewed & Practiced":75,"Mastered":100};
 const USERS_KEY="d-study-users-v1", ACTIVE_KEY="d-study-active-user";
-let activeUser=null,state=null,quizMode="review",quizSet="l1a",quizPart="l1-foundations",quizSession=null,filtersReady=false,loginMode="signin";
+let activeUser=null,state=null,quizMode="review",quizSet="l1a",quizPart="l1-foundations",quizSession=null,filtersReady=false,loginMode="signin",sessionExpiryTimer=null;
 
 function getQuizFor(part=quizPart,mode=quizMode){
   const meta=quizParts[part]||quizParts["l1-all"];
@@ -650,11 +651,22 @@ async function handleLogin(){
     startUser(user);
   }
 }
+function scheduleSessionExpiry(){
+  if(sessionExpiryTimer)clearTimeout(sessionExpiryTimer);
+  try{
+    const s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||"null");
+    if(!s?.expiresAt)return;
+    const ms=s.expiresAt-Date.now();
+    if(ms<=0){localStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(ACTIVE_KEY);location.reload();return}
+    sessionExpiryTimer=setTimeout(()=>{localStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(ACTIVE_KEY);alert("Your 24-hour login expired. Please sign in again.");location.reload()},ms);
+  }catch(e){}
+}
 function startUser(user,renewSession=true){
   activeUser=user;
   if(renewSession){
     localStorage.setItem(ACTIVE_KEY,JSON.stringify({id:user.id,expiresAt:Date.now()+24*60*60*1000}));
   }
+  scheduleSessionExpiry();
   sessionStorage.setItem(ACTIVE_KEY,user.id);
   document.getElementById("loginScreen").style.display="none";
   document.getElementById("appShell").style.display="block";
@@ -946,6 +958,13 @@ document.getElementById("copyPromptBtn").onclick=async()=>{
 };
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.dataset.mode));
+window.addEventListener("storage",e=>{
+  if(!activeUser)return;
+  if(e.key===stateKey()&&e.newValue){
+    try{state=normalizeState(JSON.parse(e.newValue));applyPreferences();renderTracker();renderHistory()}catch(err){}
+  }
+  if(e.key===ACTIVE_KEY&&e.newValue===null){sessionStorage.removeItem(ACTIVE_KEY);location.reload()}
+});
 window.addEventListener("beforeunload",()=>{saveQuizDraft();persist()});
 setLoginMode("signin");
 restoreSession();
