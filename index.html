@@ -10,7 +10,7 @@
 :root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--blue:#1f4e78;--blue2:#2c6b9f;--line:#dbe2ea;--good:#e2f0d9;--bad:#fde2e2;--soft:#eef3f8}
 *{box-sizing:border-box}body{margin:0;font-family:var(--app-font,Inter,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif);background:var(--bg);color:var(--ink)}
 header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:24px 20px}.wrap{max-width:1100px;margin:auto}h1{margin:0 0 6px;font-size:28px}.sub{opacity:.86}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{background:#e9eef5;color:#17365d}.tab.active{background:var(--blue);color:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{display:inline-flex;align-items:center;justify-content:center;background:#e9eef5;color:#17365d;text-decoration:none;padding:10px 14px;border-radius:10px;font:inherit;font-weight:600;transition:transform .08s ease,background-color .12s ease,color .12s ease,border-color .12s ease}.tab.active{background:var(--blue);color:#fff}
 button{border:0;border-radius:10px;padding:10px 14px;background:var(--blue);color:#fff;cursor:pointer;font:inherit}
 button{transition:transform .08s ease,background-color .12s ease,border-color .12s ease,box-shadow .12s ease,filter .12s ease}
 button:active{transform:translateY(1px) scale(.985);filter:brightness(.9);box-shadow:inset 0 2px 5px rgba(0,0,0,.18)}
@@ -261,7 +261,14 @@ body.dark footer{color:#aebdcc}
 <div id="appShell">
 <header><div class="wrap headerrow"><div><h1>D Study App • EC214</h1><div class="sub">Review first → Master later • autosave + confidence tracking</div></div><div class="userbar"><span id="userChip" class="userchip"></span><button id="logoutBtn" class="logout">Log out</button></div></div></header>
 <main class="wrap"><div id="legacyBox" class="legacy"><b>Old EC214 progress found on this browser.</b><div class="small" style="margin:4px 0 9px">Import it into this profile so your previous tracker/draft is not lost.</div><button id="migrateBtn">Import old progress</button></div>
-<div class="tabs"><button class="tab active" data-tab="tracker">📚 Progress</button><button class="tab" data-tab="summary">📝 Summary</button><button class="tab" data-tab="quiz">✅ Quiz</button><button class="tab" data-tab="history">📈 Quiz History</button><button class="tab" data-tab="prompt">🤖 ChatGPT Prompt</button><button class="tab" data-tab="settings">⚙️ Settings</button></div>
+<nav class="tabs" aria-label="Main navigation">
+  <a class="tab active" data-tab="tracker" href="/d-study-app/progress/">📚 Progress</a>
+  <a class="tab" data-tab="summary" href="/d-study-app/summary/">📝 Summary</a>
+  <a class="tab" data-tab="quiz" href="/d-study-app/quiz/">✅ Quiz</a>
+  <a class="tab" data-tab="history" href="/d-study-app/history/">📈 Quiz History</a>
+  <a class="tab" data-tab="prompt" href="/d-study-app/prompt/">🤖 ChatGPT Prompt</a>
+  <a class="tab" data-tab="settings" href="/d-study-app/settings/">⚙️ Settings</a>
+</nav>
 <section id="tracker" class="panel active">
 <div class="dashboard-hero">
   <div class="dashboard-main">
@@ -565,7 +572,7 @@ body.dark footer{color:#aebdcc}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:940px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:960px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -605,14 +612,19 @@ DEDICATED STUDY PAGES
 - Major study objects have their own GitHub Pages path.
 - Library item titles themselves should be clickable links; do not add a redundant "View here" button.
 - Normal clicks should navigate in the SAME tab. Do not force target=_blank; the user can Cmd/Ctrl-click or use the browser menu when they want another tab.
-- Current examples:
+- The top navigation should use normal same-tab links, not JS-only buttons, so every main page has a copyable/bookmarkable URL.
+- Every MAIN navigation item must have its own stable GitHub Pages path:
   /progress/
+  /summary/
+  /quiz/
+  /history/
+  /prompt/
+  /settings/
+- Deep study links also remain available:
   /sum-1-42/
   /sum-43-70/
   /quiz1-42/
   /quiz43-70/
-  /history/
-  /prompt/
 - These paths remain on the same origin, so on the same browser/device they share the same localStorage profile data and unfinished drafts.
 - Summary graph visuals should be included whenever they materially help. Prefer lecture-grounded visuals based on the current professor slides; do not introduce graph rules that the current files do not support.
 
@@ -961,6 +973,8 @@ function applyPathRoute(){
   if(p.endsWith("/history")){switchTab("history");return}
   if(p.endsWith("/prompt")){switchTab("prompt");return}
   if(p.endsWith("/settings")){switchTab("settings");applyPreferences();return}
+  if(p.endsWith("/summary")){openSummaryDoc("sum-l1-1-42");return}
+  if(p.endsWith("/quiz")){quizSet="l1a";quizPart="l1-foundations";quizSession=loadQuizDraft(quizMode,quizPart);renderQuizSetButtons();renderQuizPartButtons();renderQuiz();switchTab("quiz");return}
   if(p.endsWith("/sum-1-42")){openSummaryDoc("sum-l1-1-42");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
   if(p.endsWith("/sum-43-70")){openSummaryDoc("sum-l1-43-70");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
   if(p.endsWith("/quiz1-42")){
@@ -1179,7 +1193,7 @@ document.getElementById("copyPromptBtn").onclick=async()=>{
   catch(e){t.select();document.execCommand("copy");s.textContent="Copied ✓";}
   setTimeout(()=>s.textContent="",1800);
 };
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+document.querySelectorAll("button.tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.dataset.mode));
 window.addEventListener("storage",e=>{
   if(!activeUser)return;
