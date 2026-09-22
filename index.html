@@ -2260,6 +2260,98 @@ body.midnight-ui.dark .deep-chevron{
   .deep-brain{width:35px!important;height:35px!important}
   .deep-dive-expanded{padding:0 14px 14px!important}
 }
+
+/* ============================================================
+   v12.10 — Stronger Understand it affordance + larger reading size
+   ============================================================ */
+.summary-deep-dive{
+  margin-top:24px!important;
+  border-width:2px!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 46%,var(--line))!important;
+  box-shadow:0 10px 28px color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,transparent)!important;
+}
+.deep-dive-toggle{
+  min-height:82px!important;
+  padding:18px 20px!important;
+}
+.deep-dive-title b{
+  font-size:17px!important;
+}
+.deep-dive-title small{
+  font-size:11.5px!important;
+  line-height:1.45!important;
+}
+.deep-brain{
+  width:42px!important;
+  height:42px!important;
+  font-size:20px!important;
+}
+.deep-click-hint{
+  font-size:10px!important;
+  padding:6px 10px!important;
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 14%,var(--card))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 40%,var(--line))!important;
+}
+.deep-chevron{
+  width:34px!important;
+  height:34px!important;
+  font-size:23px!important;
+}
+.deep-dive-expanded{
+  padding:0 20px 20px!important;
+}
+.deep-dive-toolbar{
+  padding:12px 0 14px!important;
+}
+.deep-lang-switch button{
+  min-width:64px;
+  font-size:10.5px!important;
+  padding:7px 12px!important;
+}
+.deep-block{
+  padding:14px!important;
+}
+.deep-block h4{
+  font-size:13.5px!important;
+  margin-bottom:9px!important;
+}
+.deep-block li{
+  font-size:13.5px!important;
+  line-height:1.66!important;
+  margin:7px 0!important;
+}
+.summary-deep-dive[data-lang="th"] .deep-block li{
+  font-size:14px!important;
+  line-height:1.78!important;
+}
+.summary-deep-dive[data-lang="th"] .deep-block h4{
+  font-size:14px!important;
+}
+.summary-deep-dive.collapsed .deep-dive-toggle{
+  cursor:pointer;
+}
+.summary-deep-dive.collapsed .deep-dive-toggle:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 34%,transparent)!important;
+  outline-offset:-3px;
+}
+@media(hover:hover) and (pointer:fine){
+  .summary-deep-dive.collapsed:hover{
+    transform:translateY(-2px)!important;
+    border-color:var(--theme-accent,var(--blue))!important;
+    box-shadow:0 14px 34px color-mix(in srgb,var(--theme-accent,var(--blue)) 16%,transparent)!important;
+  }
+  .summary-deep-dive.collapsed:hover .deep-brain{
+    transform:scale(1.05);
+  }
+}
+@media(max-width:600px){
+  .deep-dive-toggle{min-height:76px!important;padding:16px!important}
+  .deep-dive-title b{font-size:16px!important}
+  .deep-dive-title small{font-size:10.5px!important}
+  .deep-brain{width:38px!important;height:38px!important}
+  .deep-dive-expanded{padding:0 16px 16px!important}
+  .deep-block li,.summary-deep-dive[data-lang="th"] .deep-block li{font-size:13.5px!important}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -3501,7 +3593,8 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.9</b><span>Understand it Visibility</span></div><p>Made the collapsible Understand it control larger, more readable, and much more obviously clickable with accent emphasis and expand/collapse cues.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.10</b><span>Understand it Readability</span></div><p>Expanded the Understand it card further, increased English/Thai explanation text size, enlarged its icon and controls, and strengthened the clickable hover/focus treatment.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.9</b><span>Understand it Visibility</span></div><p>Made the collapsible Understand it control larger, more readable, and much more obviously clickable with accent emphasis and expand/collapse cues.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.8</b><span>Bilingual Understand it</span></div><p>Made every lecture section's Understand it explanation collapsible and added an English/Thai switch with complete Thai explanations for every section.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.7</b><span>Mistake Log</span></div><p>Made incomplete/flagged Quiz History attempts clickable, with targeted review of wrong, Not sure, and Guessed questions including answers and explanations.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.6</b><span>Explanation-First Summaries</span></div><p>Expanded all five lecture summaries with plain-language reasoning, application examples, common traps, and Thai bridges; also rebuilt the Lecture 1 production/factor-income section in detail.</p></article>
@@ -3535,13 +3628,13 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.9</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.10</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.9</b> • larger, clearer, bilingual Understand it controls</footer></div>
-<script>const APP_VERSION="12.9";
+</main><footer><b id="appVersionLabel">D Study App v12.10</b> • larger, more noticeable bilingual Understand it cards</footer></div>
+<script>const APP_VERSION="12.10";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
