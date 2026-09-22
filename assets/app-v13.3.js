@@ -654,7 +654,8 @@ function startUser(user,renewSession=true){
   if(mlc&&!mlc.dataset.bound){mlc.dataset.bound="1";mlc.onclick=closeMistakeLog}
   if(mlo&&!mlo.dataset.bound){mlo.dataset.bound="1";mlo.onclick=e=>{if(e.target===mlo)closeMistakeLog()}}
   renderNotesHub();
-  if(!restoreSubjectSessionForActiveUser())renderSubjectHub();
+  if(location.pathname===appPath("subjects")){activeSubject=null;clearSubjectSession();renderSubjectHub()}
+  else if(!restoreSubjectSessionForActiveUser())renderSubjectHub();
   const legacy=!!localStorage.getItem("ec214-study-state")&&!hadUserState;
   document.getElementById("legacyBox").style.display=legacy?"block":"none";
   persist();
