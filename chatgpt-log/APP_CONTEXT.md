@@ -163,7 +163,36 @@ When changing routing:
 - preserve correct back/navigation behavior;
 - keep GitHub Pages static hosting constraints in mind.
 
-## 11. Course material archive policy
+## 11. Developer Management Console (v12.11)
+
+Settings now includes a small **For Dev** button next to Update Log. It opens a full-screen developer management console after a password check.
+
+Current management features:
+- overview metrics for local browser profiles;
+- local user list with username, progress, quiz-attempt count, notes, and per-lecture progress;
+- local activity log for profile creation/sign-in/session restore/sign-out, quiz submissions, and admin actions from v12.11 onward;
+- remove a local profile and its stored state/drafts;
+- local user ban / unban enforcement during sign-in and session restore;
+- export a developer snapshot that intentionally excludes PIN hashes/password data;
+- future-feature placeholders for cloud users, remote progress, server audit logs, and network security.
+
+Developer-console storage keys:
+- `d-study-dev-bans-v1`
+- `d-study-dev-activity-v1`
+- session-only unlock state: `d-study-dev-unlocked`
+
+### Security / architecture limitation
+
+The current app is still a **public static GitHub Pages app with browser-local profiles**. Therefore:
+- the password gate is only a convenience UI gate, not server-grade administrator authentication;
+- a determined user can inspect client code or clear browser storage;
+- the console only sees users/data stored in the same browser/device;
+- the app does **not** collect public IP addresses;
+- reliable global user management, IP logging, IP ban/unban, tamper-resistant logs, and cross-device enforcement require a real authenticated backend or edge/server layer.
+
+Do not fake global/IP administration in the static build. Keep IP controls disabled/clearly marked backend-required until such infrastructure exists.
+
+## 12. Course material archive policy
 
 The course-material archive uses a **hybrid storage policy**:
 
@@ -198,7 +227,7 @@ Current professor teaching-record links supplied by the user:
 - 16 Sep 2026 — https://youtu.be/qh7EOjQfTOM
 - 19 Sep 2026 — https://youtu.be/ACnXh3ZiRKI (make-up session)
 
-## 12. Current annotated lecture files supplied in the 2026 project conversation
+## 13. Current annotated lecture files supplied in the 2026 project conversation
 
 Canonical five:
 - Lecture 1 — Introduction to Economics — annotated, 70 pages.
@@ -210,7 +239,7 @@ Canonical five:
 Non-canonical duplicate/partial:
 - Lecture 4 — Finance, Saving, and Investment — part 1 version, 43 pages.
 
-## 13. Content-source hierarchy
+## 14. Content-source hierarchy
 
 For current EC214 teaching content:
 1. current professor lecture PDFs / annotated lecture materials;
@@ -221,7 +250,7 @@ For current EC214 teaching content:
 
 Do not silently import an old-exam topic into the current syllabus unless current material supports it.
 
-## 14. General implementation rule
+## 15. General implementation rule
 
 Before editing:
 1. inspect current `main`;
