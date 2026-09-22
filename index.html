@@ -493,6 +493,403 @@ body.dark .update-entry-top span{color:#aebdcc}
   .update-log-modal{padding:16px;max-height:82vh}
   .update-entry-top{align-items:flex-start}
 }
+
+/* =========================
+   V12 — OPTIONAL NEO DASHBOARD UI
+   Classic UI remains untouched unless body.neo-ui is active.
+   ========================= */
+.ui-theme-setting{margin-bottom:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--soft) 55%,var(--card))}
+.ui-theme-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ui-theme-choice{
+  display:flex;align-items:center;gap:10px;text-align:left;
+  padding:12px;border-radius:13px;background:var(--card);color:var(--ink);
+  border:1px solid var(--line)
+}
+.ui-theme-choice-icon{
+  display:grid;place-items:center;flex:0 0 auto;width:34px;height:34px;border-radius:10px;
+  background:var(--soft);color:var(--blue);font-weight:900
+}
+.ui-theme-choice span:last-child{display:grid;gap:2px}
+.ui-theme-choice small{font-size:10px;color:var(--muted);font-weight:600}
+.ui-theme-choice.active{border:2px solid var(--blue);background:color-mix(in srgb,var(--blue) 7%,var(--card));box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 10%,transparent)}
+.ui-theme-note{font-size:10px;color:var(--muted);line-height:1.5;margin-top:9px}
+body.dark .ui-theme-setting{background:#29394d;border-color:#50647a}
+body.dark .ui-theme-choice{background:#223043;border-color:#50647a;color:#f4f7fb}
+body.dark .ui-theme-choice-icon{background:#31445a;color:#a9d5ff}
+body.dark .ui-theme-choice.active{background:#2d4258;border-color:#8abfe9}
+@media(max-width:650px){.ui-theme-choices{grid-template-columns:1fr}}
+
+/* Neo base — Light */
+body.neo-ui{
+  --neo-bg:#eef4fb;
+  --neo-card:#ffffff;
+  --neo-card-2:#f7faff;
+  --neo-line:#d9e4f0;
+  --neo-line-strong:#c7d7e8;
+  --neo-ink:#10223d;
+  --neo-muted:#65768c;
+  --neo-blue:#1677ff;
+  --neo-cyan:#22a5f5;
+  --neo-green:#18a46b;
+  --neo-yellow:#f0b53d;
+  --neo-red:#ef5e67;
+  background:
+    radial-gradient(circle at 12% -8%,rgba(22,119,255,.10),transparent 31%),
+    radial-gradient(circle at 92% 12%,rgba(34,165,245,.07),transparent 26%),
+    var(--neo-bg);
+  color:var(--neo-ink);
+}
+body.neo-ui header{
+  background:rgba(255,255,255,.88);
+  color:var(--neo-ink);
+  border-bottom:1px solid var(--neo-line);
+  box-shadow:0 8px 26px rgba(35,72,115,.07);
+  backdrop-filter:blur(16px);
+}
+body.neo-ui header h1{color:var(--neo-ink)}
+body.neo-ui header .sub{color:var(--neo-muted)}
+body.neo-ui .userchip{background:#edf5ff;color:#24415f}
+body.neo-ui .logout{background:#f5f8fc;color:#34506f;border-color:#d8e4ef}
+body.neo-ui main.wrap{padding-top:6px}
+body.neo-ui .tabs{
+  background:rgba(255,255,255,.82);
+  border-color:var(--neo-line);
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(35,72,115,.06);
+}
+body.neo-ui .tab{background:transparent;color:#49627d}
+body.neo-ui .tab.active{
+  background:#eaf3ff!important;
+  color:#0d67df!important;
+  border-color:#b9d5f6!important;
+  box-shadow:0 0 0 2px rgba(22,119,255,.07)!important;
+}
+body.neo-ui .panel-intro{margin-top:8px;margin-bottom:12px}
+body.neo-ui .panel-intro .eyebrow{color:#3a83cf}
+body.neo-ui .panel-intro h2{font-size:31px;letter-spacing:-.03em;margin-top:3px;color:var(--neo-ink)}
+body.neo-ui .panel-intro p{color:var(--neo-muted);font-size:13px}
+body.neo-ui .card,
+body.neo-ui .settings-card,
+body.neo-ui .slide-card,
+body.neo-ui .summary-card,
+body.neo-ui .summary-library,
+body.neo-ui .quiz-library,
+body.neo-ui .notes-entry,
+body.neo-ui .notes-hub-toolbar,
+body.neo-ui .dashboard-main,
+body.neo-ui .dashboard-ring-card,
+body.neo-ui .dashboard-focus{
+  background:var(--neo-card);
+  color:var(--neo-ink);
+  border-color:var(--neo-line);
+  box-shadow:0 10px 28px rgba(35,72,115,.07);
+}
+body.neo-ui .card{border-radius:20px}
+body.neo-ui .summary-library,
+body.neo-ui .quiz-library{border-radius:18px;padding:18px}
+body.neo-ui .library-link{
+  background:var(--neo-card-2)!important;
+  border-color:var(--neo-line)!important;
+  color:#1e4f7d!important;
+  border-radius:14px;
+}
+body.neo-ui .library-link:hover{
+  background:#f0f7ff!important;border-color:#83b8ee!important;
+  box-shadow:0 8px 20px rgba(22,119,255,.10)
+}
+body.neo-ui .library-link.active{
+  color:#0d65d4!important;
+  background:#edf6ff!important;
+  border-color:#64a8ec!important;
+}
+body.neo-ui .slide-card{border-radius:18px}
+body.neo-ui .slide-card h2,body.neo-ui .slide-card h3,
+body.neo-ui .lecture-title,body.neo-ui .question{color:var(--neo-ink)}
+body.neo-ui .slide-no,body.neo-ui .summary-kicker{color:#3d88d4}
+body.neo-ui .keyline{
+  background:#f2f8ff;color:#173958;border-left-color:#2b88e8;
+  border-radius:10px
+}
+body.neo-ui .thai-help{background:#fff9ea;border-color:#f2d895;color:#66521a}
+body.neo-ui .exam-note,body.neo-ui .source-note,body.neo-ui .read-with,body.neo-ui .backup-note{
+  background:#f6f9fd;color:#263f5b;border-color:var(--neo-line)
+}
+body.neo-ui .summary-link{color:#176fc4}
+body.neo-ui .mode-btn,body.neo-ui .part-btn{
+  background:var(--neo-card);
+  border-color:var(--neo-line);
+  color:var(--neo-ink);
+  box-shadow:none
+}
+body.neo-ui .mode-btn.active,body.neo-ui .part-btn.active{
+  background:#edf6ff!important;color:#163c62!important;border-color:#2e7fc4!important
+}
+body.neo-ui input,body.neo-ui select,body.neo-ui textarea{
+  background:#fbfdff;color:var(--neo-ink);border-color:var(--neo-line-strong)
+}
+body.neo-ui .option{
+  background:#fbfdff;border-color:var(--neo-line)
+}
+body.neo-ui .option:hover{background:#f1f7fd}
+body.neo-ui .option.selected{
+  background:#eef6ff;border-color:#58a0e5;
+  box-shadow:0 0 0 2px rgba(22,119,255,.08)
+}
+body.neo-ui .qnum{background:#f5f9fd;color:#36506e;border-color:var(--neo-line)}
+body.neo-ui .qnum.answered{background:#e9f5ff;color:#145d9a}
+body.neo-ui .qnum.current{background:#eaf4ff;color:#0d67df;border-color:#4c96d8}
+body.neo-ui .quiz-progress{background:#e7eef6}
+body.neo-ui .quiz-progress>div{background:linear-gradient(90deg,var(--neo-blue),var(--neo-cyan))}
+body.neo-ui .quiz-note-box{background:#f7faff;border-color:var(--neo-line)}
+body.neo-ui .quiz-note-box textarea{background:#fff}
+body.neo-ui .confidence-wrap{background:#f8fbff;border-color:#cbdbea}
+body.neo-ui .result-box{background:#f8fbff;border-color:var(--neo-line)}
+body.neo-ui .correct{background:#ecf8f1!important;color:#246342!important}
+body.neo-ui .wrong{background:#fff0f2!important;color:#863641!important}
+body.neo-ui .notice{background:#fff8e8!important;color:#6b5417!important;border-color:#ecd58c!important}
+body.neo-ui .notes-empty{background:#fff;border-color:var(--neo-line)}
+body.neo-ui .note-count-chip,body.neo-ui .note-source-pill{
+  background:#f2f7fd;border-color:var(--neo-line);color:#33628d
+}
+body.neo-ui .settings-card{
+  border-radius:18px;padding:20px
+}
+body.neo-ui .settings-grid{gap:16px}
+body.neo-ui .setting-row{border-color:var(--neo-line)}
+body.neo-ui .font-preview{
+  background:linear-gradient(145deg,#f8fbff,#f1f7fd);
+  border-color:var(--neo-line);border-radius:14px
+}
+body.neo-ui .device-note{
+  background:#f2f7fd;border-color:#cfe0ef;color:#31516e;border-radius:12px
+}
+body.neo-ui .session-badge{
+  background:#eaf4ff;color:#20689f;border:1px solid #cee0f0
+}
+body.neo-ui .dashboard-main{
+  background:linear-gradient(145deg,#ffffff,#f3f8fe)
+}
+body.neo-ui .progress-donut{
+  background:conic-gradient(var(--neo-blue) calc(var(--pct)*1%),#e0e9f2 0)
+}
+body.neo-ui .progress-donut:after{background:#fff}
+body.neo-ui .status-track{background:#e5edf5}
+body.neo-ui .status-fill{background:linear-gradient(90deg,var(--neo-blue),var(--neo-cyan))}
+body.neo-ui footer{color:#7b8a9d}
+
+/* Neo Settings receives the new theme's own aesthetic */
+body.neo-ui #settings>.card{
+  background:linear-gradient(145deg,#ffffff,#f7faff);
+  border-color:#d8e5f1;
+}
+body.neo-ui #settings .ui-theme-setting{
+  background:linear-gradient(145deg,#f3f8ff,#f8fbff);
+  border-color:#cddff1
+}
+body.neo-ui #settings .ui-theme-choice{background:#fff}
+body.neo-ui #settings .ui-theme-choice.active{
+  background:linear-gradient(145deg,#edf6ff,#f5faff);
+  border-color:#3790e4
+}
+
+/* Neo Summary page: richer dashboard-like hierarchy, same underlying content/features */
+body.neo-ui #summary>.panel-intro{
+  padding:20px 4px 4px;
+}
+body.neo-ui #summary .summary-library{
+  background:linear-gradient(145deg,#ffffff,#f7faff);
+}
+body.neo-ui #summary .library-list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px
+}
+body.neo-ui #summary .library-list li{margin:0}
+body.neo-ui #summary .library-link{
+  height:100%;min-height:70px;display:flex;align-items:center;
+  font-size:15px!important;line-height:1.35;
+  padding:16px!important
+}
+body.neo-ui #summary .summary-doc>.card:first-child{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#ffffff,#f4f9ff)
+}
+body.neo-ui #summary .summary-doc>.card:first-child::after{
+  content:"";position:absolute;width:160px;height:160px;border-radius:50%;
+  right:-72px;top:-88px;background:rgba(22,119,255,.07)
+}
+body.neo-ui #summary .slide-card{
+  border-left:3px solid #76afe5
+}
+body.neo-ui #summary .lecture-figure{
+  border-color:#d7e3ef;box-shadow:0 8px 20px rgba(35,72,115,.06)
+}
+
+/* Neo Quiz */
+body.neo-ui #quiz>.panel-intro{padding-top:20px}
+body.neo-ui #quiz .quiz-shell>.card{
+  background:linear-gradient(145deg,#fff,#f7faff)
+}
+body.neo-ui .quiz-set-progress{
+  background:#f1f6fb;border-color:#d5e1ec;color:#65778a
+}
+body.neo-ui .quiz-set-progress.complete{
+  background:#edf8f2;color:#3f7857;border-color:#cfe4d7
+}
+body.neo-ui .quiz-attempt-detail{
+  background:#f1f7fd;border-color:#d9e5ef;color:#5e7187
+}
+
+/* Neo Notes */
+body.neo-ui #notes .notes-hub-toolbar{
+  background:linear-gradient(145deg,#fff,#f5f9fe)
+}
+body.neo-ui #notes .notes-entry{
+  border-left:3px solid #8bb9e6
+}
+
+/* Neo dark */
+body.neo-ui.dark{
+  --neo-bg:#0c1723;
+  --neo-card:#121f2d;
+  --neo-card-2:#162535;
+  --neo-line:#26394c;
+  --neo-line-strong:#385069;
+  --neo-ink:#f2f7fc;
+  --neo-muted:#9fb0c2;
+  --neo-blue:#2f9cff;
+  --neo-cyan:#2fb9df;
+  --neo-green:#45c28a;
+  --neo-yellow:#efba4e;
+  --neo-red:#ed6871;
+  background:
+    radial-gradient(circle at 10% -5%,rgba(47,156,255,.12),transparent 32%),
+    radial-gradient(circle at 88% 4%,rgba(47,185,223,.07),transparent 25%),
+    var(--neo-bg)!important;
+  color:var(--neo-ink);
+}
+body.neo-ui.dark header{
+  background:rgba(11,24,36,.91);
+  border-color:#21384c;
+  box-shadow:0 10px 28px rgba(0,0,0,.22)
+}
+body.neo-ui.dark header h1{color:#f6f9fd}
+body.neo-ui.dark header .sub{color:#9cb0c3}
+body.neo-ui.dark .userchip{background:#17293a;color:#c9d8e7}
+body.neo-ui.dark .logout{background:#17293a;color:#d5e4f1;border-color:#31475d}
+body.neo-ui.dark .tabs{
+  background:rgba(17,31,45,.88);border-color:#294056;
+  box-shadow:0 8px 24px rgba(0,0,0,.18)
+}
+body.neo-ui.dark .tab{background:transparent;color:#c5d1de}
+body.neo-ui.dark .tab.active{
+  background:#173451!important;color:#8dcaff!important;border-color:#3b79ad!important;
+  box-shadow:0 0 0 2px rgba(47,156,255,.10)!important
+}
+body.neo-ui.dark .panel-intro h2,
+body.neo-ui.dark .lecture-title,
+body.neo-ui.dark .question,
+body.neo-ui.dark .slide-card h2,
+body.neo-ui.dark .slide-card h3{color:#f4f8fc!important}
+body.neo-ui.dark .panel-intro p{color:#9fb0c2!important}
+body.neo-ui.dark .card,
+body.neo-ui.dark .settings-card,
+body.neo-ui.dark .slide-card,
+body.neo-ui.dark .summary-card,
+body.neo-ui.dark .summary-library,
+body.neo-ui.dark .quiz-library,
+body.neo-ui.dark .notes-entry,
+body.neo-ui.dark .notes-hub-toolbar,
+body.neo-ui.dark .dashboard-main,
+body.neo-ui.dark .dashboard-ring-card,
+body.neo-ui.dark .dashboard-focus{
+  background:#121f2d!important;
+  color:#edf4fb!important;
+  border-color:#2b4054!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.20)!important
+}
+body.neo-ui.dark .summary-library,
+body.neo-ui.dark .quiz-library,
+body.neo-ui.dark #settings>.card,
+body.neo-ui.dark #notes .notes-hub-toolbar,
+body.neo-ui.dark #quiz .quiz-shell>.card{
+  background:linear-gradient(145deg,#142333,#101d2a)!important
+}
+body.neo-ui.dark .library-link{
+  background:#162636!important;color:#b9daf5!important;border-color:#2d4358!important
+}
+body.neo-ui.dark .library-link:hover{
+  background:#1b3044!important;border-color:#4d8fc6!important
+}
+body.neo-ui.dark .library-link.active{
+  color:#d9eeff!important;background:#18344e!important;border-color:#4b96d4!important
+}
+body.neo-ui.dark .keyline{
+  background:#172b3e!important;color:#edf5fc!important;border-left-color:#42a1ee!important
+}
+body.neo-ui.dark .thai-help{background:#302918!important;color:#f8e8b4!important;border-color:#64572b!important}
+body.neo-ui.dark .exam-note,
+body.neo-ui.dark .source-note,
+body.neo-ui.dark .read-with,
+body.neo-ui.dark .backup-note{
+  background:#172737!important;color:#dbe7f2!important;border-color:#334b61!important
+}
+body.neo-ui.dark .summary-link{color:#9dd4ff!important}
+body.neo-ui.dark .mode-btn,body.neo-ui.dark .part-btn{
+  background:#142333!important;color:#edf4fb!important;border-color:#30475c!important
+}
+body.neo-ui.dark .mode-btn.active,body.neo-ui.dark .part-btn.active{
+  background:#193853!important;color:#f3f9ff!important;border-color:#4a95cf!important
+}
+body.neo-ui.dark input,body.neo-ui.dark select,body.neo-ui.dark textarea{
+  background:#0f1b28!important;color:#edf4fb!important;border-color:#385069!important
+}
+body.neo-ui.dark .option{
+  background:#142536!important;border-color:#30465a!important
+}
+body.neo-ui.dark .option:hover{background:#193047!important}
+body.neo-ui.dark .option.selected{background:#183651!important;border-color:#4c98d5!important}
+body.neo-ui.dark .qnum{background:#142536!important;color:#cfdae5!important;border-color:#2f455a!important}
+body.neo-ui.dark .qnum.answered{background:#193d5b!important;color:#eef7ff!important}
+body.neo-ui.dark .qnum.current{background:#173b59!important;color:#a8d8ff!important;border-color:#4d99d6!important}
+body.neo-ui.dark .quiz-progress{background:#1a2c3d}
+body.neo-ui.dark .quiz-progress>div{background:linear-gradient(90deg,#2f9cff,#35c0df)}
+body.neo-ui.dark .quiz-note-box{background:#152638!important;border-color:#31495e!important}
+body.neo-ui.dark .quiz-note-box textarea{background:#0f1b28!important}
+body.neo-ui.dark .confidence-wrap{background:#101e2d!important;border-color:#334d63!important}
+body.neo-ui.dark .result-box{background:#0f1c29!important;color:#edf5fc!important}
+body.neo-ui.dark .notes-empty{background:#121f2d!important;border-color:#2d4357!important}
+body.neo-ui.dark .note-count-chip,body.neo-ui.dark .note-source-pill{
+  background:#182c3e!important;color:#a8d3f4!important;border-color:#334b60!important
+}
+body.neo-ui.dark .font-preview{
+  background:linear-gradient(145deg,#152739,#101f2e)!important;border-color:#334b61!important
+}
+body.neo-ui.dark .device-note{background:#172838!important;color:#c8d7e5!important;border-color:#354e64!important}
+body.neo-ui.dark .session-badge{background:#173450!important;color:#aad8fb!important;border-color:#315c7f!important}
+body.neo-ui.dark .dashboard-main{background:linear-gradient(145deg,#152b3e,#111f2d)!important}
+body.neo-ui.dark .progress-donut{background:conic-gradient(#2f9cff calc(var(--pct)*1%),#203347 0)!important}
+body.neo-ui.dark .progress-donut:after{background:#121f2d!important}
+body.neo-ui.dark .status-track{background:#203347!important}
+body.neo-ui.dark .status-fill{background:linear-gradient(90deg,#2f9cff,#2fb9df)!important}
+body.neo-ui.dark #settings .ui-theme-setting{
+  background:linear-gradient(145deg,#15283a,#111f2d)!important;border-color:#31485e!important
+}
+body.neo-ui.dark #settings .ui-theme-choice{background:#132334!important;border-color:#30475c!important}
+body.neo-ui.dark #settings .ui-theme-choice.active{background:#173650!important;border-color:#4d99d6!important}
+body.neo-ui.dark #summary .summary-doc>.card:first-child{
+  background:linear-gradient(145deg,#142536,#101e2b)!important
+}
+body.neo-ui.dark #summary .slide-card{border-left-color:#447faf!important}
+body.neo-ui.dark #summary .lecture-figure{background:#fff!important;color:#172033!important;border-color:#41566c!important}
+body.neo-ui.dark .quiz-set-progress{background:#172838!important;border-color:#334b60!important;color:#aebdca!important}
+body.neo-ui.dark .quiz-set-progress.complete{background:#183728!important;color:#bce5cb!important;border-color:#366147!important}
+body.neo-ui.dark .quiz-attempt-detail{background:#172838!important;border-color:#334b60!important;color:#c4d2de!important}
+body.neo-ui.dark footer{color:#8fa1b4}
+
+/* Neo responsive */
+@media(max-width:850px){
+  body.neo-ui #summary .library-list{grid-template-columns:1fr}
+  body.neo-ui .dashboard-hero{grid-template-columns:1fr}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -1032,7 +1429,7 @@ body.dark .update-entry-top span{color:#aebdcc}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1370px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1450px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1201,6 +1598,17 @@ UPDATE LOG
 - Clicking it opens an in-app modal with concise release notes, newest first. Do not make it a full technical changelog; summarize user-visible changes in one short sentence per version/group.
 - The modal must work in light/dark mode, close with its X button, backdrop click, or Escape, and show the current app version.
 - Add a short new entry whenever the app version changes meaningfully.
+
+
+UI THEME / V12 NON-REGRESSION RULE
+- Settings must keep a UI Theme control with at least:
+  1) Classic = the original D Study App interface,
+  2) Neo Dashboard = the V12 premium dashboard interface.
+- BIG RULE: NEVER remove, overwrite, or permanently replace the Classic UI. New UI themes may be added, but Classic must remain selectable and functional.
+- Switching UI Theme is presentation-only. It must never delete or reset progress, notes, quiz history, confidence data, drafts, summary/quiz routes, login/session data, backup compatibility, or any other existing feature.
+- Neo Dashboard must support BOTH Light and Dark appearance modes with deliberate contrast, not a dark-only skin.
+- Preserve the main navigation destinations and all pre-V12 functionality while theming their surrounding surfaces/cards/layout.
+- UI Theme preference must be per-profile and included automatically in Full Backup through the preferences object.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1213,6 +1621,22 @@ UPDATE LOG
     <div class="settings-grid" style="margin-top:14px">
       <div class="settings-card">
         <h3>Appearance</h3>
+        <div class="ui-theme-setting">
+          <div class="setting-row" style="border-top:0;padding-top:0">
+            <div><b>UI Theme</b><div class="small">Switch the whole interface style. Classic is always kept and can be restored anytime.</div></div>
+          </div>
+          <div class="ui-theme-choices" id="uiThemeChoices">
+            <button class="ui-theme-choice" type="button" data-ui-theme="classic">
+              <span class="ui-theme-choice-icon">◫</span>
+              <span><b>Classic</b><small>Original D Study App UI</small></span>
+            </button>
+            <button class="ui-theme-choice" type="button" data-ui-theme="neo">
+              <span class="ui-theme-choice-icon">✦</span>
+              <span><b>Neo Dashboard</b><small>V12 premium dashboard style</small></span>
+            </button>
+          </div>
+          <div class="ui-theme-note">Changing UI Theme only changes appearance. Progress, notes, quiz history, drafts, summaries, routes, backup, and every existing feature stay untouched.</div>
+        </div>
         <div class="setting-row"><div><b>Theme color</b><div class="small">Changes the main accent across the app.</div></div></div>
         <div class="swatches" id="accentSwatches">
           <button class="swatch" data-color="navy" title="Navy"></button>
@@ -1272,6 +1696,10 @@ UPDATE LOG
       </div>
       <div class="update-log-list">
         <article class="update-entry latest">
+          <div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div>
+          <p>Added the optional Neo Dashboard interface in both Light and Dark mode while keeping the full Classic UI available.</p>
+        </article>
+        <article class="update-entry">
           <div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div>
           <p>Added this compact release-history popup in Settings.</p>
         </article>
@@ -1304,13 +1732,13 @@ UPDATE LOG
           <p>Improved pressed/active states, stable page URLs, and visible current-page styling.</p>
         </article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v11.5</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.0</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.5</b> • compact Update Log in Settings</footer></div>
-<script>const APP_VERSION="11.5";
+</main><footer><b id="appVersionLabel">D Study App v12.0</b> • optional Classic / Neo Dashboard UI themes • Light + Dark supported</footer></div>
+<script>const APP_VERSION="12.0";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1400,7 +1828,7 @@ function draftKey(mode=quizMode,part=quizPart){return `d-study-draft::${activeUs
 function oldDraftKey(mode=quizMode){return `d-study-draft::${activeUser.id}::${mode}`}
 function zeroTopics(){return baselineTopics.map(t=>({...JSON.parse(JSON.stringify(t)),status:"Not Started"}))}
 function zeroPages(){const p=JSON.parse(JSON.stringify(baselinePages));Object.keys(p).forEach(k=>p[k].current=0);return p}
-function defaultPreferences(){return{accent:"navy",appearance:"light",textSize:"normal",cardStyle:"soft",font:"inter"}}
+function defaultPreferences(){return{accent:"navy",appearance:"light",textSize:"normal",cardStyle:"soft",font:"inter",uiTheme:"classic"}}
 function freshState(){return{topics:zeroTopics(),pages:zeroPages(),notes:{},accuracy:{},lastReview:{},quizHistory:[],quizTopicStats:{},quizNotes:{sections:{},questions:{}},preferences:defaultPreferences()}}
 function normalizeState(x){
   const s=Object.assign(freshState(),x||{});
@@ -1581,10 +2009,13 @@ function applyPreferences(){
   document.body.dataset.accent=p.accent||"navy";
   const dark=p.appearance==="dark"||(p.appearance==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);
   document.body.classList.toggle("dark",dark);
+  document.body.classList.toggle("neo-ui",(p.uiTheme||"classic")==="neo");
+  document.body.dataset.uiTheme=p.uiTheme||"classic";
   document.body.classList.toggle("large-text",p.textSize==="large");
   document.body.classList.toggle("flat-cards",p.cardStyle==="flat");
   if(!fontPreviewActive)applyFontKey(p.font||"inter");
   document.querySelectorAll(".swatch").forEach(b=>b.classList.toggle("active",b.dataset.color===p.accent));
+  document.querySelectorAll("[data-ui-theme]").forEach(b=>b.classList.toggle("active",b.dataset.uiTheme===(p.uiTheme||"classic")));
   const a=document.getElementById("appearanceSelect"),t=document.getElementById("textSizeSelect"),c=document.getElementById("cardStyleSelect"),f=document.getElementById("fontSelect");
   if(a)a.value=p.appearance;if(t)t.value=p.textSize;if(c)c.value=p.cardStyle;if(f&&!fontPreviewActive)f.value=p.font||"inter";
 }
@@ -2064,6 +2495,7 @@ document.getElementById("loginPin").addEventListener("keydown",e=>{if(e.key==="E
 document.getElementById("logoutBtn").onclick=logout;
 document.getElementById("migrateBtn").onclick=migrateLegacy;
 document.querySelectorAll(".swatch").forEach(b=>b.onclick=()=>updatePreference("accent",b.dataset.color));
+document.querySelectorAll("[data-ui-theme]").forEach(b=>b.onclick=()=>updatePreference("uiTheme",b.dataset.uiTheme));
 document.getElementById("appearanceSelect").onchange=e=>updatePreference("appearance",e.target.value);
 document.getElementById("textSizeSelect").onchange=e=>updatePreference("textSize",e.target.value);
 document.getElementById("cardStyleSelect").onchange=e=>updatePreference("cardStyle",e.target.value);
