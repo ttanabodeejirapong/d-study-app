@@ -122,3 +122,14 @@ Implementation decision:
 - IP collection and IP ban/unban were deliberately not faked or added through a third-party IP service;
 - IP controls are displayed as backend-required because the current static GitHub Pages architecture cannot securely observe/enforce global network identity;
 - future cloud user directory, remote progress, server audit log, and network-security sections are reserved in the UI.
+
+
+### Developer console visibility bug + cross-device expectation — 2026-09-22
+User report:
+- management data was visible without entering the developer password;
+- users from other devices were not visible.
+
+Response/implementation:
+- fixed the password-gating bug in v12.12 so locked management content is hidden and every open requires the developer password again;
+- confirmed that the cross-device issue is architectural rather than a UI bug: current profiles/progress live in per-device localStorage;
+- a shared backend is required for one developer console to see/manage users from all devices.
