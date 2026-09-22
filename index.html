@@ -1989,6 +1989,117 @@ body.midnight-ui.dark .deep-block{background:#24282e!important;border-color:#3a4
 body.midnight-ui.dark .deep-block.application{border-left-color:var(--theme-accent)!important}
 body.midnight-ui.dark .deep-block.trap{border-left-color:#c69552!important}
 @media(max-width:900px){.deep-grid{grid-template-columns:1fr}.concept-table{grid-template-columns:1fr}}
+
+/* ============================================================
+   v12.7 — Clickable Quiz History + Mistake Log
+   ============================================================ */
+.history-attempt{
+  padding:12px!important;border:1px solid var(--line);border-radius:12px;
+  background:color-mix(in srgb,var(--soft) 44%,var(--card));
+  transition:background-color .14s ease,border-color .14s ease,box-shadow .14s ease,transform .10s ease
+}
+.history-attempt+.history-attempt{margin-top:9px}
+.history-attempt.clickable{cursor:pointer}
+@media(hover:hover) and (pointer:fine){
+  .history-attempt.clickable:hover{
+    transform:translateY(-1px);
+    border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 52%,var(--line));
+    box-shadow:0 7px 18px color-mix(in srgb,var(--theme-accent,var(--blue)) 9%,transparent)
+  }
+}
+.history-attempt:focus-visible{outline:3px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 24%,transparent);outline-offset:2px}
+.history-attempt-main{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.history-review-pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:900;white-space:nowrap}
+.history-review-pill.review{background:#fff1e3;color:#9a5a15;border:1px solid #ebc79c}
+.history-review-pill.clean{background:#eaf7ef;color:#2d7850;border:1px solid #c8e3d3}
+.history-score-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:10px;color:var(--muted)}
+.history-open-cue{margin-left:auto;color:var(--theme-accent,var(--blue));font-weight:900}
+.history-clean-cue{margin-left:auto;color:#4f8a67;font-weight:800}
+
+.mistake-log-overlay{
+  position:fixed;inset:0;z-index:1100;display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(7,13,22,.62);backdrop-filter:blur(6px)
+}
+.mistake-log-overlay.open{display:flex}
+.mistake-log-modal{
+  width:min(860px,100%);max-height:min(86vh,900px);overflow:auto;
+  background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;
+  box-shadow:0 28px 80px rgba(0,0,0,.34);padding:20px
+}
+.mistake-log-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.mistake-log-head h2{margin:4px 0 3px}
+.mistake-log-head p{margin:0}
+.mistake-log-close{width:38px;height:38px;padding:0!important;flex:0 0 auto}
+.mistake-log-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0}
+.mistake-stat{display:grid;gap:2px;padding:10px;border:1px solid var(--line);border-radius:11px;background:color-mix(in srgb,var(--soft) 50%,var(--card))}
+.mistake-stat b{font-size:17px}.mistake-stat span{font-size:9px;color:var(--muted);font-weight:800}
+.wrong-stat{border-left:3px solid #d55c68}.unsure-stat{border-left:3px solid #d5a837}.guessed-stat{border-left:3px solid #6689ad}.learn-stat{border-left:3px solid var(--theme-accent,var(--blue))}
+.mistake-log-body{display:grid;gap:11px}
+.mistake-entry{padding:14px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--soft) 38%,var(--card))}
+.mistake-entry-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.mistake-qno{display:inline-grid;place-items:center;min-width:31px;height:26px;padding:0 7px;border-radius:8px;background:color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,var(--card));color:var(--theme-accent,var(--blue));font-size:10px;font-weight:900}
+.mistake-topic{margin-left:7px;font-size:10px;color:var(--muted);font-weight:800}
+.mistake-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.mistake-tag{display:inline-flex;border-radius:999px;padding:4px 7px;font-size:8px;font-weight:900}
+.wrong-tag{background:#ffecef;color:#9d3c48;border:1px solid #efc5cb}
+.unsure-tag{background:#fff6d9;color:#8d6b12;border:1px solid #e9d48a}
+.guessed-tag{background:#eaf2fa;color:#456b91;border:1px solid #c9dbea}
+.mistake-entry h3{font-size:15px;margin:11px 0 9px;line-height:1.45}
+.mistake-answer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mistake-user-answer,.mistake-correct-answer{display:grid;gap:4px;padding:10px;border-radius:10px;border:1px solid var(--line)}
+.mistake-user-answer span,.mistake-correct-answer span{font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:900}
+.mistake-user-answer b,.mistake-correct-answer b{font-size:11px;line-height:1.42}
+.wrong-answer{background:#fff1f2;border-color:#efc8cd;color:#883640}
+.flagged-answer{background:#fff8e5;border-color:#ead69f;color:#755b18}
+.mistake-correct-answer{background:#edf8f2;border-color:#c9e3d4;color:#2e6847}
+.mistake-explanation{margin-top:8px;padding:10px;border-radius:10px;background:color-mix(in srgb,var(--theme-accent,var(--blue)) 6%,var(--card));border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 16%,var(--line))}
+.mistake-explanation>b{font-size:10px;color:var(--theme-accent,var(--blue))}
+.mistake-explanation p{margin:4px 0 0;font-size:11px;line-height:1.55;color:var(--muted)}
+.mistake-confidence-note{margin-top:7px;padding:9px 10px;border-radius:9px;background:#fff8e6;border:1px solid #ead7a3;color:#71571c;font-size:10px;line-height:1.5}
+.mistake-log-unavailable{padding:18px;border:1px dashed var(--line);border-radius:12px;text-align:center;color:var(--muted)}
+.mistake-log-unavailable p{margin:6px auto 0;max-width:560px;font-size:11px;line-height:1.5}
+
+body.dark .history-attempt{background:#26364a;border-color:#4d6176}
+body.dark .history-review-pill.review{background:#4a3824;color:#f0cd94;border-color:#735631}
+body.dark .history-review-pill.clean{background:#203d2d;color:#b9e3c7;border-color:#3f694e}
+body.dark .history-clean-cue{color:#9dd4ad}
+body.dark .mistake-log-modal{background:#223043;border-color:#5b6f85;box-shadow:0 28px 80px rgba(0,0,0,.48)}
+body.dark .mistake-stat,body.dark .mistake-entry{background:#29394d;border-color:#50647a}
+body.dark .wrong-tag{background:#4a2930;color:#ffc4ca;border-color:#75414a}
+body.dark .unsure-tag{background:#4a3d21;color:#f6da8d;border-color:#735f31}
+body.dark .guessed-tag{background:#27394c;color:#bed8f0;border-color:#45627c}
+body.dark .wrong-answer{background:#462a30;border-color:#74444d;color:#ffd8dc}
+body.dark .flagged-answer{background:#443a25;border-color:#6a5c39;color:#f6df9f}
+body.dark .mistake-correct-answer{background:#203c2d;border-color:#3e684e;color:#c7ecd3}
+body.dark .mistake-explanation{background:#293d52;border-color:#4c647a}
+body.dark .mistake-explanation p{color:#d0d9e2}
+body.dark .mistake-confidence-note{background:#413722;border-color:#685a36;color:#f0dda6}
+
+body.neo-ui .history-attempt{background:#f8fbff;border-color:#d9e4ef}
+body.neo-ui .mistake-log-modal{background:#fff;border-color:#d9e4ef}
+body.neo-ui .mistake-entry{background:#f8fbff}
+body.neo-ui.dark .history-attempt{background:#142536!important;border-color:#30475c!important}
+body.neo-ui.dark .mistake-log-modal{background:#121f2d!important;border-color:#2b4054!important}
+body.neo-ui.dark .mistake-entry,body.neo-ui.dark .mistake-stat{background:#172838!important;border-color:#334b60!important}
+
+body.midnight-ui .history-attempt{background:#f7f8fa!important;border-color:#d9dde4!important}
+body.midnight-ui .mistake-log-modal{background:#fff!important;border-color:#d9dde4!important}
+body.midnight-ui .mistake-entry,body.midnight-ui .mistake-stat{background:#f6f7f9!important;border-color:#d9dde4!important}
+body.midnight-ui.dark .history-attempt{background:#20242a!important;border-color:#343a42!important}
+body.midnight-ui.dark .mistake-log-modal{background:#1c1f23!important;border-color:#373c44!important}
+body.midnight-ui.dark .mistake-entry,body.midnight-ui.dark .mistake-stat{background:#22262b!important;border-color:#343940!important}
+body.midnight-ui.dark .mistake-explanation{background:color-mix(in srgb,var(--theme-accent) 14%,#22262b)!important;border-color:color-mix(in srgb,var(--theme-accent) 36%,#3a414b)!important}
+body.midnight-ui.dark .mistake-qno{background:color-mix(in srgb,var(--theme-accent) 22%,#22262b)!important;color:color-mix(in srgb,var(--theme-accent2) 76%,white)!important}
+
+@media(max-width:650px){
+  .mistake-log-overlay{padding:12px}
+  .mistake-log-modal{padding:15px;max-height:88vh}
+  .mistake-log-summary{grid-template-columns:1fr 1fr}
+  .mistake-answer-grid{grid-template-columns:1fr}
+  .history-attempt-main{align-items:flex-start}
+  .history-score-row{gap:8px}
+  .history-open-cue,.history-clean-cue{width:100%;margin-left:0}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -2831,13 +2942,28 @@ body.midnight-ui.dark .deep-block.trap{border-left-color:#c69552!important}
   <div class="mode-switch"><button class="mode-btn active" data-mode="review"><b>Reviewing — recommended first</b><span class="small">Clearer recall + application • does not award Mastered</span></button><button class="mode-btn" data-mode="mastery"><b>Mastering — harder</b><span class="small">Closer distractors • multi-step graph/application logic</span></button></div>
   <div id="quizReadingGuide" class="read-with"></div><div id="resumeNotice"></div><div id="quizArea"></div>
 </div></div></section>
-<section id="history" class="panel"><div class="panel-intro"><div><div class="eyebrow">Review</div><h2>Quiz History</h2><p>Track accuracy, learning score, and confidence over time.</p></div></div><div class="card"><div class="lecture-title">Quiz History</div><div class="small">Raw accuracy, confidence-adjusted learning score, part, and mode are saved. Full backup also includes notes and unfinished drafts.</div><div id="historyArea" style="margin-top:12px"></div></div></section>
+<section id="history" class="panel"><div class="panel-intro"><div><div class="eyebrow">Review</div><h2>Quiz History</h2><p>Track accuracy, learning score, confidence, and revisit mistakes.</p></div></div><div class="card"><div class="lecture-title">Quiz History</div><div class="small">Press any attempt that still needs review to open its Mistake Log. A clean 100% attempt with no Not sure / Guessed flags has no mistake log. Full backup also includes notes and unfinished drafts.</div><div id="historyArea" style="margin-top:12px"></div></div>
+  <div class="mistake-log-overlay" id="mistakeLogOverlay" aria-hidden="true">
+    <section class="mistake-log-modal" role="dialog" aria-modal="true" aria-labelledby="mistakeLogTitle">
+      <div class="mistake-log-head">
+        <div>
+          <div class="eyebrow">Targeted Review</div>
+          <h2 id="mistakeLogTitle">Mistake Log</h2>
+          <p class="small" id="mistakeLogMeta"></p>
+        </div>
+        <button class="secondary mistake-log-close" id="mistakeLogClose" type="button" aria-label="Close mistake log">✕</button>
+      </div>
+      <div class="mistake-log-summary" id="mistakeLogSummary"></div>
+      <div class="mistake-log-body" id="mistakeLogBody"></div>
+    </section>
+  </div>
+</section>
 <section id="prompt" class="panel">
   <div class="panel-intro"><div><div class="eyebrow">AI Study Partner</div><h2>ChatGPT Prompt</h2><p>Copy the app rules and workflow into a new ChatGPT conversation.</p></div></div>
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1930px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:2050px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -3089,6 +3215,21 @@ EXPLANATION DEPTH
 - Do not invent professor examples. If an example is constructed only to apply a lecture definition, label it as an application/example rather than implying the professor said it.
 - Especially expand short mapping-style notes such as Factors of Production → Paid Incomes, GDP components, labor classifications, curve movement vs shift, growth-theory assumptions, and financial-flow relationships.
 - Quiz questions must not depend on a classification/detail that the matching Summary gives only as an unexplained one-line label. The Summary should contain enough reasoning to learn the tested distinction.
+
+
+QUIZ HISTORY MISTAKE LOG
+- Quiz History attempts that still need review must be clickable and open a Mistake Log.
+- A clean attempt means raw 100% AND zero Not sure AND zero Guessed flags. Clean attempts show no Mistake Log action.
+- Mistake Log includes every:
+  1) wrong question,
+  2) question marked Not sure, even if correct,
+  3) question marked Guessed, even if correct.
+- For each logged question show the original question, topic, user's selected answer, correct answer, explanation, and Wrong / Not sure / Guessed labels as applicable.
+- If a correct answer was Not sure or Guessed, explicitly explain why it still deserves review under the confidence-weighting system.
+- New quiz-history entries should store a compact snapshot of question text/options/correct answer/topic/explanation so old mistake logs survive future quiz-pool edits.
+- Existing old history entries without snapshots should reconstruct from the matching current quiz pool only when question count still matches; otherwise preserve the score record and explain that detailed question reconstruction is unavailable.
+- Mistake Log is review-only; opening it must not modify scores, topic status, mastery evidence, notes, or quiz attempts.
+- Keep Mistake Log readable in Classic, Neo Dashboard, and Midnight Workspace, in Light and Dark modes.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -3179,7 +3320,8 @@ EXPLANATION DEPTH
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.6</b><span>Explanation-First Summaries</span></div><p>Expanded all five lecture summaries with plain-language reasoning, application examples, common traps, and Thai bridges; also rebuilt the Lecture 1 production/factor-income section in detail.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.7</b><span>Mistake Log</span></div><p>Made incomplete/flagged Quiz History attempts clickable, with targeted review of wrong, Not sure, and Guessed questions including answers and explanations.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.6</b><span>Explanation-First Summaries</span></div><p>Expanded all five lecture summaries with plain-language reasoning, application examples, common traps, and Thai bridges; also rebuilt the Lecture 1 production/factor-income section in detail.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.5</b><span>Accent Consistency</span></div><p>Fixed remaining hard-coded theme colors so the selected palette now reaches active tabs, theme cards, badges, panel accent lines, hints, progress elements, and other non-semantic UI accents.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.4</b><span>Complete Lecture Summaries</span></div><p>Audited Summary against all five current professor lecture files, expanded missing subtopics, and added complete Lecture 3 Economic Growth and Lecture 4 Finance/Saving/Investment summaries.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.3</b><span>Theme & Quiz Clarity</span></div><p>Reworked Theme color so each UI theme has its own palette and the accent applies across the interface; also made selected answers and answered question numbers much clearer in every theme.</p></article>
@@ -3210,13 +3352,13 @@ EXPLANATION DEPTH
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.6</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.7</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.6</b> • explanation-first summaries across all five current lectures</footer></div>
-<script>const APP_VERSION="12.6";
+</main><footer><b id="appVersionLabel">D Study App v12.7</b> • clickable Quiz History Mistake Log • explanation-first summaries preserved</footer></div>
+<script>const APP_VERSION="12.7";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -3425,6 +3567,9 @@ function startUser(user,renewSession=true){
   if(ulb&&!ulb.dataset.bound){ulb.dataset.bound="1";ulb.onclick=openUpdateLog}
   if(ulc&&!ulc.dataset.bound){ulc.dataset.bound="1";ulc.onclick=closeUpdateLog}
   if(ulo&&!ulo.dataset.bound){ulo.dataset.bound="1";ulo.onclick=e=>{if(e.target===ulo)closeUpdateLog()}}
+  const mlc=document.getElementById("mistakeLogClose"),mlo=document.getElementById("mistakeLogOverlay");
+  if(mlc&&!mlc.dataset.bound){mlc.dataset.bound="1";mlc.onclick=closeMistakeLog}
+  if(mlo&&!mlo.dataset.bound){mlo.dataset.bound="1";mlo.onclick=e=>{if(e.target===mlo)closeMistakeLog()}}
   renderNotesHub();applyPathRoute();
   const legacy=!!localStorage.getItem("ec214-study-state")&&!hadUserState;
   document.getElementById("legacyBox").style.display=legacy?"block":"none";
@@ -3964,7 +4109,7 @@ function submitQuiz(){
     state.quizTopicStats[topic]={attempts:(old.attempts||0)+1,bestAdjusted:Math.max(old.bestAdjusted||0,adj),latestAdjusted:adj,latestRaw:raw,last:date,mode:quizMode,part:quizPart,guessed:s.guess,unsure:s.unsure,masteryPasses};
   });
   const rawPct=Math.round(correct/quiz.length*100),adjPct=Math.round(weighted/quiz.length*100);
-  state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x])});
+  state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x]),questionSnapshot:quiz.map(q=>({q:q.q,opts:[...q.opts],ans:q.ans,topic:q.topic,why:q.why}))});
   state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderHistory();
 }
 function renderQuizResult(){
@@ -3974,9 +4119,95 @@ function renderQuizResult(){
   a.innerHTML=`<div class="result-head"><div class="result-box"><span class="small">Raw score</span><b>${h.score}/${h.total}</b></div><div class="result-box"><span class="small">Raw accuracy</span><b>${h.percent}%</b></div><div class="result-box"><span class="small">Learning score</span><b>${h.adjustedPercent}%</b></div><div class="result-box"><span class="small">Flagged</span><b>${h.guessed+h.unsure}</b><span class="small">${h.guessed} guessed • ${h.unsure} unsure</span></div></div><div class="notice"><b>${meta.label}</b> • ${meta.pages}<br>Correct + confident = full evidence, correct + Not sure = 70%, correct + Guessed = 40%, wrong = 0. Review mode cannot award Mastered.</div>${getSectionNote()? `<div class="note-review"><b>📝 Section note:</b> ${getSectionNote().replace(/\n/g,"<br>")}</div>`:""}<div class="card" style="box-shadow:none;margin-top:14px"><div class="lecture-title">Topic results</div>${topicRows}</div><div class="card" style="box-shadow:none;margin-top:14px"><div class="lecture-title">Review answers</div>${quiz.map((q,i)=>{const ch=h.answers[i],ok=ch===q.ans,conf=h.confidence?.[i]||"confident",label=conf==="guessed"?"Guessed":conf==="unsure"?"Not sure":"Confident",order=h.optionOrders?.[i]||[0,1,2,3],chosenLetter=String.fromCharCode(65+Math.max(0,order.indexOf(ch))),correctLetter=String.fromCharCode(65+Math.max(0,order.indexOf(q.ans)));return `<div class="review-item"><div><b>${i+1}. ${q.q}</b> <span class="tag">${q.topic}</span> <span class="tag">${label}</span></div><div class="${ok?"correct":"wrong"}" style="padding:8px 10px;border-radius:9px;margin-top:8px">Your answer: ${chosenLetter}. ${q.opts[ch]} ${ok?"✓":"✗"}</div>${ok?"":`<div class="correct" style="padding:8px 10px;border-radius:9px;margin-top:6px">Correct: ${correctLetter}. ${q.opts[q.ans]}</div>`}<div class="explain">${q.why}${ok&&conf!=="confident"?" <b>Correct but flagged, so it receives less mastery weight.</b>":""}</div>${getQuestionNote(q)?`<div class="note-review"><b>Your saved note:</b> ${getQuestionNote(q).replace(/\n/g,"<br>")}</div>`:""}</div>`}).join("")}</div><div class="qnav"><button class="secondary" onclick="location.href=summaryPath(summaryDocs[quizParts[quizPart].summaries[0]])+'#summary-'+quizParts[quizPart].summaries[0]">Read Summary</button><button onclick="retakeQuiz()">Retake this part</button></div>`;
 }
 function retakeQuiz(){quizSession=freshQuizSession(quizMode,quizPart);clearQuizDraft(quizMode,quizPart);saveQuizDraft();renderQuiz();window.scrollTo({top:0,behavior:"smooth"})}
+function historyQuestions(h){
+  if(Array.isArray(h.questionSnapshot)&&h.questionSnapshot.length===h.total)return h.questionSnapshot;
+  const current=getQuizFor(h.partId||"l1-all",h.mode||"review");
+  return Array.isArray(current)&&current.length===h.total?current:null;
+}
+function historyReviewItems(h){
+  const qs=historyQuestions(h);
+  if(!qs||!Array.isArray(h.answers))return [];
+  return qs.map((q,i)=>{
+    const chosen=h.answers[i],conf=h.confidence?.[i]||"confident",wrong=chosen!==q.ans;
+    return{q,i,chosen,conf,wrong,flagged:wrong||conf==="unsure"||conf==="guessed",order:h.optionOrders?.[i]||[0,1,2,3]};
+  }).filter(x=>x.flagged);
+}
+function historyNeedsReview(h){
+  return (Number(h.percent)||0)<100||(Number(h.guessed)||0)>0||(Number(h.unsure)||0)>0||historyReviewItems(h).length>0;
+}
+function historyStatusLabel(h){
+  if(!historyNeedsReview(h))return{label:"Clean 100%",cls:"clean"};
+  const pieces=[];
+  if((Number(h.score)||0)<(Number(h.total)||0))pieces.push((Number(h.total)||0)-(Number(h.score)||0)+" wrong");
+  if(Number(h.unsure)||0)pieces.push(h.unsure+" not sure");
+  if(Number(h.guessed)||0)pieces.push(h.guessed+" guessed");
+  return{label:pieces.join(" • ")||"Needs review",cls:"review"};
+}
+function historyLetter(order,answerIndex){
+  if(answerIndex===null||answerIndex===undefined||answerIndex<0)return"—";
+  const pos=order.indexOf(answerIndex);
+  return pos>=0?String.fromCharCode(65+pos):"—";
+}
+function closeMistakeLog(){
+  const o=document.getElementById("mistakeLogOverlay");if(!o)return;
+  o.classList.remove("open");o.setAttribute("aria-hidden","true");document.body.style.overflow="";
+}
+function openMistakeLog(index){
+  const h=state?.quizHistory?.[index];if(!h||!historyNeedsReview(h))return;
+  const items=historyReviewItems(h),o=document.getElementById("mistakeLogOverlay"),body=document.getElementById("mistakeLogBody");
+  if(!o||!body)return;
+  document.getElementById("mistakeLogMeta").textContent=`${h.name} • ${h.mode||"review"} • ${h.pages||""} • ${h.date}`;
+  const wrong=items.filter(x=>x.wrong).length,unsure=items.filter(x=>x.conf==="unsure").length,guessed=items.filter(x=>x.conf==="guessed").length;
+  document.getElementById("mistakeLogSummary").innerHTML=`
+    <div class="mistake-stat wrong-stat"><b>${wrong}</b><span>Wrong</span></div>
+    <div class="mistake-stat unsure-stat"><b>${unsure}</b><span>Not sure</span></div>
+    <div class="mistake-stat guessed-stat"><b>${guessed}</b><span>Guessed</span></div>
+    <div class="mistake-stat learn-stat"><b>${h.adjustedPercent??h.percent}%</b><span>Learning score</span></div>`;
+  if(!historyQuestions(h)){
+    body.innerHTML='<div class="mistake-log-unavailable"><b>Question details unavailable for this older attempt.</b><p>The score/confidence record is still preserved, but its original quiz pool no longer matches the current question set.</p></div>';
+  }else{
+    body.innerHTML=items.map(x=>{
+      const q=x.q,chosenText=x.chosen===null||x.chosen===undefined?"No answer":q.opts?.[x.chosen]??"Answer unavailable";
+      const correctText=q.opts?.[q.ans]??"Correct answer unavailable";
+      const chosenLetter=historyLetter(x.order,x.chosen),correctLetter=historyLetter(x.order,q.ans);
+      const tags=[
+        x.wrong?'<span class="mistake-tag wrong-tag">Wrong</span>':'',
+        x.conf==="unsure"?'<span class="mistake-tag unsure-tag">Not sure</span>':'',
+        x.conf==="guessed"?'<span class="mistake-tag guessed-tag">Guessed</span>':''
+      ].join("");
+      const flagExplain=!x.wrong&&x.conf==="unsure"
+        ?'<div class="mistake-confidence-note">You got this right, but marked <b>Not sure</b>. Review the explanation until you can answer it confidently without relying on elimination.</div>'
+        :!x.wrong&&x.conf==="guessed"
+        ?'<div class="mistake-confidence-note">You got this right, but marked <b>Guessed</b>. Treat it as weak evidence: the answer may have been lucky, so revisit the underlying rule.</div>'
+        :"";
+      return `<article class="mistake-entry">
+        <div class="mistake-entry-top"><div><span class="mistake-qno">Q${x.i+1}</span><span class="mistake-topic">${summaryExplainEscape(q.topic||"Topic")}</span></div><div class="mistake-tags">${tags}</div></div>
+        <h3>${summaryExplainEscape(q.q||"Question")}</h3>
+        <div class="mistake-answer-grid">
+          <div class="${x.wrong?"mistake-user-answer wrong-answer":"mistake-user-answer flagged-answer"}"><span>Your answer</span><b>${chosenLetter}. ${summaryExplainEscape(chosenText)}</b></div>
+          <div class="mistake-correct-answer"><span>Correct answer</span><b>${correctLetter}. ${summaryExplainEscape(correctText)}</b></div>
+        </div>
+        <div class="mistake-explanation"><b>Explanation</b><p>${summaryExplainEscape(q.why||"No saved explanation is available for this older question.")}</p></div>
+        ${flagExplain}
+      </article>`;
+    }).join("");
+  }
+  o.classList.add("open");o.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  setTimeout(()=>document.getElementById("mistakeLogClose")?.focus(),0);
+}
 function renderHistory(){
   if(!state)return;const r=document.getElementById("historyArea");
-  r.innerHTML=state.quizHistory.length?state.quizHistory.map((h,i)=>`<div class="history-item"><b>${h.name} • ${h.mode||"review"}</b> — raw ${h.score}/${h.total} (${h.percent}%) • learning ${h.adjustedPercent??h.percent}%<div class="small">${h.pages||""} • ${h.date} • guessed ${h.guessed||0} • not sure ${h.unsure||0}${i===0?" • latest":""}</div></div>`).join(""):`<div class="small">No quiz results yet for this profile.</div>`;
+  r.innerHTML=state.quizHistory.length?state.quizHistory.map((h,i)=>{
+    const needs=historyNeedsReview(h),status=historyStatusLabel(h);
+    return `<div class="history-item history-attempt ${needs?"clickable needs-review":"perfect"}" ${needs?`data-history-index="${i}" role="button" tabindex="0" aria-label="Open mistake log for ${summaryExplainEscape(h.name)}"`:""}>
+      <div class="history-attempt-main"><div><b>${summaryExplainEscape(h.name)} • ${summaryExplainEscape(h.mode||"review")}</b><div class="small">${summaryExplainEscape(h.pages||"")} • ${summaryExplainEscape(h.date)}${i===0?" • latest":""}</div></div><span class="history-review-pill ${status.cls}">${summaryExplainEscape(status.label)}</span></div>
+      <div class="history-score-row"><span>Raw <b>${h.score}/${h.total} (${h.percent}%)</b></span><span>Learning <b>${h.adjustedPercent??h.percent}%</b></span><span>Guessed <b>${h.guessed||0}</b></span><span>Not sure <b>${h.unsure||0}</b></span>${needs?'<span class="history-open-cue">Mistake Log →</span>':'<span class="history-clean-cue">No review needed ✓</span>'}</div>
+    </div>`;
+  }).join(""):`<div class="small">No quiz results yet for this profile.</div>`;
+  r.querySelectorAll("[data-history-index]").forEach(el=>{
+    el.onclick=()=>openMistakeLog(Number(el.dataset.historyIndex));
+    el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openMistakeLog(Number(el.dataset.historyIndex))}};
+  });
 }
 function collectDrafts(){
   const drafts={};
@@ -4048,6 +4279,7 @@ document.querySelectorAll("button.tab").forEach(b=>b.onclick=()=>switchTab(b.dat
 document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.dataset.mode));
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"&&document.getElementById("updateLogOverlay")?.classList.contains("open"))closeUpdateLog();
+  if(e.key==="Escape"&&document.getElementById("mistakeLogOverlay")?.classList.contains("open"))closeMistakeLog();
 });
 window.addEventListener("storage",e=>{
   if(!activeUser)return;
