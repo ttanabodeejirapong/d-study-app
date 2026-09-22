@@ -92,3 +92,16 @@ Teaching records supplied:
 - 19 Sep 2026 make-up — https://youtu.be/ACnXh3ZiRKI
 
 Old exam/lecture Drive collections were supplied and inspected. Actual public upload of third-party PDFs remains pending the user's confirmation because the current GitHub repository is public.
+
+
+### Course-material storage policy clarified — 2026-09-22
+User request:
+- keep historical/old materials as links rather than copying the files into GitHub;
+- exception: keep the five full annotated current professor lectures as actual files.
+
+Implementation decision:
+- canonical GitHub PDF set = Lecture 1, Lecture 2.1, Lecture 2.2, Lecture 3, Lecture 4 full/All;
+- Lecture 4 Part 1 is not part of the canonical five-file set;
+- old exams, old lectures, exercises, answer keys, student notes, textbooks, and other archive material remain link-only;
+- professor teaching records remain YouTube links only;
+- created `course-materials/` link indexes to preserve those sources without bloating the repo.
