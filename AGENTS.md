@@ -1,16 +1,11 @@
-# D Study App — Agent / ChatGPT Entry Point
+# D Study App — Agent Entry Point
 
-Before changing this repository, read:
+Internal project handoff documentation is intentionally kept outside this public repository.
 
-1. `chatgpt-log/README.md`
-2. `chatgpt-log/LATEST_PROMPT.md`
-3. `chatgpt-log/APP_CONTEXT.md`
-4. `chatgpt-log/FULL_UPDATE_LOG.md`
-5. `chatgpt-log/PROMPT_LOG.md`
-6. `chatgpt-log/DEPLOYMENT_CHECKLIST.md`
+Before changing the app:
+1. Inspect current `main`; current code is the runtime source of truth.
+2. With the owner's connected Google Drive, open `D Study App — Private`.
+3. Read the private `ChatGPT Log` folder, especially the latest private prompt and app context.
+4. Preserve existing browser data, quiz drafts/history, notes, routes, themes, summaries, and other working behavior unless the owner explicitly requests a change.
 
-Then inspect the current `main` branch. Current code is the final source of truth.
-
-**Mandatory:** every deployed app version must update the ChatGPT log/master prompt so future sessions do not work from stale context.
-
-Do not modify or reset existing user data/storage as a shortcut, and do not reintroduce intentionally reverted features without explicit user instruction.
+Do not add private lecture PDFs, detailed internal prompt logs, or database/backups to this public repository.
