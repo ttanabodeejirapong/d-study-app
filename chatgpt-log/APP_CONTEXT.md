@@ -163,14 +163,31 @@ When changing routing:
 - preserve correct back/navigation behavior;
 - keep GitHub Pages static hosting constraints in mind.
 
-## 11. Course material archive plan
+## 11. Course material archive policy
 
-A separate course-material archive is being organized for:
-- current full annotated lectures;
+The course-material archive uses a **hybrid storage policy**:
+
+### Keep as actual GitHub files
+Only the five canonical current full annotated professor lecture PDFs:
+1. Lecture 1 — Introduction to Economics
+2. Lecture 2.1 — Macroeconomic Indicators: GDP
+3. Lecture 2.2 — Macroeconomic Indicators: Unemployment & Inflation
+4. Lecture 3 — Economic Growth
+5. Lecture 4 — Finance, Saving, and Investment (full / All version)
+
+### Keep as links only
+Do not copy these historical/supplementary materials into GitHub:
 - old exams;
 - old lectures;
 - exercises / answer keys;
-- professor teaching-record YouTube links.
+- student notes;
+- textbooks;
+- other historical archive files;
+- professor teaching-record videos.
+
+These remain in the original Google Drive / YouTube locations and are indexed under `course-materials/`.
+
+The separate Lecture 4 Part 1 PDF is an overlapping partial copy and is **not** part of the canonical five-file set.
 
 Current professor teaching-record links supplied by the user:
 - 5 Aug 2026 — https://youtu.be/MfZ21jt3GK4
@@ -181,18 +198,17 @@ Current professor teaching-record links supplied by the user:
 - 16 Sep 2026 — https://youtu.be/qh7EOjQfTOM
 - 19 Sep 2026 — https://youtu.be/ACnXh3ZiRKI (make-up session)
 
-The current repository is public. Before uploading third-party PDFs, confirm whether public redistribution is intended. Large files above GitHub's normal file-size limits require external storage or Git LFS.
-
 ## 12. Current annotated lecture files supplied in the 2026 project conversation
 
+Canonical five:
 - Lecture 1 — Introduction to Economics — annotated, 70 pages.
 - Lecture 2.1 — Macroeconomic Indicators: GDP — annotated, 42 pages.
 - Lecture 2.2 — Macroeconomic Indicators: Unemployment & Inflation — annotated, 36 pages.
 - Lecture 3 — Economic Growth — annotated, 37 pages.
 - Lecture 4 — Finance, Saving, and Investment — annotated full version, 50 pages.
-- Lecture 4 — Finance, Saving, and Investment — part 1 version, 43 pages.
 
-Keep both Lecture 4 source files if archived; do not overwrite one with the other.
+Non-canonical duplicate/partial:
+- Lecture 4 — Finance, Saving, and Investment — part 1 version, 43 pages.
 
 ## 13. Content-source hierarchy
 
