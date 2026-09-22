@@ -392,6 +392,65 @@ body.dark .practice-dot.green{background:#72b685;border-color:#91cca1}
   .quiz-set-progress{position:static;display:inline-block;transform:none;margin:5px 0 2px}
   .part-btn{padding-right:82px}
 }
+
+/* v11.4 interaction polish, note color distinction, attempt detail */
+.qnum.noted::after{background:#7b63d1!important;box-shadow:0 0 0 2px rgba(123,99,209,.18)!important}
+body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px rgba(174,154,255,.22)!important}
+.question-note-legend{display:flex;justify-content:flex-end;align-items:center;gap:5px;margin:-2px 2px 9px;font-size:10px;color:var(--muted);opacity:.82}
+.saved-note-dot{width:7px;height:7px;border-radius:50%;background:#7b63d1;display:inline-block}
+body.dark .saved-note-dot{background:#ae9aff}
+
+.quiz-attempt-line{opacity:.82}
+.quiz-attempt-line[data-attempts="0"]{opacity:.58}
+.quiz-attempt-detail{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;padding:5px 8px;border-radius:9px;background:color-mix(in srgb,var(--blue) 6%,transparent);border:1px solid color-mix(in srgb,var(--blue) 10%,var(--line));font-size:11px;font-weight:750;color:var(--muted)}
+.quiz-attempt-detail::before{content:"↻";font-weight:900;color:color-mix(in srgb,var(--blue) 72%,var(--muted))}
+body.dark .quiz-attempt-detail{background:#29394d;border-color:#4c6279;color:#c9d4df}
+body.dark .quiz-attempt-detail::before{color:#9fcdf0}
+
+/* Read-along links must be legible in dark mode. */
+body.dark .summary-link,body.dark .summary-link:visited{color:#a9d8ff!important;text-decoration-color:#79b8e9!important}
+body.dark .summary-link:hover{color:#d7ecff!important;text-decoration-color:#b9dcf8!important}
+body.dark .read-with{background:#2a3b50!important;border-color:#60758b!important}
+
+/* Every box-like control gets the same clear hover language. */
+.part-btn,.mode-btn,.library-link,.tab,.quick-actions a,.recording-link,.qnum,.option{
+  transition:background-color .14s ease,border-color .14s ease,box-shadow .14s ease,transform .10s ease,color .14s ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .part-btn:hover,.mode-btn:hover,.library-link:hover,.tab:hover,.quick-actions a:hover,.recording-link:hover,.qnum:hover,.option:hover{
+    border-color:color-mix(in srgb,var(--blue) 72%,var(--line))!important;
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--blue) 28%,transparent),0 7px 18px rgba(23,54,93,.09);
+    transform:translateY(-1px);
+  }
+  body.dark .part-btn:hover,body.dark .mode-btn:hover,body.dark .library-link:hover,body.dark .tab:hover,body.dark .quick-actions a:hover,body.dark .recording-link:hover,body.dark .qnum:hover,body.dark .option:hover{
+    border-color:#8abfe9!important;
+    box-shadow:0 0 0 1px rgba(138,191,233,.18),0 8px 20px rgba(0,0,0,.2);
+  }
+}
+.library-link.active{
+  border:2px solid var(--blue)!important;
+  background:color-mix(in srgb,var(--blue) 8%,var(--card))!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 10%,transparent);
+}
+body.dark .library-link.active{
+  color:#d9eeff!important;
+  border-color:#8abfe9!important;
+  background:#2d4258!important;
+  box-shadow:0 0 0 2px rgba(138,191,233,.13);
+}
+.quiz-library-item.current .quiz-set-progress{
+  color:var(--blue);
+  border-color:color-mix(in srgb,var(--blue) 38%,var(--line));
+  background:color-mix(in srgb,var(--blue) 10%,var(--card));
+}
+body.dark .quiz-library-item.current .quiz-set-progress{color:#cbe7fb;border-color:#739abc;background:#30475e}
+.part-btn.active,.mode-btn.active,.qnum.current{
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 14%,transparent);
+}
+body.dark .part-btn.active,body.dark .mode-btn.active,body.dark .qnum.current{
+  border-color:#78b8ec!important;
+  box-shadow:0 0 0 2px rgba(120,184,236,.16);
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -459,10 +518,10 @@ body.dark .practice-dot.green{background:#72b685;border-color:#91cca1}
     <div class="lecture-title">📝 Summary Library</div>
     <div class="small">Choose one summary file. They are intentionally separated instead of being stacked into one long page.</div>
     <ul class="library-list">
-      <li><a class="library-link" href="/d-study-app/sum-1-42/">Lecture 1 — Summary 1: p.1–42 • Foundations → PPF concepts →</a></li>
-      <li><a class="library-link" href="/d-study-app/sum-43-70/">Lecture 1 — Summary 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a></li>
-      <li><a class="library-link" href="/d-study-app/sum-l2-gdp/">Lecture 2.1 — GDP • Definition → Measuring GDP → Real vs Nominal → Living Standard →</a></li>
-      <li><a class="library-link" href="/d-study-app/sum-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation • Labor market → CPI → Biases →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l1-1-42" href="/d-study-app/sum-1-42/">Lecture 1 — Summary 1: p.1–42 • Foundations → PPF concepts →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l1-43-70" href="/d-study-app/sum-43-70/">Lecture 1 — Summary 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l2-gdp" href="/d-study-app/sum-l2-gdp/">Lecture 2.1 — GDP • Definition → Measuring GDP → Real vs Nominal → Living Standard →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l2-labor-inflation" href="/d-study-app/sum-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation • Labor market → CPI → Biases →</a></li>
     </ul>
   </div>
 
@@ -907,10 +966,10 @@ body.dark .practice-dot.green{background:#72b685;border-color:#91cca1}
     <div class="lecture-title">✅ Quiz Library</div>
     <div class="small">Choose a study block first. Your current p.1–42 drafts keep their original part IDs, so existing unfinished work remains compatible.</div>
     <ul class="library-list quiz-library-list">
-      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz1-42/">Lecture 1 — Quiz Set 1: p.1–42 • Foundations → PPF concepts →</a><span class="quiz-set-progress" data-quiz-progress="l1a">0/4 done</span></li>
-      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz43-70/">Lecture 1 — Quiz Set 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a><span class="quiz-set-progress" data-quiz-progress="l1b">0/4 done</span></li>
-      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz-l2-gdp/">Lecture 2.1 — GDP Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2gdp">0/4 done</span></li>
-      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2ui">0/4 done</span></li>
+      <li class="quiz-library-item" data-quiz-set-item="l1a"><a class="library-link" data-quiz-set-link="l1a" href="/d-study-app/quiz1-42/">Lecture 1 — Quiz Set 1: p.1–42 • Foundations → PPF concepts →</a><span class="quiz-set-progress" data-quiz-progress="l1a">0/4 done</span></li>
+      <li class="quiz-library-item" data-quiz-set-item="l1b"><a class="library-link" data-quiz-set-link="l1b" href="/d-study-app/quiz43-70/">Lecture 1 — Quiz Set 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a><span class="quiz-set-progress" data-quiz-progress="l1b">0/4 done</span></li>
+      <li class="quiz-library-item" data-quiz-set-item="l2gdp"><a class="library-link" data-quiz-set-link="l2gdp" href="/d-study-app/quiz-l2-gdp/">Lecture 2.1 — GDP Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2gdp">0/4 done</span></li>
+      <li class="quiz-library-item" data-quiz-set-item="l2ui"><a class="library-link" data-quiz-set-link="l2ui" href="/d-study-app/quiz-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2ui">0/4 done</span></li>
     </ul>
   </div>
   <div id="partPicker" class="part-picker"></div>
@@ -931,7 +990,7 @@ body.dark .practice-dot.green{background:#72b685;border-color:#91cca1}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1260px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1320px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1084,6 +1143,15 @@ QUIZ PRACTICE STATUS DOTS
 - Keep dots small and aesthetic; labels R/M provide mode context without adding large badges.
 - Each large Quiz Library link must independently show "x/y done", where y is the number of NON-CUMULATIVE parts in that quiz set and x is how many of those parts have at least one completed attempt.
 - The cumulative quiz is NOT an extra denominator item. If the cumulative quiz is completed, treat the set as fully complete (y/y), never as 1/(y+1).
+
+
+INTERACTION / QUIZ HISTORY POLISH
+- Saved-question note dots must use a distinct violet/purple color, not the yellow used for "practiced" quiz status. Show a tiny legend near the quiz question navigator explaining that violet means a saved note.
+- Every box-like clickable control should gain a visibly stronger border/background/shadow on mouse hover, while selected/current page controls must KEEP a persistent active appearance after the pointer leaves.
+- This persistent state applies especially to main tabs, Summary/Quiz library links, quiz part cards, mode cards, and current question boxes.
+- In dark mode, "Read alongside this quiz" links must use a light high-contrast link color; never use the dark navy accent directly on the dark panel.
+- Quiz part cards keep the subtle "Taken X time(s)" line.
+- Inside the opened quiz, show a compact history line for the CURRENT mode: "Taken X times • Best Y% • Last attempt DATE". If there is no completed attempt for that mode, explicitly show that Reviewing/Mastering has not started.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1141,8 +1209,8 @@ QUIZ PRACTICE STATUS DOTS
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.3</b> • R/M status dots + independent quiz-set completion counters</footer></div>
-<script>const APP_VERSION="11.3";
+</main><footer><b id="appVersionLabel">D Study App v11.4</b> • clearer note/status colors + persistent hover/selection + quiz attempt details</footer></div>
+<script>const APP_VERSION="11.4";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1580,6 +1648,7 @@ function summaryPath(docId){
 function openSummaryDoc(docId,anchor){
   document.querySelectorAll(".summary-doc").forEach(d=>d.classList.toggle("active",d.id===docId));
   document.querySelectorAll("[data-summary-doc]").forEach(b=>b.classList.toggle("active",b.dataset.summaryDoc===docId));
+  document.querySelectorAll("[data-summary-link]").forEach(a=>a.classList.toggle("active",a.dataset.summaryLink===docId));
   switchTab("summary");
   if(anchor)setTimeout(()=>document.getElementById("summary-"+anchor)?.scrollIntoView({behavior:"smooth",block:"start"}),60);
 }
@@ -1670,12 +1739,27 @@ function renderTracker(){
 
 function renderQuizSetButtons(){
   document.querySelectorAll("[data-quiz-set]").forEach(b=>b.classList.toggle("active",b.dataset.quizSet===quizSet));
+  document.querySelectorAll("[data-quiz-set-link]").forEach(a=>a.classList.toggle("active",a.dataset.quizSetLink===quizSet));
+  document.querySelectorAll("[data-quiz-set-item]").forEach(li=>li.classList.toggle("current",li.dataset.quizSetItem===quizSet));
 }
 function quizAttemptCount(partId){
   return (state?.quizHistory||[]).filter(h=>(h.partId||"l1-all")===partId).length;
 }
 function quizAttemptText(n){
   return n===0?"Not taken yet":n===1?"Taken 1 time":`Taken ${n} times`;
+}
+function shortAttemptDate(value){
+  const m=String(value||"").match(/\b(\d{1,2}\s+[A-Za-z]{3})\b/);
+  return m?m[1]:String(value||"—");
+}
+function quizModeAttemptSummary(partId,mode){
+  const attempts=(state?.quizHistory||[]).filter(h=>(h.partId||"l1-all")===partId&&(h.mode||"review")===mode);
+  const modeName=mode==="review"?"Reviewing":"Mastering";
+  if(!attempts.length)return `${modeName} not started • no completed attempts yet`;
+  const best=Math.max(...attempts.map(h=>Number(h.adjustedPercent??h.percent??0)));
+  const last=attempts[0];
+  const taken=attempts.length===1?"Taken 1 time":`Taken ${attempts.length} times`;
+  return `${taken} • Best ${best}% • Last attempt ${shortAttemptDate(last.date)}`;
 }
 function practiceModeStatus(partId,mode){
   const attempts=(state?.quizHistory||[]).filter(h=>(h.partId||"l1-all")===partId&&(h.mode||"review")===mode);
@@ -1764,7 +1848,7 @@ function renderQuiz(){
   if(!quiz.length){a.innerHTML='<div class="notice">No questions are mapped to this part yet.</div>';return}
   const i=Math.min(quizSession.current,quiz.length-1);quizSession.current=i;
   const q=quiz[i],answered=c,conf=quizSession.confidence[i]||"confident";
-  a.innerHTML=`<div class="quiz-top"><div><b>${quizMode==="review"?"Reviewing":"Mastering"} • ${meta.label}</b><div class="small">${meta.pages} • ${answered}/${quiz.length} answered</div></div><button class="secondary" id="clear">Clear this attempt</button></div><div class="quiz-progress"><div style="width:${Math.round((i+1)/quiz.length*100)}%"></div></div><div class="number-grid">${quiz.map((qq,n)=>`<div class="qnum ${quizSession.answers[n]!==null?"answered":""} ${n===i?"current":""} ${getQuestionNote(qq)?"noted":""}" data-n="${n}" title="${getQuestionNote(qq)?"Has saved note":""}">${n+1}</div>`).join("")}</div><div class="qmeta"><span class="tag">${quizMode==="review"?"Reviewing":"Mastering"}</span><span class="small">Question ${i+1} of ${quiz.length}</span></div><div class="quiz-notes-row"><div class="quiz-note-box"><div class="quiz-note-head"><b>📝 Notes for this section</b><span>Autosaved • ${meta.label}</span></div><textarea id="sectionQuizNote" placeholder="Key idea, formula, trap, something to revisit…">${getSectionNote()}</textarea></div></div><div class="question">${q.q}</div>${(quizSession.optionOrders[i]||[0,1,2,3]).map((orig,display)=>`<label class="option ${quizSession.answers[i]===orig?"selected":""}"><input type="radio" name="a" value="${orig}" ${quizSession.answers[i]===orig?"checked":""}> ${String.fromCharCode(65+display)}. ${q.opts[orig]}</label>`).join("")}<div class="quiz-note-box question-note"><div class="quiz-note-head"><b>✏️ Note for Question ${i+1}</b><span>Autosaved to this question</span></div><textarea id="questionQuizNote" placeholder="Why I chose this, what confused me, formula to remember, professor wording…">${getQuestionNote(q)}</textarea></div><div class="confidence-wrap"><b>Confidence check</b><div class="small">Leave both unselected if confident. Mark one if the answer may be a fluke.</div><div class="confidence-actions"><button class="confidence-btn ${conf==="unsure"?"active":""}" data-conf="unsure">□ Not sure</button><button class="confidence-btn guess ${conf==="guessed"?"active":""}" data-conf="guessed">□ Guessed</button></div></div><div class="qnav"><button class="secondary" id="prev" ${i===0?"disabled":""}>← Previous</button>${i<quiz.length-1?`<button id="next">Next →</button>`:`<button id="submit" ${answered<quiz.length?"disabled":""}>Submit Quiz</button>`}</div>${i===quiz.length-1&&answered<quiz.length?`<div class="notice" style="margin-top:12px">Answer all questions before Submit — ${quiz.length-answered} left.</div>`:""}`;
+  a.innerHTML=`<div class="quiz-top"><div><b>${quizMode==="review"?"Reviewing":"Mastering"} • ${meta.label}</b><div class="small">${meta.pages} • ${answered}/${quiz.length} answered</div><div class="quiz-attempt-detail">${quizModeAttemptSummary(quizPart,quizMode)}</div></div><button class="secondary" id="clear">Clear this attempt</button></div><div class="quiz-progress"><div style="width:${Math.round((i+1)/quiz.length*100)}%"></div></div><div class="number-grid">${quiz.map((qq,n)=>`<div class="qnum ${quizSession.answers[n]!==null?"answered":""} ${n===i?"current":""} ${getQuestionNote(qq)?"noted":""}" data-n="${n}" title="${getQuestionNote(qq)?"Has saved note":""}">${n+1}</div>`).join("")}</div><div class="question-note-legend"><i class="saved-note-dot"></i> saved note</div><div class="qmeta"><span class="tag">${quizMode==="review"?"Reviewing":"Mastering"}</span><span class="small">Question ${i+1} of ${quiz.length}</span></div><div class="quiz-notes-row"><div class="quiz-note-box"><div class="quiz-note-head"><b>📝 Notes for this section</b><span>Autosaved • ${meta.label}</span></div><textarea id="sectionQuizNote" placeholder="Key idea, formula, trap, something to revisit…">${getSectionNote()}</textarea></div></div><div class="question">${q.q}</div>${(quizSession.optionOrders[i]||[0,1,2,3]).map((orig,display)=>`<label class="option ${quizSession.answers[i]===orig?"selected":""}"><input type="radio" name="a" value="${orig}" ${quizSession.answers[i]===orig?"checked":""}> ${String.fromCharCode(65+display)}. ${q.opts[orig]}</label>`).join("")}<div class="quiz-note-box question-note"><div class="quiz-note-head"><b>✏️ Note for Question ${i+1}</b><span>Autosaved to this question</span></div><textarea id="questionQuizNote" placeholder="Why I chose this, what confused me, formula to remember, professor wording…">${getQuestionNote(q)}</textarea></div><div class="confidence-wrap"><b>Confidence check</b><div class="small">Leave both unselected if confident. Mark one if the answer may be a fluke.</div><div class="confidence-actions"><button class="confidence-btn ${conf==="unsure"?"active":""}" data-conf="unsure">□ Not sure</button><button class="confidence-btn guess ${conf==="guessed"?"active":""}" data-conf="guessed">□ Guessed</button></div></div><div class="qnav"><button class="secondary" id="prev" ${i===0?"disabled":""}>← Previous</button>${i<quiz.length-1?`<button id="next">Next →</button>`:`<button id="submit" ${answered<quiz.length?"disabled":""}>Submit Quiz</button>`}</div>${i===quiz.length-1&&answered<quiz.length?`<div class="notice" style="margin-top:12px">Answer all questions before Submit — ${quiz.length-answered} left.</div>`:""}`;
   const sn=a.querySelector("#sectionQuizNote");if(sn)sn.oninput=e=>saveSectionNote(e.target.value);
   const qn=a.querySelector("#questionQuizNote");if(qn)qn.oninput=e=>saveQuestionNote(q,e.target.value);
   a.querySelectorAll('input[name="a"]').forEach(r=>r.onchange=e=>{quizSession.answers[i]=Number(e.target.value);saveQuizDraft();renderQuiz()});
