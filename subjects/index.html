@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D Study App • Subjects</title>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#111827;color:#e5edf8;display:grid;place-items:center;min-height:100vh}
+.box{background:#1c2431;border:1px solid #334155;border-radius:16px;padding:22px;box-shadow:0 12px 36px rgba(0,0,0,.22)}
+</style>
+</head>
+<body>
+<div class="box"><b>Opening D Study App…</b><div style="margin-top:6px;color:#9eb0c7;font-size:13px">Loading subjects.</div></div>
+<script>
+fetch("../index.html?ts="+Date.now(),{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.text()})
+  .then(h=>{document.open();document.write(h);document.close()})
+  .catch(e=>{document.body.innerHTML='<div class="box"><b>Could not load the app.</b><div style="margin-top:8px">'+e+'</div></div>'});
+</script>
+</body>
+</html>
