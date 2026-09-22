@@ -1650,6 +1650,299 @@ body.midnight-ui .summary-coverage-banner{
 body.midnight-ui.dark .summary-coverage-banner{
   background:#29243b!important;border-color:#4b4368!important;color:#c8c1dc!important
 }
+
+/* ============================================================
+   v12.5 — Accent consistency pass
+   Theme color now reaches every NON-SEMANTIC accent surface.
+   Semantic colors (correct/wrong, warning, confidence, practice
+   traffic lights, saved-note violet) intentionally stay fixed.
+   ============================================================ */
+
+/* Shared accentable surfaces */
+body[data-accent] .quick-primary{
+  background:var(--theme-accent,var(--blue))!important;
+}
+body[data-accent] .quick-primary:hover{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 86%,white)!important;
+}
+body[data-accent] .quick-secondary,
+body[data-accent] button.secondary{
+  color:color-mix(in srgb,var(--theme-accent,var(--blue)) 82%,var(--ink))!important;
+}
+body[data-accent] .quick-secondary:active,
+body[data-accent] button.secondary:active{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 18%,var(--soft))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 56%,var(--line))!important;
+}
+body[data-accent] .tab.active::after{background:var(--theme-accent2,var(--blue))!important}
+body[data-accent] .source-badge{
+  color:var(--theme-accent,var(--blue))!important;
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 10%,var(--card))!important;
+}
+body[data-accent] .topic-hint-btn.active{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 12%,var(--card))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 60%,var(--line))!important;
+  color:color-mix(in srgb,var(--theme-accent,var(--blue)) 82%,var(--ink))!important;
+}
+body[data-accent] .topic-hint-label{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,var(--card))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 28%,var(--line))!important;
+}
+
+/* Classic dark: override the old fixed blue utility accents. */
+body[data-ui-theme="classic"].dark[data-accent] .source-badge,
+body[data-ui-theme="classic"].dark[data-accent] .session-badge,
+body[data-ui-theme="classic"].dark[data-accent] .note-source-pill,
+body[data-ui-theme="classic"].dark[data-accent] .note-count-chip{
+  color:color-mix(in srgb,var(--theme-accent2) 72%,white)!important;
+  background:color-mix(in srgb,var(--theme-accent) 20%,#26374a)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 42%,#50647a)!important;
+}
+body[data-ui-theme="classic"].dark[data-accent] .quick-primary:active{
+  background:color-mix(in srgb,var(--theme-accent) 76%,#1a222c)!important;
+}
+body[data-ui-theme="classic"].dark[data-accent] .quick-secondary,
+body[data-ui-theme="classic"].dark[data-accent] button.secondary{
+  background:color-mix(in srgb,var(--theme-accent) 14%,#31445a)!important;
+  color:#eef6ff!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 32%,#50647a)!important;
+}
+
+/* Neo — active theme tile, dashboard accents, notes and hints all use Neo palette. */
+body.neo-ui[data-accent] .ui-theme-choice.active{
+  background:color-mix(in srgb,var(--theme-accent) 10%,var(--neo-card))!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 11%,transparent)!important;
+}
+body.neo-ui[data-accent] .ui-theme-choice.active .ui-theme-choice-icon{
+  background:linear-gradient(145deg,var(--theme-accent),var(--theme-accent2))!important;
+  color:#fff!important;
+}
+body.neo-ui[data-accent] #summary .slide-card{
+  border-left-color:var(--theme-accent)!important;
+}
+body.neo-ui[data-accent] .note-count-chip,
+body.neo-ui[data-accent] .note-source-pill,
+body.neo-ui[data-accent] .session-badge,
+body.neo-ui[data-accent] .source-badge{
+  color:var(--theme-accent)!important;
+  background:color-mix(in srgb,var(--theme-accent) 9%,var(--neo-card))!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 26%,var(--neo-line))!important;
+}
+body.neo-ui[data-accent] .quiz-set-progress:not(.complete){
+  color:var(--theme-accent)!important;
+  background:color-mix(in srgb,var(--theme-accent) 9%,var(--neo-card))!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 28%,var(--neo-line))!important;
+}
+body.neo-ui[data-accent] .update-entry.latest{
+  background:color-mix(in srgb,var(--theme-accent) 9%,var(--neo-card))!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 62%,var(--neo-line))!important;
+}
+body.neo-ui[data-accent] .dashboard-main{
+  background:
+    radial-gradient(circle at 14% 0%,color-mix(in srgb,var(--theme-accent) 12%,transparent),transparent 38%),
+    linear-gradient(145deg,#ffffff,#f3f8fe)!important;
+}
+body.neo-ui.dark[data-accent]{
+  background:
+    radial-gradient(circle at 10% -5%,color-mix(in srgb,var(--theme-accent) 14%,transparent),transparent 32%),
+    radial-gradient(circle at 88% 4%,color-mix(in srgb,var(--theme-accent2) 8%,transparent),transparent 25%),
+    var(--neo-bg)!important;
+}
+body.neo-ui.dark[data-accent] .tab.active{
+  background:color-mix(in srgb,var(--theme-accent) 28%,#142333)!important;
+  color:#f4f9ff!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 13%,transparent)!important;
+}
+body.neo-ui.dark[data-accent] .ui-theme-choice.active{
+  background:color-mix(in srgb,var(--theme-accent) 24%,#132334)!important;
+  border-color:var(--theme-accent)!important;
+}
+body.neo-ui.dark[data-accent] .keyline{
+  background:color-mix(in srgb,var(--theme-accent) 15%,#172b3e)!important;
+  border-left-color:var(--theme-accent)!important;
+}
+body.neo-ui.dark[data-accent] .note-count-chip,
+body.neo-ui.dark[data-accent] .note-source-pill,
+body.neo-ui.dark[data-accent] .session-badge,
+body.neo-ui.dark[data-accent] .source-badge{
+  color:color-mix(in srgb,var(--theme-accent2) 72%,white)!important;
+  background:color-mix(in srgb,var(--theme-accent) 18%,#182c3e)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 40%,#334b60)!important;
+}
+body.neo-ui.dark[data-accent] .quiz-set-progress:not(.complete){
+  color:color-mix(in srgb,var(--theme-accent2) 74%,white)!important;
+  background:color-mix(in srgb,var(--theme-accent) 17%,#172838)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 38%,#334b60)!important;
+}
+body.neo-ui.dark[data-accent] .topic-hint-reveal{
+  background:color-mix(in srgb,var(--theme-accent) 12%,#172838)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 34%,#334b60)!important;
+}
+body.neo-ui.dark[data-accent] .topic-hint-label{
+  background:color-mix(in srgb,var(--theme-accent) 20%,#173450)!important;
+  color:color-mix(in srgb,var(--theme-accent2) 72%,white)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 45%,#315c7f)!important;
+}
+body.neo-ui.dark[data-accent] .topic-hint-btn.active{
+  background:color-mix(in srgb,var(--theme-accent) 22%,#1b3044)!important;
+  border-color:var(--theme-accent)!important;
+}
+body.neo-ui.dark[data-accent] .update-entry.latest{
+  background:color-mix(in srgb,var(--theme-accent) 18%,#223043)!important;
+  border-color:var(--theme-accent)!important;
+}
+body.neo-ui.dark[data-accent] .dashboard-main{
+  background:
+    radial-gradient(circle at 14% 0%,color-mix(in srgb,var(--theme-accent) 13%,transparent),transparent 38%),
+    linear-gradient(145deg,#152b3e,#111f2d)!important;
+}
+
+/* Midnight — fix higher-specificity fixed-purple rules visible in Settings screenshot. */
+body.midnight-ui[data-accent] .ui-theme-choice.active{
+  background:color-mix(in srgb,var(--theme-accent) 13%,var(--mw-surface))!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 12%,transparent)!important;
+}
+body.midnight-ui[data-accent] .ui-theme-choice.active .ui-theme-choice-icon{
+  background:linear-gradient(145deg,var(--theme-accent),var(--theme-accent2))!important;
+  color:#fff!important;
+}
+body.midnight-ui[data-accent] .note-count-chip,
+body.midnight-ui[data-accent] .note-source-pill,
+body.midnight-ui[data-accent] .session-badge,
+body.midnight-ui[data-accent] .source-badge{
+  background:color-mix(in srgb,var(--theme-accent) 12%,var(--mw-surface))!important;
+  color:var(--theme-accent)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 32%,var(--mw-line))!important;
+}
+body.midnight-ui[data-accent] .quiz-set-progress:not(.complete){
+  background:color-mix(in srgb,var(--theme-accent) 11%,var(--mw-surface))!important;
+  color:var(--theme-accent)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 30%,var(--mw-line))!important;
+}
+body.midnight-ui[data-accent] .update-entry.latest{
+  background:color-mix(in srgb,var(--theme-accent) 12%,var(--mw-surface))!important;
+  border-color:var(--theme-accent)!important;
+}
+body.midnight-ui[data-accent] .dashboard-main{
+  background:
+    radial-gradient(circle at 18% 0%,color-mix(in srgb,var(--theme-accent) 11%,transparent),transparent 36%),
+    linear-gradient(155deg,var(--mw-surface),var(--mw-surface-2))!important;
+}
+
+/* Extra specificity here is intentional: these beat old body.midnight-ui.dark fixed purple rules. */
+body.midnight-ui.dark[data-accent]{
+  background:
+    radial-gradient(circle at 80% -8%,color-mix(in srgb,var(--theme-accent) 13%,transparent),transparent 28%),
+    radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--theme-accent2) 6%,transparent),transparent 22%),
+    #15171a!important;
+}
+body.midnight-ui.dark[data-accent] .tab.active{
+  background:linear-gradient(135deg,var(--theme-accent),var(--theme-accent2))!important;
+  color:#fff!important;
+  border-color:color-mix(in srgb,var(--theme-accent2) 80%,white)!important;
+  box-shadow:0 6px 18px color-mix(in srgb,var(--theme-accent) 34%,transparent)!important;
+}
+body.midnight-ui.dark[data-accent] .card::before,
+body.midnight-ui.dark[data-accent] .settings-card::before,
+body.midnight-ui.dark[data-accent] .summary-library::before,
+body.midnight-ui.dark[data-accent] .quiz-library::before,
+body.midnight-ui.dark[data-accent] .notes-hub-toolbar::before{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent2),transparent 78%)!important;
+}
+body.midnight-ui.dark[data-accent] .library-link:hover,
+body.midnight-ui.dark[data-accent] .recording-link:hover,
+body.midnight-ui.dark[data-accent] .part-btn:hover,
+body.midnight-ui.dark[data-accent] .mode-btn:hover,
+body.midnight-ui.dark[data-accent] .option:hover,
+body.midnight-ui.dark[data-accent] .qnum:hover{
+  border-color:color-mix(in srgb,var(--theme-accent) 66%,#3a414b)!important;
+}
+body.midnight-ui.dark[data-accent] .library-link.active,
+body.midnight-ui.dark[data-accent] .part-btn.active,
+body.midnight-ui.dark[data-accent] .mode-btn.active,
+body.midnight-ui.dark[data-accent] .qnum.current{
+  background:color-mix(in srgb,var(--theme-accent) 24%,#1c1f23)!important;
+  color:#f7f5ff!important;
+  border-color:var(--theme-accent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 15%,transparent)!important;
+}
+body.midnight-ui.dark[data-accent] .keyline{
+  background:color-mix(in srgb,var(--theme-accent) 17%,#24262b)!important;
+  color:#f2efff!important;
+  border-left-color:var(--theme-accent)!important;
+}
+body.midnight-ui.dark[data-accent] .summary-link{
+  color:color-mix(in srgb,var(--theme-accent2) 78%,white)!important;
+}
+body.midnight-ui.dark[data-accent] .quiz-progress>div,
+body.midnight-ui.dark[data-accent] .bar>div,
+body.midnight-ui.dark[data-accent] .status-fill{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent2))!important;
+}
+body.midnight-ui.dark[data-accent] .progress-donut{
+  background:conic-gradient(var(--theme-accent) calc(var(--pct)*1%),#2c3036 0)!important;
+}
+body.midnight-ui.dark[data-accent] .note-count-chip,
+body.midnight-ui.dark[data-accent] .note-source-pill,
+body.midnight-ui.dark[data-accent] .session-badge,
+body.midnight-ui.dark[data-accent] .source-badge{
+  background:color-mix(in srgb,var(--theme-accent) 22%,#22262b)!important;
+  color:color-mix(in srgb,var(--theme-accent2) 76%,white)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 44%,#3e444d)!important;
+}
+body.midnight-ui.dark[data-accent] .ui-theme-choice.active{
+  background:color-mix(in srgb,var(--theme-accent) 24%,#1a1d21)!important;
+  border-color:var(--theme-accent)!important;
+}
+body.midnight-ui.dark[data-accent] .quiz-set-progress:not(.complete){
+  background:color-mix(in srgb,var(--theme-accent) 20%,#22262b)!important;
+  color:color-mix(in srgb,var(--theme-accent2) 76%,white)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 42%,#494266)!important;
+}
+body.midnight-ui.dark[data-accent] .update-entry.latest{
+  background:color-mix(in srgb,var(--theme-accent) 24%,#1c1f23)!important;
+  border-color:var(--theme-accent)!important;
+}
+body.midnight-ui.dark[data-accent] .topic-hint-reveal{
+  background:color-mix(in srgb,var(--theme-accent) 14%,#20242a)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 38%,#40454d)!important;
+  color:#f1eefb!important;
+}
+body.midnight-ui.dark[data-accent] .topic-hint-label{
+  background:color-mix(in srgb,var(--theme-accent) 24%,#22262b)!important;
+  color:color-mix(in srgb,var(--theme-accent2) 80%,white)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 48%,#494266)!important;
+}
+body.midnight-ui.dark[data-accent] .topic-hint-btn.active{
+  background:color-mix(in srgb,var(--theme-accent) 23%,#22262b)!important;
+  border-color:var(--theme-accent)!important;
+  color:#fff!important;
+}
+body.midnight-ui.dark[data-accent] .dashboard-main{
+  background:
+    radial-gradient(circle at 18% 0%,color-mix(in srgb,var(--theme-accent) 13%,transparent),transparent 36%),
+    linear-gradient(155deg,#1d2024,#191c20)!important;
+}
+body.midnight-ui.dark[data-accent] .quick-primary:active{
+  background:color-mix(in srgb,var(--theme-accent) 78%,#171a1e)!important;
+}
+body.midnight-ui.dark[data-accent] .quick-secondary,
+body.midnight-ui.dark[data-accent] button.secondary{
+  background:color-mix(in srgb,var(--theme-accent) 14%,#282d34)!important;
+  color:#f2f4f7!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 30%,#3a414b)!important;
+}
+
+/* The selected swatch itself follows the active palette rather than old UI blue. */
+body[data-accent] .swatch.active{
+  outline-color:color-mix(in srgb,var(--theme-accent) 52%,transparent)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 18%,transparent),0 6px 14px color-mix(in srgb,var(--theme-accent) 16%,transparent)!important;
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -2474,7 +2767,7 @@ body.midnight-ui.dark .summary-coverage-banner{
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1740px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1810px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -2707,6 +3000,12 @@ COMPLETE LECTURE SUMMARY COVERAGE
 - Keep English as the main study language; use Thai helper boxes only for difficult distinctions/context.
 - Lecture 1 may stay split into p.1–42 and p.43–70. Lectures 2.1, 2.2, 3, and 4 each have their own dedicated Summary route.
 - When a new lecture file is added, audit Summary against its outline and annotations before claiming coverage is complete.
+
+
+ACCENT CONSISTENCY
+- Theme color must propagate to ALL non-semantic accent surfaces, including active nav tabs, selected UI-theme card, card accent lines, session/source/note badges, summary/quiz active cards, links, progress bars/rings, hint controls, update-log latest highlight, and relevant hover/focus states.
+- Audit Dark mode separately because old theme-specific selectors can have higher CSS specificity and accidentally keep a fixed legacy color.
+- Semantic colors must stay semantic and should NOT be recolored by the user accent: correct/wrong results, warning/Thai-help colors, Reviewing/Mastering traffic-light status colors, confidence meaning, and the saved-note violet marker.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -2797,7 +3096,8 @@ COMPLETE LECTURE SUMMARY COVERAGE
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.4</b><span>Complete Lecture Summaries</span></div><p>Audited Summary against all five current professor lecture files, expanded missing subtopics, and added complete Lecture 3 Economic Growth and Lecture 4 Finance/Saving/Investment summaries.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.5</b><span>Accent Consistency</span></div><p>Fixed remaining hard-coded theme colors so the selected palette now reaches active tabs, theme cards, badges, panel accent lines, hints, progress elements, and other non-semantic UI accents.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.4</b><span>Complete Lecture Summaries</span></div><p>Audited Summary against all five current professor lecture files, expanded missing subtopics, and added complete Lecture 3 Economic Growth and Lecture 4 Finance/Saving/Investment summaries.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.3</b><span>Theme & Quiz Clarity</span></div><p>Reworked Theme color so each UI theme has its own palette and the accent applies across the interface; also made selected answers and answered question numbers much clearer in every theme.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.2</b><span>Quiz Hint</span></div><p>Added a Hint button on every quiz question that reveals the source topic without revealing the answer.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
@@ -2826,13 +3126,13 @@ COMPLETE LECTURE SUMMARY COVERAGE
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.4</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.5</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.4</b> • comprehensive summaries for all five current professor lecture files</footer></div>
-<script>const APP_VERSION="12.4";
+</main><footer><b id="appVersionLabel">D Study App v12.5</b> • theme-color consistency pass • all five lecture summaries preserved</footer></div>
+<script>const APP_VERSION="12.5";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
