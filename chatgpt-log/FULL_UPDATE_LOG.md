@@ -8,6 +8,49 @@ This log records both app releases and documentation/handoff changes. It is inte
 
 ### v12.x — current maintained line
 
+#### v12.11 — Developer Management Console
+Runtime commit: `8d4e16facf04e2f0b22020194960107853388f38`
+
+User request:
+- add a password-gated **For Dev** feature next to Update Log;
+- provide a whole management-system screen;
+- show users, logs, names, and progress;
+- allow direct removal;
+- allow ban/unban where technically appropriate;
+- prepare the console for additional future management features.
+
+Implementation:
+- added full-screen developer console with Overview, Users, Activity Log, Security, and Future sections;
+- added local-browser user metrics and progress inspection;
+- added per-user lecture progress, quiz-attempt count, and saved-note count;
+- added local activity logging from v12.11 onward for profile/session/quiz/admin events;
+- added local account removal with confirmation;
+- added local user ban/unban, enforced by sign-in and session restore;
+- added developer snapshot JSON export without PIN hashes;
+- added future placeholders for cloud user directory, remote progress, server audit log, and network security;
+- added disabled IP controls with explicit backend-required explanation;
+- developer unlock is session-only and uses a SHA-256 comparison rather than storing the user-provided developer password as plaintext.
+
+Architecture/security notes:
+- no backend was introduced;
+- all managed users/data are still browser-local;
+- no IP address collection was added;
+- global users, reliable IP logs/bans, remote administration, and tamper-resistant audit logs still require an authenticated backend;
+- because the repo is public/static, the developer password gate is a convenience barrier, not strong access control.
+
+Compatibility/non-regression:
+- existing profile keys and per-profile state keys were preserved;
+- quiz draft keys were preserved;
+- quiz history, notes, backup/import, routes, themes, and summaries were not reset or renamed;
+- new admin data uses isolated keys: `d-study-dev-bans-v1` and `d-study-dev-activity-v1`.
+
+Verification:
+- re-fetched deployed `index.html`;
+- confirmed v12.11 footer/version/update-log entry;
+- confirmed developer-console element IDs are unique;
+- parsed the full JavaScript with V8 `new Function(...)`: syntax OK.
+
+
 #### v12.10 baseline — Understand it readability / visibility
 Commit: `8c4bd02958397143d4ba91f99f85fa27452e609d`
 - Enlarged and emphasized clickable Understand it cards.
