@@ -6,13 +6,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/d-study-app/assets/app-v13.2.min.css"></head>
+<link rel="stylesheet" href="/d-study-app/assets/app-v13.3.css"></head>
 <body>
-<section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">Multi-subject learning workspace • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
+
+<section id="loginScreen">
+  <div class="auth-stage">
+    <aside class="auth-brand-panel" aria-hidden="true">
+      <div class="auth-brand-kicker">D STUDY APP</div>
+      <div class="auth-brand-mark">D</div>
+      <h1>Study with structure.<br>Keep your momentum.</h1>
+      <p>One workspace for focused summaries, practice, notes, confidence tracking, and subject access.</p>
+      <div class="auth-feature-grid">
+        <div><b>24h</b><span>login + subject continuity</span></div>
+        <div><b>5</b><span>current EC214 lecture blocks</span></div>
+        <div><b>2 modes</b><span>Reviewing → Mastering</span></div>
+      </div>
+      <div class="auth-theme-note">The login and subject pages follow your latest saved workspace theme. New browsers start in Midnight + Dark.</div>
+    </aside>
+    <div class="login-card auth-login-card">
+      <div class="auth-mobile-brand"><span class="auth-mini-mark">D</span><div><b>D Study App</b><small>Multi-subject learning workspace</small></div></div>
+      <div class="eyebrow">Welcome</div>
+      <h2>Continue your study workspace</h2>
+      <p class="auth-lead">Sign in to a local profile or create a new one on this browser.</p>
+      <div class="login-tabs" role="group" aria-label="Profile access">
+        <button id="signInTab" class="active" type="button" aria-pressed="true">Sign in</button>
+        <button id="createTab" type="button" aria-pressed="false">Create profile</button>
+      </div>
+      <div class="field"><label for="loginUser">Username</label><input id="loginUser" autocomplete="username" placeholder="Your profile name"></div>
+      <div class="field"><label for="loginPin">PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div>
+      <button id="loginAction" class="auth-primary" style="width:100%;margin-top:6px" type="button">Sign in</button>
+      <div id="loginError" class="login-error"></div>
+      <div class="login-note"><b>Local profile:</b> progress stays on this browser unless you export/import a full backup. The same username on another device is a separate profile until a shared backend is added.</div>
+      <div class="auth-security-line"><span></span> Your PIN is stored as a hash in this browser, not shown in the interface.</div>
+    </div>
+  </div>
+</section>
 <section id="subjectScreen" class="subject-screen" aria-label="Choose subject">
   <div class="subject-shell">
     <div class="subject-topbar">
-      <div><div class="eyebrow">D Study App • v13.2</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
+      <div><div class="eyebrow">D Study App • v13.3</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
       <div class="subject-user"><span id="subjectUserChip" class="userchip"></span><button id="subjectLogoutBtn" class="logout" type="button">Log out</button></div>
     </div>
     <div class="subject-grid">
@@ -1302,7 +1334,7 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v13.2</b><span>Graph Alignment, Thai Understand-it & Preview Workspace</span></div><p>Audits graph coordinates so points/intersections sit on the lines they describe, expands updated graph explanations in Thai, separates Preview from Unlock/Open, changes the default workspace to Midnight + Dark, and removes the image icon from note attachments.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v13.3</b><span>Exact Progress Preview, Themed Login & Public Routes</span></div><p>Makes the EC214 Progress preview mirror the real dashboard layout, makes preview navigation visibly pressed, applies the selected/default theme to preview and login, redesigns login, and adds dedicated /login/ and /subjects/ routes.</p></article>\n        <article class="update-entry"><div class="update-entry-top"><b>v13.2</b><span>Graph Alignment, Thai Understand-it & Preview Workspace</span></div><p>Audits graph coordinates so points/intersections sit on the lines they describe, expands updated graph explanations in Thai, separates Preview from Unlock/Open, changes the default workspace to Midnight + Dark, and removes the image icon from note attachments.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v13.1</b><span>24h Subject Session, Preview & Full Midterm Quizzes</span></div><p>Keeps an opened subject active for 24 hours across app routes, adds a limited locked-subject preview with free Summary/Quiz samples, and adds complete Reviewing/Mastering quiz sets for Lectures 3 and 4.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v13.0</b><span>Subjects, Rich Notes & Graph Detail</span></div><p>Added the post-login subject chooser with one-time-per-account EC214 access, rich note images with resizing and auto-growing text areas, and more detailed lecture-grounded graph reading guides.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.13</b><span>Public Build Split</span></div><p>Moved the large inline CSS and JavaScript out of index.html into separate production assets so the public entry page exposes much less implementation code at a glance while preserving the existing app behavior.</p></article>
@@ -1343,7 +1375,7 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v13.2</b></div>
+      <div class="update-log-foot small">Current build: <b>v13.3</b></div>
     </section>
   </div>
 
@@ -1450,5 +1482,5 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v13.2</b> • aligned graphs, bilingual graph explanations, Midnight preview workspace</footer></div>
-<script src="/d-study-app/assets/app-v13.2.min.js"></script></body></html>
+</main><footer><b id="appVersionLabel">D Study App v13.3</b> • exact themed preview, polished login, dedicated public routes</footer></div>
+<script src="/d-study-app/assets/app-v13.3.js"></script></body></html>
