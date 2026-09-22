@@ -358,6 +358,40 @@ body.dark .quiz-attempt-line[data-level="2"]::before{background:color-mix(in srg
 body.dark .quiz-attempt-line[data-level="3"]::before{background:color-mix(in srgb,#79b8e9 70%,#50647a)}
 body.dark .quiz-attempt-line[data-level="4"]::before{background:color-mix(in srgb,#79b8e9 84%,#50647a)}
 body.dark .part-btn.active .quiz-attempt-line{color:#c7ddf0}
+
+/* v11.3 quiz practice status dots + set completion */
+.quiz-library-list{list-style:none;padding-left:0}
+.quiz-library-item{position:relative;display:flex;align-items:center;gap:12px;min-height:58px;padding:0 92px 0 0}
+.quiz-library-item .library-link{flex:1;min-width:0}
+.quiz-set-progress{position:absolute;right:0;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:11px;font-weight:850;letter-spacing:.02em;color:var(--muted);background:color-mix(in srgb,var(--blue) 6%,var(--card));border:1px solid color-mix(in srgb,var(--blue) 14%,var(--line));border-radius:999px;padding:5px 8px}
+.quiz-set-progress.complete{color:#376a4c;background:#eef8f1;border-color:#c6decf}
+
+.part-btn{position:relative;padding-right:92px}
+.practice-status-cluster{position:absolute;top:10px;right:10px;display:flex;gap:7px;align-items:center}
+.practice-mode-status{display:flex;align-items:center;gap:3px;font-size:9px;font-weight:900;letter-spacing:.03em;color:var(--muted);opacity:.82}
+.practice-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-sizing:border-box;box-shadow:0 0 0 1px rgba(0,0,0,.035)}
+.practice-dot.not-started{background:transparent;border:2px solid #cc6b6b}
+.practice-dot.red{background:#cf5656;border:1px solid #b94747}
+.practice-dot.orange{background:#d88a42;border:1px solid #bd7332}
+.practice-dot.yellow{background:#d6ad3d;border:1px solid #b7922f}
+.practice-dot.green{background:#5f9f70;border:1px solid #4a865b}
+.practice-dot-legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-1px 2px 12px;font-size:10px;color:var(--muted);opacity:.78}
+.practice-dot-legend span{display:inline-flex;align-items:center;gap:4px}
+
+body.dark .quiz-set-progress{color:#b8c5d3;background:#29394d;border-color:#50647a}
+body.dark .quiz-set-progress.complete{color:#cdebd4;background:#294536;border-color:#4e785d}
+body.dark .practice-mode-status{color:#b4c1cf}
+body.dark .practice-dot.not-started{border-color:#e07a7a}
+body.dark .practice-dot.red{background:#dc6a6a;border-color:#ef8b8b}
+body.dark .practice-dot.orange{background:#e09a55;border-color:#edb273}
+body.dark .practice-dot.yellow{background:#e2bd55;border-color:#efd174}
+body.dark .practice-dot.green{background:#72b685;border-color:#91cca1}
+
+@media(max-width:700px){
+  .quiz-library-item{padding-right:0;display:block}
+  .quiz-set-progress{position:static;display:inline-block;transform:none;margin:5px 0 2px}
+  .part-btn{padding-right:82px}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -872,14 +906,22 @@ body.dark .part-btn.active .quiz-attempt-line{color:#c7ddf0}
   <div class="quiz-library">
     <div class="lecture-title">✅ Quiz Library</div>
     <div class="small">Choose a study block first. Your current p.1–42 drafts keep their original part IDs, so existing unfinished work remains compatible.</div>
-    <ul class="library-list">
-      <li><a class="library-link" href="/d-study-app/quiz1-42/">Lecture 1 — Quiz Set 1: p.1–42 • Foundations → PPF concepts →</a></li>
-      <li><a class="library-link" href="/d-study-app/quiz43-70/">Lecture 1 — Quiz Set 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a></li>
-      <li><a class="library-link" href="/d-study-app/quiz-l2-gdp/">Lecture 2.1 — GDP Quiz • 4 parts + cumulative →</a></li>
-      <li><a class="library-link" href="/d-study-app/quiz-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation Quiz • 4 parts + cumulative →</a></li>
+    <ul class="library-list quiz-library-list">
+      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz1-42/">Lecture 1 — Quiz Set 1: p.1–42 • Foundations → PPF concepts →</a><span class="quiz-set-progress" data-quiz-progress="l1a">0/4 done</span></li>
+      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz43-70/">Lecture 1 — Quiz Set 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a><span class="quiz-set-progress" data-quiz-progress="l1b">0/4 done</span></li>
+      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz-l2-gdp/">Lecture 2.1 — GDP Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2gdp">0/4 done</span></li>
+      <li class="quiz-library-item"><a class="library-link" href="/d-study-app/quiz-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation Quiz • 4 parts + cumulative →</a><span class="quiz-set-progress" data-quiz-progress="l2ui">0/4 done</span></li>
     </ul>
   </div>
   <div id="partPicker" class="part-picker"></div>
+  <div class="practice-dot-legend" aria-label="Practice status colors">
+    <span><i class="practice-dot not-started"></i> not started</span>
+    <span><i class="practice-dot red"></i> guessed</span>
+    <span><i class="practice-dot orange"></i> needs work</span>
+    <span><i class="practice-dot yellow"></i> practiced</span>
+    <span><i class="practice-dot green"></i> strong</span>
+    <span style="margin-left:auto">R = Reviewing • M = Mastering</span>
+  </div>
   <div class="mode-switch"><button class="mode-btn active" data-mode="review"><b>Reviewing — recommended first</b><span class="small">Clearer recall + application • does not award Mastered</span></button><button class="mode-btn" data-mode="mastery"><b>Mastering — harder</b><span class="small">Closer distractors • multi-step graph/application logic</span></button></div>
   <div id="quizReadingGuide" class="read-with"></div><div id="resumeNotice"></div><div id="quizArea"></div>
 </div></div></section>
@@ -889,7 +931,7 @@ body.dark .part-btn.active .quiz-attempt-line{color:#c7ddf0}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1210px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1260px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1029,6 +1071,19 @@ QUIZ ATTEMPT INDICATOR
 - Keep it subtle: small text, muted/faded color, and a tiny accent dot. It should provide context without competing with the quiz title.
 - The accent may become slightly stronger as attempt count increases, but avoid bright badges, large pills, or clutter.
 - Count completed attempts from quiz history and refresh the indicator immediately after submitting a quiz.
+
+
+QUIZ PRACTICE STATUS DOTS
+- Every quiz part card must show two small status indicators in its top-right corner: R for Reviewing and M for Mastering, so Mastering can visibly remain "not started" even after Reviewing has been attempted.
+- Use a restrained traffic-light progression:
+  • hollow red = not started,
+  • filled red = latest completed attempt contains Guessed answers,
+  • orange = completed but learning score is below 60%,
+  • yellow = practiced but still has Not sure flags or learning score below 80%,
+  • green = strong completed attempt with learning score at least 80% and no Guessed/Not sure flags.
+- Keep dots small and aesthetic; labels R/M provide mode context without adding large badges.
+- Each large Quiz Library link must independently show "x/y done", where y is the number of NON-CUMULATIVE parts in that quiz set and x is how many of those parts have at least one completed attempt.
+- The cumulative quiz is NOT an extra denominator item. If the cumulative quiz is completed, treat the set as fully complete (y/y), never as 1/(y+1).
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1086,8 +1141,8 @@ QUIZ ATTEMPT INDICATOR
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.2</b> • subtle quiz attempt history on each quiz part</footer></div>
-<script>const APP_VERSION="11.2";
+</main><footer><b id="appVersionLabel">D Study App v11.3</b> • R/M status dots + independent quiz-set completion counters</footer></div>
+<script>const APP_VERSION="11.3";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1287,7 +1342,7 @@ function startUser(user,renewSession=true){
   quizMode="review";quizSet="l1a";quizPart="l1-foundations";quizSession=loadQuizDraft("review",quizPart);
   if(!filtersReady)initFilters();
   document.querySelectorAll(".mode-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===quizMode));
-  renderQuizSetButtons();renderQuizPartButtons();renderTracker();renderQuiz();renderHistory();renderRecordingDatabase();
+  renderQuizSetButtons();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderQuiz();renderHistory();renderRecordingDatabase();
   const ns=document.getElementById("notesSearch"),nf=document.getElementById("notesLectureFilter");
   if(ns&&!ns.dataset.bound){ns.dataset.bound="1";ns.oninput=renderNotesHub}
   if(nf&&!nf.dataset.bound){nf.dataset.bound="1";nf.onchange=renderNotesHub}
@@ -1622,14 +1677,51 @@ function quizAttemptCount(partId){
 function quizAttemptText(n){
   return n===0?"Not taken yet":n===1?"Taken 1 time":`Taken ${n} times`;
 }
+function practiceModeStatus(partId,mode){
+  const attempts=(state?.quizHistory||[]).filter(h=>(h.partId||"l1-all")===partId&&(h.mode||"review")===mode);
+  if(!attempts.length)return{cls:"not-started",label:(mode==="review"?"Reviewing":"Mastering")+" not started"};
+  const h=attempts[0],learn=Number(h.adjustedPercent??h.percent??0),guessed=Number(h.guessed||0),unsure=Number(h.unsure||0);
+  if(guessed>0)return{cls:"red",label:(mode==="review"?"Reviewing":"Mastering")+": completed with guessed answers"};
+  if(learn<60)return{cls:"orange",label:(mode==="review"?"Reviewing":"Mastering")+": needs more work"};
+  if(unsure>0||learn<80)return{cls:"yellow",label:(mode==="review"?"Reviewing":"Mastering")+": practiced"};
+  return{cls:"green",label:(mode==="review"?"Reviewing":"Mastering")+": strong attempt"};
+}
+function quizSetCompletion(setId){
+  const entries=Object.entries(quizParts).filter(([id,p])=>p.set===setId);
+  const regular=entries.filter(([id,p])=>!id.endsWith("-all"));
+  const cumulative=entries.find(([id,p])=>id.endsWith("-all"));
+  const total=regular.length;
+  if(!total)return{done:0,total:0};
+  const hasCumulative=cumulative&&(state?.quizHistory||[]).some(h=>(h.partId||"l1-all")===cumulative[0]);
+  if(hasCumulative)return{done:total,total};
+  const done=regular.filter(([id])=>(state?.quizHistory||[]).some(h=>(h.partId||"l1-all")===id)).length;
+  return{done,total};
+}
+function renderQuizLibraryProgress(){
+  document.querySelectorAll("[data-quiz-progress]").forEach(el=>{
+    const p=quizSetCompletion(el.dataset.quizProgress);
+    el.textContent=`${p.done}/${p.total} done`;
+    el.classList.toggle("complete",p.total>0&&p.done===p.total);
+  });
+}
 function renderQuizPartButtons(){
   const root=document.getElementById("partPicker");if(!root)return;
   const entries=Object.entries(quizParts).filter(([id,p])=>p.set===quizSet);
   root.innerHTML=entries.map(([id,p])=>{
     const rc=getQuizFor(id,"review").length,mc=getQuizFor(id,"mastery").length,attempts=quizAttemptCount(id),level=Math.min(4,attempts);
-    return `<button class="part-btn ${id===quizPart?"active":""}" data-part="${id}"><b>${p.label}</b><div class="small">${p.pages} • Review ${rc}Q • Master ${mc}Q</div><div class="quiz-attempt-line" data-attempts="${attempts}" data-level="${level}">${quizAttemptText(attempts)}</div></button>`;
+    const rs=practiceModeStatus(id,"review"),ms=practiceModeStatus(id,"mastery");
+    return `<button class="part-btn ${id===quizPart?"active":""}" data-part="${id}">
+      <span class="practice-status-cluster">
+        <span class="practice-mode-status" title="${rs.label}" aria-label="${rs.label}">R <i class="practice-dot ${rs.cls}"></i></span>
+        <span class="practice-mode-status" title="${ms.label}" aria-label="${ms.label}">M <i class="practice-dot ${ms.cls}"></i></span>
+      </span>
+      <b>${p.label}</b>
+      <div class="small">${p.pages} • Review ${rc}Q • Master ${mc}Q</div>
+      <div class="quiz-attempt-line" data-attempts="${attempts}" data-level="${level}">${quizAttemptText(attempts)}</div>
+    </button>`;
   }).join("");
   root.querySelectorAll("[data-part]").forEach(b=>b.onclick=()=>setQuizPart(b.dataset.part));
+  renderQuizLibraryProgress();
 }
 function renderReadingGuide(){
   const root=document.getElementById("quizReadingGuide"),p=quizParts[quizPart];if(!root||!p)return;
@@ -1707,7 +1799,7 @@ function submitQuiz(){
   });
   const rawPct=Math.round(correct/quiz.length*100),adjPct=Math.round(weighted/quiz.length*100);
   state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x])});
-  state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderTracker();renderHistory();
+  state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderHistory();
 }
 function renderQuizResult(){
   const quiz=getQuiz(),meta=quizParts[quizPart],a=document.getElementById("quizArea"),h=state.quizHistory.find(x=>(x.partId||"l1-all")===quizPart&&x.mode===quizMode);
@@ -1790,7 +1882,7 @@ document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.da
 window.addEventListener("storage",e=>{
   if(!activeUser)return;
   if(e.key===stateKey()&&e.newValue){
-    try{state=normalizeState(JSON.parse(e.newValue));applyPreferences();renderTracker();renderNotesHub();renderHistory()}catch(err){}
+    try{state=normalizeState(JSON.parse(e.newValue));applyPreferences();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderNotesHub();renderHistory()}catch(err){}
   }
   if(e.key===ACTIVE_KEY&&e.newValue===null){sessionStorage.removeItem(ACTIVE_KEY);location.reload()}
 });
