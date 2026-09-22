@@ -232,7 +232,7 @@ function renderSubjectHub(){
   if(chip)chip.textContent="👤 "+activeUser.username;
   const unlocked=hasSubjectAccess(activeUser,"ec214");
   if(card)card.classList.toggle("unlocked",unlocked);
-  if(stateEl)stateEl.textContent=unlocked?"Unlocked":"Locked";
+  if(stateEl)stateEl.textContent=unlocked?"Unlocked":"Locked • Preview";
   if(screen)screen.style.display="flex";
 }
 function chooseSubject(subjectId){
