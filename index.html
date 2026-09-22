@@ -1627,6 +1627,29 @@ body.midnight-ui.dark .qnum.answered.current{
 /* Keep saved-note violet distinct from answer/accent state. */
 .qnum.noted::after{background:#7b63d1!important;box-shadow:0 0 0 2px rgba(123,99,209,.18)!important}
 body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px rgba(174,154,255,.22)!important}
+
+/* v12.4 complete lecture-summary coverage */
+.summary-coverage-banner{
+  margin:12px 0 0;padding:10px 12px;border-radius:10px;
+  background:color-mix(in srgb,var(--blue) 7%,var(--card));
+  border:1px solid color-mix(in srgb,var(--blue) 20%,var(--line));
+  color:var(--muted);font-size:12px;line-height:1.55
+}
+body.dark .summary-coverage-banner{
+  background:#29394d;color:#c9d4df;border-color:#50647a
+}
+body.neo-ui .summary-coverage-banner{
+  background:#f2f8ff;border-color:#d2e2f0;color:#50677f
+}
+body.neo-ui.dark .summary-coverage-banner{
+  background:#172838!important;border-color:#334b60!important;color:#c4d2de!important
+}
+body.midnight-ui .summary-coverage-banner{
+  background:#f2effc!important;border-color:#d8d0f2!important;color:#5c5572!important
+}
+body.midnight-ui.dark .summary-coverage-banner{
+  background:#29243b!important;border-color:#4b4368!important;color:#c8c1dc!important
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -1698,7 +1721,10 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
       <li><a class="library-link" data-summary-link="sum-l1-43-70" href="/d-study-app/sum-43-70/">Lecture 1 — Summary 2: p.43–70 • PPF applications → Demand, Supply & Equilibrium →</a></li>
       <li><a class="library-link" data-summary-link="sum-l2-gdp" href="/d-study-app/sum-l2-gdp/">Lecture 2.1 — GDP • Definition → Measuring GDP → Real vs Nominal → Living Standard →</a></li>
       <li><a class="library-link" data-summary-link="sum-l2-labor-inflation" href="/d-study-app/sum-l2-labor-inflation/">Lecture 2.2 — Jobs, Unemployment & Inflation • Labor market → CPI → Biases →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l3-growth" href="/d-study-app/sum-l3-growth/">Lecture 3 — Economic Growth • Growth concept → Productivity → Growth theories → Policy →</a></li>
+      <li><a class="library-link" data-summary-link="sum-l4-finance" href="/d-study-app/sum-l4-finance/">Lecture 4 — Finance, Saving & Investment • Financial markets → Loanable funds → Government →</a></li>
     </ul>
+    <div class="summary-coverage-banner"><b>Full lecture coverage:</b> conceptual topics and subtopics from all five current professor lecture files are represented here. Handwritten annotations/highlights are treated as high-priority lecture content; course-administration pages are not expanded as study theory.</div>
   </div>
 
   <div class="source-library">
@@ -1791,6 +1817,8 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
         <li><b>Efficient vs Inefficient:</b> efficient means one more unit cannot be produced without producing less of something else; inefficient means more can be produced without giving something up.</li>
         <li><b>Tradeoff vs Free Lunch:</b> a tradeoff requires giving something up; a free lunch means getting more without giving something up.</li>
       </ul>
+      <h3>Bridge into the market model on p.42</h3>
+      <div class="keyline">Buyers → <b>Demand</b> &nbsp; | &nbsp; Sellers / resource owners → <b>Supply</b> &nbsp; | &nbsp; Market interaction → <b>Equilibrium</b>.</div>
       
       <figure class="lecture-figure">
         <svg viewBox="0 0 620 330" role="img" aria-label="Production Possibilities Frontier with attainable, efficient, inefficient and unattainable points">
@@ -1972,7 +2000,7 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
       <h3>The professor’s 4-part reading of the definition</h3>
       <ul>
         <li><b>Market value</b> → VALUE produced. For current-period nominal GDP, add price × quantity across final products.</li>
-        <li><b>Final goods and services</b> → WHAT produced. Intermediate goods are excluded to avoid counting the same production more than once.</li>
+        <li><b>Final goods and services</b> → WHAT produced. Intermediate goods are excluded to avoid counting the same production more than once. The lecture’s logic is: count the final value, or equivalently sum the <b>value added</b> at each stage, so intermediate production is not double counted.</li>
         <li><b>Within a country</b> → WHERE produced. GDP follows the location of production, not the nationality of the owner.</li>
         <li><b>Given time period</b> → WHEN produced, such as a quarter or year.</li>
       </ul>
@@ -1995,7 +2023,7 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
       <h3>Four expenditure sectors</h3>
       <ul>
         <li><b>C — Consumption:</b> household spending on goods and services, <b>except new housing</b>.</li>
-        <li><b>I — Investment:</b> capital equipment, inventories, structures, and <b>new housing</b>.</li>
+        <li><b>I — Investment:</b> capital equipment, <b>inventories</b>, structures, and <b>new housing</b>. Inventory is current production that has not yet been sold to a final user.</li>
         <li><b>G — Government purchases:</b> government spending on currently produced goods and services.</li>
         <li><b>NX = X − M — Net exports:</b> exports minus imports.</li>
       </ul>
@@ -2042,6 +2070,15 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
       </ul>
       <h3>What GDP can and cannot tell you</h3>
       <p>The lecture treats GDP as a major macroeconomic indicator, not a complete definition of prosperity or well-being. Always distinguish <b>higher money value</b> from <b>higher real output</b>, and distinguish aggregate GDP from per-person living-standard comparisons.</p>
+      <h3>Specific limitations listed in the lecture</h3>
+      <ul>
+        <li><b>Household production</b> — useful non-market production can be omitted.</li>
+        <li><b>Underground economic activity</b> — production can exist without being captured in official GDP.</li>
+        <li><b>Health and life expectancy</b> — important for quality of life but not directly measured by GDP.</li>
+        <li><b>Leisure time</b> — more output is not automatically more leisure/well-being.</li>
+        <li><b>Environmental quality</b> — GDP can rise while environmental conditions worsen.</li>
+        <li><b>Political freedom and social justice</b> — dimensions of well-being outside the GDP measure.</li>
+      </ul>
       <div class="thai-help"><b>ข้อสอบตีความ:</b> “ประเทศ A GDP ใหญ่กว่า B” ยังสรุปไม่ได้ว่าคน A อยู่ดีกว่า ต้องคิดอย่างน้อยเรื่อง population และ price level/PPP.</div>
     </article>
   </div>
@@ -2062,7 +2099,12 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
         <li><b>Employed:</b> paid work for at least 1 hour, or unpaid work for at least 15 hours; also includes someone who did not work but still had a job from which they were temporarily laid off.</li>
         <li><b>Unemployed:</b> no employment + available for work + either actively applied for a job within the last four weeks or is waiting to be recalled after layoff.</li>
         <li><b>Discouraged worker:</b> has not made an effort to find a job in the last four weeks → not counted as unemployed and not in the labor force.</li>
+        <li><b>Full-time worker:</b> works 35+ hours per week in the lecture’s worker-classification note.</li>
+        <li><b>Part-time worker:</b> can be <b>involuntary</b> (wants full-time work but works part-time for economic reasons) or <b>voluntary</b>.</li>
+        <li><b>Aggregate hours:</b> total hours worked by all workers over the period — a quantity-of-labor measure later reused in the Economic Growth lecture.</li>
       </ul>
+      <h3>Why unemployment is a problem</h3>
+      <ul><li><b>Lost income and production</b>.</li><li><b>Lost human capital</b> as skills and productive capacity can deteriorate during unemployment.</li></ul>
       <h3>Three labor-market indicators</h3>
       <div class="keyline">Employment-to-Population Ratio = Employed ÷ Working-age Population × 100</div>
       <div class="keyline">Unemployment Rate = Unemployed ÷ Labor Force × 100</div>
@@ -2132,6 +2174,272 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
         <li>The lecture notes that, in theory, the GDP deflator avoids several fixed-basket CPI biases, but in practice CPI remains widely used because it is direct and understandable for cost of living, and some deflator construction still depends on price indexes.</li>
       </ul>
       <div class="thai-help"><b>จำ contrast:</b> CPI = consumer basket / fixed weights; GDP deflator = domestic GDP basket / changing production mix.</div>
+
+    </article>
+  </div>
+
+  <div id="sum-l3-growth" class="summary-doc">
+    <div class="card">
+      <div class="lecture-title">Lecture 3 • Economic Growth — Complete Conceptual Coverage</div>
+      <div class="small">Built from the current 37-page professor lecture file. Handwritten questions, assumptions, causal arrows, and policy notes are incorporated as high-priority study material.</div>
+      <div class="summary-source-status"><b>Coverage:</b> growth definition & measurement • real GDP per person • Rule of 70 • quantity of labor • labor productivity • physical/human capital & technology • Classical / Neoclassical / New Growth theories • preconditions • growth policy • key formulas.</div>
+    </div>
+
+    <article class="slide-card" id="summary-s17">
+      <div class="slide-no">Lecture 3 • Concept • p.3–12</div>
+      <h2>Economic Growth: Definition, Measurement, and Why Per Person Matters</h2>
+      <div class="keyline"><b>Economic growth</b> = sustained expansion of the PPF, measured as an increase in <b>Real GDP (RGDP)</b>.</div>
+      <div class="keyline">Economic growth rate = percentage change in Real GDP.</div>
+      <h3>Real GDP per person</h3>
+      <ul>
+        <li>Used to focus on the <b>individual standard-of-living side</b> rather than only the size of the whole economy.</li>
+        <li><b>Real GDP per person grows only when Real GDP grows faster than population.</b></li>
+        <li>The lecture uses real GDP per person in country-income classification and as an indicator of economic-development outcomes.</li>
+        <li>Thailand is discussed in the context of the <b>middle-income trap</b>: moving to a higher income group requires a growth model capable of raising real GDP per person persistently.</li>
+      </ul>
+      <h3>Rule of 70</h3>
+      <div class="keyline">Years to double ≈ 70 ÷ annual percentage growth rate</div>
+      <p>The professor uses this rule to connect a target income level with the growth rate required to reach it over time.</p>
+      <div class="thai-help"><b>จำ logic:</b> GDP โตอย่างเดียวไม่พอ ถ้า population โตเร็วพอ ๆ กัน. ตัวที่สะท้อนคนหนึ่งคนได้ดีกว่าคือ <b>Real GDP per person</b>.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s18">
+      <div class="slide-no">Lecture 3 • Drivers • p.13–18</div>
+      <h2>What Determines Real GDP Growth?</h2>
+      <div class="keyline">Real GDP = Aggregate Hours × Labor Productivity</div>
+      <p>The lecture organizes <b>all influences on RGDP growth</b> through two channels:</p>
+      <ol>
+        <li><b>Quantity of labor / Aggregate hours</b></li>
+        <li><b>Labor productivity</b></li>
+      </ol>
+      <h3>Quantity of labor</h3>
+      <ul>
+        <li>Can rise through higher <b>average hours worked</b>.</li>
+        <li>Can rise when the <b>labor force</b> grows.</li>
+        <li>Labor force growth depends on the <b>labor-force participation rate</b> and <b>population</b>.</li>
+        <li>Participation and hours have practical upper limits; the lecture identifies <b>population growth</b> as the only sustainable source of continued quantity-of-labor growth.</li>
+        <li>But population growth alone does not guarantee higher <b>RGDP per person</b>; labor must also become more productive.</li>
+      </ul>
+      <h3>Labor productivity</h3>
+      <div class="keyline">Labor Productivity = Real GDP ÷ Aggregate Hours</div>
+      <ul>
+        <li><b>Physical capital per worker:</b> more/better tools, machines, buildings and productive capital raise output per hour.</li>
+        <li><b>Human capital:</b> education, training and job experience raise worker productivity.</li>
+        <li><b>New technology:</b> discoveries and advanced production methods raise productivity; the lecture stresses that physical capital often must increase for technology to be used effectively.</li>
+      </ul>
+      <div class="exam-note"><b>Professor’s bridge:</b> to explain growth, do not stop at “more workers.” Ask whether <b>productivity</b> rises enough for Real GDP per person to increase.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s19">
+      <div class="slide-no">Lecture 3 • Theory 1 • p.19–20</div>
+      <h2>Classical Growth Theory — Smith & Malthus</h2>
+      <div class="keyline">Key condition in the lecture: <b>exploding population + limited resources</b> → long-run pressure that ends growth in RGDP per person.</div>
+      <h3>Causal story</h3>
+      <ul>
+        <li>Technology advances and capital accumulation can initially raise productivity and RGDP per person.</li>
+        <li>Prosperity then encourages <b>population growth</b>.</li>
+        <li>More population reduces the amount of capital/resources available per worker.</li>
+        <li>Productivity and RGDP per person fall back toward a low level; technological change cannot permanently escape the population/resource pressure in this theory.</li>
+      </ul>
+      <h3>Professor’s evaluation</h3>
+      <p>The lecture treats the historical condition as crucial: population explosion was a major concern when the theory was developed. Its limitation for current advanced economies is that population does <b>not</b> behave as the theory predicted.</p>
+      <div class="thai-help"><b>แก่น Classical:</b> productivity ↑ → prosperity ↑ → population ↑มาก → capital/resource per worker ↓ → per-person gain ถูกกินกลับ.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s20">
+      <div class="slide-no">Lecture 3 • Theory 2 • p.21–22</div>
+      <h2>Neoclassical Growth Theory — Solow</h2>
+      <div class="keyline">RGDP per person can keep increasing <b>as long as technology keeps advancing</b>.</div>
+      <ul>
+        <li>The lecture presents population growth and technological change as determinants of growth that are <b>not themselves explained by the RGDP growth rate</b>.</li>
+        <li>Predicted RGDP growth ≈ <b>population growth + labor-productivity growth</b>.</li>
+        <li>As technology advances, firms invest and expand to exploit it; saving/investment raise capital per hour of labor.</li>
+        <li>Population does not explode as in Classical theory: higher income can reduce birth rates while also reducing death rates, producing offsetting forces.</li>
+      </ul>
+      <h3>Major limitation emphasized by the professor</h3>
+      <p>Technology is effectively treated as arriving from outside the model / by chance. The theory therefore does <b>not explain what determines technological change</b>, giving policymakers little direct explanation of how to create it.</p>
+    </article>
+
+    <article class="slide-card" id="summary-s21">
+      <div class="slide-no">Lecture 3 • Theory 3 • p.23–26</div>
+      <h2>New Growth Theory — Choices, Profit, Knowledge, and Technology</h2>
+      <div class="keyline">Growth is driven by <b>choices people make in pursuit of self-interest / profit</b>; technological progress is not merely luck.</div>
+      <h3>Five market-economy facts emphasized</h3>
+      <ol>
+        <li><b>Human capital grows because of choices</b> — people choose education and training.</li>
+        <li><b>Discoveries result from choices</b> — technology depends on how many people search and how hard they try.</li>
+        <li><b>Discoveries create profit; competition destroys profit</b> — the loss of profit pushes firms to search for better methods and lower costs.</li>
+        <li><b>Physical capital can be replicated</b> — productive methods/capital can spread.</li>
+        <li><b>Many people can use technology at the same time</b> — knowledge has spillover/non-rival characteristics, helping avoid the simple diminishing-return story.</li>
+      </ol>
+      <h3>Link back to Lecture 1</h3>
+      <p>The professor explicitly connects this theory to economic agents: households choose to build human capital; firms pursue profit and therefore have incentives to develop/adopt technology that raises productivity and growth.</p>
+      <div class="exam-note"><b>Important nuance:</b> the handwritten note “competition is bad here” is about competition <b>eroding an innovator’s profit</b>; that erosion itself becomes an incentive to keep innovating. It is not a claim that competition is generally undesirable.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s22">
+      <div class="slide-no">Lecture 3 • Preconditions / Policy / Formula Sheet • p.27–36</div>
+      <h2>Conditions and Policies for Sustained Economic Growth</h2>
+      <h3>Preconditions in the lecture</h3>
+      <ul>
+        <li><b>Economic freedom:</b> ability to make personal/economic choices; fewer barriers from corruption, illegal markets, excessive trade barriers, taxes or restrictive regulation.</li>
+        <li><b>Property rights:</b> protection of physical, financial and intellectual property provides incentives to work and save.</li>
+        <li><b>Markets:</b> exchange information, products and services and enable trade, saving and investment.</li>
+      </ul>
+      <h3>What must increase?</h3>
+      <ul>
+        <li>Growth rate of <b>capital per hour of labor</b>.</li>
+        <li>Growth rate of <b>human capital</b>.</li>
+        <li>Pace of <b>technological change</b>.</li>
+      </ul>
+      <h3>Policies listed by the professor</h3>
+      <ul>
+        <li>Create incentives to <b>save, invest and innovate</b>.</li>
+        <li>Encourage saving.</li>
+        <li>Encourage <b>research and development</b>.</li>
+        <li>Use <b>international trade</b>.</li>
+        <li>Improve the <b>quality of education</b>.</li>
+        <li>Expect growth to be <b>slow and steady</b>, with large cumulative benefits over time.</li>
+      </ul>
+      <h3>Key formulas</h3>
+      <div class="keyline">Growth of Real GDP = (RGDPₜ − RGDPₜ₋₁) ÷ RGDPₜ₋₁ × 100</div>
+      <div class="keyline">Growth of Real GDP per person ≈ Growth of Real GDP − Population growth</div>
+      <div class="keyline">Years to double ≈ 70 ÷ annual growth rate</div>
+      <div class="keyline">Labor Productivity = Real GDP ÷ Aggregate Hours</div>
+    </article>
+  </div>
+
+  <div id="sum-l4-finance" class="summary-doc">
+    <div class="card">
+      <div class="lecture-title">Lecture 4 • Finance, Saving, and Investment — Complete Conceptual Coverage</div>
+      <div class="small">Built from the current 43-page professor lecture file, including the handwritten financial-flow, lender/borrower, asset-price, and government-intervention annotations.</div>
+      <div class="summary-source-status"><b>Coverage:</b> financial flows • finance vs money • physical/financial capital • gross/net investment • wealth/saving • loans/bonds/stocks • financial institutions • solvency/liquidity • interest rates & asset prices • loanable-funds demand/supply/equilibrium • government deficit • crowding out • Ricardo–Barro.</div>
+    </div>
+
+    <article class="slide-card" id="summary-s23">
+      <div class="slide-no">Lecture 4 • Foundations • p.3–10</div>
+      <h2>Financial Flows, Finance vs Money, Capital, Investment, Wealth, and Saving</h2>
+      <h3>Why finance appears in the circular flow</h3>
+      <p>The lecture starts from the real economy: households, firms, government and the rest of the world have income and expenditure flows. Financial markets allow units with <b>surpluses</b> to provide funds to units with <b>deficits</b>, helping make investment and expenditure possible.</p>
+      <h3>Finance vs Money</h3>
+      <ul>
+        <li><b>Finance:</b> activity of providing funds that finance expenditure on capital; studies how households/firms obtain and use financial resources and manage the associated risks.</li>
+        <li><b>Money:</b> what is used to pay for goods/services, factors of production and financial transactions — a medium used in transactions.</li>
+      </ul>
+      <h3>Physical vs Financial Capital</h3>
+      <ul>
+        <li><b>Physical capital:</b> produced tools, machines, buildings and constructions used to produce goods/services.</li>
+        <li><b>Financial capital:</b> funds firms use to buy and operate physical capital.</li>
+      </ul>
+      <h3>Gross vs Net Investment</h3>
+      <div class="keyline">Net Investment = Gross Investment − Depreciation</div>
+      <p>Gross investment is total spending on new capital goods; <b>net investment</b> is the actual change in the capital stock after replacing depreciated capital.</p>
+      <h3>Wealth vs Saving</h3>
+      <ul>
+        <li><b>Wealth:</b> value of all things a person owns.</li>
+        <li><b>Saving:</b> income not paid in taxes or spent on consumption; saving adds to wealth and becomes a source of funds for investment.</li>
+      </ul>
+      <div class="thai-help"><b>Flow idea:</b> คน/หน่วยที่ Income &gt; Expenditure = saver/lender; Income &lt; Expenditure = borrower/spender.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s24">
+      <div class="slide-no">Lecture 4 • Financial Markets & Institutions • p.11–19</div>
+      <h2>Loans, Bonds, Stocks, Financial Institutions, and Asset Prices</h2>
+      <h3>Three markets for financial capital</h3>
+      <ul>
+        <li><b>Loan markets:</b> bank/credit loans used by firms for inventories/credit and by households for large purchases.</li>
+        <li><b>Bond markets:</b> a bond is a promise by the issuer to pay specified sums on specified dates; it is <b>debt</b> for the issuer. Firms and governments issue bonds.</li>
+        <li><b>Stock markets:</b> stock is a certificate of <b>ownership</b> and a claim on the profits of a firm.</li>
+      </ul>
+      <h3>Direct vs indirect finance</h3>
+      <p>The professor’s flow diagram distinguishes direct movement of funds through financial markets from <b>indirect finance</b> through financial intermediaries.</p>
+      <h3>Financial institutions</h3>
+      <p>A financial institution operates on both sides of financial-capital markets — it borrows in one market and lends in another. The lecture lists investment banks, commercial banks, government-sponsored mortgage lenders, pension funds and insurance companies.</p>
+      <h3>Solvency, net worth, and liquidity</h3>
+      <ul>
+        <li><b>Net worth</b> = market value of what an institution has lent / its assets minus market value of what it has borrowed / liabilities.</li>
+        <li>Positive net worth → <b>solvent</b>; negative net worth → <b>insolvent</b>.</li>
+        <li>The lecture also distinguishes a shortage of immediately usable funds / liquidity from insolvency: a firm can own valuable assets but still face difficulty meeting short-term cash needs.</li>
+      </ul>
+      <h3>Interest rates and asset prices</h3>
+      <div class="keyline">Other things equal: Asset price ↑ → interest rate / yield ↓ &nbsp; | &nbsp; Asset price ↓ → interest rate / yield ↑</div>
+      <p>Stocks, bonds and loans are financial assets. The lecture frames the interest rate as a return relative to the asset’s price, producing the inverse relationship.</p>
+    </article>
+
+    <article class="slide-card" id="summary-s25">
+      <div class="slide-no">Lecture 4 • Loanable Funds • p.20–30</div>
+      <h2>The Loanable Funds Market: Flows, Demand, Supply, and Shifts</h2>
+      <div class="keyline"><b>Loanable funds market</b> = aggregate of the markets for loans, bonds and stocks, represented with one average <b>real interest rate</b>.</div>
+      <h3>Where loanable funds come from</h3>
+      <ol>
+        <li>Private saving</li><li>Government budget surplus</li><li>International borrowing</li>
+      </ol>
+      <h3>What loanable funds are used for</h3>
+      <ol>
+        <li>Business investment</li><li>Government budget deficit</li><li>International investment / lending</li>
+      </ol>
+      <h3>Demand for loanable funds (DLF)</h3>
+      <ul>
+        <li>Major private use = financing <b>investment</b>.</li>
+        <li>Investment depends on the <b>real interest rate</b> and <b>expected profit</b>.</li>
+        <li>Real interest rate ↑ → quantity of loanable funds demanded ↓; real interest rate ↓ → quantity demanded ↑.</li>
+        <li><b>Expected profit ↑</b> → investment ↑ → DLF shifts right. Expected profit ↓ → DLF shifts left.</li>
+      </ul>
+      <h3>Supply of loanable funds (SLF)</h3>
+      <ul>
+        <li>Main private source = <b>saving</b>.</li>
+        <li>Saving / supply is influenced by: <b>real interest rate, disposable income, wealth, expected future income, and default risk</b>.</li>
+        <li>Other things equal: real interest rate ↑ → saving and quantity of loanable funds supplied ↑.</li>
+      </ul>
+      <div class="thai-help"><b>กราฟ:</b> r คือ “price/return” ของ loanable funds. DLF ลงลาด; SLF ขึ้นลาด.</div>
+    </article>
+
+    <article class="slide-card" id="summary-s26">
+      <div class="slide-no">Lecture 4 • Equilibrium • p.31–34</div>
+      <h2>Loanable Funds Equilibrium and Market Adjustment</h2>
+      <div class="keyline">Equilibrium: Quantity of loanable funds supplied = Quantity demanded.</div>
+      <ul>
+        <li>If the real interest rate is <b>above equilibrium</b> → quantity supplied &gt; quantity demanded → <b>surplus of funds</b> → real interest rate falls.</li>
+        <li>If the real interest rate is <b>below equilibrium</b> → quantity demanded &gt; quantity supplied → <b>shortage of funds</b> → real interest rate rises.</li>
+      </ul>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 620 330" role="img" aria-label="Loanable funds market equilibrium">
+          <line x1="75" y1="270" x2="560" y2="270" stroke="#172033" stroke-width="2"/>
+          <line x1="75" y1="270" x2="75" y2="40" stroke="#172033" stroke-width="2"/>
+          <path d="M135 75 L490 245" fill="none" stroke="#c33c49" stroke-width="4"/>
+          <path d="M135 240 L490 75" fill="none" stroke="#2c6b9f" stroke-width="4"/>
+          <circle cx="312" cy="160" r="7" fill="#172033"/>
+          <line x1="312" y1="160" x2="312" y2="270" stroke="#6b7280" stroke-dasharray="6 6"/>
+          <line x1="75" y1="160" x2="312" y2="160" stroke="#6b7280" stroke-dasharray="6 6"/>
+          <text x="470" y="224" font-size="16" fill="#c33c49">DLF</text>
+          <text x="468" y="90" font-size="16" fill="#2c6b9f">SLF</text>
+          <text x="322" y="152" font-size="15">E</text>
+          <text x="450" y="306" font-size="15">Loanable funds</text>
+          <text x="12" y="55" font-size="15">Real interest rate</text>
+        </svg>
+        <figcaption>Equilibrium real interest rate coordinates saving/lending plans with borrowing/investment plans.</figcaption>
+      </figure>
+    </article>
+
+    <article class="slide-card" id="summary-s27">
+      <div class="slide-no">Lecture 4 • Government • p.35–42</div>
+      <h2>Government in the Loanable Funds Market: Deficit, Crowding Out, and Ricardo–Barro</h2>
+      <h3>Government budget position</h3>
+      <ul>
+        <li>A <b>budget surplus</b> is a source of loanable funds in the lecture’s flow framework.</li>
+        <li>A <b>budget deficit</b> is a use/demand for loanable funds and is added to private demand.</li>
+      </ul>
+      <h3>Deficit mechanism emphasized in the lecture</h3>
+      <div class="keyline">Budget deficit ↑ → DLF right → real interest rate ↑ → private investment ↓</div>
+      <ul>
+        <li>The higher real interest rate induces a greater quantity of private funds supplied.</li>
+        <li>But the higher borrowing cost reduces firms’ investment and private quantity of loanable funds demanded.</li>
+      </ul>
+      <h3>Crowding-out effect</h3>
+      <p><b>Crowding out</b> is the tendency for a government budget deficit to raise the real interest rate and reduce private investment.</p>
+      <h3>Ricardo–Barro effect</h3>
+      <p>The Ricardo–Barro proposition says a budget deficit need not change the real interest rate or investment <b>if private saving rises enough to offset the deficit</b>. Then SLF shifts right by the amount of the deficit and the real interest rate does not change. The lecture explicitly notes that most economists regard this complete offset as unlikely.</p>
+      <div class="exam-note"><b>Graph trap:</b> the standard deficit story in this lecture is a <b>rightward shift of demand for loanable funds</b>, not a movement along the same DLF curve.</div>
     </article>
   </div>
 
@@ -2166,7 +2474,7 @@ body.dark .qnum.noted::after{background:#ae9aff!important;box-shadow:0 0 0 2px r
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1620px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1740px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -2382,6 +2690,23 @@ V12.3 THEME COLOR + ANSWER VISIBILITY
 - Answered question-number boxes must be visibly distinct from unanswered boxes. Current+answered must be even clearer.
 - Saved-note indicators stay violet/purple so they cannot be confused with answer status.
 - Never use correctness colors before quiz submission.
+
+
+COMPLETE LECTURE SUMMARY COVERAGE
+- Summary is a comprehensive professor-lecture study layer, not a short selective recap.
+- The current source set consists of five current lecture files:
+  1) Lecture 1 — Introduction to Economics,
+  2) Lecture 2.1 — Macroeconomic Indicators: GDP,
+  3) Lecture 2.2 — Unemployment &amp; Inflation,
+  4) Lecture 3 — Economic Growth,
+  5) Lecture 4 — Finance, Saving, and Investment.
+- Every conceptual topic AND subtopic taught in those lecture files must appear somewhere in Summary. Do not omit a subtopic merely because it looks basic.
+- Handwritten annotations, highlighted causal arrows, professor-written questions, examples, assumptions, warnings, and graph interpretations are high-priority content because they often represent the professor's emphasis.
+- Preserve the professor's terminology and causal framing. Do not silently replace it with generic textbook wording.
+- Course administration pages may stay condensed, but conceptual lecture material must not be dropped.
+- Keep English as the main study language; use Thai helper boxes only for difficult distinctions/context.
+- Lecture 1 may stay split into p.1–42 and p.43–70. Lectures 2.1, 2.2, 3, and 4 each have their own dedicated Summary route.
+- When a new lecture file is added, audit Summary against its outline and annotations before claiming coverage is complete.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -2472,7 +2797,8 @@ V12.3 THEME COLOR + ANSWER VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.3</b><span>Theme & Quiz Clarity</span></div><p>Reworked Theme color so each UI theme has its own palette and the accent applies across the interface; also made selected answers and answered question numbers much clearer in every theme.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.4</b><span>Complete Lecture Summaries</span></div><p>Audited Summary against all five current professor lecture files, expanded missing subtopics, and added complete Lecture 3 Economic Growth and Lecture 4 Finance/Saving/Investment summaries.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.3</b><span>Theme & Quiz Clarity</span></div><p>Reworked Theme color so each UI theme has its own palette and the accent applies across the interface; also made selected answers and answered question numbers much clearer in every theme.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.2</b><span>Quiz Hint</span></div><p>Added a Hint button on every quiz question that reveals the source topic without revealing the answer.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div><p>Added optional Neo Dashboard styling in Light and Dark mode without replacing the original UI.</p></article>
@@ -2500,13 +2826,13 @@ V12.3 THEME COLOR + ANSWER VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.3</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.4</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.3</b> • theme-specific palettes + clearer quiz answer states • Classic / Neo / Midnight</footer></div>
-<script>const APP_VERSION="12.3";
+</main><footer><b id="appVersionLabel">D Study App v12.4</b> • comprehensive summaries for all five current professor lecture files</footer></div>
+<script>const APP_VERSION="12.4";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -2981,7 +3307,9 @@ function summaryPath(docId){
     "sum-l1-1-42":"/d-study-app/sum-1-42/",
     "sum-l1-43-70":"/d-study-app/sum-43-70/",
     "sum-l2-gdp":"/d-study-app/sum-l2-gdp/",
-    "sum-l2-labor-inflation":"/d-study-app/sum-l2-labor-inflation/"
+    "sum-l2-labor-inflation":"/d-study-app/sum-l2-labor-inflation/",
+    "sum-l3-growth":"/d-study-app/sum-l3-growth/",
+    "sum-l4-finance":"/d-study-app/sum-l4-finance/"
   };
   return map[docId]||"/d-study-app/summary/";
 }
@@ -3007,6 +3335,8 @@ function applyPathRoute(){
   if(p.endsWith("/sum-43-70")){openSummaryDoc("sum-l1-43-70");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
   if(p.endsWith("/sum-l2-gdp")){openSummaryDoc("sum-l2-gdp");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
   if(p.endsWith("/sum-l2-labor-inflation")){openSummaryDoc("sum-l2-labor-inflation");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
+  if(p.endsWith("/sum-l3-growth")){openSummaryDoc("sum-l3-growth");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
+  if(p.endsWith("/sum-l4-finance")){openSummaryDoc("sum-l4-finance");if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({block:"start"}),80);return}
   if(p.endsWith("/quiz1-42")){
     quizSet="l1a";if(!quizParts[quizPart]||quizParts[quizPart].set!=="l1a")quizPart="l1-foundations";
     quizSession=loadQuizDraft(quizMode,quizPart);renderQuizSetButtons();renderQuizPartButtons();renderQuiz();switchTab("quiz");return
