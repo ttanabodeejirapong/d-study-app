@@ -2,20 +2,130 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>D Study App • Subjects</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>D Study App</title>
+<script>
+(function(){
+  var appearance="system";
+  try{
+    var active=JSON.parse(localStorage.getItem("d-study-active-user")||"null");
+    var id=active&&active.id;
+    if(!id) id=sessionStorage.getItem("d-study-active-user");
+    if(id){
+      var state=JSON.parse(localStorage.getItem("d-study-state::"+id)||"null");
+      if(state&&state.preferences&&state.preferences.appearance) appearance=state.preferences.appearance;
+    }
+  }catch(e){}
+  var systemDark=!!(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);
+  var dark=appearance==="dark"||(appearance==="system"&&systemDark);
+  document.documentElement.setAttribute("data-loading-theme",dark?"dark":"light");
+})();
+</script>
 <style>
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#111827;color:#e5edf8;display:grid;place-items:center;min-height:100vh}
-.box{background:#1c2431;border:1px solid #334155;border-radius:16px;padding:22px;box-shadow:0 12px 36px rgba(0,0,0,.22)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;width:100%}
+body{
+  min-height:100vh;min-height:100dvh;
+  display:grid;place-items:center;
+  padding:max(22px,env(safe-area-inset-top)) 22px max(22px,env(safe-area-inset-bottom));
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  transition:background .18s ease,color .18s ease;
+}
+.loading-shell{
+  width:min(92vw,520px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:24px;text-align:center;
+}
+.loading-monkey{
+  display:block;
+  width:min(58vw,250px);
+  max-height:46vh;
+  object-fit:contain;
+  user-select:none;-webkit-user-drag:none;
+}
+.status-box{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:min(100%,390px);
+  min-height:64px;
+  padding:15px 20px;
+  border-radius:20px;
+  font-size:clamp(15px,4vw,18px);
+  font-weight:700;
+  letter-spacing:-.01em;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+.spinner{
+  width:20px;height:20px;flex:0 0 20px;
+  border:3px solid currentColor;border-right-color:transparent;
+  border-radius:50%;
+  opacity:.65;
+  animation:spin .8s linear infinite;
+}
+.status-detail{
+  margin-top:-14px;
+  font-size:12px;
+  opacity:.66;
+  min-height:1.2em;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+html[data-loading-theme="dark"] body{
+  background:radial-gradient(circle at 50% 38%,#1b1d21 0,#0b0c0f 42%,#030405 100%);
+  color:#f8fafc;
+}
+html[data-loading-theme="dark"] .loading-monkey{
+  filter:drop-shadow(0 18px 36px rgba(0,0,0,.55));
+}
+html[data-loading-theme="dark"] .status-box{
+  background:rgba(20,23,29,.9);
+  border:1px solid rgba(148,163,184,.24);
+  box-shadow:0 18px 48px rgba(0,0,0,.36),inset 0 1px rgba(255,255,255,.04);
+}
+html[data-loading-theme="light"] body{
+  background:radial-gradient(circle at 50% 36%,#fff 0,#f8f8f5 56%,#efefeb 100%);
+  color:#172033;
+}
+html[data-loading-theme="light"] .loading-monkey{
+  filter:brightness(1.08) saturate(.86) contrast(.96) drop-shadow(0 15px 27px rgba(39,48,61,.18));
+}
+html[data-loading-theme="light"] .status-box{
+  background:rgba(255,255,255,.94);
+  border:1px solid #d9dee7;
+  box-shadow:0 16px 38px rgba(42,51,66,.13),inset 0 1px rgba(255,255,255,.9);
+}
+@media(max-height:560px){
+  .loading-shell{gap:16px}
+  .loading-monkey{width:min(42vw,190px);max-height:38vh}
+  .status-box{min-height:56px;border-radius:17px;padding:12px 17px}
+}
+@media(prefers-reduced-motion:reduce){
+  .spinner{animation-duration:1.8s}
+}
 </style>
 </head>
 <body>
-<div class="box"><b>Opening D Study App…</b><div style="margin-top:6px;color:#9eb0c7;font-size:13px">Loading subjects.</div></div>
+<main class="loading-shell" aria-live="polite">
+  <img class="loading-monkey" src="/d-study-app/assets/loading-monkey.webp" alt="" width="213" height="235">
+  <div class="status-box"><span class="spinner" aria-hidden="true"></span><span id="loadingText">Waiting for app update…</span></div>
+  <div class="status-detail" id="loadingDetail">Loading the latest D Study App.</div>
+</main>
 <script>
-fetch("../index.html?ts="+Date.now(),{cache:"no-store"})
-  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.text()})
-  .then(h=>{document.open();document.write(h);document.close()})
-  .catch(e=>{document.body.innerHTML='<div class="box"><b>Could not load the app.</b><div style="margin-top:8px">'+e+'</div></div>'});
+(function(){
+  var text=document.getElementById("loadingText");
+  var detail=document.getElementById("loadingDetail");
+  function showError(err){
+    text.textContent="Could not load the app.";
+    detail.textContent="Tap here to try again.";
+    document.querySelector(".status-box").style.cursor="pointer";
+    document.querySelector(".status-box").onclick=function(){location.reload()};
+    console.error(err);
+  }
+  fetch("/d-study-app/index.html?ts="+Date.now(),{cache:"no-store"})
+    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text()})
+    .then(function(h){document.open();document.write(h);document.close()})
+    .catch(showError);
+})();
 </script>
 </body>
 </html>
