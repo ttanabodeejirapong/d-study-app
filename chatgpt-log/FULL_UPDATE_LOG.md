@@ -8,6 +8,37 @@ This log records both app releases and documentation/handoff changes. It is inte
 
 ### v12.x — current maintained line
 
+#### v12.12 — Developer Access Fix
+Runtime commit: `c241a270092fce54777d0587a09b98d5ff8786fe`
+
+Bug reported:
+- the developer-management content was visible even while the password lock screen was still shown;
+- user expected the password to be required before any management data could be viewed.
+
+Root cause:
+- the console element used the HTML `hidden` attribute, but author CSS forced `.dev-console { display:grid }`, overriding the browser's default hidden presentation;
+- the first implementation also remembered an unlocked state in `sessionStorage`.
+
+Fix:
+- added explicit `.dev-console[hidden], .dev-lock[hidden] { display:none!important }`;
+- removed persistent developer-unlock session storage;
+- every opening of **For Dev** now starts locked;
+- successful password verification unlocks only the current open console;
+- closing or locking resets the unlock state;
+- management rendering now has an explicit in-memory `devUnlocked` guard.
+
+Verification:
+- re-fetched deployed `index.html`;
+- confirmed v12.12 version/footer/update-log entry;
+- confirmed old developer session-unlock key is no longer referenced;
+- confirmed hidden-state CSS exists;
+- parsed full JavaScript successfully with V8 `new Function(...)`.
+
+Cross-device note:
+- this release does not change the browser-local account architecture;
+- users created on other devices remain invisible to this console until a real shared backend/database is connected.
+
+
 #### v12.11 — Developer Management Console
 Runtime commit: `8d4e16facf04e2f0b22020194960107853388f38`
 
