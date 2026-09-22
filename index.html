@@ -6,11 +6,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/d-study-app/assets/app-v12.13.min.css"></head>
+<link rel="stylesheet" href="/d-study-app/assets/app-v13.0.css"></head>
 <body>
-<section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
+<section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">Multi-subject learning workspace • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
+<section id="subjectScreen" class="subject-screen" aria-label="Choose subject">
+  <div class="subject-shell">
+    <div class="subject-topbar">
+      <div><div class="eyebrow">D Study App • v13</div><h1>Choose your subject</h1><p>Subject access is remembered permanently for this local account after the password is entered correctly once.</p></div>
+      <div class="subject-user"><span id="subjectUserChip" class="userchip"></span><button id="subjectLogoutBtn" class="logout" type="button">Log out</button></div>
+    </div>
+    <div class="subject-grid">
+      <button class="subject-card live" id="subjectEc214Card" type="button" data-subject="ec214">
+        <span class="subject-icon">📘</span><span class="subject-state" id="subjectEc214State">Locked</span>
+        <strong>EC214</strong><span>Introductory Macroeconomics</span><small>Current study workspace</small>
+      </button>
+      <div class="subject-card coming"><span class="subject-icon">＋</span><span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>New subject</span><small>Reserved for your next deployment</small></div>
+      <div class="subject-card coming"><span class="subject-icon">＋</span><span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>Future subject</span><small>Reserved subject slot</small></div>
+    </div>
+    <div class="subject-unlock" id="subjectUnlockPanel" hidden>
+      <div><div class="eyebrow">EC214 access</div><h2>Enter the EC214 subject password</h2><p class="small">You only need to enter it once for this local account. After a successful unlock, this account keeps EC214 access even if the subject password later changes.</p></div>
+      <div class="subject-unlock-row"><input id="subjectPasswordInput" type="password" autocomplete="off" placeholder="Subject password"><button id="subjectUnlockBtn" type="button">Unlock EC214</button><button id="subjectUnlockCancel" class="secondary" type="button">Cancel</button></div>
+      <div class="login-error" id="subjectUnlockStatus"></div>
+    </div>
+    <div class="subject-foot small">Current architecture note: profiles and subject-password overrides are local to this browser/device until a shared backend is connected.</div>
+  </div>
+</section>
 <div id="appShell">
-<header><div class="wrap headerrow"><div><h1>D Study App • EC214</h1><div class="sub">Review first → Master later • autosave + confidence tracking</div></div><div class="userbar"><span id="userChip" class="userchip"></span><button id="logoutBtn" class="logout">Log out</button></div></div></header>
+<header><div class="wrap headerrow"><div><h1>D Study App • EC214</h1><div class="sub">Review first → Master later • autosave + confidence tracking</div></div><div class="userbar"><button id="backToSubjectsBtn" class="secondary subject-back-btn" type="button">← Subjects</button><span id="userChip" class="userchip"></span><button id="logoutBtn" class="logout">Log out</button></div></div></header>
 <main class="wrap"><div id="legacyBox" class="legacy"><b>Old EC214 progress found on this browser.</b><div class="small" style="margin:4px 0 9px">Import it into this profile so your previous tracker/draft is not lost.</div><button id="migrateBtn">Import old progress</button></div>
 <nav class="tabs" aria-label="Main navigation">
   <a class="tab active" data-tab="tracker" href="/d-study-app/progress/">📚 Progress</a>
@@ -200,20 +222,28 @@
       <h3>Bridge into the market model on p.42</h3>
       <div class="keyline">Buyers → <b>Demand</b> &nbsp; | &nbsp; Sellers / resource owners → <b>Supply</b> &nbsp; | &nbsp; Market interaction → <b>Equilibrium</b>.</div>
       
-      <figure class="lecture-figure">
-        <svg viewBox="0 0 620 330" role="img" aria-label="Production Possibilities Frontier with attainable, efficient, inefficient and unattainable points">
-          <defs><marker id="arrPPF" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#172033"/></marker></defs>
-          <line x1="70" y1="270" x2="565" y2="270" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF)"/>
-          <line x1="70" y1="270" x2="70" y2="35" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF)"/>
-          <text x="485" y="302" font-size="16">Good X</text><text x="16" y="45" font-size="16">Good Y</text>
-          <path d="M105 65 C 220 72, 365 125, 500 245" fill="none" stroke="#2c6b9f" stroke-width="5"/>
-          <text x="465" y="215" font-size="16" fill="#2c6b9f" font-weight="700">PPF</text>
-          <circle cx="310" cy="115" r="7" fill="#17365d"/><text x="321" y="109" font-size="15">On PPF = attainable + efficient</text>
-          <circle cx="300" cy="205" r="7" fill="#d6a72d"/><text x="312" y="225" font-size="15">Inside = attainable + inefficient</text>
-          <circle cx="420" cy="75" r="7" fill="#b53b3b"/><text x="432" y="71" font-size="15">Outside = unattainable</text>
+      <figure class="lecture-figure lecture-figure-detailed">
+        <svg viewBox="0 0 760 430" role="img" aria-label="Detailed Production Possibilities Frontier with coordinate examples and attainable, efficient, inefficient and unattainable points">
+          <defs><marker id="arrPPF4" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#172033"/></marker></defs>
+          <g stroke="#d7dde5" stroke-width="1">
+            <line x1="95" y1="350" x2="690" y2="350"/><line x1="95" y1="300" x2="690" y2="300"/><line x1="95" y1="250" x2="690" y2="250"/><line x1="95" y1="200" x2="690" y2="200"/><line x1="95" y1="150" x2="690" y2="150"/><line x1="95" y1="100" x2="690" y2="100"/><line x1="95" y1="50" x2="690" y2="50"/>
+            <line x1="95" y1="50" x2="95" y2="350"/><line x1="195" y1="50" x2="195" y2="350"/><line x1="295" y1="50" x2="295" y2="350"/><line x1="395" y1="50" x2="395" y2="350"/><line x1="495" y1="50" x2="495" y2="350"/><line x1="595" y1="50" x2="595" y2="350"/><line x1="690" y1="50" x2="690" y2="350"/>
+          </g>
+          <line x1="95" y1="350" x2="710" y2="350" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF4)"/>
+          <line x1="95" y1="350" x2="95" y2="32" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF4)"/>
+          <text x="650" y="392" font-size="16">Good X</text><text x="23" y="45" font-size="16">Good Y</text>
+          <g fill="#596273" font-size="12"><text x="88" y="371">0</text><text x="185" y="371">10</text><text x="285" y="371">20</text><text x="385" y="371">30</text><text x="485" y="371">40</text><text x="585" y="371">50</text><text x="66" y="354">0</text><text x="58" y="304">10</text><text x="58" y="254">20</text><text x="58" y="204">30</text><text x="58" y="154">40</text><text x="58" y="104">50</text><text x="58" y="54">60</text></g>
+          <path d="M95 75 C 230 72, 355 105, 445 155 C 535 205, 610 270, 680 330" fill="none" stroke="#2c6b9f" stroke-width="6"/>
+          <text x="640" y="306" font-size="17" fill="#2c6b9f" font-weight="700">PPF</text>
+          <circle cx="295" cy="100" r="7" fill="#d97706"/><text x="307" y="94" font-size="14">(20, 50)</text>
+          <circle cx="395" cy="150" r="7" fill="#d97706"/><text x="407" y="145" font-size="14">(30, 40)</text>
+          <circle cx="495" cy="225" r="7" fill="#d97706"/><text x="507" y="220" font-size="14">(40, 25)</text>
+          <circle cx="445" cy="155" r="8" fill="#17365d"/><text x="458" y="172" font-size="14">On PPF = attainable + efficient</text>
+          <circle cx="390" cy="265" r="8" fill="#d6a72d"/><text x="405" y="284" font-size="14">Inside = attainable + inefficient</text>
+          <circle cx="525" cy="92" r="8" fill="#b53b3b"/><text x="540" y="87" font-size="14">Outside = unattainable now</text>
         </svg>
-        <figcaption>Lecture-based recreation of the PPF graphs in Lecture 1. Use it to distinguish on / inside / outside the frontier.</figcaption>
-      </figure><div class="thai-help"><b>At p.42:</b> these three ideas have been introduced. The detailed graph applications and student-PPF examples begin in the next summary (p.43 onward).</div>
+        <figcaption><b>Combined reading view:</b> the on/inside/outside annotations preserve the lecture logic. The coordinate labels are an illustrative practice overlay so you can also read quantities and calculate tradeoffs from points on the curve; they are not claimed as the professor's exact numerical dataset.</figcaption>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">How to read this PPF step by step</div><ol><li><b>Start with the axes:</b> every point is one Good X / Good Y production combination under the same current resources and technology.</li><li><b>Classify location:</b> on the frontier = attainable + efficient; inside = attainable + inefficient; outside = unattainable under current constraints.</li><li><b>Read a movement:</b> moving along the frontier means resources are already fully used, so gaining more of one good requires giving up some of the other.</li><li><b>Use the coordinate overlay for tradeoff practice:</b> (20,50) → (30,40) gains 10 X and gives up 10 Y; (30,40) → (40,25) gains another 10 X and gives up 15 Y. The numbers are an added practice overlay, not the professor's exact dataset.</li></ol></div><div class="thai-help"><b>At p.42:</b> these three ideas have been introduced. The detailed graph applications and student-PPF examples begin in the next summary (p.43 onward).</div>
     </article>
   </div>
 
@@ -231,20 +261,28 @@
       <h3>Your personal PPF</h3>
       <p>The lecture applies the same logic to a student choosing between <b>GPA</b> and <b>time for leisure / work</b>. A higher GPA requires giving up leisure or income; the forgone leisure/income is the opportunity cost.</p>
       
-      <figure class="lecture-figure">
-        <svg viewBox="0 0 620 330" role="img" aria-label="Production Possibilities Frontier with attainable, efficient, inefficient and unattainable points">
-          <defs><marker id="arrPPF" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#172033"/></marker></defs>
-          <line x1="70" y1="270" x2="565" y2="270" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF)"/>
-          <line x1="70" y1="270" x2="70" y2="35" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF)"/>
-          <text x="485" y="302" font-size="16">Good X</text><text x="16" y="45" font-size="16">Good Y</text>
-          <path d="M105 65 C 220 72, 365 125, 500 245" fill="none" stroke="#2c6b9f" stroke-width="5"/>
-          <text x="465" y="215" font-size="16" fill="#2c6b9f" font-weight="700">PPF</text>
-          <circle cx="310" cy="115" r="7" fill="#17365d"/><text x="321" y="109" font-size="15">On PPF = attainable + efficient</text>
-          <circle cx="300" cy="205" r="7" fill="#d6a72d"/><text x="312" y="225" font-size="15">Inside = attainable + inefficient</text>
-          <circle cx="420" cy="75" r="7" fill="#b53b3b"/><text x="432" y="71" font-size="15">Outside = unattainable</text>
+      <figure class="lecture-figure lecture-figure-detailed">
+        <svg viewBox="0 0 760 430" role="img" aria-label="Detailed Production Possibilities Frontier with coordinate examples and attainable, efficient, inefficient and unattainable points">
+          <defs><marker id="arrPPF5" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#172033"/></marker></defs>
+          <g stroke="#d7dde5" stroke-width="1">
+            <line x1="95" y1="350" x2="690" y2="350"/><line x1="95" y1="300" x2="690" y2="300"/><line x1="95" y1="250" x2="690" y2="250"/><line x1="95" y1="200" x2="690" y2="200"/><line x1="95" y1="150" x2="690" y2="150"/><line x1="95" y1="100" x2="690" y2="100"/><line x1="95" y1="50" x2="690" y2="50"/>
+            <line x1="95" y1="50" x2="95" y2="350"/><line x1="195" y1="50" x2="195" y2="350"/><line x1="295" y1="50" x2="295" y2="350"/><line x1="395" y1="50" x2="395" y2="350"/><line x1="495" y1="50" x2="495" y2="350"/><line x1="595" y1="50" x2="595" y2="350"/><line x1="690" y1="50" x2="690" y2="350"/>
+          </g>
+          <line x1="95" y1="350" x2="710" y2="350" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF5)"/>
+          <line x1="95" y1="350" x2="95" y2="32" stroke="#172033" stroke-width="2" marker-end="url(#arrPPF5)"/>
+          <text x="650" y="392" font-size="16">Good X</text><text x="23" y="45" font-size="16">Good Y</text>
+          <g fill="#596273" font-size="12"><text x="88" y="371">0</text><text x="185" y="371">10</text><text x="285" y="371">20</text><text x="385" y="371">30</text><text x="485" y="371">40</text><text x="585" y="371">50</text><text x="66" y="354">0</text><text x="58" y="304">10</text><text x="58" y="254">20</text><text x="58" y="204">30</text><text x="58" y="154">40</text><text x="58" y="104">50</text><text x="58" y="54">60</text></g>
+          <path d="M95 75 C 230 72, 355 105, 445 155 C 535 205, 610 270, 680 330" fill="none" stroke="#2c6b9f" stroke-width="6"/>
+          <text x="640" y="306" font-size="17" fill="#2c6b9f" font-weight="700">PPF</text>
+          <circle cx="295" cy="100" r="7" fill="#d97706"/><text x="307" y="94" font-size="14">(20, 50)</text>
+          <circle cx="395" cy="150" r="7" fill="#d97706"/><text x="407" y="145" font-size="14">(30, 40)</text>
+          <circle cx="495" cy="225" r="7" fill="#d97706"/><text x="507" y="220" font-size="14">(40, 25)</text>
+          <circle cx="445" cy="155" r="8" fill="#17365d"/><text x="458" y="172" font-size="14">On PPF = attainable + efficient</text>
+          <circle cx="390" cy="265" r="8" fill="#d6a72d"/><text x="405" y="284" font-size="14">Inside = attainable + inefficient</text>
+          <circle cx="525" cy="92" r="8" fill="#b53b3b"/><text x="540" y="87" font-size="14">Outside = unattainable now</text>
         </svg>
-        <figcaption>Lecture-based recreation of the PPF graphs in Lecture 1. Use it to distinguish on / inside / outside the frontier.</figcaption>
-      </figure><div class="thai-help"><b>ช่วยอ่านกราฟ:</b> จุด “inside” ไม่ได้แปลว่าทำไม่ได้ — ทำได้แต่ inefficient. จุด “outside” ต่างหากที่ยังทำไม่ได้ภายใต้ข้อจำกัดปัจจุบัน.</div>
+        <figcaption><b>Combined reading view:</b> the on/inside/outside annotations preserve the lecture logic. The coordinate labels are an illustrative practice overlay so you can also read quantities and calculate tradeoffs from points on the curve; they are not claimed as the professor's exact numerical dataset.</figcaption>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">Graph reasoning checklist</div><ol><li>Ask <b>attainable?</b> On or inside = yes; outside = no with current resources/technology.</li><li>Then ask <b>efficient?</b> Only a point on the frontier uses available resources efficiently.</li><li>From an inside point toward the frontier, output can rise because idle/misallocated resources are being used.</li><li>Once on the frontier, more X means less Y. In the student's personal PPF, this becomes the GPA versus leisure/job-time opportunity-cost story from the lecture.</li></ol></div><div class="thai-help"><b>ช่วยอ่านกราฟ:</b> จุด “inside” ไม่ได้แปลว่าทำไม่ได้ — ทำได้แต่ inefficient. จุด “outside” ต่างหากที่ยังทำไม่ได้ภายใต้ข้อจำกัดปัจจุบัน.</div>
     </article>
 
     <article class="slide-card" id="summary-s6">
@@ -281,7 +319,7 @@
           <text x="245" y="151" font-size="14">own price ↓ → move along D → Qd ↑</text>
         </svg>
         <figcaption>Law of Demand: own price and quantity demanded move in opposite directions, ceteris paribus.</figcaption>
-      </figure>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">Demand graph: movement vs shift</div><ol><li>The vertical axis is the good's <b>own price</b>; the horizontal axis is <b>quantity demanded</b>.</li><li>If only own price changes, move on the <b>same D curve</b>: P ↓ → Qd ↑; P ↑ → Qd ↓, ceteris paribus.</li><li>If income, related-good prices, tastes, expectations, or number of buyers changes, the <b>whole demand curve shifts</b>.</li><li>Exam check: identify what changed before deciding whether the curve moves or shifts.</li></ol></div>
       <figure class="lecture-figure">
         <svg viewBox="0 0 620 330" role="img" aria-label="Rightward shift of the demand curve">
           <line x1="75" y1="270" x2="560" y2="270" stroke="#172033" stroke-width="2"/>
@@ -329,7 +367,7 @@
           <text x="180" y="135" font-size="14">lower cost / better technology → S shifts right</text>
         </svg>
         <figcaption>Supply: own-price changes move along S; non-price determinants such as input costs, technology, expectations, and number of sellers shift S.</figcaption>
-      </figure><div class="thai-help"><b>จำเหมือน Demand:</b> ถ้าเปลี่ยน “ราคาของสินค้านั้นเอง” ให้คิด movement along ก่อน; ถ้าเป็นต้นทุน เทคโนโลยี expectation จำนวนผู้ขาย ฯลฯ ให้คิด shift.</div>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">Supply graph: trace the seller's incentive</div><ol><li>Own selling price changes cause a <b>movement along S</b>, not a new supply curve.</li><li>Lower input cost or better technology shifts supply right in the lecture logic.</li><li>At the same comparison price, a curve farther right means a larger quantity supplied.</li><li>Exam check: distinguish own current price from cost, technology, expectations, or number of sellers.</li></ol></div><div class="thai-help"><b>จำเหมือน Demand:</b> ถ้าเปลี่ยน “ราคาของสินค้านั้นเอง” ให้คิด movement along ก่อน; ถ้าเป็นต้นทุน เทคโนโลยี expectation จำนวนผู้ขาย ฯลฯ ให้คิด shift.</div>
     </article>
 
     <article class="slide-card" id="summary-s8">
@@ -362,7 +400,7 @@
           <text x="305" y="245" font-size="14" fill="#31587c">P &lt; Pe → shortage → P ↑</text>
         </svg>
         <figcaption>Equilibrium / market-clearing price occurs where Qd = Qs. Above Pe there is excess supply; below Pe there is excess demand.</figcaption>
-      </figure><div class="thai-help"><b>คำยาก:</b> <i>market-clearing</i> = ราคาที่ทำให้ของที่คนอยากซื้อเท่ากับของที่คนอยากขาย; <i>surplus</i> = ของเหลือ; <i>shortage</i> = ของขาด.</div>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">Equilibrium: read the pressure back toward E</div><ol><li>At E, <b>Qd = Qs</b>; the matching coordinates are Pe and Qe.</li><li>Above Pe, Qs &gt; Qd → <b>surplus</b> → downward pressure on price.</li><li>Below Pe, Qd &gt; Qs → <b>shortage</b> → upward pressure on price.</li><li>If D or S shifts, find a <b>new intersection</b>; do not confuse that with a temporary price away from unchanged equilibrium.</li></ol></div><div class="thai-help"><b>คำยาก:</b> <i>market-clearing</i> = ราคาที่ทำให้ของที่คนอยากซื้อเท่ากับของที่คนอยากขาย; <i>surplus</i> = ของเหลือ; <i>shortage</i> = ของขาด.</div>
     </article>
   </div>
 
@@ -798,7 +836,7 @@
           <text x="12" y="55" font-size="15">Real interest rate</text>
         </svg>
         <figcaption>Equilibrium real interest rate coordinates saving/lending plans with borrowing/investment plans.</figcaption>
-      </figure>
+      </figure><div class="graph-reading-guide"><div class="graph-guide-title">Loanable funds: real interest rate is the market price</div><ol><li>DLF slopes down because a higher real interest rate reduces funds demanded for investment/borrowing; SLF slopes up because a higher real rate encourages saving/lending.</li><li>At E, quantity supplied equals quantity demanded, so there is neither shortage nor surplus.</li><li>Above equilibrium, supplied &gt; demanded → surplus → real interest rate falls. Below equilibrium, demanded &gt; supplied → shortage → real interest rate rises.</li><li>When expected profit or government borrowing changes demand, shift DLF first and then read the new equilibrium.</li></ol></div>
     </article>
 
     <article class="slide-card" id="summary-s27">
@@ -1248,7 +1286,8 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.13</b><span>Public Build Split</span></div><p>Moved the large inline CSS and JavaScript out of index.html into separate production assets so the public entry page exposes much less implementation code at a glance while preserving the existing app behavior.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v13.0</b><span>Subjects, Rich Notes & Graph Detail</span></div><p>Added the post-login subject chooser with one-time-per-account EC214 access, rich note images with resizing and auto-growing text areas, and more detailed lecture-grounded graph reading guides.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.13</b><span>Public Build Split</span></div><p>Moved the large inline CSS and JavaScript out of index.html into separate production assets so the public entry page exposes much less implementation code at a glance while preserving the existing app behavior.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.12</b><span>Developer Access Fix</span></div><p>Fixed the developer lock so management content stays completely hidden until the password is entered, and now requires the password again every time For Dev is opened.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.11</b><span>Developer Console</span></div><p>Added the password-gated For Dev management console for local-browser users, progress, activity logs, account removal, and local ban/unban controls, with backend-only IP controls clearly separated.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.10</b><span>Understand it Readability</span></div><p>Expanded the Understand it card further, increased English/Thai explanation text size, enlarged its icon and controls, and strengthened the clickable hover/focus treatment.</p></article>
@@ -1286,7 +1325,7 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.13</b></div>
+      <div class="update-log-foot small">Current build: <b>v13.0</b></div>
     </section>
   </div>
 
@@ -1324,6 +1363,7 @@ UNDERSTAND IT VISIBILITY
           <button class="active" type="button" data-dev-view="overview">Overview</button>
           <button type="button" data-dev-view="users">Users</button>
           <button type="button" data-dev-view="activity">Activity Log</button>
+          <button type="button" data-dev-view="subjects">Subject Access</button>
           <button type="button" data-dev-view="security">Security</button>
           <button type="button" data-dev-view="future">Future</button>
         </nav>
@@ -1352,6 +1392,25 @@ UNDERSTAND IT VISIBILITY
             <div class="dev-log-list" id="devActivityList"></div>
           </section>
 
+<section class="dev-view" data-dev-section="subjects">
+            <div class="dev-toolbar"><div><h3 style="margin:0">Subject Access</h3><div class="small">Manage the EC214 shared subject password for this browser and inspect which local accounts already have permanent access.</div></div></div>
+            <div class="dev-grid">
+              <div class="dev-card">
+                <h3>EC214 password</h3>
+                <p class="small">A user enters this password only once. Successful access is then saved on that local account. Existing unlocked accounts remain unlocked when you change the password.</p>
+                <div class="field"><label>New EC214 password</label><input id="devSubjectPassword" type="password" autocomplete="new-password" placeholder="Enter new subject password"></div>
+                <div class="field"><label>Confirm password</label><input id="devSubjectPasswordConfirm" type="password" autocomplete="new-password" placeholder="Enter it again"></div>
+                <div class="controls"><button id="devSaveSubjectPassword" type="button">Save password on this browser</button><button id="devResetSubjectPassword" class="secondary" type="button">Restore deployed default</button></div>
+                <div class="small" id="devSubjectPasswordStatus" style="margin-top:8px"></div>
+                <div class="dev-warning" style="margin-top:12px"><b>No backend yet:</b> changing this here changes the gate for accounts on this browser only. Other devices keep the deployed default password until a future backend/global configuration is added.</div>
+              </div>
+              <div class="dev-card">
+                <h3>Local account access</h3>
+                <div id="devSubjectAccessList"></div>
+              </div>
+            </div>
+          </section>
+
           <section class="dev-view" data-dev-section="security">
             <div class="dev-security-grid">
               <div class="dev-card"><h3>User bans</h3><p class="small">Local bans are enforced by this browser's sign-in and session restore flow.</p><div class="dev-ban-list" id="devBanList"></div></div>
@@ -1373,5 +1432,5 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.13</b> • public build split into production assets</footer></div>
-<script src="/d-study-app/assets/app-v12.13.min.js"></script></body></html>
+</main><footer><b id="appVersionLabel">D Study App v13.0</b> • subjects, rich notes, and expanded graph explanations</footer></div>
+<script src="/d-study-app/assets/app-v13.0.js"></script></body></html>
