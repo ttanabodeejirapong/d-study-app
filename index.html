@@ -499,7 +499,7 @@ body.dark .update-entry-top span{color:#aebdcc}
    Classic UI remains untouched unless body.neo-ui is active.
    ========================= */
 .ui-theme-setting{margin-bottom:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--soft) 55%,var(--card))}
-.ui-theme-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ui-theme-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
 .ui-theme-choice{
   display:flex;align-items:center;gap:10px;text-align:left;
   padding:12px;border-radius:13px;background:var(--card);color:var(--ink);
@@ -517,7 +517,7 @@ body.dark .ui-theme-setting{background:#29394d;border-color:#50647a}
 body.dark .ui-theme-choice{background:#223043;border-color:#50647a;color:#f4f7fb}
 body.dark .ui-theme-choice-icon{background:#31445a;color:#a9d5ff}
 body.dark .ui-theme-choice.active{background:#2d4258;border-color:#8abfe9}
-@media(max-width:650px){.ui-theme-choices{grid-template-columns:1fr}}
+@media(max-width:900px){.ui-theme-choices{grid-template-columns:1fr 1fr}}@media(max-width:650px){.ui-theme-choices{grid-template-columns:1fr}}
 
 /* Neo base — Light */
 body.neo-ui{
@@ -890,6 +890,422 @@ body.neo-ui.dark footer{color:#8fa1b4}
   body.neo-ui #summary .library-list{grid-template-columns:1fr}
   body.neo-ui .dashboard-hero{grid-template-columns:1fr}
 }
+
+/* ============================================================
+   V12.1 — MIDNIGHT WORKSPACE UI THEME
+   Reference: dark productivity-board aesthetic supplied by user.
+   Classic + Neo Dashboard remain selectable and untouched.
+   ============================================================ */
+body.midnight-ui{
+  --mw-bg:#f1f3f6;
+  --mw-surface:#ffffff;
+  --mw-surface-2:#f7f8fa;
+  --mw-surface-3:#eceff3;
+  --mw-line:#d9dde4;
+  --mw-line-strong:#c3cad4;
+  --mw-ink:#1b2028;
+  --mw-muted:#747d89;
+  --mw-purple:#6d5bd0;
+  --mw-purple-2:#8f79f3;
+  --mw-cyan:#18bfd4;
+  --mw-green:#2fad73;
+  --mw-orange:#e59542;
+  --mw-red:#db5d6b;
+  background:
+    radial-gradient(circle at 82% -10%,rgba(109,91,208,.10),transparent 28%),
+    radial-gradient(circle at 8% 0%,rgba(24,191,212,.06),transparent 22%),
+    var(--mw-bg);
+  color:var(--mw-ink);
+}
+body.midnight-ui header{
+  background:linear-gradient(135deg,#17191f,#22262f)!important;
+  color:#f5f7fb!important;
+  border-bottom:1px solid #2f343d!important;
+  box-shadow:0 14px 34px rgba(25,29,36,.14)!important;
+}
+body.midnight-ui header h1{color:#ffffff!important;letter-spacing:-.02em}
+body.midnight-ui header .sub{color:#aab1bc!important}
+body.midnight-ui .userchip{background:#262b34!important;color:#edf1f6!important;border:1px solid #353b46}
+body.midnight-ui .logout{background:#262b34!important;color:#edf1f6!important;border-color:#3b424d!important}
+
+body.midnight-ui .tabs{
+  background:linear-gradient(135deg,#1c1f26,#252933)!important;
+  border:1px solid #343a46!important;
+  border-radius:15px!important;
+  box-shadow:0 10px 26px rgba(25,29,36,.12)!important;
+  padding:7px!important;
+}
+body.midnight-ui .tab{
+  background:transparent!important;
+  color:#b9c0ca!important;
+  border:1px solid transparent!important;
+  border-radius:9px!important;
+}
+body.midnight-ui .tab:hover{
+  background:#2c313c!important;
+  color:#ffffff!important;
+  border-color:#3b424f!important;
+}
+body.midnight-ui .tab.active{
+  background:linear-gradient(135deg,#6251bf,#7563d8)!important;
+  color:#ffffff!important;
+  border-color:#8e7aed!important;
+  box-shadow:0 6px 16px rgba(83,65,173,.26)!important;
+}
+body.midnight-ui .tab.active::after{background:#d8d0ff!important;box-shadow:none!important}
+
+body.midnight-ui .panel-intro .eyebrow{color:var(--mw-purple)!important}
+body.midnight-ui .panel-intro h2{color:var(--mw-ink)!important;letter-spacing:-.025em}
+body.midnight-ui .panel-intro p{color:var(--mw-muted)!important}
+
+body.midnight-ui .card,
+body.midnight-ui .settings-card,
+body.midnight-ui .slide-card,
+body.midnight-ui .summary-library,
+body.midnight-ui .quiz-library,
+body.midnight-ui .source-library,
+body.midnight-ui .notes-entry,
+body.midnight-ui .notes-hub-toolbar,
+body.midnight-ui .dashboard-main,
+body.midnight-ui .dashboard-ring-card,
+body.midnight-ui .dashboard-focus{
+  background:linear-gradient(155deg,var(--mw-surface),var(--mw-surface-2))!important;
+  color:var(--mw-ink)!important;
+  border:1px solid var(--mw-line)!important;
+  border-radius:14px!important;
+  box-shadow:0 8px 22px rgba(33,38,47,.06)!important;
+}
+body.midnight-ui .card,
+body.midnight-ui .settings-card,
+body.midnight-ui .slide-card,
+body.midnight-ui .notes-entry,
+body.midnight-ui .part-btn,
+body.midnight-ui .mode-btn,
+body.midnight-ui .library-link{
+  position:relative;
+}
+body.midnight-ui .card::before,
+body.midnight-ui .settings-card::before,
+body.midnight-ui .summary-library::before,
+body.midnight-ui .quiz-library::before,
+body.midnight-ui .notes-hub-toolbar::before{
+  content:"";
+  position:absolute;left:12px;right:12px;top:0;height:2px;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--mw-purple),var(--mw-cyan),transparent 74%);
+  opacity:.75;
+}
+
+body.midnight-ui .library-link,
+body.midnight-ui .recording-link,
+body.midnight-ui .part-btn,
+body.midnight-ui .mode-btn,
+body.midnight-ui .option,
+body.midnight-ui .qnum{
+  background:var(--mw-surface-2)!important;
+  color:var(--mw-ink)!important;
+  border-color:var(--mw-line)!important;
+  box-shadow:none!important;
+}
+body.midnight-ui .library-link:hover,
+body.midnight-ui .recording-link:hover,
+body.midnight-ui .part-btn:hover,
+body.midnight-ui .mode-btn:hover,
+body.midnight-ui .option:hover,
+body.midnight-ui .qnum:hover{
+  background:#f0eefc!important;
+  border-color:#a79ae5!important;
+  box-shadow:0 0 0 1px rgba(109,91,208,.10)!important;
+}
+body.midnight-ui .library-link.active,
+body.midnight-ui .part-btn.active,
+body.midnight-ui .mode-btn.active,
+body.midnight-ui .qnum.current{
+  background:#efedfb!important;
+  color:#41347d!important;
+  border-color:#7766d4!important;
+  box-shadow:0 0 0 2px rgba(109,91,208,.10)!important;
+}
+body.midnight-ui .mode-btn.active::before,
+body.midnight-ui .part-btn.active::before{
+  content:"";position:absolute;left:9px;top:9px;bottom:9px;width:3px;border-radius:99px;background:var(--mw-purple)
+}
+body.midnight-ui .quiz-set-progress{
+  background:#ece9fb!important;color:#6654bd!important;border-color:#d2cbf2!important
+}
+body.midnight-ui .quiz-set-progress.complete{
+  background:#e8f6ee!important;color:#2c8055!important;border-color:#cbe8d7!important
+}
+
+body.midnight-ui .keyline{
+  background:#f2effc!important;
+  color:#3d3561!important;
+  border-left-color:var(--mw-purple)!important;
+}
+body.midnight-ui .thai-help{
+  background:#fff7e9!important;color:#73501f!important;border-color:#ead4a8!important
+}
+body.midnight-ui .exam-note,
+body.midnight-ui .source-note,
+body.midnight-ui .read-with,
+body.midnight-ui .backup-note{
+  background:#f4f6f8!important;color:#3d4652!important;border-color:var(--mw-line)!important
+}
+body.midnight-ui .summary-link{color:#6555bb!important}
+body.midnight-ui .lecture-title,
+body.midnight-ui .question,
+body.midnight-ui h1,
+body.midnight-ui h2,
+body.midnight-ui h3{color:var(--mw-ink)}
+body.midnight-ui .small,
+body.midnight-ui .muted,
+body.midnight-ui .slide-no{color:var(--mw-muted)}
+
+body.midnight-ui input,
+body.midnight-ui select,
+body.midnight-ui textarea{
+  background:#ffffff!important;
+  color:var(--mw-ink)!important;
+  border-color:var(--mw-line-strong)!important;
+  border-radius:9px!important;
+}
+body.midnight-ui button{
+  border-radius:9px;
+}
+body.midnight-ui button:not(.tab):not(.swatch):not(.ui-theme-choice){
+  box-shadow:none;
+}
+body.midnight-ui .quiz-progress{background:#e2e5ea!important;border-radius:99px}
+body.midnight-ui .quiz-progress>div{background:linear-gradient(90deg,var(--mw-purple),var(--mw-cyan))!important}
+body.midnight-ui .bar{background:#e3e6eb!important}
+body.midnight-ui .bar>div{background:linear-gradient(90deg,var(--mw-purple),var(--mw-cyan))!important}
+body.midnight-ui .status-track{background:#e4e7eb!important}
+body.midnight-ui .status-fill{background:linear-gradient(90deg,var(--mw-purple),var(--mw-cyan))!important}
+body.midnight-ui .progress-donut{
+  background:conic-gradient(var(--mw-purple) calc(var(--pct)*1%),#e0e4ea 0)!important
+}
+body.midnight-ui .progress-donut:after{background:var(--mw-surface)!important}
+body.midnight-ui .confidence-wrap,
+body.midnight-ui .quiz-note-box,
+body.midnight-ui .result-box{
+  background:#f7f8fa!important;border-color:var(--mw-line)!important
+}
+body.midnight-ui .correct{background:#eaf7f0!important;color:#27724a!important}
+body.midnight-ui .wrong{background:#fff0f2!important;color:#8a3944!important}
+body.midnight-ui .notice{background:#fff5e4!important;color:#79551b!important;border-color:#ecd1a0!important}
+body.midnight-ui .note-count-chip,
+body.midnight-ui .note-source-pill{
+  background:#efedfb!important;color:#6654bd!important;border-color:#d6cff2!important
+}
+body.midnight-ui .device-note{
+  background:#f1f3f6!important;color:#424b57!important;border-color:#d9dde4!important
+}
+body.midnight-ui .session-badge{
+  background:#ece9fb!important;color:#5c4eaa!important;border:1px solid #d5cef1!important
+}
+body.midnight-ui .font-preview{
+  background:#f6f7f9!important;border-color:#d9dde4!important
+}
+body.midnight-ui .ui-theme-setting{
+  background:#f5f6f8!important;border-color:#d9dde4!important
+}
+body.midnight-ui .ui-theme-choice{
+  background:#ffffff!important;color:#20252d!important;border-color:#d9dde4!important
+}
+body.midnight-ui .ui-theme-choice.active{
+  background:#efedfb!important;border-color:#7c69d8!important;
+  box-shadow:0 0 0 2px rgba(109,91,208,.09)!important
+}
+body.midnight-ui .ui-theme-choice.active .ui-theme-choice-icon{
+  background:linear-gradient(145deg,#6150bb,#8171df)!important;color:white!important
+}
+body.midnight-ui footer{color:#7b8491}
+
+/* Midnight page-specific surfaces */
+body.midnight-ui .dashboard-hero{gap:12px}
+body.midnight-ui .dashboard-main{
+  background:
+    linear-gradient(145deg,rgba(109,91,208,.08),transparent 34%),
+    linear-gradient(155deg,var(--mw-surface),var(--mw-surface-2))!important;
+}
+body.midnight-ui .quick-actions a{
+  border-radius:9px!important;
+}
+body.midnight-ui #summary .summary-library,
+body.midnight-ui #quiz .quiz-library,
+body.midnight-ui #notes .notes-hub-toolbar{
+  padding:16px!important;
+}
+body.midnight-ui #summary .library-list,
+body.midnight-ui #quiz .library-list{
+  gap:8px!important;
+}
+body.midnight-ui .slide-card{
+  border-left:3px solid var(--mw-purple)!important
+}
+body.midnight-ui .lecture-figure{
+  border-color:#d5dae2!important;
+  box-shadow:0 7px 18px rgba(31,35,42,.05)!important
+}
+body.midnight-ui .practice-dot.green{background:var(--mw-green)!important}
+body.midnight-ui .practice-dot.yellow{background:var(--mw-cyan)!important;border-color:#0fa1b5!important}
+body.midnight-ui .practice-dot.orange{background:var(--mw-orange)!important}
+body.midnight-ui .practice-dot.red{background:var(--mw-red)!important}
+body.midnight-ui .qnum.noted::after{background:#f0a64f!important;box-shadow:0 0 0 2px rgba(240,166,79,.16)!important}
+
+/* Dark Midnight — closest to supplied reference */
+body.midnight-ui.dark{
+  --mw-bg:#15171a;
+  --mw-surface:#1b1e22;
+  --mw-surface-2:#202329;
+  --mw-surface-3:#262a30;
+  --mw-line:#30343a;
+  --mw-line-strong:#3c414a;
+  --mw-ink:#f3f5f7;
+  --mw-muted:#959da8;
+  --mw-purple:#7564d7;
+  --mw-purple-2:#927ef0;
+  --mw-cyan:#27c7dc;
+  --mw-green:#4dca88;
+  --mw-orange:#e7a15a;
+  --mw-red:#de6874;
+  background:
+    radial-gradient(circle at 80% -8%,rgba(117,100,215,.12),transparent 28%),
+    radial-gradient(circle at 8% 0%,rgba(39,199,220,.05),transparent 22%),
+    #15171a!important;
+  color:var(--mw-ink);
+}
+body.midnight-ui.dark header{
+  background:linear-gradient(135deg,#121417,#1b1f25)!important;
+  border-color:#2b3037!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.34)!important
+}
+body.midnight-ui.dark .tabs{
+  background:linear-gradient(135deg,#1a1d22,#22262d)!important;
+  border-color:#30353d!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.30)!important
+}
+body.midnight-ui.dark .tab{color:#aeb6c1!important}
+body.midnight-ui.dark .tab:hover{background:#292e36!important;color:#fff!important;border-color:#3a414b!important}
+body.midnight-ui.dark .tab.active{
+  background:linear-gradient(135deg,#56459f,#6d5bc0)!important;
+  color:#fff!important;border-color:#7d6bd0!important;
+  box-shadow:0 6px 18px rgba(77,59,150,.34)!important
+}
+body.midnight-ui.dark .panel-intro h2,
+body.midnight-ui.dark .lecture-title,
+body.midnight-ui.dark .question,
+body.midnight-ui.dark h1,
+body.midnight-ui.dark h2,
+body.midnight-ui.dark h3{color:#f5f6f8!important}
+body.midnight-ui.dark .panel-intro p,
+body.midnight-ui.dark .small,
+body.midnight-ui.dark .muted,
+body.midnight-ui.dark .slide-no{color:#99a2ad!important}
+body.midnight-ui.dark .card,
+body.midnight-ui.dark .settings-card,
+body.midnight-ui.dark .slide-card,
+body.midnight-ui.dark .summary-library,
+body.midnight-ui.dark .quiz-library,
+body.midnight-ui.dark .source-library,
+body.midnight-ui.dark .notes-entry,
+body.midnight-ui.dark .notes-hub-toolbar,
+body.midnight-ui.dark .dashboard-main,
+body.midnight-ui.dark .dashboard-ring-card,
+body.midnight-ui.dark .dashboard-focus{
+  background:linear-gradient(155deg,#1d2024,#191c20)!important;
+  color:#edf0f3!important;
+  border-color:#30343a!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.22)!important
+}
+body.midnight-ui.dark .card::before,
+body.midnight-ui.dark .settings-card::before,
+body.midnight-ui.dark .summary-library::before,
+body.midnight-ui.dark .quiz-library::before,
+body.midnight-ui.dark .notes-hub-toolbar::before{
+  background:linear-gradient(90deg,#7866db,#26c7db,transparent 78%)
+}
+body.midnight-ui.dark .library-link,
+body.midnight-ui.dark .recording-link,
+body.midnight-ui.dark .part-btn,
+body.midnight-ui.dark .mode-btn,
+body.midnight-ui.dark .option,
+body.midnight-ui.dark .qnum{
+  background:#21252a!important;
+  color:#e9edf1!important;
+  border-color:#343940!important
+}
+body.midnight-ui.dark .library-link:hover,
+body.midnight-ui.dark .recording-link:hover,
+body.midnight-ui.dark .part-btn:hover,
+body.midnight-ui.dark .mode-btn:hover,
+body.midnight-ui.dark .option:hover,
+body.midnight-ui.dark .qnum:hover{
+  background:#282d34!important;border-color:#6557ac!important
+}
+body.midnight-ui.dark .library-link.active,
+body.midnight-ui.dark .part-btn.active,
+body.midnight-ui.dark .mode-btn.active,
+body.midnight-ui.dark .qnum.current{
+  background:#2b2740!important;
+  color:#f3efff!important;
+  border-color:#7363c7!important;
+  box-shadow:0 0 0 2px rgba(117,100,215,.12)!important
+}
+body.midnight-ui.dark .keyline{
+  background:#29243b!important;color:#ece8ff!important;border-left-color:#7d6bd3!important
+}
+body.midnight-ui.dark .thai-help{background:#332b1e!important;color:#f0ddb3!important;border-color:#5c4d30!important}
+body.midnight-ui.dark .exam-note,
+body.midnight-ui.dark .source-note,
+body.midnight-ui.dark .read-with,
+body.midnight-ui.dark .backup-note{
+  background:#22262b!important;color:#d8dde3!important;border-color:#343940!important
+}
+body.midnight-ui.dark .summary-link{color:#a99af3!important}
+body.midnight-ui.dark input,
+body.midnight-ui.dark select,
+body.midnight-ui.dark textarea{
+  background:#171a1e!important;color:#eef1f4!important;border-color:#3a4047!important
+}
+body.midnight-ui.dark .quiz-progress,
+body.midnight-ui.dark .bar,
+body.midnight-ui.dark .status-track{background:#2b2f35!important}
+body.midnight-ui.dark .quiz-progress>div,
+body.midnight-ui.dark .bar>div,
+body.midnight-ui.dark .status-fill{
+  background:linear-gradient(90deg,#7b69db,#25c5d9)!important
+}
+body.midnight-ui.dark .progress-donut{
+  background:conic-gradient(#7866d8 calc(var(--pct)*1%),#2c3036 0)!important
+}
+body.midnight-ui.dark .progress-donut:after{background:#1b1e22!important}
+body.midnight-ui.dark .confidence-wrap,
+body.midnight-ui.dark .quiz-note-box,
+body.midnight-ui.dark .result-box{background:#20242a!important;border-color:#343a42!important}
+body.midnight-ui.dark .note-count-chip,
+body.midnight-ui.dark .note-source-pill,
+body.midnight-ui.dark .session-badge{
+  background:#2b2740!important;color:#c5bbff!important;border-color:#4d456f!important
+}
+body.midnight-ui.dark .device-note,
+body.midnight-ui.dark .font-preview,
+body.midnight-ui.dark .ui-theme-setting{
+  background:#20242a!important;color:#d5dbe1!important;border-color:#343a42!important
+}
+body.midnight-ui.dark .ui-theme-choice{
+  background:#1a1d21!important;color:#edf0f3!important;border-color:#343940!important
+}
+body.midnight-ui.dark .ui-theme-choice.active{
+  background:#2b2740!important;border-color:#7563cf!important
+}
+body.midnight-ui.dark .lecture-figure{background:#fff!important;color:#172033!important;border-color:#3e444d!important}
+body.midnight-ui.dark .quiz-set-progress{background:#28243a!important;color:#b9aff0!important;border-color:#494266!important}
+body.midnight-ui.dark .quiz-set-progress.complete{background:#1f3429!important;color:#94ddb1!important;border-color:#365743!important}
+body.midnight-ui.dark .update-log-modal{background:#1c1f23!important;border-color:#373c44!important}
+body.midnight-ui.dark .update-entry{background:#22262b!important;border-color:#343940!important}
+body.midnight-ui.dark .update-entry.latest{background:#2b2740!important;border-color:#7462cc!important}
+body.midnight-ui.dark footer{color:#818996!important}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -1429,7 +1845,7 @@ body.neo-ui.dark footer{color:#8fa1b4}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1450px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1510px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1609,6 +2025,20 @@ UI THEME / V12 NON-REGRESSION RULE
 - Neo Dashboard must support BOTH Light and Dark appearance modes with deliberate contrast, not a dark-only skin.
 - Preserve the main navigation destinations and all pre-V12 functionality while theming their surrounding surfaces/cards/layout.
 - UI Theme preference must be per-profile and included automatically in Full Backup through the preferences object.
+
+
+MIDNIGHT WORKSPACE THEME
+- Keep THREE independent UI Theme choices in Settings:
+  1) Classic — original interface,
+  2) Neo Dashboard — first V12 dashboard theme,
+  3) Midnight Workspace — dark productivity-board theme inspired by the user's reference image.
+- Never delete or silently replace an older theme when adding a newer one.
+- Midnight Workspace must work in both Light and Dark Appearance modes; Dark should be closest to the reference image.
+- UI Theme switching remains presentation-only and must preserve every existing feature and all saved state.
+
+UPDATE LOG HISTORY
+- Keep concise release notes from v1.0 through the latest version in the Settings Update Log, newest first.
+- Do not delete older release entries when a new version is added; append/prepend the new concise entry and keep history scrollable.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1633,6 +2063,10 @@ UI THEME / V12 NON-REGRESSION RULE
             <button class="ui-theme-choice" type="button" data-ui-theme="neo">
               <span class="ui-theme-choice-icon">✦</span>
               <span><b>Neo Dashboard</b><small>V12 premium dashboard style</small></span>
+            </button>
+            <button class="ui-theme-choice" type="button" data-ui-theme="midnight">
+              <span class="ui-theme-choice-icon">◈</span>
+              <span><b>Midnight Workspace</b><small>Productivity-board style from your reference</small></span>
             </button>
           </div>
           <div class="ui-theme-note">Changing UI Theme only changes appearance. Progress, notes, quiz history, drafts, summaries, routes, backup, and every existing feature stay untouched.</div>
@@ -1695,50 +2129,39 @@ UI THEME / V12 NON-REGRESSION RULE
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest">
-          <div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div>
-          <p>Added the optional Neo Dashboard interface in both Light and Dark mode while keeping the full Classic UI available.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div>
-          <p>Added this compact release-history popup in Settings.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.4</b><span>Quiz UI polish</span></div>
-          <p>Clearer saved-note color, better dark-mode links, persistent selected states, and visible attempt details inside quizzes.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.3</b><span>Practice status</span></div>
-          <p>Added Reviewing/Mastering status dots and independent completion counters for each quiz set.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.2</b><span>Attempt history</span></div>
-          <p>Added subtle “Taken X times” history to quiz-part cards.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.1</b><span>Notes Hub</span></div>
-          <p>Added one Notes page that gathers Progress, quiz-section, and question notes together.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v11.0</b><span>Lecture 2</span></div>
-          <p>Added part-by-part Lecture 2 summaries and Reviewing/Mastering quizzes.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v10.6–10.7</b><span>Notes & sources</span></div>
-          <p>Added autosaved quiz notes and the lecture-recording source database.</p>
-        </article>
-        <article class="update-entry">
-          <div class="update-entry-top"><b>v10.3–10.5</b><span>Navigation & dark mode</span></div>
-          <p>Improved pressed/active states, stable page URLs, and visible current-page styling.</p>
-        </article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div><p>Added optional Neo Dashboard styling in Light and Dark mode without replacing the original UI.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div><p>Added the in-app release-history popup in Settings.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.4</b><span>Quiz polish</span></div><p>Improved dark-mode links, saved-note color, persistent selected states, and attempt details.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.3</b><span>Practice status</span></div><p>Added Reviewing/Mastering traffic-light status dots and quiz-set completion counters.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.2</b><span>Attempt history</span></div><p>Added subtle Taken X times history on each quiz part.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.1</b><span>Notes Hub</span></div><p>Gathered Progress, quiz-section, and question notes into one editable Notes page.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v11.0</b><span>Lecture 2</span></div><p>Added Lecture 2.1 and 2.2 summaries with part-by-part Reviewing and Mastering quizzes.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.7</b><span>Lecture sources</span></div><p>Added the professor recording database and source tracking on summaries.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.6</b><span>Quiz notes</span></div><p>Added autosaved section notes and individual question notes inside quizzes.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.5</b><span>Persistent selection</span></div><p>Made current pages and active navigation remain visibly selected, especially in dark mode.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.4</b><span>Stable navigation</span></div><p>Expanded dedicated URLs so refreshing a main page keeps the user on that page.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.3</b><span>Dark controls</span></div><p>Improved pressed and selected states across dark-mode Progress and navigation controls.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.2</b><span>Confidence controls</span></div><p>Fixed dark-mode Not sure and Guessed visual states.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.1</b><span>Dark contrast</span></div><p>Improved dark-mode card separation, headings, links, and readability.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v10.0</b><span>Dashboard & fonts</span></div><p>Redesigned the dashboard, added font choices/preview, and polished the app-wide aesthetic.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v9.0</b><span>Profiles & quiz reliability</span></div><p>Added 24-hour local sessions, balanced A/B/C/D shuffling, settings, and stronger per-profile behavior.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v8.0</b><span>Study visuals</span></div><p>Added lecture-grounded SVG economics graphs to summaries.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v7.0</b><span>Lecture 1 expansion</span></div><p>Expanded p.43–70 with separate Reviewing/Mastering question pools and study blocks.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v6.0</b><span>Full backup</span></div><p>Expanded full backup/import to preserve tracker data, notes, quiz history, confidence, and unfinished drafts.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v5.0</b><span>Summary Library</span></div><p>Introduced compact slide-style summaries and separated study blocks instead of one long page.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v4.0</b><span>Multipart quiz</span></div><p>Split quizzes into focused parts plus cumulative practice and linked them to matching study material.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v3.0</b><span>Zero-start profiles</span></div><p>Made new profiles start at true 0% and added the reusable ChatGPT study prompt.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.0</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.1</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.0</b> • optional Classic / Neo Dashboard UI themes • Light + Dark supported</footer></div>
-<script>const APP_VERSION="12.0";
+</main><footer><b id="appVersionLabel">D Study App v12.1</b> • Classic + Neo Dashboard + Midnight Workspace • full update history from v1</footer></div>
+<script>const APP_VERSION="12.1";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -2009,8 +2432,10 @@ function applyPreferences(){
   document.body.dataset.accent=p.accent||"navy";
   const dark=p.appearance==="dark"||(p.appearance==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);
   document.body.classList.toggle("dark",dark);
-  document.body.classList.toggle("neo-ui",(p.uiTheme||"classic")==="neo");
-  document.body.dataset.uiTheme=p.uiTheme||"classic";
+  const uiTheme=p.uiTheme||"classic";
+  document.body.classList.toggle("neo-ui",uiTheme==="neo");
+  document.body.classList.toggle("midnight-ui",uiTheme==="midnight");
+  document.body.dataset.uiTheme=uiTheme;
   document.body.classList.toggle("large-text",p.textSize==="large");
   document.body.classList.toggle("flat-cards",p.cardStyle==="flat");
   if(!fontPreviewActive)applyFontKey(p.font||"inter");
