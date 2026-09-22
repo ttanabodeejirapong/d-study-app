@@ -1306,6 +1306,107 @@ body.midnight-ui.dark .update-log-modal{background:#1c1f23!important;border-colo
 body.midnight-ui.dark .update-entry{background:#22262b!important;border-color:#343940!important}
 body.midnight-ui.dark .update-entry.latest{background:#2b2740!important;border-color:#7462cc!important}
 body.midnight-ui.dark footer{color:#818996!important}
+
+/* v12.2 quiz topic hint */
+.qmeta{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.qmeta-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.topic-hint-btn{
+  padding:6px 10px!important;
+  min-height:32px;
+  font-size:11px;
+  font-weight:800;
+  opacity:.76;
+}
+.topic-hint-btn:hover,.topic-hint-btn.active{opacity:1}
+.topic-hint-btn.active{
+  border-color:color-mix(in srgb,var(--blue) 55%,var(--line))!important;
+  background:color-mix(in srgb,var(--blue) 8%,var(--card))!important;
+}
+.topic-hint-reveal{
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  align-items:center;
+  gap:7px;
+  margin:8px 0 12px;
+  padding:9px 11px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:color-mix(in srgb,var(--soft) 62%,var(--card));
+  color:var(--ink);
+  font-size:12px;
+}
+.topic-hint-reveal[hidden]{display:none!important}
+.topic-hint-label{
+  display:inline-flex;
+  align-items:center;
+  padding:3px 6px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--blue) 10%,var(--card));
+  color:var(--blue);
+  border:1px solid color-mix(in srgb,var(--blue) 20%,var(--line));
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+body.dark .topic-hint-reveal{
+  background:#29394d;
+  border-color:#50647a;
+  color:#f0f5fa;
+}
+body.dark .topic-hint-label{
+  background:#31445a;
+  color:#a9d5ff;
+  border-color:#56718c;
+}
+body.dark .topic-hint-btn.active{
+  background:#2d4258!important;
+  border-color:#79b8e9!important;
+  color:#e7f4ff!important;
+}
+body.neo-ui .topic-hint-reveal{
+  background:#f4f8fd;
+  border-color:#d7e4ef;
+}
+body.neo-ui .topic-hint-label{
+  background:#eaf4ff;
+  color:#176fc4;
+  border-color:#c8ddf1;
+}
+body.neo-ui.dark .topic-hint-reveal{
+  background:#172838!important;
+  border-color:#334b60!important;
+  color:#edf5fc!important;
+}
+body.neo-ui.dark .topic-hint-label{
+  background:#173450!important;
+  color:#aad8fb!important;
+  border-color:#315c7f!important;
+}
+body.midnight-ui .topic-hint-reveal{
+  background:#f4f2fb!important;
+  border-color:#d9d3f0!important;
+  color:#332d55!important;
+}
+body.midnight-ui .topic-hint-label{
+  background:#ebe7fb!important;
+  color:#6555bb!important;
+  border-color:#d1c9f0!important;
+}
+body.midnight-ui.dark .topic-hint-reveal{
+  background:#262231!important;
+  border-color:#494266!important;
+  color:#eeeaff!important;
+}
+body.midnight-ui.dark .topic-hint-label{
+  background:#302a47!important;
+  color:#c1b5ff!important;
+  border-color:#554c78!important;
+}
+@media(max-width:600px){
+  .topic-hint-reveal{grid-template-columns:auto 1fr}
+  .topic-hint-reveal .small{grid-column:1/-1}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -1845,7 +1946,7 @@ body.midnight-ui.dark footer{color:#818996!important}
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1510px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1560px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -2039,6 +2140,14 @@ MIDNIGHT WORKSPACE THEME
 UPDATE LOG HISTORY
 - Keep concise release notes from v1.0 through the latest version in the Settings Update Log, newest first.
 - Do not delete older release entries when a new version is added; append/prepend the new concise entry and keep history scrollable.
+
+
+QUIZ TOPIC HINT
+- Every in-progress quiz question must include a small Hint button.
+- Pressing Hint reveals ONLY the question's mapped topic (for example "Ceteris Paribus" or "GDP Components").
+- The hint must explicitly avoid revealing the correct answer, explanation, option, formula result, or whether the user's current choice is correct.
+- Showing a hint must not change confidence, score, mastery evidence, quiz history, or completion status.
+- Keep the hint visually compact and compatible with Classic, Neo Dashboard, Midnight Workspace, Light, and Dark modes.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -2129,7 +2238,8 @@ UPDATE LOG HISTORY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.2</b><span>Quiz Hint</span></div><p>Added a Hint button on every quiz question that reveals the source topic without revealing the answer.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div><p>Added optional Neo Dashboard styling in Light and Dark mode without replacing the original UI.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div><p>Added the in-app release-history popup in Settings.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v11.4</b><span>Quiz polish</span></div><p>Improved dark-mode links, saved-note color, persistent selected states, and attempt details.</p></article>
@@ -2155,13 +2265,13 @@ UPDATE LOG HISTORY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.1</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.2</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.1</b> • Classic + Neo Dashboard + Midnight Workspace • full update history from v1</footer></div>
-<script>const APP_VERSION="12.1";
+</main><footer><b id="appVersionLabel">D Study App v12.2</b> • quiz topic Hint button • Classic + Neo + Midnight preserved</footer></div>
+<script>const APP_VERSION="12.2";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -2824,7 +2934,15 @@ function renderQuiz(){
   if(!quiz.length){a.innerHTML='<div class="notice">No questions are mapped to this part yet.</div>';return}
   const i=Math.min(quizSession.current,quiz.length-1);quizSession.current=i;
   const q=quiz[i],answered=c,conf=quizSession.confidence[i]||"confident";
-  a.innerHTML=`<div class="quiz-top"><div><b>${quizMode==="review"?"Reviewing":"Mastering"} • ${meta.label}</b><div class="small">${meta.pages} • ${answered}/${quiz.length} answered</div><div class="quiz-attempt-detail">${quizModeAttemptSummary(quizPart,quizMode)}</div></div><button class="secondary" id="clear">Clear this attempt</button></div><div class="quiz-progress"><div style="width:${Math.round((i+1)/quiz.length*100)}%"></div></div><div class="number-grid">${quiz.map((qq,n)=>`<div class="qnum ${quizSession.answers[n]!==null?"answered":""} ${n===i?"current":""} ${getQuestionNote(qq)?"noted":""}" data-n="${n}" title="${getQuestionNote(qq)?"Has saved note":""}">${n+1}</div>`).join("")}</div><div class="question-note-legend"><i class="saved-note-dot"></i> saved note</div><div class="qmeta"><span class="tag">${quizMode==="review"?"Reviewing":"Mastering"}</span><span class="small">Question ${i+1} of ${quiz.length}</span></div><div class="quiz-notes-row"><div class="quiz-note-box"><div class="quiz-note-head"><b>📝 Notes for this section</b><span>Autosaved • ${meta.label}</span></div><textarea id="sectionQuizNote" placeholder="Key idea, formula, trap, something to revisit…">${getSectionNote()}</textarea></div></div><div class="question">${q.q}</div>${(quizSession.optionOrders[i]||[0,1,2,3]).map((orig,display)=>`<label class="option ${quizSession.answers[i]===orig?"selected":""}"><input type="radio" name="a" value="${orig}" ${quizSession.answers[i]===orig?"checked":""}> ${String.fromCharCode(65+display)}. ${q.opts[orig]}</label>`).join("")}<div class="quiz-note-box question-note"><div class="quiz-note-head"><b>✏️ Note for Question ${i+1}</b><span>Autosaved to this question</span></div><textarea id="questionQuizNote" placeholder="Why I chose this, what confused me, formula to remember, professor wording…">${getQuestionNote(q)}</textarea></div><div class="confidence-wrap"><b>Confidence check</b><div class="small">Leave both unselected if confident. Mark one if the answer may be a fluke.</div><div class="confidence-actions"><button class="confidence-btn ${conf==="unsure"?"active":""}" data-conf="unsure">□ Not sure</button><button class="confidence-btn guess ${conf==="guessed"?"active":""}" data-conf="guessed">□ Guessed</button></div></div><div class="qnav"><button class="secondary" id="prev" ${i===0?"disabled":""}>← Previous</button>${i<quiz.length-1?`<button id="next">Next →</button>`:`<button id="submit" ${answered<quiz.length?"disabled":""}>Submit Quiz</button>`}</div>${i===quiz.length-1&&answered<quiz.length?`<div class="notice" style="margin-top:12px">Answer all questions before Submit — ${quiz.length-answered} left.</div>`:""}`;
+  a.innerHTML=`<div class="quiz-top"><div><b>${quizMode==="review"?"Reviewing":"Mastering"} • ${meta.label}</b><div class="small">${meta.pages} • ${answered}/${quiz.length} answered</div><div class="quiz-attempt-detail">${quizModeAttemptSummary(quizPart,quizMode)}</div></div><button class="secondary" id="clear">Clear this attempt</button></div><div class="quiz-progress"><div style="width:${Math.round((i+1)/quiz.length*100)}%"></div></div><div class="number-grid">${quiz.map((qq,n)=>`<div class="qnum ${quizSession.answers[n]!==null?"answered":""} ${n===i?"current":""} ${getQuestionNote(qq)?"noted":""}" data-n="${n}" title="${getQuestionNote(qq)?"Has saved note":""}">${n+1}</div>`).join("")}</div><div class="question-note-legend"><i class="saved-note-dot"></i> saved note</div><div class="qmeta"><div class="qmeta-left"><span class="tag">${quizMode==="review"?"Reviewing":"Mastering"}</span><span class="small">Question ${i+1} of ${quiz.length}</span></div><button class="secondary topic-hint-btn" id="topicHintBtn" type="button" aria-expanded="false">💡 Hint</button></div><div class="topic-hint-reveal" id="topicHintReveal" hidden><span class="topic-hint-label">Topic</span><b>${escapeHTML(q.topic)}</b><span class="small">This only shows where the question came from — not the answer.</span></div><div class="quiz-notes-row"><div class="quiz-note-box"><div class="quiz-note-head"><b>📝 Notes for this section</b><span>Autosaved • ${meta.label}</span></div><textarea id="sectionQuizNote" placeholder="Key idea, formula, trap, something to revisit…">${getSectionNote()}</textarea></div></div><div class="question">${q.q}</div>${(quizSession.optionOrders[i]||[0,1,2,3]).map((orig,display)=>`<label class="option ${quizSession.answers[i]===orig?"selected":""}"><input type="radio" name="a" value="${orig}" ${quizSession.answers[i]===orig?"checked":""}> ${String.fromCharCode(65+display)}. ${q.opts[orig]}</label>`).join("")}<div class="quiz-note-box question-note"><div class="quiz-note-head"><b>✏️ Note for Question ${i+1}</b><span>Autosaved to this question</span></div><textarea id="questionQuizNote" placeholder="Why I chose this, what confused me, formula to remember, professor wording…">${getQuestionNote(q)}</textarea></div><div class="confidence-wrap"><b>Confidence check</b><div class="small">Leave both unselected if confident. Mark one if the answer may be a fluke.</div><div class="confidence-actions"><button class="confidence-btn ${conf==="unsure"?"active":""}" data-conf="unsure">□ Not sure</button><button class="confidence-btn guess ${conf==="guessed"?"active":""}" data-conf="guessed">□ Guessed</button></div></div><div class="qnav"><button class="secondary" id="prev" ${i===0?"disabled":""}>← Previous</button>${i<quiz.length-1?`<button id="next">Next →</button>`:`<button id="submit" ${answered<quiz.length?"disabled":""}>Submit Quiz</button>`}</div>${i===quiz.length-1&&answered<quiz.length?`<div class="notice" style="margin-top:12px">Answer all questions before Submit — ${quiz.length-answered} left.</div>`:""}`;
+  const hintBtn=a.querySelector("#topicHintBtn"),hintReveal=a.querySelector("#topicHintReveal");
+  if(hintBtn&&hintReveal)hintBtn.onclick=()=>{
+    const opening=hintReveal.hidden;
+    hintReveal.hidden=!opening;
+    hintBtn.classList.toggle("active",opening);
+    hintBtn.setAttribute("aria-expanded",opening?"true":"false");
+    hintBtn.innerHTML=opening?"💡 Topic shown":"💡 Hint";
+  };
   const sn=a.querySelector("#sectionQuizNote");if(sn)sn.oninput=e=>saveSectionNote(e.target.value);
   const qn=a.querySelector("#questionQuizNote");if(qn)qn.oninput=e=>saveQuestionNote(q,e.target.value);
   a.querySelectorAll('input[name="a"]').forEach(r=>r.onchange=e=>{quizSession.answers[i]=Number(e.target.value);saveQuizDraft();renderQuiz()});
