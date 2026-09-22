@@ -553,8 +553,10 @@ function exportDevSnapshot(){
 }
 function setLoginMode(mode){
   loginMode=mode;
-  document.getElementById("signInTab").classList.toggle("active",mode==="signin");
-  document.getElementById("createTab").classList.toggle("active",mode==="create");
+  const sign=document.getElementById("signInTab"),create=document.getElementById("createTab");
+  [sign,create].forEach(function(b){if(b){b.classList.remove("pressed");b.setAttribute("aria-pressed","false")}});
+  if(sign){sign.classList.toggle("active",mode==="signin");sign.classList.toggle("pressed",mode==="signin");sign.setAttribute("aria-pressed",mode==="signin"?"true":"false")}
+  if(create){create.classList.toggle("active",mode==="create");create.classList.toggle("pressed",mode==="create");create.setAttribute("aria-pressed",mode==="create"?"true":"false")}
   document.getElementById("loginAction").textContent=mode==="signin"?"Sign in":"Create profile";
   document.getElementById("loginError").textContent="";
 }
