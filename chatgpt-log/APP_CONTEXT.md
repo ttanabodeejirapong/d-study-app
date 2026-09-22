@@ -163,9 +163,9 @@ When changing routing:
 - preserve correct back/navigation behavior;
 - keep GitHub Pages static hosting constraints in mind.
 
-## 11. Developer Management Console (v12.11)
+## 11. Developer Management Console (v12.12)
 
-Settings now includes a small **For Dev** button next to Update Log. It opens a full-screen developer management console after a password check.
+Settings includes a small **For Dev** button next to Update Log. It opens a full-screen developer management console after a password check. As of v12.12, the management content is hidden while locked and the developer password is required again every time For Dev is opened.
 
 Current management features:
 - overview metrics for local browser profiles;
@@ -179,7 +179,6 @@ Current management features:
 Developer-console storage keys:
 - `d-study-dev-bans-v1`
 - `d-study-dev-activity-v1`
-- session-only unlock state: `d-study-dev-unlocked`
 
 ### Security / architecture limitation
 
