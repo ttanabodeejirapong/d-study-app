@@ -451,6 +451,48 @@ body.dark .part-btn.active,body.dark .mode-btn.active,body.dark .qnum.current{
   border-color:#78b8ec!important;
   box-shadow:0 0 0 2px rgba(120,184,236,.16);
 }
+
+/* v11.5 Settings Update Log */
+.settings-footer-actions{display:flex;justify-content:flex-end;margin-top:14px}
+.update-log-btn{font-size:12px;opacity:.82}
+.update-log-btn:hover{opacity:1}
+
+.update-log-overlay{
+  position:fixed;inset:0;z-index:1000;
+  display:none;align-items:center;justify-content:center;
+  padding:24px;background:rgba(8,16,28,.58);
+  backdrop-filter:blur(5px);
+}
+.update-log-overlay.open{display:flex}
+.update-log-modal{
+  width:min(620px,100%);max-height:min(76vh,720px);overflow:auto;
+  background:var(--card);color:var(--ink);
+  border:1px solid var(--line);border-radius:20px;
+  padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+.update-log-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.update-log-head h2{margin:4px 0 4px}
+.update-log-head p{margin:0}
+.update-log-close{flex:0 0 auto;width:38px;height:38px;padding:0;border-radius:10px}
+.update-log-list{display:grid;gap:9px;margin-top:14px}
+.update-entry{border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:color-mix(in srgb,var(--soft) 48%,var(--card))}
+.update-entry.latest{border-color:color-mix(in srgb,var(--blue) 52%,var(--line));background:color-mix(in srgb,var(--blue) 8%,var(--card))}
+.update-entry-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.update-entry-top b{font-size:13px}
+.update-entry-top span{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.update-entry p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+.update-log-foot{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);text-align:right}
+body.dark .update-log-overlay{background:rgba(6,11,18,.68)}
+body.dark .update-log-modal{background:#223043;border-color:#5b6f85;box-shadow:0 28px 80px rgba(0,0,0,.48)}
+body.dark .update-entry{background:#28394d;border-color:#50647a}
+body.dark .update-entry.latest{background:#2d435a;border-color:#79b8e9}
+body.dark .update-entry p{color:#c4cfdb}
+body.dark .update-entry-top span{color:#aebdcc}
+@media(max-width:650px){
+  .update-log-overlay{padding:14px}
+  .update-log-modal{padding:16px;max-height:82vh}
+  .update-entry-top{align-items:flex-start}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -990,7 +1032,7 @@ body.dark .part-btn.active,body.dark .mode-btn.active,body.dark .qnum.current{
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1320px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1370px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1152,6 +1194,13 @@ INTERACTION / QUIZ HISTORY POLISH
 - In dark mode, "Read alongside this quiz" links must use a light high-contrast link color; never use the dark navy accent directly on the dark panel.
 - Quiz part cards keep the subtle "Taken X time(s)" line.
 - Inside the opened quiz, show a compact history line for the CURRENT mode: "Taken X times • Best Y% • Last attempt DATE". If there is no completed attempt for that mode, explicitly show that Reviewing/Mastering has not started.
+
+
+UPDATE LOG
+- Keep a small "Update Log" button at the bottom-right of Settings.
+- Clicking it opens an in-app modal with concise release notes, newest first. Do not make it a full technical changelog; summarize user-visible changes in one short sentence per version/group.
+- The modal must work in light/dark mode, close with its X button, backdrop click, or Escape, and show the current app version.
+- Add a short new entry whenever the app version changes meaningfully.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1206,11 +1255,62 @@ INTERACTION / QUIZ HISTORY POLISH
         <div class="device-note"><b>Cross-device note:</b> Mac and iPad still use separate browser storage. For now use <b>Export full backup → Import full backup</b>. True automatic sync needs a cloud database/login backend.</div>
       </div>
     </div>
+    <div class="settings-footer-actions">
+      <button class="secondary update-log-btn" id="updateLogBtn" type="button">↻ Update Log</button>
+    </div>
+  </div>
+
+  <div class="update-log-overlay" id="updateLogOverlay" aria-hidden="true">
+    <section class="update-log-modal" role="dialog" aria-modal="true" aria-labelledby="updateLogTitle">
+      <div class="update-log-head">
+        <div>
+          <div class="eyebrow">Release Notes</div>
+          <h2 id="updateLogTitle">Update Log</h2>
+          <p class="small">A short overview of the latest changes — intentionally not every technical detail.</p>
+        </div>
+        <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
+      </div>
+      <div class="update-log-list">
+        <article class="update-entry latest">
+          <div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div>
+          <p>Added this compact release-history popup in Settings.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v11.4</b><span>Quiz UI polish</span></div>
+          <p>Clearer saved-note color, better dark-mode links, persistent selected states, and visible attempt details inside quizzes.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v11.3</b><span>Practice status</span></div>
+          <p>Added Reviewing/Mastering status dots and independent completion counters for each quiz set.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v11.2</b><span>Attempt history</span></div>
+          <p>Added subtle “Taken X times” history to quiz-part cards.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v11.1</b><span>Notes Hub</span></div>
+          <p>Added one Notes page that gathers Progress, quiz-section, and question notes together.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v11.0</b><span>Lecture 2</span></div>
+          <p>Added part-by-part Lecture 2 summaries and Reviewing/Mastering quizzes.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v10.6–10.7</b><span>Notes & sources</span></div>
+          <p>Added autosaved quiz notes and the lecture-recording source database.</p>
+        </article>
+        <article class="update-entry">
+          <div class="update-entry-top"><b>v10.3–10.5</b><span>Navigation & dark mode</span></div>
+          <p>Improved pressed/active states, stable page URLs, and visible current-page styling.</p>
+        </article>
+      </div>
+      <div class="update-log-foot small">Current build: <b>v11.5</b></div>
+    </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.4</b> • clearer note/status colors + persistent hover/selection + quiz attempt details</footer></div>
-<script>const APP_VERSION="11.4";
+</main><footer><b id="appVersionLabel">D Study App v11.5</b> • compact Update Log in Settings</footer></div>
+<script>const APP_VERSION="11.5";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1414,6 +1514,10 @@ function startUser(user,renewSession=true){
   const ns=document.getElementById("notesSearch"),nf=document.getElementById("notesLectureFilter");
   if(ns&&!ns.dataset.bound){ns.dataset.bound="1";ns.oninput=renderNotesHub}
   if(nf&&!nf.dataset.bound){nf.dataset.bound="1";nf.onchange=renderNotesHub}
+  const ulb=document.getElementById("updateLogBtn"),ulc=document.getElementById("updateLogClose"),ulo=document.getElementById("updateLogOverlay");
+  if(ulb&&!ulb.dataset.bound){ulb.dataset.bound="1";ulb.onclick=openUpdateLog}
+  if(ulc&&!ulc.dataset.bound){ulc.dataset.bound="1";ulc.onclick=closeUpdateLog}
+  if(ulo&&!ulo.dataset.bound){ulo.dataset.bound="1";ulo.onclick=e=>{if(e.target===ulo)closeUpdateLog()}}
   renderNotesHub();applyPathRoute();
   const legacy=!!localStorage.getItem("ec214-study-state")&&!hadUserState;
   document.getElementById("legacyBox").style.display=legacy?"block":"none";
@@ -1485,6 +1589,22 @@ function applyPreferences(){
   if(a)a.value=p.appearance;if(t)t.value=p.textSize;if(c)c.value=p.cardStyle;if(f&&!fontPreviewActive)f.value=p.font||"inter";
 }
 function updatePreference(key,value){state.preferences[key]=value;persist();applyPreferences()}
+function openUpdateLog(){
+  const overlay=document.getElementById("updateLogOverlay");
+  if(!overlay)return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  setTimeout(()=>document.getElementById("updateLogClose")?.focus(),0);
+}
+function closeUpdateLog(){
+  const overlay=document.getElementById("updateLogOverlay");
+  if(!overlay)return;
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+  document.getElementById("updateLogBtn")?.focus();
+}
 async function changePin(){
   const cur=document.getElementById("currentPin").value.trim(),next=document.getElementById("newPin").value.trim(),out=document.getElementById("changePinStatus");
   if(!/^[0-9]{4,8}$/.test(next)){out.textContent="New PIN must be 4–8 digits.";return}
@@ -1963,6 +2083,9 @@ document.getElementById("copyPromptBtn").onclick=async()=>{
 };
 document.querySelectorAll("button.tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.dataset.mode));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&document.getElementById("updateLogOverlay")?.classList.contains("open"))closeUpdateLog();
+});
 window.addEventListener("storage",e=>{
   if(!activeUser)return;
   if(e.key===stateKey()&&e.newValue){
