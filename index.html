@@ -499,7 +499,7 @@ body.dark .update-entry-top span{color:#aebdcc}
    Classic UI remains untouched unless body.neo-ui is active.
    ========================= */
 .ui-theme-setting{margin-bottom:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--soft) 55%,var(--card))}
-.ui-theme-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.ui-theme-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
 .ui-theme-choice{
   display:flex;align-items:center;gap:10px;text-align:left;
   padding:12px;border-radius:13px;background:var(--card);color:var(--ink);
@@ -1407,6 +1407,290 @@ body.midnight-ui.dark .topic-hint-label{
   .topic-hint-reveal{grid-template-columns:auto 1fr}
   .topic-hint-reveal .small{grid-column:1/-1}
 }
+
+/* ============================================================
+   V13 — VIBRANT ACCENTS
+   Full fourth UI theme. Classic, Neo, and Midnight stay intact.
+   ============================================================ */
+.vibrant-summary-shell{display:none}
+
+body.vibrant-ui{
+  --va-bg:#edf5ff;
+  --va-surface:#ffffff;
+  --va-surface2:#f7fbff;
+  --va-line:#d8e6f4;
+  --va-ink:#13254a;
+  --va-muted:#607699;
+  --va-blue:#1686ff;
+  --va-cyan:#16b7d8;
+  --va-green:#14b878;
+  --va-yellow:#ffbd32;
+  --va-purple:#8a5cf5;
+  --va-red:#ff5f6d;
+  background:
+    radial-gradient(circle at 22% -8%,rgba(22,134,255,.09),transparent 30%),
+    radial-gradient(circle at 94% 12%,rgba(138,92,245,.07),transparent 26%),
+    #edf5ff!important;
+  color:var(--va-ink);
+}
+body.vibrant-ui header{
+  background:rgba(255,255,255,.93)!important;color:var(--va-ink)!important;
+  border-bottom:1px solid #d8e6f4!important;box-shadow:0 8px 24px rgba(36,78,128,.07)!important;
+  backdrop-filter:blur(16px)
+}
+body.vibrant-ui header h1{color:#11254b!important}
+body.vibrant-ui header .sub{color:#6680a1!important}
+body.vibrant-ui .tabs{
+  background:rgba(255,255,255,.92)!important;border:1px solid #d9e6f4!important;border-radius:16px!important;
+  box-shadow:0 9px 25px rgba(36,78,128,.06)!important
+}
+body.vibrant-ui .tab{background:transparent!important;color:#39577a!important;border-color:transparent!important}
+body.vibrant-ui .tab:hover{background:#eff7ff!important;color:#096fd6!important;border-color:#c9e2fb!important}
+body.vibrant-ui .tab.active{
+  background:linear-gradient(145deg,#eef7ff,#e2f1ff)!important;color:#0879ec!important;border:1px solid #73b8f7!important;
+  box-shadow:0 5px 16px rgba(22,134,255,.14)!important
+}
+body.vibrant-ui .panel-intro{display:none}
+body.vibrant-ui #summary>.summary-library{display:none}
+body.vibrant-ui .vibrant-summary-shell{
+  display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start;margin-top:18px
+}
+.vibrant-summary-main{min-width:0}
+.vibrant-summary-heading{
+  display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:14px
+}
+.vibrant-summary-heading>div:first-child{display:flex;gap:13px;align-items:center}
+.vibrant-summary-heading h2{margin:0;color:var(--va-ink);font-size:30px;letter-spacing:-.035em}
+.vibrant-summary-heading p{margin:3px 0 0;color:var(--va-muted);font-size:12px}
+.vibrant-book-icon{
+  width:52px;height:52px;border-radius:15px;display:grid;place-items:center;
+  color:white;font-size:25px;font-weight:900;background:linear-gradient(145deg,var(--va-blue),#5caeff);
+  box-shadow:0 9px 24px rgba(22,134,255,.22)
+}
+.vibrant-summary-tools{display:flex;gap:9px;align-items:center}
+.vibrant-search{
+  min-width:220px;display:flex;align-items:center;gap:7px;padding:0 11px;border:1px solid var(--va-line);
+  border-radius:12px;background:var(--va-surface);height:40px
+}
+.vibrant-search span{color:#7390ae;font-size:18px}
+.vibrant-search input{border:0!important;outline:0;background:transparent!important;padding:0!important;min-width:0;width:100%;box-shadow:none!important}
+.vibrant-summary-tools select{width:auto;min-width:130px;height:40px;background:var(--va-surface)!important}
+
+.vibrant-summary-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.vibrant-summary-card{
+  display:block;text-decoration:none;color:var(--va-ink);background:linear-gradient(150deg,#fff,#f8fbff);
+  border:1px solid var(--va-line);border-radius:15px;padding:13px;min-height:180px;
+  box-shadow:0 8px 22px rgba(41,84,132,.06);transition:.15s ease
+}
+.vibrant-summary-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(41,84,132,.11)}
+.vibrant-summary-card.active{border:2px solid var(--va-blue);box-shadow:0 0 0 3px rgba(22,134,255,.08),0 12px 28px rgba(22,134,255,.12)}
+.vibrant-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.vibrant-card-icon{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:900;
+  background:linear-gradient(145deg,var(--va-blue),#5cafff)
+}
+.vibrant-summary-card[data-tone="amber"] .vibrant-card-icon{background:linear-gradient(145deg,#ffad22,#ffd55b)}
+.vibrant-summary-card[data-tone="purple"] .vibrant-card-icon{background:linear-gradient(145deg,#7653e8,#ab86ff)}
+.vibrant-summary-card[data-tone="green"] .vibrant-card-icon{background:linear-gradient(145deg,#0dbf77,#4de0a3)}
+.vibrant-card-arrow{font-size:22px;color:#7188a3}
+.vibrant-summary-card h3{margin:2px 0 6px;font-size:16px;color:var(--va-ink)}
+.vibrant-summary-card p{font-size:11px;line-height:1.45;color:#526b88;margin:5px 0 9px;min-height:32px}
+.vibrant-card-pages{font-size:12px;font-weight:800;margin-top:9px}
+.vibrant-card-meta{display:flex;justify-content:space-between;gap:5px;color:#70839b;font-size:9px;margin-top:10px}
+.vibrant-status{display:inline-flex;align-items:center;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:850}
+.vibrant-status.complete{background:#e8f8ef;color:#118555;border:1px solid #bde8cf}
+.vibrant-status.reading{background:#eaf4ff;color:#0b78df;border:1px solid #bdddfb}
+.vibrant-status.notstarted{background:#f1f4f8;color:#687a8f;border:1px solid #d9e2eb}
+.vibrant-empty{grid-column:1/-1;padding:24px;text-align:center;border:1px dashed var(--va-line);border-radius:14px;color:var(--va-muted);background:var(--va-surface)}
+
+.vibrant-current-summary{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;margin-bottom:12px;
+  background:var(--va-surface);border:1px solid var(--va-line);border-radius:15px;
+  box-shadow:0 8px 22px rgba(41,84,132,.05)
+}
+.vibrant-current-title{display:flex;align-items:center;gap:11px;min-width:0}
+.vibrant-doc-icon{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:900;
+  background:linear-gradient(145deg,#ffae23,#ffd45a)
+}
+.vibrant-current-title h3{margin:1px 0 2px;font-size:18px;color:var(--va-ink)}
+.vibrant-current-actions{display:flex;gap:7px;flex:0 0 auto}
+
+.vibrant-summary-sidebar{display:grid;gap:12px}
+.vibrant-side-card{
+  background:linear-gradient(150deg,#fff,#f8fbff);border:1px solid var(--va-line);border-radius:15px;padding:14px;
+  box-shadow:0 8px 22px rgba(41,84,132,.06)
+}
+.vibrant-side-title{display:flex;align-items:center;gap:9px}
+.vibrant-side-title>div{flex:1}
+.vibrant-side-icon{
+  width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#eaf4ff;color:#1185ee;font-weight:900;flex:0 0 auto
+}
+.vibrant-side-icon.amber{background:#fff4d7;color:#d49204}
+.vibrant-side-icon.cyan{background:#e2f8fb;color:#0c9bb0}
+.vibrant-side-icon.purple{background:#f0eafe;color:#7f57de}
+.vibrant-side-icon.red{background:#ffedf0;color:#e34f5f}
+.vibrant-side-icon.green{background:#e8f8ef;color:#14945e}
+.vibrant-progress-wrap{display:grid;grid-template-columns:108px 1fr;gap:13px;align-items:center;margin-top:12px}
+.vibrant-progress-ring{
+  --vp:0;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--va-blue) calc(var(--vp)*1%),var(--va-yellow) 0 calc((var(--vp) + 12)*1%),#e3edf7 0);
+  position:relative
+}
+.vibrant-progress-ring::after{content:"";position:absolute;inset:13px;border-radius:50%;background:#fff}
+.vibrant-progress-ring>div{position:relative;z-index:1;display:grid;text-align:center}
+.vibrant-progress-ring b{font-size:19px}.vibrant-progress-ring span{font-size:9px;color:var(--va-muted)}
+.vibrant-progress-stats{display:grid;gap:7px}
+.vibrant-progress-stats>div{display:grid;grid-template-columns:8px auto 1fr;gap:6px;align-items:center;font-size:10px}
+.vibrant-progress-stats span{color:var(--va-muted)}
+.vibrant-progress-stats .dot{width:7px;height:7px;border-radius:50%;display:block}
+.dot.blue{background:var(--va-blue)}.dot.green{background:var(--va-green)}.dot.amber{background:var(--va-yellow)}.dot.purple{background:var(--va-purple)}
+.vibrant-mini-row{display:flex;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid var(--va-line)}
+.vibrant-mini-row:last-child{border-bottom:0}
+.vibrant-streak-count{font-size:19px;text-align:center;color:var(--va-ink)}
+.vibrant-streak-count small{display:block;font-size:8px;color:var(--va-muted)}
+.vibrant-streak-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}
+.vibrant-streak-days div{display:grid;gap:4px;justify-items:center}
+.vibrant-streak-days i{width:12px;height:12px;border-radius:50%;display:block;background:#dbe6f0}
+.vibrant-streak-days .on i{background:linear-gradient(145deg,var(--va-blue),var(--va-cyan));box-shadow:0 0 0 3px rgba(22,134,255,.08)}
+.vibrant-streak-days span{font-size:8px;color:var(--va-muted)}
+.vibrant-recent-row{display:grid;grid-template-columns:32px 1fr auto;gap:8px;align-items:center;padding:9px 0;text-decoration:none;color:var(--va-ink);border-bottom:1px solid var(--va-line)}
+.vibrant-recent-row:last-child{border-bottom:0}
+.vibrant-recent-row b{font-size:10px}
+.vibrant-no-recent{padding:12px 0}
+.vibrant-quote-card{
+  min-height:112px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:16px;border-radius:15px;
+  color:#1e4d83;border:1px solid #c9e1fb;background:
+    radial-gradient(circle at 90% 80%,rgba(255,188,50,.18),transparent 24%),
+    linear-gradient(160deg,#f1f8ff,#e4f1ff);
+  font-style:italic
+}
+.vibrant-quote-card span{font-size:10px;color:#7290ae;text-align:right}
+
+body.vibrant-ui #summary>.source-library{border-radius:15px}
+body.vibrant-ui #summary .summary-doc{margin-top:0}
+body.vibrant-ui #summary .summary-doc>.card:first-child{
+  background:linear-gradient(145deg,#fff,#f7fbff)!important;border:1px solid var(--va-line)!important;border-radius:15px!important;
+  box-shadow:0 8px 22px rgba(41,84,132,.05)!important
+}
+body.vibrant-ui #summary .slide-card{
+  background:#fff!important;border:1px solid var(--va-line)!important;border-left:3px solid var(--va-blue)!important;border-radius:14px!important;
+  box-shadow:0 7px 20px rgba(41,84,132,.05)!important;color:var(--va-ink)!important
+}
+body.vibrant-ui #summary .slide-card h2,body.vibrant-ui #summary .slide-card h3{color:#14294e!important}
+body.vibrant-ui #summary .keyline{background:#edf7ff!important;color:#1d456e!important;border-left-color:var(--va-blue)!important}
+body.vibrant-ui #summary .thai-help{background:#fff7e6!important;color:#71521d!important;border-color:#efd5a1!important}
+body.vibrant-ui #summary .exam-note{background:#f5f0ff!important;color:#514074!important;border-color:#dcd0fb!important}
+
+/* Vibrant settings & general surfaces */
+body.vibrant-ui .card,body.vibrant-ui .settings-card,body.vibrant-ui .quiz-library,body.vibrant-ui .notes-hub-toolbar,body.vibrant-ui .notes-entry{
+  background:linear-gradient(150deg,#fff,#f8fbff)!important;color:var(--va-ink)!important;border-color:var(--va-line)!important;
+  box-shadow:0 8px 22px rgba(41,84,132,.06)!important
+}
+body.vibrant-ui .ui-theme-setting{background:#f2f8ff!important;border-color:#d2e4f5!important}
+body.vibrant-ui .ui-theme-choice{background:#fff!important;color:#17345e!important;border-color:#d8e6f4!important}
+body.vibrant-ui .ui-theme-choice.active{
+  background:linear-gradient(145deg,#eaf5ff,#f4f9ff)!important;border-color:#4ba4f5!important;box-shadow:0 0 0 2px rgba(22,134,255,.08)!important
+}
+body.vibrant-ui input,body.vibrant-ui select,body.vibrant-ui textarea{background:#fff!important;color:#18345d!important;border-color:#cfdeed!important}
+body.vibrant-ui .part-btn,body.vibrant-ui .mode-btn,body.vibrant-ui .option,body.vibrant-ui .qnum{background:#f8fbff!important;color:#18345d!important;border-color:#d3e1ef!important}
+body.vibrant-ui .part-btn.active,body.vibrant-ui .mode-btn.active,body.vibrant-ui .qnum.current{background:#e9f5ff!important;border-color:#4ba4f5!important;color:#0a69c5!important}
+body.vibrant-ui .quiz-progress>div,body.vibrant-ui .status-fill{background:linear-gradient(90deg,var(--va-blue),var(--va-cyan))!important}
+
+/* Vibrant Dark */
+body.vibrant-ui.dark{
+  --va-bg:#07131f;
+  --va-surface:#0d1b29;
+  --va-surface2:#102131;
+  --va-line:#22394c;
+  --va-ink:#eef6ff;
+  --va-muted:#91a8c0;
+  --va-blue:#21a0ff;
+  --va-cyan:#26c9e6;
+  --va-green:#36d691;
+  --va-yellow:#ffc13b;
+  --va-purple:#9c73ff;
+  --va-red:#ff626f;
+  background:
+    radial-gradient(circle at 16% -8%,rgba(33,160,255,.13),transparent 31%),
+    radial-gradient(circle at 92% 9%,rgba(156,115,255,.09),transparent 25%),
+    #07131f!important;color:var(--va-ink)
+}
+body.vibrant-ui.dark header{background:rgba(6,18,29,.93)!important;color:#f3f8fd!important;border-color:#1d3447!important;box-shadow:0 10px 28px rgba(0,0,0,.28)!important}
+body.vibrant-ui.dark header h1{color:#f3f8fd!important}
+body.vibrant-ui.dark header .sub{color:#91a7bc!important}
+body.vibrant-ui.dark .tabs{background:rgba(8,22,34,.93)!important;border-color:#21384b!important;box-shadow:0 10px 28px rgba(0,0,0,.25)!important}
+body.vibrant-ui.dark .tab{color:#b8c9d9!important}
+body.vibrant-ui.dark .tab:hover{background:#102a40!important;color:#eaf7ff!important;border-color:#2b5f86!important}
+body.vibrant-ui.dark .tab.active{
+  background:linear-gradient(145deg,#0d4772,#1067a3)!important;color:#dff4ff!important;border-color:#299de8!important;
+  box-shadow:0 0 0 2px rgba(33,160,255,.09),0 8px 20px rgba(0,0,0,.24)!important
+}
+body.vibrant-ui.dark .vibrant-summary-heading h2,body.vibrant-ui.dark .vibrant-current-title h3{color:#f2f8ff}
+body.vibrant-ui.dark .vibrant-summary-heading p{color:#9bb0c4}
+body.vibrant-ui.dark .vibrant-search,body.vibrant-ui.dark .vibrant-summary-tools select{
+  background:#0d1b29!important;border-color:#274056!important;color:#eaf5ff!important
+}
+body.vibrant-ui.dark .vibrant-summary-card,
+body.vibrant-ui.dark .vibrant-current-summary,
+body.vibrant-ui.dark .vibrant-side-card{
+  background:linear-gradient(150deg,#0f1e2c,#0b1824)!important;color:#edf6ff!important;border-color:#223a4f!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22)!important
+}
+body.vibrant-ui.dark .vibrant-summary-card.active{border-color:#24a3ff!important;box-shadow:0 0 0 3px rgba(33,160,255,.09),0 12px 30px rgba(0,0,0,.26)!important}
+body.vibrant-ui.dark .vibrant-summary-card h3{color:#f4f9fd}
+body.vibrant-ui.dark .vibrant-summary-card p,body.vibrant-ui.dark .vibrant-card-meta{color:#92a9be}
+body.vibrant-ui.dark .vibrant-card-arrow{color:#8ea8be}
+body.vibrant-ui.dark .vibrant-status.complete{background:#123427;color:#88e7b3;border-color:#275a42}
+body.vibrant-ui.dark .vibrant-status.reading{background:#0c3655;color:#8ad1ff;border-color:#25658f}
+body.vibrant-ui.dark .vibrant-status.notstarted{background:#172534;color:#a8b9c9;border-color:#314558}
+body.vibrant-ui.dark .vibrant-progress-ring::after{background:#0d1b29}
+body.vibrant-ui.dark .vibrant-mini-row,body.vibrant-ui.dark .vibrant-recent-row{border-color:#22394c}
+body.vibrant-ui.dark .vibrant-recent-row{color:#eaf4fc}
+body.vibrant-ui.dark .vibrant-streak-days i{background:#24394b}
+body.vibrant-ui.dark .vibrant-quote-card{
+  color:#cfeaff;border-color:#244b69;background:
+    radial-gradient(circle at 90% 80%,rgba(255,193,59,.16),transparent 25%),
+    linear-gradient(160deg,#0f2334,#0a1824)
+}
+body.vibrant-ui.dark #summary>.source-library,
+body.vibrant-ui.dark #summary .summary-doc>.card:first-child,
+body.vibrant-ui.dark #summary .slide-card,
+body.vibrant-ui.dark .card,
+body.vibrant-ui.dark .settings-card,
+body.vibrant-ui.dark .quiz-library,
+body.vibrant-ui.dark .notes-hub-toolbar,
+body.vibrant-ui.dark .notes-entry{
+  background:linear-gradient(150deg,#0f1e2c,#0b1824)!important;color:#edf6ff!important;border-color:#223a4f!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.20)!important
+}
+body.vibrant-ui.dark #summary .slide-card h2,body.vibrant-ui.dark #summary .slide-card h3,body.vibrant-ui.dark .lecture-title,body.vibrant-ui.dark .question{color:#f2f8ff!important}
+body.vibrant-ui.dark #summary .keyline{background:#0e2a40!important;color:#d9efff!important;border-left-color:#25a4ff!important}
+body.vibrant-ui.dark #summary .thai-help{background:#302817!important;color:#f1dfab!important;border-color:#594d2d!important}
+body.vibrant-ui.dark #summary .exam-note{background:#241f38!important;color:#e0d7ff!important;border-color:#4d446a!important}
+body.vibrant-ui.dark .ui-theme-setting{background:#102131!important;border-color:#274056!important}
+body.vibrant-ui.dark .ui-theme-choice{background:#0c1a27!important;color:#edf6ff!important;border-color:#294256!important}
+body.vibrant-ui.dark .ui-theme-choice.active{background:#0d3552!important;border-color:#2c9ee8!important}
+body.vibrant-ui.dark input,body.vibrant-ui.dark select,body.vibrant-ui.dark textarea{background:#081521!important;color:#eef6ff!important;border-color:#2a445a!important}
+body.vibrant-ui.dark .part-btn,body.vibrant-ui.dark .mode-btn,body.vibrant-ui.dark .option,body.vibrant-ui.dark .qnum{background:#0f2030!important;color:#eaf4fc!important;border-color:#284156!important}
+body.vibrant-ui.dark .part-btn.active,body.vibrant-ui.dark .mode-btn.active,body.vibrant-ui.dark .qnum.current{background:#0d3958!important;border-color:#2d9fe9!important;color:#bfe8ff!important}
+
+@media(max-width:1180px){
+  body.vibrant-ui .vibrant-summary-shell{grid-template-columns:1fr}
+  body.vibrant-ui .vibrant-summary-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .vibrant-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vibrant-summary-heading{align-items:flex-start;flex-direction:column}
+  .vibrant-summary-tools{width:100%}.vibrant-search{flex:1}
+}
+@media(max-width:650px){
+  .vibrant-summary-cards{grid-template-columns:1fr}
+  body.vibrant-ui .vibrant-summary-sidebar{grid-template-columns:1fr}
+  .vibrant-summary-tools{display:grid;grid-template-columns:1fr}
+  .vibrant-search{min-width:0}
+  .vibrant-current-summary{align-items:flex-start;flex-direction:column}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -1470,6 +1754,65 @@ body.midnight-ui.dark .topic-hint-label{
 
 <section id="summary" class="panel">
   <div class="panel-intro"><div><div class="eyebrow">Study Notes</div><h2>Summary Library</h2><p>Open one focused block at a time.</p></div></div>
+
+  <div class="vibrant-summary-shell" id="vibrantSummaryShell">
+    <div class="vibrant-summary-main">
+      <div class="vibrant-summary-heading">
+        <div>
+          <div class="vibrant-book-icon">▤</div>
+          <div><h2>Summary Library</h2><p>Concise notes for each study block. Review key concepts, diagrams and takeaways.</p></div>
+        </div>
+        <div class="vibrant-summary-tools">
+          <label class="vibrant-search"><span>⌕</span><input id="vibrantSummarySearch" type="search" placeholder="Search summaries…"></label>
+          <select id="vibrantSummaryLectureFilter" aria-label="Filter summaries by lecture"><option value="all">All Lectures</option></select>
+        </div>
+      </div>
+      <div class="vibrant-summary-cards" id="vibrantSummaryCards"></div>
+
+      <div class="vibrant-current-summary" id="vibrantCurrentSummary">
+        <div class="vibrant-current-title">
+          <div class="vibrant-doc-icon">▤</div>
+          <div><div class="small" id="vibrantCurrentKicker">Currently reading</div><h3 id="vibrantCurrentTitle">Summary</h3><div class="small" id="vibrantCurrentSub"></div></div>
+        </div>
+        <div class="vibrant-current-actions">
+          <button class="secondary" id="vibrantPrevSummary" type="button">← Previous</button>
+          <button class="secondary" id="vibrantNextSummary" type="button">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="vibrant-summary-sidebar">
+      <section class="vibrant-side-card">
+        <div class="vibrant-side-title"><span class="vibrant-side-icon blue">▥</span><div><b>Your Study Progress</b><div class="small">EC214 Overall</div></div></div>
+        <div class="vibrant-progress-wrap">
+          <div class="vibrant-progress-ring" id="vibrantProgressRing"><div><b id="vibrantProgressPct">0%</b><span>Completed</span></div></div>
+          <div class="vibrant-progress-stats" id="vibrantProgressStats"></div>
+        </div>
+      </section>
+
+      <section class="vibrant-side-card">
+        <div class="vibrant-mini-row"><span class="vibrant-side-icon blue">▤</span><div><b id="vibrantAvailableCount">4 summaries available</b><div class="small">in this course</div></div></div>
+        <div class="vibrant-mini-row"><span class="vibrant-side-icon amber">▣</span><div><b>Currently reading</b><div class="small" id="vibrantCurrentlyReading">—</div></div></div>
+        <div class="vibrant-mini-row"><span class="vibrant-side-icon cyan">◫</span><div><b>Last updated</b><div class="small" id="vibrantLastUpdated">—</div></div></div>
+      </section>
+
+      <section class="vibrant-side-card">
+        <div class="vibrant-side-title"><span class="vibrant-side-icon red">♨</span><div><b>Study Streak</b><div class="small">Keep the momentum going.</div></div><strong class="vibrant-streak-count" id="vibrantStreakCount">0</strong></div>
+        <div class="vibrant-streak-days" id="vibrantStreakDays"></div>
+      </section>
+
+      <section class="vibrant-side-card">
+        <div class="vibrant-side-title"><span class="vibrant-side-icon purple">◷</span><div><b>Recent Summaries</b><div class="small">Your latest reading activity</div></div></div>
+        <div id="vibrantRecentSummaries"></div>
+      </section>
+
+      <section class="vibrant-quote-card">
+        <b>“Small, consistent steps lead to big understanding.”</b>
+        <span>— D Study App</span>
+      </section>
+    </aside>
+  </div>
+
   <div class="summary-library">
     <div class="lecture-title">📝 Summary Library</div>
     <div class="small">Choose one summary file. They are intentionally separated instead of being stacked into one long page.</div>
@@ -1946,7 +2289,7 @@ body.midnight-ui.dark .topic-hint-label{
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1560px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1650px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -2148,6 +2491,28 @@ QUIZ TOPIC HINT
 - The hint must explicitly avoid revealing the correct answer, explanation, option, formula result, or whether the user's current choice is correct.
 - Showing a hint must not change confidence, score, mastery evidence, quiz history, or completion status.
 - Keep the hint visually compact and compatible with Classic, Neo Dashboard, Midnight Workspace, Light, and Dark modes.
+
+
+VIBRANT ACCENTS / V13
+- Keep FOUR separate UI Themes in Settings:
+  1) Classic,
+  2) Neo Dashboard,
+  3) Midnight Workspace,
+  4) Vibrant Accents.
+- BIG NON-REGRESSION RULE: never remove or overwrite an older theme when adding a new one.
+- Vibrant Accents is a full study-dashboard theme inspired by the approved Light/Dark reference designs, not merely a color recolor.
+- In Vibrant Accents, the Summary page includes functional:
+  • Summary search,
+  • Lecture filter,
+  • Visual summary cards with status/page/reading metadata,
+  • Previous/Next summary navigation,
+  • Overall study progress widget using real topic state,
+  • Completed quiz-set and note counts using real app data,
+  • Summary reading history / Recent Summaries,
+  • Study streak based on real summary-opening and quiz-completion activity,
+  • Light and Dark layouts.
+- These features use the existing summary documents and state; do not duplicate or replace the underlying summaries.
+- summaryViews and studyActivity are part of profile state and therefore included in Full Backup automatically.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -2176,6 +2541,10 @@ QUIZ TOPIC HINT
             <button class="ui-theme-choice" type="button" data-ui-theme="midnight">
               <span class="ui-theme-choice-icon">◈</span>
               <span><b>Midnight Workspace</b><small>Productivity-board style from your reference</small></span>
+            </button>
+            <button class="ui-theme-choice" type="button" data-ui-theme="vibrant">
+              <span class="ui-theme-choice-icon">✺</span>
+              <span><b>Vibrant Accents</b><small>V13 colorful study-dashboard workspace</small></span>
             </button>
           </div>
           <div class="ui-theme-note">Changing UI Theme only changes appearance. Progress, notes, quiz history, drafts, summaries, routes, backup, and every existing feature stay untouched.</div>
@@ -2238,7 +2607,8 @@ QUIZ TOPIC HINT
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.2</b><span>Quiz Hint</span></div><p>Added a Hint button on every quiz question that reveals the source topic without revealing the answer.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v13.0</b><span>Vibrant Accents</span></div><p>Added a fourth full UI theme with a summary dashboard, real search/filter, summary reading history, recent summaries, overall study stats, previous/next navigation, and a study streak — in Light and Dark mode.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.2</b><span>Quiz Hint</span></div><p>Added a Hint button on every quiz question that reveals the source topic without revealing the answer.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.1</b><span>Midnight Workspace</span></div><p>Added a third productivity-board UI theme inspired by the supplied reference, while keeping Classic and Neo Dashboard.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.0</b><span>UI Themes</span></div><p>Added optional Neo Dashboard styling in Light and Dark mode without replacing the original UI.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v11.5</b><span>Update Log</span></div><p>Added the in-app release-history popup in Settings.</p></article>
@@ -2265,13 +2635,13 @@ QUIZ TOPIC HINT
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.2</b></div>
+      <div class="update-log-foot small">Current build: <b>v13.0</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.2</b> • quiz topic Hint button • Classic + Neo + Midnight preserved</footer></div>
-<script>const APP_VERSION="12.2";
+</main><footer><b id="appVersionLabel">D Study App v13.0</b> • Vibrant Accents dashboard theme + summary search/history/streak • all older themes preserved</footer></div>
+<script>const APP_VERSION="13.0";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -2362,7 +2732,7 @@ function oldDraftKey(mode=quizMode){return `d-study-draft::${activeUser.id}::${m
 function zeroTopics(){return baselineTopics.map(t=>({...JSON.parse(JSON.stringify(t)),status:"Not Started"}))}
 function zeroPages(){const p=JSON.parse(JSON.stringify(baselinePages));Object.keys(p).forEach(k=>p[k].current=0);return p}
 function defaultPreferences(){return{accent:"navy",appearance:"light",textSize:"normal",cardStyle:"soft",font:"inter",uiTheme:"classic"}}
-function freshState(){return{topics:zeroTopics(),pages:zeroPages(),notes:{},accuracy:{},lastReview:{},quizHistory:[],quizTopicStats:{},quizNotes:{sections:{},questions:{}},preferences:defaultPreferences()}}
+function freshState(){return{topics:zeroTopics(),pages:zeroPages(),notes:{},accuracy:{},lastReview:{},quizHistory:[],quizTopicStats:{},quizNotes:{sections:{},questions:{}},summaryViews:{},studyActivity:[],preferences:defaultPreferences()}}
 function normalizeState(x){
   const s=Object.assign(freshState(),x||{});
   s.topics=Array.isArray(s.topics)?s.topics:[];
@@ -2373,6 +2743,8 @@ function normalizeState(x){
   s.notes=s.notes||{};s.accuracy=s.accuracy||{};s.lastReview=s.lastReview||{};
   s.quizHistory=s.quizHistory||[];s.quizTopicStats=s.quizTopicStats||{};
   s.quizNotes=s.quizNotes||{sections:{},questions:{}};s.quizNotes.sections=s.quizNotes.sections||{};s.quizNotes.questions=s.quizNotes.questions||{};
+  s.summaryViews=s.summaryViews||{};
+  s.studyActivity=Array.isArray(s.studyActivity)?s.studyActivity:[];
   s.preferences=Object.assign(defaultPreferences(),s.preferences||{});
   return s;
 }
@@ -2475,6 +2847,9 @@ function startUser(user,renewSession=true){
   const ns=document.getElementById("notesSearch"),nf=document.getElementById("notesLectureFilter");
   if(ns&&!ns.dataset.bound){ns.dataset.bound="1";ns.oninput=renderNotesHub}
   if(nf&&!nf.dataset.bound){nf.dataset.bound="1";nf.onchange=renderNotesHub}
+  const vss=document.getElementById("vibrantSummarySearch"),vsl=document.getElementById("vibrantSummaryLectureFilter");
+  if(vss&&!vss.dataset.bound){vss.dataset.bound="1";vss.oninput=renderVibrantSummaryDashboard}
+  if(vsl&&!vsl.dataset.bound){vsl.dataset.bound="1";vsl.onchange=renderVibrantSummaryDashboard}
   const ulb=document.getElementById("updateLogBtn"),ulc=document.getElementById("updateLogClose"),ulo=document.getElementById("updateLogOverlay");
   if(ulb&&!ulb.dataset.bound){ulb.dataset.bound="1";ulb.onclick=openUpdateLog}
   if(ulc&&!ulc.dataset.bound){ulc.dataset.bound="1";ulc.onclick=closeUpdateLog}
@@ -2545,7 +2920,9 @@ function applyPreferences(){
   const uiTheme=p.uiTheme||"classic";
   document.body.classList.toggle("neo-ui",uiTheme==="neo");
   document.body.classList.toggle("midnight-ui",uiTheme==="midnight");
+  document.body.classList.toggle("vibrant-ui",uiTheme==="vibrant");
   document.body.dataset.uiTheme=uiTheme;
+  if(uiTheme==="vibrant")setTimeout(renderVibrantSummaryDashboard,0);
   document.body.classList.toggle("large-text",p.textSize==="large");
   document.body.classList.toggle("flat-cards",p.cardStyle==="flat");
   if(!fontPreviewActive)applyFontKey(p.font||"inter");
@@ -2716,7 +3093,7 @@ function switchTab(name){
     if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
   });
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===name));
-  if(name==="tracker")renderTracker();if(name==="notes")renderNotesHub();if(name==="history")renderHistory();
+  if(name==="tracker")renderTracker();if(name==="notes")renderNotesHub();if(name==="summary")renderVibrantSummaryDashboard();if(name==="history")renderHistory();
 }
 function renderRecordingDatabase(){
   const box=document.getElementById("recordingDatabase");if(!box)return;
@@ -2731,11 +3108,136 @@ function summaryPath(docId){
   };
   return map[docId]||"/d-study-app/summary/";
 }
+const summaryCatalog=[
+  {id:"sum-l1-1-42",lecture:"Lecture 1",title:"Summary 1",pages:"p.1–42",desc:"Foundations → PPF concepts",pageLecture:"Lecture 1",endPage:42,tone:"blue"},
+  {id:"sum-l1-43-70",lecture:"Lecture 1",title:"Summary 2",pages:"p.43–70",desc:"PPF applications → Demand, Supply & Equilibrium",pageLecture:"Lecture 1",endPage:70,tone:"amber"},
+  {id:"sum-l2-gdp",lecture:"Lecture 2.1",title:"GDP",pages:"p.1–42",desc:"GDP definition → expenditure → real vs nominal → living standard",pageLecture:"Lecture 2.1",endPage:42,tone:"purple"},
+  {id:"sum-l2-labor-inflation",lecture:"Lecture 2.2",title:"Jobs & Inflation",pages:"p.1–36",desc:"Labor market → unemployment → CPI → inflation",pageLecture:"Lecture 2.2",endPage:36,tone:"green"}
+];
+function localDayKey(ts=Date.now()){
+  const d=new Date(ts),y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");
+  return y+"-"+m+"-"+day;
+}
+function noteStudyActivity(kind,id){
+  if(!state)return;
+  const today=localDayKey(),key=today+"::"+kind+"::"+id;
+  if(!state.studyActivity.some(a=>a.key===key))state.studyActivity.push({key,date:today,kind,id,at:Date.now()});
+  state.studyActivity=state.studyActivity.slice(-365);
+}
+function markSummaryViewed(docId){
+  if(!state||!docId)return;
+  const old=state.summaryViews[docId]||{count:0};
+  state.summaryViews[docId]={count:(old.count||0)+1,lastViewed:Date.now()};
+  noteStudyActivity("summary",docId);
+  persist();
+}
+function summaryStatus(meta){
+  const p=state?.pages?.[meta.pageLecture],view=state?.summaryViews?.[meta.id];
+  if(p&&Number(p.current||0)>=meta.endPage)return{label:"Completed",cls:"complete"};
+  if(view?.lastViewed)return{label:"Currently Reading",cls:"reading"};
+  return{label:"Not Started",cls:"notstarted"};
+}
+function relativeViewed(ts){
+  if(!ts)return"Not yet viewed";
+  const diff=Math.max(0,Date.now()-ts),day=86400000;
+  if(diff<3600000)return"Viewed recently";
+  if(diff<day)return"Last viewed today";
+  const d=Math.floor(diff/day);
+  return d===1?"Last viewed 1 day ago":`Last viewed ${d} days ago`;
+}
+function summaryKeyPointCount(id){
+  const doc=document.getElementById(id);
+  return doc?doc.querySelectorAll(".slide-card").length:0;
+}
+function computeStudyStreak(){
+  const days=new Set((state?.studyActivity||[]).map(a=>a.date));
+  let n=0,d=new Date();
+  while(days.has(localDayKey(d.getTime()))){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+function renderVibrantSummaryDashboard(){
+  if(!state)return;
+  const cards=document.getElementById("vibrantSummaryCards");
+  if(!cards)return;
+  const search=(document.getElementById("vibrantSummarySearch")?.value||"").trim().toLowerCase();
+  const lecture=document.getElementById("vibrantSummaryLectureFilter")?.value||"all";
+  const active=document.querySelector(".summary-doc.active")?.id||"sum-l1-1-42";
+  const visible=summaryCatalog.filter(m=>(lecture==="all"||m.lecture===lecture)&&(!search||[m.lecture,m.title,m.pages,m.desc].join(" ").toLowerCase().includes(search)));
+  cards.innerHTML=visible.length?visible.map(m=>{
+    const st=summaryStatus(m),view=state.summaryViews[m.id],points=summaryKeyPointCount(m.id);
+    return `<a class="vibrant-summary-card ${m.id===active?"active":""}" data-tone="${m.tone}" href="${summaryPath(m.id)}">
+      <div class="vibrant-card-top"><span class="vibrant-card-icon">▤</span><span class="vibrant-card-arrow">›</span></div>
+      <div class="small">${m.lecture}</div><h3>${m.title}</h3>
+      <span class="vibrant-status ${st.cls}">${st.label}</span>
+      <div class="vibrant-card-pages">${m.pages}</div>
+      <p>${m.desc}</p>
+      <div class="vibrant-card-meta"><span>▤ ${points} key sections</span><span>◷ ${relativeViewed(view?.lastViewed)}</span></div>
+    </a>`;
+  }).join(""):`<div class="vibrant-empty">No summaries match your search.</div>`;
+
+  const allLectures=[...new Set(summaryCatalog.map(x=>x.lecture))];
+  const lf=document.getElementById("vibrantSummaryLectureFilter");
+  if(lf&&lf.options.length===1){
+    allLectures.forEach(l=>{const o=document.createElement("option");o.value=l;o.textContent=l;lf.appendChild(o)});
+  }
+
+  const totalScore=state.topics.reduce((s,t)=>s+(scoreMap[t.status]||0),0);
+  const overall=state.topics.length?Math.round(totalScore/state.topics.length):0;
+  const ring=document.getElementById("vibrantProgressRing");
+  if(ring)ring.style.setProperty("--vp",overall);
+  const pct=document.getElementById("vibrantProgressPct");if(pct)pct.textContent=overall+"%";
+  const completedSummaries=summaryCatalog.filter(m=>summaryStatus(m).cls==="complete").length;
+  const completedQuizSets=Object.keys(quizSets).filter(set=>{const p=quizSetCompletion(set);return p.total&&p.done===p.total}).length;
+  const notes=getAllSavedNotes().length;
+  const stats=document.getElementById("vibrantProgressStats");
+  if(stats)stats.innerHTML=`
+    <div><i class="dot blue"></i><b>${completedSummaries} / ${summaryCatalog.length}</b><span>Summaries</span></div>
+    <div><i class="dot green"></i><b>${completedQuizSets} / ${Object.keys(quizSets).length}</b><span>Quizzes</span></div>
+    <div><i class="dot amber"></i><b>${notes}</b><span>Notes</span></div>
+    <div><i class="dot purple"></i><b>${state.quizHistory.length}</b><span>Quiz attempts</span></div>`;
+
+  const avail=document.getElementById("vibrantAvailableCount");if(avail)avail.textContent=summaryCatalog.length+" summaries available";
+  const currentMeta=summaryCatalog.find(x=>x.id===active)||summaryCatalog[0];
+  const cr=document.getElementById("vibrantCurrentlyReading");if(cr)cr.textContent=currentMeta.lecture+" — "+currentMeta.title+" • "+currentMeta.pages;
+  const lu=document.getElementById("vibrantLastUpdated");if(lu){
+    const latest=Math.max(0,...Object.values(state.summaryViews).map(v=>Number(v.lastViewed||0)));
+    lu.textContent=latest?relativeViewed(latest).replace("Last viewed","Updated"):"No reading activity yet";
+  }
+
+  const streak=computeStudyStreak(),sc=document.getElementById("vibrantStreakCount");
+  if(sc)sc.innerHTML=streak+"<small> day"+(streak===1?"":"s")+"</small>";
+  const sd=document.getElementById("vibrantStreakDays");
+  if(sd){
+    sd.innerHTML=[6,5,4,3,2,1,0].map(back=>{const d=new Date();d.setDate(d.getDate()-back);const key=localDayKey(d.getTime()),on=(state.studyActivity||[]).some(a=>a.date===key);return `<div class="${on?"on":""}"><i></i><span>${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()]}</span></div>`}).join("");
+  }
+
+  const recent=summaryCatalog.filter(m=>state.summaryViews[m.id]?.lastViewed).sort((a,b)=>state.summaryViews[b.id].lastViewed-state.summaryViews[a.id].lastViewed).slice(0,3);
+  const rr=document.getElementById("vibrantRecentSummaries");
+  if(rr)rr.innerHTML=recent.length?recent.map(m=>`<a class="vibrant-recent-row" href="${summaryPath(m.id)}"><span class="vibrant-side-icon ${m.tone}">▤</span><div><b>${m.lecture} — ${m.title}</b><div class="small">${m.pages}</div></div><span class="small">${relativeViewed(state.summaryViews[m.id].lastViewed).replace("Last viewed ","")}</span></a>`).join(""):`<div class="small vibrant-no-recent">Open a summary to start Recent Summaries.</div>`;
+
+  renderVibrantCurrentSummary(active);
+}
+function renderVibrantCurrentSummary(docId){
+  const meta=summaryCatalog.find(x=>x.id===docId)||summaryCatalog[0],idx=summaryCatalog.findIndex(x=>x.id===meta.id);
+  const title=document.getElementById("vibrantCurrentTitle"),sub=document.getElementById("vibrantCurrentSub"),kick=document.getElementById("vibrantCurrentKicker");
+  if(title)title.textContent=meta.lecture+" — "+meta.title;
+  if(sub)sub.textContent=meta.pages+" • "+meta.desc;
+  if(kick)kick.textContent=summaryStatus(meta).label;
+  const prev=document.getElementById("vibrantPrevSummary"),next=document.getElementById("vibrantNextSummary");
+  if(prev){prev.disabled=idx<=0;prev.onclick=()=>{if(idx>0)location.href=summaryPath(summaryCatalog[idx-1].id)}}
+  if(next){next.disabled=idx>=summaryCatalog.length-1;next.onclick=()=>{if(idx<summaryCatalog.length-1)location.href=summaryPath(summaryCatalog[idx+1].id)}}
+}
+
+let lastSummaryViewMark={id:null,at:0};
 function openSummaryDoc(docId,anchor){
   document.querySelectorAll(".summary-doc").forEach(d=>d.classList.toggle("active",d.id===docId));
   document.querySelectorAll("[data-summary-doc]").forEach(b=>b.classList.toggle("active",b.dataset.summaryDoc===docId));
   document.querySelectorAll("[data-summary-link]").forEach(a=>a.classList.toggle("active",a.dataset.summaryLink===docId));
+  if(state&&(!lastSummaryViewMark.id||lastSummaryViewMark.id!==docId||Date.now()-lastSummaryViewMark.at>10000)){
+    markSummaryViewed(docId);lastSummaryViewMark={id:docId,at:Date.now()};
+  }
   switchTab("summary");
+  renderVibrantSummaryDashboard();
   if(anchor)setTimeout(()=>document.getElementById("summary-"+anchor)?.scrollIntoView({behavior:"smooth",block:"start"}),60);
 }
 function applyPathRoute(){
@@ -2977,6 +3479,7 @@ function submitQuiz(){
   });
   const rawPct=Math.round(correct/quiz.length*100),adjPct=Math.round(weighted/quiz.length*100);
   state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x])});
+  noteStudyActivity("quiz",quizPart);
   state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderHistory();
 }
 function renderQuizResult(){
