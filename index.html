@@ -494,6 +494,89 @@ body.dark .update-entry-top span{color:#aebdcc}
   .update-entry-top{align-items:flex-start}
 }
 
+/* v12.11 Developer Management Console */
+.settings-footer-actions{gap:8px;flex-wrap:wrap}
+.dev-panel-btn{font-size:12px;opacity:.86}
+.dev-panel-btn:hover{opacity:1}
+.dev-overlay{
+  position:fixed;inset:0;z-index:1100;display:none;background:rgba(5,12,22,.72);
+  backdrop-filter:blur(7px);padding:18px;overflow:auto
+}
+.dev-overlay.open{display:block}
+.dev-shell{
+  width:min(1180px,100%);min-height:calc(100vh - 36px);margin:0 auto;
+  background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:22px;
+  box-shadow:0 28px 90px rgba(0,0,0,.36);overflow:hidden
+}
+.dev-lock{max-width:500px;margin:10vh auto 0;padding:28px}
+.dev-lock-card{border:1px solid var(--line);border-radius:20px;padding:22px;background:color-mix(in srgb,var(--soft) 45%,var(--card))}
+.dev-lock-card h2{margin:6px 0 8px}
+.dev-lock-actions{display:flex;gap:8px;margin-top:12px}
+.dev-lock-actions input{flex:1;min-width:0}
+.dev-console{min-height:calc(100vh - 36px);display:grid;grid-template-rows:auto auto 1fr}
+.dev-topbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dev-title{display:flex;gap:12px;align-items:center}
+.dev-title-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:color-mix(in srgb,var(--blue) 12%,var(--card));color:var(--blue);font-weight:900}
+.dev-title h2{margin:0 0 3px}
+.dev-top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.dev-mode-badge{display:inline-flex;align-items:center;gap:6px;padding:7px 9px;border-radius:999px;background:color-mix(in srgb,#d79a26 13%,var(--card));border:1px solid color-mix(in srgb,#d79a26 42%,var(--line));font-size:10px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.dev-nav{display:flex;gap:7px;padding:12px 20px;border-bottom:1px solid var(--line);overflow:auto}
+.dev-nav button{white-space:nowrap;background:var(--soft);color:var(--ink);border:1px solid var(--line);padding:9px 12px}
+.dev-nav button.active{background:var(--blue);color:white;border-color:var(--blue)}
+.dev-main{padding:18px 20px 26px}
+.dev-warning{border:1px solid color-mix(in srgb,#d79a26 50%,var(--line));background:color-mix(in srgb,#d79a26 8%,var(--card));border-radius:14px;padding:12px 14px;margin-bottom:16px;line-height:1.55}
+.dev-view{display:none}.dev-view.active{display:block}
+.dev-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.dev-metric{border:1px solid var(--line);border-radius:15px;padding:14px;background:color-mix(in srgb,var(--soft) 45%,var(--card))}
+.dev-metric span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.dev-metric b{display:block;font-size:24px;margin-top:4px}
+.dev-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+.dev-card{border:1px solid var(--line);border-radius:16px;padding:15px;background:color-mix(in srgb,var(--soft) 30%,var(--card))}
+.dev-card h3{margin:0 0 10px}
+.dev-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+.dev-toolbar input{min-width:min(320px,100%)}
+.dev-user-list{display:grid;gap:8px}
+.dev-user-row{display:grid;grid-template-columns:minmax(160px,1.3fr) .7fr .6fr .65fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:13px;padding:11px;background:var(--card)}
+.dev-user-row.is-banned{border-color:color-mix(in srgb,#c94d56 48%,var(--line));background:color-mix(in srgb,#c94d56 5%,var(--card))}
+.dev-user-main{min-width:0}.dev-user-main b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dev-user-main small{color:var(--muted)}
+.dev-user-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.dev-user-actions button{padding:7px 9px;font-size:11px}
+.dev-danger{background:#8d2f38!important;border-color:#8d2f38!important;color:white!important}
+.dev-status{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:900;border:1px solid var(--line)}
+.dev-status.banned{color:#a62e38;border-color:color-mix(in srgb,#c94d56 50%,var(--line));background:color-mix(in srgb,#c94d56 8%,var(--card))}
+.dev-status.active{color:var(--blue);border-color:color-mix(in srgb,var(--blue) 45%,var(--line));background:color-mix(in srgb,var(--blue) 7%,var(--card))}
+.dev-detail{margin-top:14px}
+.dev-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dev-detail-item{border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--card)}
+.dev-detail-item span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800}.dev-detail-item b{display:block;margin-top:3px}
+.dev-lecture-progress{display:grid;gap:7px;margin-top:12px}
+.dev-progress-row{display:grid;grid-template-columns:140px 1fr 48px;gap:9px;align-items:center}
+.dev-progress-track{height:8px;background:var(--soft);border-radius:999px;overflow:hidden}.dev-progress-fill{height:100%;background:var(--blue)}
+.dev-log-list{display:grid;gap:7px;max-height:62vh;overflow:auto}
+.dev-log-item{border:1px solid var(--line);border-radius:12px;padding:10px 11px;background:var(--card)}
+.dev-log-head{display:flex;justify-content:space-between;gap:10px}.dev-log-head span{color:var(--muted);font-size:10px}.dev-log-item p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.dev-security-grid,.dev-future-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dev-placeholder{border:1px dashed var(--line);border-radius:15px;padding:15px;background:color-mix(in srgb,var(--soft) 32%,var(--card))}
+.dev-placeholder b{display:block;margin-bottom:5px}
+.dev-disabled{opacity:.58}
+.dev-ban-list{display:grid;gap:7px;margin-top:10px}
+.dev-ban-item{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:9px;background:var(--card)}
+body.dark .dev-shell{background:#1d2938;border-color:#52677e}
+body.dark .dev-lock-card,body.dark .dev-card,body.dark .dev-metric,body.dark .dev-placeholder{background:#253548;border-color:#4d6278}
+body.dark .dev-user-row,body.dark .dev-detail-item,body.dark .dev-log-item,body.dark .dev-ban-item{background:#223043;border-color:#4d6278}
+body.dark .dev-warning{background:#332d20;border-color:#6d5a29}
+@media(max-width:900px){
+  .dev-metrics{grid-template-columns:1fr 1fr}.dev-grid,.dev-security-grid,.dev-future-grid{grid-template-columns:1fr}
+  .dev-user-row{grid-template-columns:1fr 1fr}.dev-user-actions{grid-column:1/-1;justify-content:flex-start}
+}
+@media(max-width:620px){
+  .dev-overlay{padding:0}.dev-shell{min-height:100vh;border-radius:0;border-left:0;border-right:0}
+  .dev-topbar{padding:14px}.dev-nav,.dev-main{padding-left:14px;padding-right:14px}.dev-topbar{align-items:center}
+  .dev-title .small{display:none}.dev-mode-badge{display:none}.dev-metrics{grid-template-columns:1fr 1fr}.dev-detail-grid{grid-template-columns:1fr}
+  .dev-progress-row{grid-template-columns:105px 1fr 42px}.dev-user-row{grid-template-columns:1fr}.dev-user-actions{grid-column:auto}
+  .dev-lock{padding:16px;margin-top:6vh}.dev-lock-actions{flex-direction:column}
+}
+
 /* =========================
    V12 — OPTIONAL NEO DASHBOARD UI
    Classic UI remains untouched unless body.neo-ui is active.
@@ -3578,6 +3661,7 @@ UNDERSTAND IT VISIBILITY
       </div>
     </div>
     <div class="settings-footer-actions">
+      <button class="secondary dev-panel-btn" id="devPanelBtn" type="button">🛠 For Dev</button>
       <button class="secondary update-log-btn" id="updateLogBtn" type="button">↻ Update Log</button>
     </div>
   </div>
@@ -3593,7 +3677,8 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.10</b><span>Understand it Readability</span></div><p>Expanded the Understand it card further, increased English/Thai explanation text size, enlarged its icon and controls, and strengthened the clickable hover/focus treatment.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.11</b><span>Developer Console</span></div><p>Added the password-gated For Dev management console for local-browser users, progress, activity logs, account removal, and local ban/unban controls, with backend-only IP controls clearly separated.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.10</b><span>Understand it Readability</span></div><p>Expanded the Understand it card further, increased English/Thai explanation text size, enlarged its icon and controls, and strengthened the clickable hover/focus treatment.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.9</b><span>Understand it Visibility</span></div><p>Made the collapsible Understand it control larger, more readable, and much more obviously clickable with accent emphasis and expand/collapse cues.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.8</b><span>Bilingual Understand it</span></div><p>Made every lecture section's Understand it explanation collapsible and added an English/Thai switch with complete Thai explanations for every section.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.7</b><span>Mistake Log</span></div><p>Made incomplete/flagged Quiz History attempts clickable, with targeted review of wrong, Not sure, and Guessed questions including answers and explanations.</p></article>
@@ -3628,13 +3713,95 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.10</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.11</b></div>
+    </section>
+  </div>
+
+  <div class="dev-overlay" id="devOverlay" aria-hidden="true">
+    <section class="dev-shell" role="dialog" aria-modal="true" aria-labelledby="devConsoleTitle">
+      <div class="dev-lock" id="devLockView">
+        <div class="dev-lock-card">
+          <div class="eyebrow">Developer Access</div>
+          <h2>For Dev</h2>
+          <p class="small">Enter the developer password to open the local management console.</p>
+          <div class="dev-lock-actions">
+            <input id="devPassword" type="password" autocomplete="off" placeholder="Developer password" aria-label="Developer password">
+            <button id="devUnlockBtn" type="button">Unlock</button>
+            <button class="secondary" id="devCancelBtn" type="button">Cancel</button>
+          </div>
+          <div id="devUnlockStatus" class="small" style="margin-top:9px"></div>
+          <div class="device-note"><b>Security note:</b> this is a convenience gate inside a public static GitHub Pages app. It does not replace server-side administrator authentication, and a determined user can inspect client code or clear local browser data.</div>
+        </div>
+      </div>
+
+      <div class="dev-console" id="devConsole" hidden>
+        <header class="dev-topbar">
+          <div class="dev-title">
+            <span class="dev-title-icon">D</span>
+            <div><h2 id="devConsoleTitle">D Study Management</h2><div class="small">Developer console • v12.11</div></div>
+          </div>
+          <div class="dev-top-actions">
+            <span class="dev-mode-badge">● Local browser mode</span>
+            <button class="secondary" id="devExportBtn" type="button">Export snapshot</button>
+            <button class="secondary" id="devLockBtn" type="button">Lock</button>
+            <button class="secondary" id="devCloseBtn" type="button" aria-label="Close developer console">✕</button>
+          </div>
+        </header>
+        <nav class="dev-nav" aria-label="Developer console sections">
+          <button class="active" type="button" data-dev-view="overview">Overview</button>
+          <button type="button" data-dev-view="users">Users</button>
+          <button type="button" data-dev-view="activity">Activity Log</button>
+          <button type="button" data-dev-view="security">Security</button>
+          <button type="button" data-dev-view="future">Future</button>
+        </nav>
+        <div class="dev-main">
+          <div class="dev-warning"><b>Local-management limitation:</b> D Study App still stores profiles and progress in each device's browser. This console can manage users/data that exist on <b>this browser only</b>. It does not currently receive other devices' users or IP addresses. Global user administration, reliable IP logging, and enforceable IP bans require an authenticated backend.</div>
+
+          <section class="dev-view active" data-dev-section="overview">
+            <div class="dev-metrics" id="devMetrics"></div>
+            <div class="dev-grid">
+              <div class="dev-card"><h3>Local user summary</h3><div id="devOverviewUsers"></div></div>
+              <div class="dev-card"><h3>System status</h3><div id="devSystemStatus"></div></div>
+            </div>
+          </section>
+
+          <section class="dev-view" data-dev-section="users">
+            <div class="dev-toolbar">
+              <div><h3 style="margin:0">Local Browser Users</h3><div class="small">View progress, ban/unban, or remove a local account and its stored study data.</div></div>
+              <input id="devUserSearch" type="search" placeholder="Search username">
+            </div>
+            <div class="dev-user-list" id="devUserList"></div>
+            <div class="dev-detail" id="devUserDetail"></div>
+          </section>
+
+          <section class="dev-view" data-dev-section="activity">
+            <div class="dev-toolbar"><div><h3 style="margin:0">Local Activity Log</h3><div class="small">Events recorded from v12.11 onward on this browser.</div></div><button class="secondary" id="devClearLogBtn" type="button">Clear local log</button></div>
+            <div class="dev-log-list" id="devActivityList"></div>
+          </section>
+
+          <section class="dev-view" data-dev-section="security">
+            <div class="dev-security-grid">
+              <div class="dev-card"><h3>User bans</h3><p class="small">Local bans are enforced by this browser's sign-in and session restore flow.</p><div class="dev-ban-list" id="devBanList"></div></div>
+              <div class="dev-card dev-disabled"><h3>IP controls — backend required</h3><p class="small">Public IP addresses are not collected by the current static app. Reliable IP log / ban / unban needs a server or authenticated database layer that can observe requests and enforce the rule outside the user's localStorage.</p><button class="secondary" type="button" disabled>IP Ban</button> <button class="secondary" type="button" disabled>IP Unban</button></div>
+            </div>
+          </section>
+
+          <section class="dev-view" data-dev-section="future">
+            <div class="dev-future-grid">
+              <div class="dev-placeholder"><b>Cloud user directory</b><span class="small">Future: authenticated backend users across Mac, iPad, and other devices.</span></div>
+              <div class="dev-placeholder"><b>Remote progress dashboard</b><span class="small">Future: server-synced lecture progress, quiz history, and last-seen activity.</span></div>
+              <div class="dev-placeholder"><b>Server audit log</b><span class="small">Future: tamper-resistant login/admin/security events instead of browser-local logs.</span></div>
+              <div class="dev-placeholder"><b>Network security</b><span class="small">Future: IP/rate-limit controls implemented at a backend or edge layer.</span></div>
+            </div>
+          </section>
+        </div>
+      </div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.10</b> • larger, more noticeable bilingual Understand it cards</footer></div>
-<script>const APP_VERSION="12.10";
+</main><footer><b id="appVersionLabel">D Study App v12.11</b> • local developer management console</footer></div>
+<script>const APP_VERSION="12.11";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -3707,7 +3874,10 @@ const summaryNames={
 const summaryDocs={s1:"sum-l1-1-42",s2:"sum-l1-1-42",s3:"sum-l1-1-42",s4:"sum-l1-1-42",s5:"sum-l1-43-70",s6:"sum-l1-43-70",s7:"sum-l1-43-70",s8:"sum-l1-43-70",s9:"sum-l2-gdp",s10:"sum-l2-gdp",s11:"sum-l2-gdp",s12:"sum-l2-gdp",s13:"sum-l2-labor-inflation",s14:"sum-l2-labor-inflation",s15:"sum-l2-labor-inflation",s16:"sum-l2-labor-inflation"};
 const scoreMap={"Not Started":0,"Learning":25,"Learned · Not Reviewed":50,"Reviewed & Practiced":75,"Mastered":100};
 const USERS_KEY="d-study-users-v1", ACTIVE_KEY="d-study-active-user";
+const DEV_BANS_KEY="d-study-dev-bans-v1", DEV_ACTIVITY_KEY="d-study-dev-activity-v1", DEV_UNLOCK_SESSION_KEY="d-study-dev-unlocked";
+const DEV_PASSWORD_HASH="a5e57e1761885aeec9f67067df47931dea50175c96181de7fd57b2cec6915771";
 let activeUser=null,state=null,quizMode="review",quizSet="l1a",quizPart="l1-foundations",quizSession=null,filtersReady=false,loginMode="signin",sessionExpiryTimer=null;
+let devSelectedUserId=null,devActiveView="overview";
 
 function getQuizFor(part=quizPart,mode=quizMode){
   const meta=quizParts[part]||quizParts["l1-all"];
@@ -3786,6 +3956,160 @@ async function pinHash(username,pin){
 }
 function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||"[]")}catch(e){return[]}}
 function setUsers(u){localStorage.setItem(USERS_KEY,JSON.stringify(u))}
+function getDevBans(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(DEV_BANS_KEY)||"null");
+    return{users:Array.isArray(raw?.users)?raw.users:[],ips:Array.isArray(raw?.ips)?raw.ips:[]};
+  }catch(e){return{users:[],ips:[]}}
+}
+function setDevBans(v){localStorage.setItem(DEV_BANS_KEY,JSON.stringify({users:v.users||[],ips:v.ips||[]}))}
+function isDevUserBanned(user){
+  if(!user)return false;
+  const name=String(user.username||"").toLowerCase();
+  return getDevBans().users.some(b=>b.id===user.id||String(b.username||"").toLowerCase()===name);
+}
+function isDevUsernameBanned(username){
+  const name=String(username||"").trim().toLowerCase();
+  return !!name&&getDevBans().users.some(b=>String(b.username||"").toLowerCase()===name);
+}
+function getDevActivity(){try{const x=JSON.parse(localStorage.getItem(DEV_ACTIVITY_KEY)||"[]");return Array.isArray(x)?x:[]}catch(e){return[]}}
+function appendDevActivity(type,detail="",user=activeUser){
+  const log=getDevActivity();
+  log.unshift({at:new Date().toISOString(),type:String(type||"Event"),detail:String(detail||""),userId:user?.id||null,username:user?.username||"System"});
+  localStorage.setItem(DEV_ACTIVITY_KEY,JSON.stringify(log.slice(0,250)));
+}
+async function sha256Text(value){
+  const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(String(value)));
+  return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function devStateForUser(userId){
+  try{return normalizeState(JSON.parse(localStorage.getItem(`d-study-state::${userId}`)||"null"))}catch(e){return freshState()}
+}
+function devProgressPercent(s){
+  const topics=s?.topics||[];if(!topics.length)return 0;
+  return Math.round(topics.reduce((sum,t)=>sum+(scoreMap[t.status]||0),0)/topics.length);
+}
+function devNoteCount(s){
+  const progress=Object.values(s?.notes||{}).filter(v=>String(v||"").trim()).length;
+  const sections=Object.values(s?.quizNotes?.sections||{}).filter(v=>String(v||"").trim()).length;
+  const questions=Object.values(s?.quizNotes?.questions||{}).filter(v=>String(v||"").trim()).length;
+  return progress+sections+questions;
+}
+function devLectureBreakdown(s){
+  const groups={};
+  (s?.topics||[]).forEach(t=>{if(!groups[t.lecture])groups[t.lecture]=[];groups[t.lecture].push(scoreMap[t.status]||0)});
+  return Object.entries(groups).map(([lecture,vals])=>({lecture,pct:Math.round(vals.reduce((a,b)=>a+b,0)/Math.max(1,vals.length))}));
+}
+function devLastActivityFor(user){
+  const hit=getDevActivity().find(x=>x.userId===user.id);
+  return hit?.at||user.createdAt||null;
+}
+function formatDevDate(value){
+  if(!value)return"—";const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString();
+}
+function openDevPanel(){
+  const o=document.getElementById("devOverlay");if(!o)return;
+  o.classList.add("open");o.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  const unlocked=sessionStorage.getItem(DEV_UNLOCK_SESSION_KEY)==="1";
+  showDevLock(!unlocked);
+  if(unlocked)renderDevConsole();
+  setTimeout(()=>document.getElementById(unlocked?"devCloseBtn":"devPassword")?.focus(),0);
+}
+function closeDevPanel(){
+  const o=document.getElementById("devOverlay");if(!o)return;
+  o.classList.remove("open");o.setAttribute("aria-hidden","true");document.body.style.overflow="";
+  document.getElementById("devPanelBtn")?.focus();
+}
+function showDevLock(locked){
+  const l=document.getElementById("devLockView"),c=document.getElementById("devConsole");
+  if(l)l.hidden=!locked;if(c)c.hidden=locked;
+  if(locked){const p=document.getElementById("devPassword");if(p)p.value="";const s=document.getElementById("devUnlockStatus");if(s)s.textContent=""}
+}
+async function unlockDevPanel(){
+  const p=document.getElementById("devPassword")?.value||"",out=document.getElementById("devUnlockStatus");
+  if(await sha256Text(p)!==DEV_PASSWORD_HASH){if(out)out.textContent="Incorrect developer password.";return}
+  sessionStorage.setItem(DEV_UNLOCK_SESSION_KEY,"1");showDevLock(false);appendDevActivity("Developer console unlocked","Local management session opened.");
+  renderDevConsole();setTimeout(()=>document.getElementById("devCloseBtn")?.focus(),0);
+}
+function lockDevPanel(){
+  sessionStorage.removeItem(DEV_UNLOCK_SESSION_KEY);appendDevActivity("Developer console locked","Local management session locked.");showDevLock(true);
+  setTimeout(()=>document.getElementById("devPassword")?.focus(),0);
+}
+function switchDevView(view){
+  devActiveView=view;
+  document.querySelectorAll("[data-dev-view]").forEach(b=>b.classList.toggle("active",b.dataset.devView===view));
+  document.querySelectorAll("[data-dev-section]").forEach(s=>s.classList.toggle("active",s.dataset.devSection===view));
+  if(view==="users")renderDevUsers();if(view==="activity")renderDevActivity();if(view==="security")renderDevSecurity();
+}
+function renderDevConsole(){
+  if(sessionStorage.getItem(DEV_UNLOCK_SESSION_KEY)!=="1")return;
+  const users=getUsers(),bans=getDevBans(),states=users.map(u=>devStateForUser(u.id));
+  const attempts=states.reduce((n,s)=>n+(s.quizHistory?.length||0),0);
+  const metrics=document.getElementById("devMetrics");
+  if(metrics)metrics.innerHTML=[
+    ["Local users",users.length],["Active profile",activeUser?escapeHTML(activeUser.username):"—"],["Quiz attempts",attempts],["Banned users",bans.users.length]
+  ].map(([k,v])=>`<div class="dev-metric"><span>${k}</span><b>${v}</b></div>`).join("");
+  const ou=document.getElementById("devOverviewUsers");
+  if(ou)ou.innerHTML=users.length?users.slice(0,6).map(u=>{const s=devStateForUser(u.id);return `<div class="dev-ban-item"><span><b>${escapeHTML(u.username)}</b><br><span class="small">${devProgressPercent(s)}% progress • ${s.quizHistory?.length||0} attempts</span></span><button class="secondary" onclick="selectDevUser('${u.id}')">Manage</button></div>`}).join(""):`<div class="small">No local users found.</div>`;
+  const ss=document.getElementById("devSystemStatus");
+  if(ss)ss.innerHTML=`<div class="dev-detail-grid"><div class="dev-detail-item"><span>Storage</span><b>Local browser</b></div><div class="dev-detail-item"><span>Global backend</span><b>Not connected</b></div><div class="dev-detail-item"><span>IP collection</span><b>Off</b></div></div><p class="small" style="margin-bottom:0">Account/password data never appears in the admin export. IP controls remain disabled until a backend exists.</p>`;
+  renderDevUsers();renderDevActivity();renderDevSecurity();switchDevView(devActiveView);
+}
+function selectDevUser(id){devSelectedUserId=id;switchDevView("users");renderDevUsers()}
+function renderDevUsers(){
+  const root=document.getElementById("devUserList"),detail=document.getElementById("devUserDetail");if(!root||!detail)return;
+  const q=(document.getElementById("devUserSearch")?.value||"").trim().toLowerCase(),bans=getDevBans();
+  const users=getUsers().filter(u=>!q||String(u.username).toLowerCase().includes(q));
+  if(!users.length){root.innerHTML=`<div class="dev-card small">No matching local users.</div>`;detail.innerHTML="";return}
+  root.innerHTML=users.map(u=>{
+    const s=devStateForUser(u.id),pct=devProgressPercent(s),ban=bans.users.some(b=>b.id===u.id||String(b.username||"").toLowerCase()===String(u.username).toLowerCase()),isActive=activeUser?.id===u.id;
+    return `<div class="dev-user-row ${ban?"is-banned":""}"><div class="dev-user-main"><b>${escapeHTML(u.username)}</b><small>${escapeHTML(u.id)}</small></div><div><b>${pct}%</b><div class="small">progress</div></div><div><b>${s.quizHistory?.length||0}</b><div class="small">attempts</div></div><div>${ban?'<span class="dev-status banned">Banned</span>':isActive?'<span class="dev-status active">Active</span>':'<span class="dev-status">Local</span>'}</div><div class="dev-user-actions"><button class="secondary" onclick="selectDevUser('${u.id}')">View</button><button class="secondary" onclick="${ban?"unbanDevUser":"banDevUser"}('${u.id}')">${ban?"Unban":"Ban"}</button><button class="dev-danger" onclick="removeDevUser('${u.id}')">Remove</button></div></div>`;
+  }).join("");
+  const chosen=getUsers().find(u=>u.id===(devSelectedUserId||users[0]?.id));if(!chosen){detail.innerHTML="";return}
+  devSelectedUserId=chosen.id;const s=devStateForUser(chosen.id),lecture=devLectureBreakdown(s);
+  detail.innerHTML=`<div class="dev-card"><div class="dev-toolbar"><div><h3 style="margin:0">${escapeHTML(chosen.username)}</h3><div class="small">Created ${formatDevDate(chosen.createdAt)} • Last local event ${formatDevDate(devLastActivityFor(chosen))}</div></div></div><div class="dev-detail-grid"><div class="dev-detail-item"><span>Overall progress</span><b>${devProgressPercent(s)}%</b></div><div class="dev-detail-item"><span>Quiz attempts</span><b>${s.quizHistory?.length||0}</b></div><div class="dev-detail-item"><span>Saved notes</span><b>${devNoteCount(s)}</b></div></div><div class="dev-lecture-progress">${lecture.map(x=>`<div class="dev-progress-row"><span class="small">${escapeHTML(x.lecture)}</span><div class="dev-progress-track"><div class="dev-progress-fill" style="width:${x.pct}%"></div></div><b class="small">${x.pct}%</b></div>`).join("")||'<div class="small">No topic progress yet.</div>'}</div></div>`;
+}
+function banDevUser(id){
+  const u=getUsers().find(x=>x.id===id);if(!u)return;if(!confirm(`Ban ${u.username} on this browser?`))return;
+  const b=getDevBans();if(!b.users.some(x=>x.id===u.id||String(x.username||"").toLowerCase()===String(u.username).toLowerCase()))b.users.push({id:u.id,username:u.username,bannedAt:new Date().toISOString()});
+  setDevBans(b);appendDevActivity("User banned",u.username,u);renderDevConsole();
+  if(activeUser?.id===id){alert("The active local profile was banned and will be signed out.");sessionStorage.removeItem(ACTIVE_KEY);localStorage.removeItem(ACTIVE_KEY);location.reload()}
+}
+function unbanDevUser(id){
+  const b=getDevBans(),hit=b.users.find(x=>x.id===id),u=getUsers().find(x=>x.id===id);
+  b.users=b.users.filter(x=>x.id!==id);setDevBans(b);appendDevActivity("User unbanned",hit?.username||u?.username||id,u||hit);renderDevConsole();
+}
+function unbanDevUserByName(name){
+  const b=getDevBans(),key=String(name).toLowerCase(),hit=b.users.find(x=>String(x.username||"").toLowerCase()===key);
+  b.users=b.users.filter(x=>String(x.username||"").toLowerCase()!==key);setDevBans(b);appendDevActivity("User unbanned",hit?.username||name,hit);renderDevConsole();
+}
+function removeDevUser(id){
+  const users=getUsers(),u=users.find(x=>x.id===id);if(!u)return;
+  if(!confirm(`Permanently remove local profile "${u.username}" and its stored progress, notes, quiz history, and drafts from this browser? This cannot be undone unless you have a backup.`))return;
+  appendDevActivity("User removed",u.username,u);setUsers(users.filter(x=>x.id!==id));
+  Object.keys(localStorage).filter(k=>k===`d-study-state::${id}`||k.startsWith(`d-study-draft::${id}::`)).forEach(k=>localStorage.removeItem(k));
+  devSelectedUserId=null;
+  if(activeUser?.id===id){sessionStorage.removeItem(ACTIVE_KEY);localStorage.removeItem(ACTIVE_KEY);alert("The active profile was removed. The app will return to sign in.");location.reload();return}
+  renderDevConsole();
+}
+function renderDevActivity(){
+  const root=document.getElementById("devActivityList");if(!root)return;const log=getDevActivity();
+  root.innerHTML=log.length?log.map(x=>`<div class="dev-log-item"><div class="dev-log-head"><b>${escapeHTML(x.type)}</b><span>${formatDevDate(x.at)}</span></div><p><b>${escapeHTML(x.username||"System")}</b>${x.detail?" • "+escapeHTML(x.detail):""}</p></div>`).join(""):`<div class="dev-card small">No local admin/activity events recorded yet.</div>`;
+}
+function clearDevActivity(){
+  if(!confirm("Clear the local developer activity log on this browser?"))return;
+  localStorage.removeItem(DEV_ACTIVITY_KEY);appendDevActivity("Activity log cleared","A new log started after clearing.");renderDevConsole();
+}
+function renderDevSecurity(){
+  const root=document.getElementById("devBanList");if(!root)return;const bans=getDevBans().users;
+  root.innerHTML=bans.length?bans.map(b=>`<div class="dev-ban-item"><span><b>${escapeHTML(b.username||b.id)}</b><br><span class="small">${formatDevDate(b.bannedAt)}</span></span><button class="secondary" onclick="unbanDevUserByName('${String(b.username||"").replace(/'/g,"&#39;")}')">Unban</button></div>`).join(""):`<div class="small">No locally banned users.</div>`;
+}
+function exportDevSnapshot(){
+  const users=getUsers().map(u=>{const s=devStateForUser(u.id);return{id:u.id,username:u.username,createdAt:u.createdAt||null,progress:devProgressPercent(s),quizAttempts:s.quizHistory?.length||0,savedNotes:devNoteCount(s),lastLocalEvent:devLastActivityFor(u)}});
+  const payload={app:"D Study App",version:APP_VERSION,scope:"local-browser-developer-snapshot",exportedAt:new Date().toISOString(),users,bans:getDevBans(),activity:getDevActivity(),network:{ipCollection:false,note:"Static GitHub Pages build has no backend IP visibility."}};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="d-study-dev-local-snapshot.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  appendDevActivity("Developer snapshot exported",`${users.length} local user(s)`);
+}
 function setLoginMode(mode){
   loginMode=mode;
   document.getElementById("signInTab").classList.toggle("active",mode==="signin");
@@ -3802,12 +4126,14 @@ async function handleLogin(){
   const h=await pinHash(u,p);
   if(loginMode==="create"){
     if(users.some(x=>x.username.toLowerCase()===u.toLowerCase())){err.textContent="That username already exists on this browser.";return}
+    if(isDevUsernameBanned(u)){err.textContent="This profile name is banned on this browser.";appendDevActivity("Blocked profile creation",u,null);return}
     const user={id:"u_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,7),username:u,pinHash:h,createdAt:new Date().toISOString()};
-    users.push(user);setUsers(users);startUser(user);
+    users.push(user);setUsers(users);appendDevActivity("Profile created","Local profile created.",user);startUser(user);
   }else{
     const user=users.find(x=>x.username.toLowerCase()===u.toLowerCase());
     if(!user||user.pinHash!==h){err.textContent="Username or PIN is incorrect on this browser.";return}
-    startUser(user);
+    if(isDevUserBanned(user)){err.textContent="This profile is banned on this browser.";appendDevActivity("Blocked sign-in","Banned local profile attempted to sign in.",user);return}
+    appendDevActivity("Signed in","Local profile signed in.",user);startUser(user);
   }
 }
 function scheduleSessionExpiry(){
@@ -3821,7 +4147,13 @@ function scheduleSessionExpiry(){
   }catch(e){}
 }
 function startUser(user,renewSession=true){
+  if(isDevUserBanned(user)){
+    sessionStorage.removeItem(ACTIVE_KEY);localStorage.removeItem(ACTIVE_KEY);
+    const err=document.getElementById("loginError");if(err)err.textContent="This profile is banned on this browser.";
+    return;
+  }
   activeUser=user;
+  if(!renewSession)appendDevActivity("Session restored","Existing local 24-hour session restored.",user);
   if(renewSession){
     localStorage.setItem(ACTIVE_KEY,JSON.stringify({id:user.id,expiresAt:Date.now()+24*60*60*1000}));
   }
@@ -3843,6 +4175,18 @@ function startUser(user,renewSession=true){
   if(ulb&&!ulb.dataset.bound){ulb.dataset.bound="1";ulb.onclick=openUpdateLog}
   if(ulc&&!ulc.dataset.bound){ulc.dataset.bound="1";ulc.onclick=closeUpdateLog}
   if(ulo&&!ulo.dataset.bound){ulo.dataset.bound="1";ulo.onclick=e=>{if(e.target===ulo)closeUpdateLog()}}
+  const dpb=document.getElementById("devPanelBtn"),dvo=document.getElementById("devOverlay"),dvu=document.getElementById("devUnlockBtn"),dvc=document.getElementById("devCloseBtn"),dvx=document.getElementById("devCancelBtn"),dvl=document.getElementById("devLockBtn"),dve=document.getElementById("devExportBtn"),dvp=document.getElementById("devPassword"),dvs=document.getElementById("devUserSearch"),dva=document.getElementById("devClearLogBtn");
+  if(dpb&&!dpb.dataset.bound){dpb.dataset.bound="1";dpb.onclick=openDevPanel}
+  if(dvo&&!dvo.dataset.bound){dvo.dataset.bound="1";dvo.onclick=e=>{if(e.target===dvo)closeDevPanel()}}
+  if(dvu&&!dvu.dataset.bound){dvu.dataset.bound="1";dvu.onclick=unlockDevPanel}
+  if(dvc&&!dvc.dataset.bound){dvc.dataset.bound="1";dvc.onclick=closeDevPanel}
+  if(dvx&&!dvx.dataset.bound){dvx.dataset.bound="1";dvx.onclick=closeDevPanel}
+  if(dvl&&!dvl.dataset.bound){dvl.dataset.bound="1";dvl.onclick=lockDevPanel}
+  if(dve&&!dve.dataset.bound){dve.dataset.bound="1";dve.onclick=exportDevSnapshot}
+  if(dvp&&!dvp.dataset.bound){dvp.dataset.bound="1";dvp.onkeydown=e=>{if(e.key==="Enter")unlockDevPanel()}}
+  if(dvs&&!dvs.dataset.bound){dvs.dataset.bound="1";dvs.oninput=renderDevUsers}
+  if(dva&&!dva.dataset.bound){dva.dataset.bound="1";dva.onclick=clearDevActivity}
+  document.querySelectorAll("[data-dev-view]").forEach(b=>{if(!b.dataset.bound){b.dataset.bound="1";b.onclick=()=>switchDevView(b.dataset.devView)}})
   const mlc=document.getElementById("mistakeLogClose"),mlo=document.getElementById("mistakeLogOverlay");
   if(mlc&&!mlc.dataset.bound){mlc.dataset.bound="1";mlc.onclick=closeMistakeLog}
   if(mlo&&!mlo.dataset.bound){mlo.dataset.bound="1";mlo.onclick=e=>{if(e.target===mlo)closeMistakeLog()}}
@@ -3851,7 +4195,7 @@ function startUser(user,renewSession=true){
   document.getElementById("legacyBox").style.display=legacy?"block":"none";
   persist();
 }
-function logout(){saveQuizDraft();persist();sessionStorage.removeItem(ACTIVE_KEY);localStorage.removeItem(ACTIVE_KEY);location.reload()}
+function logout(){saveQuizDraft();persist();appendDevActivity("Signed out","Local profile signed out.",activeUser);sessionStorage.removeItem(ACTIVE_KEY);localStorage.removeItem(ACTIVE_KEY);location.reload()}
 function restoreSession(){
   let id=null;
   try{
@@ -4425,7 +4769,7 @@ function submitQuiz(){
   });
   const rawPct=Math.round(correct/quiz.length*100),adjPct=Math.round(weighted/quiz.length*100);
   state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x]),questionSnapshot:quiz.map(q=>({q:q.q,opts:[...q.opts],ans:q.ans,topic:q.topic,why:q.why}))});
-  state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderHistory();
+  state.quizHistory=state.quizHistory.slice(0,50);persist();appendDevActivity("Quiz submitted",`${meta.label} • ${quizMode} • raw ${rawPct}% • learning ${adjPct}%`,activeUser);clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderQuizLibraryProgress();renderTracker();renderHistory();
 }
 function renderQuizResult(){
   const quiz=getQuiz(),meta=quizParts[quizPart],a=document.getElementById("quizArea"),h=state.quizHistory.find(x=>(x.partId||"l1-all")===quizPart&&x.mode===quizMode);
@@ -4593,6 +4937,7 @@ document.getElementById("copyPromptBtn").onclick=async()=>{
 document.querySelectorAll("button.tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.dataset.mode));
 document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&document.getElementById("devOverlay")?.classList.contains("open")){closeDevPanel();return}
   if(e.key==="Escape"&&document.getElementById("updateLogOverlay")?.classList.contains("open"))closeUpdateLog();
   if(e.key==="Escape"&&document.getElementById("mistakeLogOverlay")?.classList.contains("open"))closeMistakeLog();
 });
