@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css"></head>
+<link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.6.min.css"></head>
 <body>
 
 <section id="loginScreen" class="auth-screen">
@@ -33,16 +33,24 @@
         <div class="field"><label for="loginUser">Username</label><input id="loginUser" autocomplete="username" placeholder="Your study name"></div>
         <div class="field"><label for="loginPin">PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div>
         <button id="loginAction" style="width:100%;margin-top:6px" type="button">Sign in</button>
+        <button id="loginPreviewBtn" class="secondary" type="button">Preview EC214 before signing in</button>
         <div id="loginError" class="login-error"></div>
         <div class="auth-security-note"><span>◈</span><div><b>Local profile:</b> progress is stored in this browser. The same username on another device is still a separate local profile until a cloud backend is added.</div></div>
       </div>
     </div>
   </div>
+  <section class="login-preview-panel" id="loginPreviewPanel" hidden>
+    <div class="login-preview-head">
+      <div><div class="eyebrow">Login Preview</div><h2>EC214 workspace preview</h2><p class="small">Try the real navigation and an exact historical midterm-style quiz interaction. Notes and confidence flags in this preview are temporary and never touch a profile.</p></div>
+      <button class="secondary" id="loginPreviewClose" type="button">Close preview</button>
+    </div>
+    <div id="loginPreviewBody"></div>
+  </section>
 </section>
 <section id="subjectScreen" class="subject-screen" aria-label="Choose subject">
   <div class="subject-shell">
     <div class="subject-topbar">
-      <div><div class="eyebrow">D Study App • v13.5</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
+      <div><div class="eyebrow">D Study App • v13.6</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
       <div class="subject-user"><span id="subjectUserChip" class="userchip"></span><button id="subjectLogoutBtn" class="logout" type="button">Log out</button></div>
     </div>
     <div class="subject-grid">
@@ -1504,5 +1512,5 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v13.5</b> • clearer summaries, AI Notes Pack, cross-lecture search, aligned preview</footer></div>
-<script src="/d-study-app/assets/app-v13.3.min.js"></script><script src="/d-study-app/assets/midterm-v13.4.min.js"></script><script src="/d-study-app/assets/ux-v13.5.min.js"></script></body></html>
+</main><footer><b id="appVersionLabel">D Study App v13.6</b> • visual-complete midterm questions, login preview, exact summary search highlighting</footer></div>
+<script src="/d-study-app/assets/app-v13.3.min.js"></script><script src="/d-study-app/assets/midterm-v13.4.min.js"></script><script src="/d-study-app/assets/ux-v13.5.min.js"></script><script src="/d-study-app/assets/ux-v13.6.min.js"></script></body></html>
