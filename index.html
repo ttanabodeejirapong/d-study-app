@@ -315,6 +315,28 @@ body.dark .recording-link:hover{background:#31445a;border-color:#8abfe9}
 body.dark .source-badge{background:#31445a;color:#a9d5ff}
 body.dark .summary-source-status{background:#29394d;color:#c0cad7;border-color:#50647a}
 @media(max-width:700px){.recording-grid{grid-template-columns:1fr}}
+
+/* v11.1 Notes Hub */
+.notes-hub-toolbar{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;margin-bottom:16px}
+.notes-hub-counts{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.note-count-chip{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800;color:var(--muted)}
+.notes-hub-controls{grid-column:1/-1;display:grid;grid-template-columns:1fr 220px;gap:10px}
+.notes-lecture{margin:16px 0}
+.notes-lecture-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.notes-stack{display:grid;gap:10px}
+.notes-entry{border:1px solid var(--line);border-radius:14px;padding:13px;background:var(--card)}
+.notes-entry-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.notes-entry-title{font-weight:800;line-height:1.4}
+.notes-entry-meta{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.45}
+.note-source-pill{flex:0 0 auto;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900;letter-spacing:.02em;background:var(--soft);color:var(--blue);border:1px solid var(--line)}
+.notes-entry textarea{min-height:78px;margin:0;background:var(--card)}
+.notes-group-title{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 7px}
+.notes-empty{padding:28px 20px;text-align:center;border:1px dashed var(--line);border-radius:15px;background:var(--card);color:var(--muted)}
+.notes-save-state{font-size:11px;color:var(--muted);margin-top:6px;min-height:16px}
+body.dark .notes-hub-toolbar,body.dark .notes-entry,body.dark .notes-empty{background:#223043;border-color:#50647a}
+body.dark .notes-entry textarea{background:#1c2837;color:#f4f7fb;border-color:#52677e}
+body.dark .note-count-chip,body.dark .note-source-pill{background:#31445a;border-color:#50647a;color:#a9d5ff}
+@media(max-width:700px){.notes-hub-toolbar{grid-template-columns:1fr}.notes-hub-counts{justify-content:flex-start}.notes-hub-controls{grid-template-columns:1fr}}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -323,6 +345,7 @@ body.dark .summary-source-status{background:#29394d;color:#c0cad7;border-color:#
 <main class="wrap"><div id="legacyBox" class="legacy"><b>Old EC214 progress found on this browser.</b><div class="small" style="margin:4px 0 9px">Import it into this profile so your previous tracker/draft is not lost.</div><button id="migrateBtn">Import old progress</button></div>
 <nav class="tabs" aria-label="Main navigation">
   <a class="tab active" data-tab="tracker" href="/d-study-app/progress/">📚 Progress</a>
+  <a class="tab" data-tab="notes" href="/d-study-app/notes/">🗒️ Notes</a>
   <a class="tab" data-tab="summary" href="/d-study-app/summary/">📝 Summary</a>
   <a class="tab" data-tab="quiz" href="/d-study-app/quiz/">✅ Quiz</a>
   <a class="tab" data-tab="history" href="/d-study-app/history/">📈 Quiz History</a>
@@ -335,7 +358,7 @@ body.dark .summary-source-status{background:#29394d;color:#c0cad7;border-color:#
     <div class="eyebrow">EC214 Study Dashboard</div>
     <h2 id="dashboardGreeting">Keep the momentum.</h2>
     <p>Use Summary for fast recall, Reviewing for your first practice pass, and Mastering only after the concepts feel stable.</p>
-    <div class="quick-actions"><a class="quick-primary" href="/d-study-app/sum-43-70/">Continue Summary</a><a class="quick-secondary" href="/d-study-app/quiz1-42/">Open Review Quiz</a></div>
+    <div class="quick-actions"><a class="quick-primary" href="/d-study-app/sum-43-70/">Continue Summary</a><a class="quick-secondary" href="/d-study-app/quiz1-42/">Open Review Quiz</a><a class="quick-secondary" href="/d-study-app/notes/">Open All Notes</a></div>
   </div>
   <div class="dashboard-ring-card">
     <div class="small" style="text-align:center">Overall learning progress</div>
@@ -351,6 +374,28 @@ body.dark .summary-source-status{background:#29394d;color:#c0cad7;border-color:#
 <div class="grid kpi-grid"><div class="card kpi"><div class="num" id="overall">0%</div><div class="label">Overall progress</div></div><div class="card kpi"><div class="num" id="done">0</div><div class="label">Reviewed / Mastered</div></div><div class="card kpi"><div class="num" id="learning">0</div><div class="label">Currently learning</div></div><div class="card kpi"><div class="num" id="left">0</div><div class="label">Not started</div></div></div>
 <div class="card status-chart"><div class="lecture-title">Status distribution</div><div class="small">A quick visual of where your topics currently sit.</div><div id="statusBars" style="margin-top:12px"></div></div>
 <div class="controls"><select id="lectureFilter"><option value="all">All lectures</option></select><select id="statusFilter"><option value="all">All statuses</option></select><button class="secondary" onclick="exportData()">Export full backup</button><button class="secondary" onclick="document.getElementById('importFile').click()">Import full backup</button><input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)"><button onclick="resetData()">Reset my profile to 0%</button></div><div id="lectures"></div>
+</section>
+
+<section id="notes" class="panel">
+  <div class="panel-intro">
+    <div>
+      <div class="eyebrow">Personal Knowledge Base</div>
+      <h2>All Notes</h2>
+      <p>Everything you write in Progress or Quiz is gathered here automatically and kept aligned by lecture and source.</p>
+    </div>
+  </div>
+  <div class="notes-hub-toolbar card">
+    <div>
+      <div class="lecture-title">🗒️ Notes Hub</div>
+      <div class="small">Edit here or at the original location — both views write to the same saved note.</div>
+    </div>
+    <div class="notes-hub-counts" id="notesHubCounts"></div>
+    <div class="notes-hub-controls">
+      <input id="notesSearch" type="search" placeholder="Search notes, topics, questions…">
+      <select id="notesLectureFilter"><option value="all">All lectures</option></select>
+    </div>
+  </div>
+  <div id="notesHubArea"></div>
 </section>
 
 <section id="summary" class="panel">
@@ -823,7 +868,7 @@ body.dark .summary-source-status{background:#29394d;color:#c0cad7;border-color:#
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1140px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1180px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -945,6 +990,17 @@ LECTURE 2 STUDY BLOCKS
 - Lecture 2.2 Unemployment &amp; Inflation is split into 4 related parts: Worker Classification &amp; Indicators; Types of Unemployment; CPI/Inflation/Headline-Core; CPI Biases &amp; GDP Deflator.
 - Handwritten annotations, highlights, formulas, arrows, and professor-added examples in the current lecture PDFs are HIGH-PRIORITY exam content. Always inspect and incorporate them, not only the printed slide text.
 - Keep Lecture 2 quizzes mapped to the matching summary part and preserve Reviewing vs Mastering difficulty.
+
+
+NOTES HUB
+- Keep a dedicated main navigation page at /notes/ that automatically gathers ALL user-created notes from:
+  1) Progress topic notes,
+  2) Quiz section/part notes,
+  3) Individual quiz question notes.
+- Organize notes by lecture and source type so they are easy to review.
+- The Notes Hub is not a copied snapshot. Editing a note in the Hub must update the SAME underlying saved note used in Progress/Quiz, and editing in Progress/Quiz must appear in the Hub.
+- Notes must autosave to the active profile and remain part of Full Backup export/import.
+- Preserve orphaned/archived question notes instead of silently deleting them when quiz content changes.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1002,8 +1058,8 @@ LECTURE 2 STUDY BLOCKS
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.0</b> • Lecture 2 summaries + part-by-part Reviewing/Mastering quizzes</footer></div>
-<script>const APP_VERSION="11.0";
+</main><footer><b id="appVersionLabel">D Study App v11.1</b> • unified Notes Hub for Progress + quiz section + question notes</footer></div>
+<script>const APP_VERSION="11.1";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1203,7 +1259,11 @@ function startUser(user,renewSession=true){
   quizMode="review";quizSet="l1a";quizPart="l1-foundations";quizSession=loadQuizDraft("review",quizPart);
   if(!filtersReady)initFilters();
   document.querySelectorAll(".mode-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===quizMode));
-  renderQuizSetButtons();renderQuizPartButtons();renderTracker();renderQuiz();renderHistory();renderRecordingDatabase();applyPathRoute();
+  renderQuizSetButtons();renderQuizPartButtons();renderTracker();renderQuiz();renderHistory();renderRecordingDatabase();
+  const ns=document.getElementById("notesSearch"),nf=document.getElementById("notesLectureFilter");
+  if(ns&&!ns.dataset.bound){ns.dataset.bound="1";ns.oninput=renderNotesHub}
+  if(nf&&!nf.dataset.bound){nf.dataset.bound="1";nf.onchange=renderNotesHub}
+  renderNotesHub();applyPathRoute();
   const legacy=!!localStorage.getItem("ec214-study-state")&&!hadUserState;
   document.getElementById("legacyBox").style.display=legacy?"block":"none";
   persist();
@@ -1287,6 +1347,131 @@ async function changePin(){
   localStorage.setItem(ACTIVE_KEY,JSON.stringify({id:activeUser.id,expiresAt:Date.now()+24*60*60*1000}));
 }
 function topicIndex(name){return state.topics.findIndex(t=>t.topic===name)}
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+function quizPartLecture(partId){
+  const p=quizParts[partId];
+  if(!p)return "Other";
+  if(p.set==="l1a"||p.set==="l1b")return "Lecture 1";
+  if(p.set==="l2gdp")return "Lecture 2.1";
+  if(p.set==="l2ui")return "Lecture 2.2";
+  return "Other";
+}
+function getAllSavedNotes(){
+  const items=[];
+  Object.entries(state.notes||{}).forEach(([idx,val])=>{
+    if(!String(val||"").trim())return;
+    const t=state.topics[Number(idx)];
+    items.push({
+      kind:"progress",lecture:t?.lecture||"Other",title:t?.topic||("Progress topic #"+idx),
+      meta:"Progress topic note",value:String(val),key:String(idx),sort:1
+    });
+  });
+
+  Object.entries(state.quizNotes?.sections||{}).forEach(([partId,val])=>{
+    if(!String(val||"").trim())return;
+    const p=quizParts[partId];
+    items.push({
+      kind:"section",lecture:quizPartLecture(partId),title:p?.label||partId,
+      meta:(p?.pages? p.pages+" • ":"")+"Quiz section note",value:String(val),key:partId,sort:2
+    });
+  });
+
+  const known=new Set();
+  Object.entries(quizParts).forEach(([partId,p])=>{
+    ["review","mastery"].forEach(mode=>{
+      getQuizFor(partId,mode).forEach((q,questionIndex)=>{
+        const key=questionNoteKey(q,partId);
+        const val=state.quizNotes?.questions?.[key];
+        if(!String(val||"").trim()||known.has(key))return;
+        known.add(key);
+        items.push({
+          kind:"question",lecture:quizPartLecture(partId),title:q.q,
+          meta:(p?.label||partId)+" • "+(mode==="review"?"Reviewing":"Mastering")+" • "+q.topic,
+          value:String(val),key,partId,question:q,sort:3
+        });
+      });
+    });
+  });
+
+  Object.entries(state.quizNotes?.questions||{}).forEach(([key,val])=>{
+    if(!String(val||"").trim()||known.has(key))return;
+    const partId=key.split("::")[0];
+    items.push({
+      kind:"question-orphan",lecture:quizPartLecture(partId),title:"Saved quiz question note",
+      meta:(quizParts[partId]?.label||partId)+" • archived question",value:String(val),key,sort:4
+    });
+  });
+  return items;
+}
+function saveHubNote(kind,key,value){
+  if(kind==="progress")state.notes[key]=value;
+  else if(kind==="section")state.quizNotes.sections[key]=value;
+  else state.quizNotes.questions[key]=value;
+  persist();
+}
+function renderNotesHub(){
+  if(!state)return;
+  const root=document.getElementById("notesHubArea"),counts=document.getElementById("notesHubCounts"),search=document.getElementById("notesSearch"),filter=document.getElementById("notesLectureFilter");
+  if(!root||!counts||!search||!filter)return;
+
+  const all=getAllSavedNotes();
+  const lectures=[...new Set([...state.topics.map(t=>t.lecture),...all.map(x=>x.lecture)])];
+  const selected=filter.value||"all";
+  const currentOptions=[...filter.options].map(o=>o.value);
+  const wanted=["all",...lectures];
+  if(JSON.stringify(currentOptions)!==JSON.stringify(wanted)){
+    filter.innerHTML='<option value="all">All lectures</option>'+lectures.map(l=>`<option value="${escapeHTML(l)}">${escapeHTML(l)}</option>`).join("");
+    filter.value=wanted.includes(selected)?selected:"all";
+  }
+
+  const q=(search.value||"").trim().toLowerCase();
+  const filtered=all.filter(x=>(filter.value==="all"||x.lecture===filter.value)&&(!q||[x.lecture,x.title,x.meta,x.value].join(" ").toLowerCase().includes(q)));
+  const nProgress=all.filter(x=>x.kind==="progress").length;
+  const nSection=all.filter(x=>x.kind==="section").length;
+  const nQuestion=all.filter(x=>x.kind==="question"||x.kind==="question-orphan").length;
+  counts.innerHTML=`<span class="note-count-chip">${all.length} total</span><span class="note-count-chip">${nProgress} Progress</span><span class="note-count-chip">${nSection} Sections</span><span class="note-count-chip">${nQuestion} Questions</span>`;
+
+  if(!filtered.length){
+    root.innerHTML=`<div class="notes-empty"><b>${all.length?"No notes match this filter.":"No saved notes yet."}</b><div class="small" style="margin-top:6px">${all.length?"Try another lecture or search term.":"Write a note from Progress, a quiz section, or an individual quiz question. It will appear here automatically."}</div></div>`;
+    return;
+  }
+
+  const lectureOrder=[...new Set(filtered.map(x=>x.lecture))];
+  root.innerHTML=lectureOrder.map(lecture=>{
+    const entries=filtered.filter(x=>x.lecture===lecture).sort((a,b)=>a.sort-b.sort||a.title.localeCompare(b.title));
+    const grouped=[
+      ["Progress Notes",entries.filter(x=>x.kind==="progress")],
+      ["Quiz Section Notes",entries.filter(x=>x.kind==="section")],
+      ["Quiz Question Notes",entries.filter(x=>x.kind==="question"||x.kind==="question-orphan")]
+    ].filter(([,xs])=>xs.length);
+    return `<section class="notes-lecture">
+      <div class="notes-lecture-head"><div class="lecture-title">${escapeHTML(lecture)}</div><span class="small">${entries.length} saved note${entries.length===1?"":"s"}</span></div>
+      ${grouped.map(([label,xs])=>`<div class="notes-group-title">${label}</div><div class="notes-stack">${xs.map(x=>`
+        <article class="notes-entry">
+          <div class="notes-entry-head">
+            <div><div class="notes-entry-title">${escapeHTML(x.title)}</div><div class="notes-entry-meta">${escapeHTML(x.meta)}</div></div>
+            <span class="note-source-pill">${x.kind==="progress"?"Progress":x.kind==="section"?"Section":"Question"}</span>
+          </div>
+          <textarea data-hub-kind="${escapeHTML(x.kind)}" data-hub-key="${escapeHTML(x.key)}">${escapeHTML(x.value)}</textarea>
+          <div class="notes-save-state" data-save-for="${escapeHTML(x.kind+"::"+x.key)}">Saved</div>
+        </article>`).join("")}</div>`).join("")}
+    </section>`;
+  }).join("");
+
+  root.querySelectorAll("textarea[data-hub-kind]").forEach(t=>{
+    t.oninput=e=>{
+      const kind=e.target.dataset.hubKind,key=e.target.dataset.hubKey;
+      saveHubNote(kind,key,e.target.value);
+      const s=e.target.parentElement.querySelector(".notes-save-state");
+      if(s){s.textContent="Saved ✓";clearTimeout(s._timer);s._timer=setTimeout(()=>s.textContent="Saved",1000)}
+      const chipCounts=getAllSavedNotes();
+      const np=chipCounts.filter(x=>x.kind==="progress").length,ns=chipCounts.filter(x=>x.kind==="section").length,nq=chipCounts.filter(x=>x.kind==="question"||x.kind==="question-orphan").length;
+      counts.innerHTML=`<span class="note-count-chip">${chipCounts.length} total</span><span class="note-count-chip">${np} Progress</span><span class="note-count-chip">${ns} Sections</span><span class="note-count-chip">${nq} Questions</span>`;
+    };
+  });
+}
 function switchTab(name){
   document.querySelectorAll(".tab").forEach(b=>{
     const on=b.dataset.tab===name;
@@ -1294,7 +1479,7 @@ function switchTab(name){
     if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
   });
   document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===name));
-  if(name==="tracker")renderTracker();if(name==="history")renderHistory();
+  if(name==="tracker")renderTracker();if(name==="notes")renderNotesHub();if(name==="history")renderHistory();
 }
 function renderRecordingDatabase(){
   const box=document.getElementById("recordingDatabase");if(!box)return;
@@ -1320,6 +1505,7 @@ function applyPathRoute(){
   const p=location.pathname.replace(/\/+$/,"");
   if(p==="/d-study-app"||p===""){switchTab("tracker");return}
   if(p.endsWith("/progress")){switchTab("tracker");return}
+  if(p.endsWith("/notes")){switchTab("notes");return}
   if(p.endsWith("/history")){switchTab("history");return}
   if(p.endsWith("/prompt")){switchTab("prompt");return}
   if(p.endsWith("/settings")){switchTab("settings");applyPreferences();return}
@@ -1525,7 +1711,7 @@ function importData(ev){
     if(["review","mastery"].includes(x.currentQuiz?.mode))quizMode=x.currentQuiz.mode;
     persist();quizSession=loadQuizDraft(quizMode,quizPart);renderQuizSetButtons();renderQuizPartButtons();
     document.querySelectorAll(".mode-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===quizMode));
-    renderTracker();renderQuiz();renderHistory();
+    renderTracker();renderQuiz();renderNotesHub();renderHistory();
     alert("Full backup imported: tracker/pages, topic notes, quiz section/question notes, quiz history, confidence data, and unfinished quiz drafts.");
   }catch(e){alert("Invalid D Study App backup file.")}};
   r.readAsText(f);
@@ -1537,7 +1723,7 @@ function resetData(){
     localStorage.removeItem(oldDraftKey("review"));localStorage.removeItem(oldDraftKey("mastery"));
     quizMode="review";quizSet="l1a";quizPart="l1-foundations";quizSession=freshQuizSession(quizMode,quizPart);
     renderQuizSetButtons();renderQuizPartButtons();document.querySelectorAll(".mode-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===quizMode));
-    renderTracker();renderQuiz();renderHistory();
+    renderTracker();renderQuiz();renderNotesHub();renderHistory();
   }
 }
 
@@ -1570,7 +1756,7 @@ document.querySelectorAll(".mode-btn").forEach(b=>b.onclick=()=>setQuizMode(b.da
 window.addEventListener("storage",e=>{
   if(!activeUser)return;
   if(e.key===stateKey()&&e.newValue){
-    try{state=normalizeState(JSON.parse(e.newValue));applyPreferences();renderTracker();renderHistory()}catch(err){}
+    try{state=normalizeState(JSON.parse(e.newValue));applyPreferences();renderTracker();renderNotesHub();renderHistory()}catch(err){}
   }
   if(e.key===ACTIVE_KEY&&e.newValue===null){sessionStorage.removeItem(ACTIVE_KEY);location.reload()}
 });
