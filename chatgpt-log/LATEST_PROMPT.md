@@ -48,7 +48,7 @@ Do not reintroduce the reverted V13/Vibrant theme unless explicitly requested.
 Current app version includes a **For Dev** management console in Settings.
 
 Preserve:
-- password-gated developer console entry next to Update Log;
+- password-gated developer console entry next to Update Log; management content must not render visibly before successful password verification, and opening the console again must require the password again;
 - local user/progress overview;
 - local activity log;
 - local remove-user action;
@@ -131,9 +131,9 @@ For risky changes, inspect the related storage and rendering logic first. Do not
 
 ## Current release baseline
 
-- App version: **v12.11**
-- v12.11 adds the local developer management console.
-- Runtime commit: `8d4e16facf04e2f0b22020194960107853388f38`
+- App version: **v12.12**
+- v12.12 fixes the developer access gate: locked content remains hidden and every open requires the developer password again.
+- Runtime commit: `c241a270092fce54777d0587a09b98d5ff8786fe`
 - The static/local architecture remains unchanged; no cloud backend exists yet.
 
 ## Documentation baseline
