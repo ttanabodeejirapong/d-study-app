@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css"></head>
+<link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css"></head>
 <body>
 
 <section id="loginScreen" class="auth-screen">
@@ -42,7 +42,7 @@
 <section id="subjectScreen" class="subject-screen" aria-label="Choose subject">
   <div class="subject-shell">
     <div class="subject-topbar">
-      <div><div class="eyebrow">D Study App • v13.4</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
+      <div><div class="eyebrow">D Study App • v13.5</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
       <div class="subject-user"><span id="subjectUserChip" class="userchip"></span><button id="subjectLogoutBtn" class="logout" type="button">Log out</button></div>
     </div>
     <div class="subject-grid">
@@ -130,6 +130,14 @@
       <select id="notesLectureFilter"><option value="all">All lectures</option></select>
     </div>
   </div>
+  <div class="notes-ai-pack card" id="notesAiPackCard">
+    <div class="notes-ai-pack-head">
+      <div><div class="lecture-title">🤖 AI Notes Pack</div><div class="small">One copyable/downloadable box containing only your saved notes, mistakes, and uncertainty — with each topic, quiz section, or question kept as context. It does not include the full lecture summaries.</div></div>
+      <div class="notes-ai-pack-actions"><button type="button" id="notesAiCopy">Copy all for ChatGPT</button><button type="button" class="secondary" id="notesAiDownload">Download .txt</button><button type="button" class="secondary" id="notesAiRefresh">Refresh</button></div>
+    </div>
+    <textarea id="notesAiPack" readonly aria-label="AI Notes Pack"></textarea>
+    <div class="small notes-ai-pack-status" id="notesAiPackStatus"></div>
+  </div>
   <div id="notesHubArea"></div>
 </section>
 
@@ -147,6 +155,14 @@
       <li><a class="library-link" data-summary-link="sum-l4-finance" href="/d-study-app/sum-l4-finance/">Lecture 4 — Finance, Saving & Investment • Financial markets → Loanable funds → Government →</a></li>
     </ul>
     <div class="summary-coverage-banner"><b>Full lecture coverage + explanation layer:</b> conceptual topics and subtopics from all five current professor lecture files are represented here. Each study block now adds plain-language reasoning, applications/examples, and common traps so the Summary teaches the idea instead of only listing it. Handwritten annotations/highlights remain high-priority lecture content.</div>
+  </div>
+
+  <div class="summary-search-card" id="summarySearchCard">
+    <div class="summary-search-head">
+      <div><div class="lecture-title">🔎 Search all summary context</div><div class="small" id="summarySearchMeta">Searches all summary blocks</div></div>
+      <div class="summary-search-input-row"><input id="summarySearch" type="search" placeholder="Search every lecture summary: paid incomes, GDP deflator, structural unemployment, crowding out…"><button type="button" class="secondary" id="summarySearchClear">Clear</button></div>
+    </div>
+    <div class="summary-search-results" id="summarySearchResults"></div>
   </div>
 
   <div class="source-library">
@@ -197,43 +213,51 @@
       <div class="keyline"><b>Scarcity</b> = available resources are insufficient to satisfy all wants → choices must be made → choices depend on incentives.</div>
       <ul>
         <li>A resource can be scarce even if it is free: the test is whether everyone can obtain as much as they want.</li>
-        <li>The professor links scarcity to <b>efficient resource allocation</b>: because we cannot satisfy every want, the economy needs a way to decide which uses of resources receive priority.</li>
-        <li>Prices and markets help coordinate those choices by connecting what buyers are willing to obtain with what sellers are willing to produce.</li>
+        <li>Because not every want can be satisfied, resources have to be allocated among competing uses.</li>
+        <li>Markets and prices help coordinate those choices by linking buyers' willingness to buy with sellers' willingness to produce.</li>
       </ul>
 
       <h3>Market — what the word means here</h3>
-      <p>A market is a broad arrangement through which buyers and sellers interact and transact for a price. It does <b>not</b> require everyone to stand in one physical place: the key idea is the interaction between buyers and sellers.</p>
+      <p>A market is an arrangement through which buyers and sellers interact and transact for a price. They do not need to be standing in one physical place; the important idea is the exchange relationship between buyers and sellers.</p>
 
       <h3>Producer decision 1 — WHAT should be produced?</h3>
-      <p>The lecture lists four categories. The useful exam skill is to classify the item by <b>who ultimately uses it / where it is sold</b>, not by whether it is physically large or expensive.</p>
+      <p><b>WHAT</b> asks what kind of output the producer will make. For exam questions, classify an item mainly by <b>who ultimately uses it or where it is sold</b>, not by whether it is large, expensive, or tangible.</p>
       <div class="concept-table">
-        <div><b>Consumption goods & services</b><span>Goods or services produced for consumption. A household service such as a haircut is a <b>service</b>, and when a household buys it for personal use it belongs on the consumption side.</span></div>
-        <div><b>Capital goods</b><span>Produced items used to help produce other goods and services. A machine used by a factory is capital because the machine itself was produced and is now used in production.</span></div>
-        <div><b>Government goods & services</b><span>Goods and services produced/purchased for government activity or public provision. The important distinction is the government sector's role, not the physical form of the item.</span></div>
-        <div><b>Export goods & services</b><span>Domestic production sold to buyers abroad. Application example: rice produced domestically and sold overseas is classified as an <b>export good</b>.</span></div>
+        <div><b>Consumption goods & services</b><span>Final goods/services used by households for personal consumption. Example: a haircut bought by a household.</span></div>
+        <div><b>Capital goods</b><span>Produced items used to help make other goods/services. Example: a machine used inside a factory.</span></div>
+        <div><b>Government goods & services</b><span>Output produced or purchased for government activity/public provision. The important distinction is the government sector's role.</span></div>
+        <div><b>Export goods & services</b><span>Domestic production sold to buyers abroad. Example: domestically produced rice sold overseas.</span></div>
       </div>
-      <div class="source-note"><b>Application-note:</b> the lecture itself lists these four categories. Examples such as “factory machine” or “rice sold abroad” are classification applications used to make the categories testable, not quotations from the slide.</div>
 
       <h3>Producer decision 2 — HOW should production be organized?</h3>
-      <p><b>HOW</b> means choosing and combining the inputs used in production. The professor groups those inputs into four <b>factors of production</b>:</p>
+      <p><b>HOW</b> is asking: <b>what productive resources must the firm combine to make the output?</b> The four factors below are not four separate businesses; they are four different roles inside the same production process.</p>
+      <div class="context-story"><b>Think of one business:</b> a bakery needs a site and natural resources, workers who spend time and effort, ovens/buildings that were produced to help production, and an entrepreneur who decides how everything will be organized. Those four roles are <b>Land, Labor, Capital, and Entrepreneurship</b>.</div>
       <div class="concept-table">
-        <div><b>Land</b><span>“Gifts of nature” — natural resources used in production. It is broader than a plot of land.</span></div>
-        <div><b>Labor</b><span>Human <b>time and effort</b> devoted to producing goods and services, whether workers are skilled or unskilled.</span></div>
-        <div><b>Capital</b><span>Produced productive resources: tools, instruments, machines, buildings, and other produced items used to make goods/services. In this lecture, capital does <b>not</b> simply mean cash.</span></div>
-        <div><b>Entrepreneurship</b><span>The human resource that organizes land, labor, and capital and runs the business decision process.</span></div>
+        <div><b>Land</b><span>“Gifts of nature” — natural resources used in production. This is broader than a plot of land: it means the natural-resource input side of production.</span></div>
+        <div><b>Labor</b><span>Human <b>time and effort</b> devoted to producing goods and services, whether the worker is skilled or unskilled.</span></div>
+        <div><b>Capital</b><span><b>Produced productive resources</b>: tools, machines, equipment, buildings, and other produced items used to make more output. Here, capital means the productive item itself — <b>not simply cash</b>.</span></div>
+        <div><b>Entrepreneurship</b><span>The human resource that organizes land, labor, and capital, makes business decisions, and bears the residual business outcome.</span></div>
       </div>
 
-      <h3>Producer decision 3 — FOR WHOM, and why “Paid Incomes” appear</h3>
-      <p>Production uses resources owned by somebody. When a firm uses those resources, the owners receive payments. That is why the professor connects the production side to <b>Paid Incomes</b>:</p>
-      <div class="keyline">Land → <b>Rent</b> &nbsp; | &nbsp; Labor → <b>Wages</b> &nbsp; | &nbsp; Capital → <b>Interest</b> &nbsp; | &nbsp; Entrepreneurship → <b>Profit/Loss</b></div>
-      <div class="concept-table">
-        <div><b>Rent</b><span>Income paid for the use of land / natural resources.</span></div>
-        <div><b>Wages</b><span>Income paid for the services of labor.</span></div>
-        <div><b>Interest</b><span>Income paid for the use of capital in the factor-income framework used on the slide.</span></div>
-        <div><b>Profit / Loss</b><span>The entrepreneur's residual income outcome from running the business and organizing production.</span></div>
+      <h3>Producer decision 3 — FOR WHOM: how production turns into income</h3>
+      <p><b>FOR WHOM</b> is about who ultimately receives the goods and services produced. To understand the connection on these slides, first ask <b>who owns or supplies the productive resources</b>. Firms use those resources, pay for their services, and the resource owners receive income. That income becomes <b>purchasing power</b>, which helps determine who can buy the economy's output.</p>
+      <div class="factor-flow">
+        <span>Factors of production are supplied</span>
+        <span class="arrow-step">→ Firm uses them to produce</span>
+        <span class="arrow-step">→ Firm makes factor payments</span>
+        <span class="arrow-step">→ Owners receive income / purchasing power</span>
       </div>
-      <div class="exam-note"><b>Two viewpoints, same flow:</b> for the <b>factor owner</b>, rent/wages/interest/profit are income received. For the <b>firm</b>, payments made to use those resources are part of the cost of production. This is the logic behind the professor's handwritten “Price → Cost of production → Paid incomes” flow. Do not read it as a literal accounting identity saying every product's sticker price must equal one single factor payment.</div>
-      <div class="thai-help"><b>คิดแบบง่าย ๆ:</b> โรงงานต้อง “เช่า/จ่าย” ทรัพยากรเพื่อผลิตสินค้า → เงินที่โรงงานจ่ายเป็น <b>cost</b> แต่พอมองจากคนที่เป็นเจ้าของทรัพยากร เงินก้อนเดียวกันคือ <b>income</b>. เช่น firm จ่ายค่าแรง = cost ของ firm แต่ = wage income ของ worker.</div>
+      <div class="keyline">Land → <b>Rent</b> &nbsp; | &nbsp; Labor → <b>Wages</b> &nbsp; | &nbsp; Capital → <b>Interest</b> &nbsp; | &nbsp; Entrepreneurship → <b>Profit / Loss</b></div>
+      <div class="concept-table">
+        <div><b>Rent</b><span>Income associated with supplying land / natural-resource services to production.</span></div>
+        <div><b>Wages</b><span>Income paid for labor services — the worker's time and effort.</span></div>
+        <div><b>Interest</b><span>The course's factor-income mapping for the return associated with capital.</span></div>
+        <div><b>Profit / Loss</b><span>The entrepreneur's residual outcome after organizing production and bearing the business result.</span></div>
+      </div>
+
+      <div class="context-story"><b>The key context:</b> suppose a firm pays a worker 20,000 baht. From the <b>firm's side</b>, the 20,000 is a cost of using labor. From the <b>worker's side</b>, the same 20,000 is wage income. Nothing was paid twice — it is the <b>same flow viewed from two sides</b>. The same idea connects the other factor payments to production.</div>
+      <div class="exam-note"><b>Exam connection:</b> do not memorize “Land → Rent, Labor → Wages…” as four isolated pairs. First identify the factor being supplied, then ask what payment the owner of that factor receives. Also keep <b>physical/produced capital</b> separate from money or financial assets.</div>
+      <div class="thai-help"><b>คิดแบบเป็นเรื่องเดียว:</b> firm ต้องเอาปัจจัย 4 อย่างมารวมกันเพื่อผลิต → firm จ่ายเงินเพื่อใช้ปัจจัยเหล่านั้น → ฝั่ง firm เงินนี้คือ <b>cost</b> แต่ฝั่งเจ้าของปัจจัยเงินเดียวกันคือ <b>income</b> → income กลายเป็นกำลังซื้อ จึงเชื่อมกับคำถาม <b>FOR WHOM</b>. เช่น firm จ่ายค่าแรง 20,000 บาท = labor cost ของ firm และ wage income ของ worker.</div>
     </article>
 
     <article class="slide-card" id="summary-s3">
@@ -1480,5 +1504,5 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v13.4</b> • 80Q midterm mock, themed refresh screen, dedicated public routes</footer></div>
-<script src="/d-study-app/assets/app-v13.3.min.js"></script><script src="/d-study-app/assets/midterm-v13.4.min.js"></script></body></html>
+</main><footer><b id="appVersionLabel">D Study App v13.5</b> • clearer summaries, AI Notes Pack, cross-lecture search, aligned preview</footer></div>
+<script src="/d-study-app/assets/app-v13.3.min.js"></script><script src="/d-study-app/assets/midterm-v13.4.min.js"></script><script src="/d-study-app/assets/ux-v13.5.min.js"></script></body></html>
