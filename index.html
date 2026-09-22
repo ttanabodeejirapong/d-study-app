@@ -337,6 +337,27 @@ body.dark .notes-hub-toolbar,body.dark .notes-entry,body.dark .notes-empty{backg
 body.dark .notes-entry textarea{background:#1c2837;color:#f4f7fb;border-color:#52677e}
 body.dark .note-count-chip,body.dark .note-source-pill{background:#31445a;border-color:#50647a;color:#a9d5ff}
 @media(max-width:700px){.notes-hub-toolbar{grid-template-columns:1fr}.notes-hub-counts{justify-content:flex-start}.notes-hub-controls{grid-template-columns:1fr}}
+
+/* v11.2 subtle quiz attempt history */
+.quiz-attempt-line{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:11px;font-weight:700;letter-spacing:.01em;color:var(--muted);opacity:.68}
+.quiz-attempt-line::before{content:"";width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--blue) 28%,var(--line));flex:0 0 auto}
+.quiz-attempt-line[data-attempts="0"]{opacity:.44;font-weight:600}
+.quiz-attempt-line[data-level="1"]{opacity:.56}
+.quiz-attempt-line[data-level="2"]{opacity:.66}
+.quiz-attempt-line[data-level="3"]{opacity:.76}
+.quiz-attempt-line[data-level="4"]{opacity:.84}
+.quiz-attempt-line[data-level="1"]::before{background:color-mix(in srgb,var(--blue) 38%,var(--line))}
+.quiz-attempt-line[data-level="2"]::before{background:color-mix(in srgb,var(--blue) 52%,var(--line))}
+.quiz-attempt-line[data-level="3"]::before{background:color-mix(in srgb,var(--blue) 68%,var(--line))}
+.quiz-attempt-line[data-level="4"]::before{background:color-mix(in srgb,var(--blue) 82%,var(--line))}
+.part-btn.active .quiz-attempt-line{color:color-mix(in srgb,var(--blue) 58%,var(--muted));opacity:.86}
+body.dark .quiz-attempt-line{color:#aebccd}
+body.dark .quiz-attempt-line::before{background:color-mix(in srgb,#79b8e9 32%,#50647a)}
+body.dark .quiz-attempt-line[data-level="1"]::before{background:color-mix(in srgb,#79b8e9 42%,#50647a)}
+body.dark .quiz-attempt-line[data-level="2"]::before{background:color-mix(in srgb,#79b8e9 56%,#50647a)}
+body.dark .quiz-attempt-line[data-level="3"]::before{background:color-mix(in srgb,#79b8e9 70%,#50647a)}
+body.dark .quiz-attempt-line[data-level="4"]::before{background:color-mix(in srgb,#79b8e9 84%,#50647a)}
+body.dark .part-btn.active .quiz-attempt-line{color:#c7ddf0}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -868,7 +889,7 @@ body.dark .note-count-chip,body.dark .note-source-pill{background:#31445a;border
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:1180px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:1210px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -1001,6 +1022,13 @@ NOTES HUB
 - The Notes Hub is not a copied snapshot. Editing a note in the Hub must update the SAME underlying saved note used in Progress/Quiz, and editing in Progress/Quiz must appear in the Hub.
 - Notes must autosave to the active profile and remain part of Full Backup export/import.
 - Preserve orphaned/archived question notes instead of silently deleting them when quiz content changes.
+
+
+QUIZ ATTEMPT INDICATOR
+- Each quiz part card should show a tiny, visually quiet attempt-history line such as "Not taken yet", "Taken 1 time", or "Taken 3 times".
+- Keep it subtle: small text, muted/faded color, and a tiny accent dot. It should provide context without competing with the quiz title.
+- The accent may become slightly stronger as attempt count increases, but avoid bright badges, large pills, or clutter.
+- Count completed attempts from quiz history and refresh the indicator immediately after submitting a quiz.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -1058,8 +1086,8 @@ NOTES HUB
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v11.1</b> • unified Notes Hub for Progress + quiz section + question notes</footer></div>
-<script>const APP_VERSION="11.1";
+</main><footer><b id="appVersionLabel">D Study App v11.2</b> • subtle quiz attempt history on each quiz part</footer></div>
+<script>const APP_VERSION="11.2";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -1588,12 +1616,18 @@ function renderTracker(){
 function renderQuizSetButtons(){
   document.querySelectorAll("[data-quiz-set]").forEach(b=>b.classList.toggle("active",b.dataset.quizSet===quizSet));
 }
+function quizAttemptCount(partId){
+  return (state?.quizHistory||[]).filter(h=>(h.partId||"l1-all")===partId).length;
+}
+function quizAttemptText(n){
+  return n===0?"Not taken yet":n===1?"Taken 1 time":`Taken ${n} times`;
+}
 function renderQuizPartButtons(){
   const root=document.getElementById("partPicker");if(!root)return;
   const entries=Object.entries(quizParts).filter(([id,p])=>p.set===quizSet);
   root.innerHTML=entries.map(([id,p])=>{
-    const rc=getQuizFor(id,"review").length,mc=getQuizFor(id,"mastery").length;
-    return `<button class="part-btn ${id===quizPart?"active":""}" data-part="${id}"><b>${p.label}</b><div class="small">${p.pages} • Review ${rc}Q • Master ${mc}Q</div></button>`;
+    const rc=getQuizFor(id,"review").length,mc=getQuizFor(id,"mastery").length,attempts=quizAttemptCount(id),level=Math.min(4,attempts);
+    return `<button class="part-btn ${id===quizPart?"active":""}" data-part="${id}"><b>${p.label}</b><div class="small">${p.pages} • Review ${rc}Q • Master ${mc}Q</div><div class="quiz-attempt-line" data-attempts="${attempts}" data-level="${level}">${quizAttemptText(attempts)}</div></button>`;
   }).join("");
   root.querySelectorAll("[data-part]").forEach(b=>b.onclick=()=>setQuizPart(b.dataset.part));
 }
@@ -1673,7 +1707,7 @@ function submitQuiz(){
   });
   const rawPct=Math.round(correct/quiz.length*100),adjPct=Math.round(weighted/quiz.length*100);
   state.quizHistory.unshift({name:meta.label,pages:meta.pages,partId:quizPart,mode:quizMode,date,score:correct,total:quiz.length,percent:rawPct,adjustedPercent:adjPct,guessed,unsure,answers:[...quizSession.answers],confidence:[...quizSession.confidence],optionOrders:quizSession.optionOrders.map(x=>[...x])});
-  state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderTracker();renderHistory();
+  state.quizHistory=state.quizHistory.slice(0,50);persist();clearQuizDraft(quizMode,quizPart);quizSession.submitted=true;renderQuizResult();renderQuizPartButtons();renderTracker();renderHistory();
 }
 function renderQuizResult(){
   const quiz=getQuiz(),meta=quizParts[quizPart],a=document.getElementById("quizArea"),h=state.quizHistory.find(x=>(x.partId||"l1-all")===quizPart&&x.mode===quizMode);
