@@ -1,0 +1,50 @@
+name: One-time v13.3 production minify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/minify-v13-3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Minify production JavaScript
+        run: npx --yes terser@5 assets/app-v13.3.js -o assets/app-v13.3.min.js
+
+      - name: Minify production CSS
+        run: npx --yes clean-css-cli@5 -o assets/app-v13.3.min.css assets/app-v13.3.css
+
+      - name: Switch public shell to minified assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("index.html")
+          s=p.read_text()
+          s=s.replace("/d-study-app/assets/app-v13.3.css","/d-study-app/assets/app-v13.3.min.css")
+          s=s.replace("/d-study-app/assets/app-v13.3.js","/d-study-app/assets/app-v13.3.min.js")
+          p.write_text(s)
+          PY
+
+      - name: Remove readable production copies and commit
+        run: |
+          git rm assets/app-v13.3.js assets/app-v13.3.css
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/app-v13.3.min.js assets/app-v13.3.min.css
+          git commit -m "Minify v13.3 production assets [skip ci]"
+          git push
