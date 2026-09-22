@@ -105,3 +105,20 @@ Implementation decision:
 - old exams, old lectures, exercises, answer keys, student notes, textbooks, and other archive material remain link-only;
 - professor teaching records remain YouTube links only;
 - created `course-materials/` link indexes to preserve those sources without bloating the repo.
+
+
+### Developer management console — 2026-09-22
+User request:
+- add a new **For Dev** feature next to Update Log;
+- password-protect it;
+- make it a full management-system UI;
+- include user logs, usernames, progress, direct removal, ban/unban, and IP ban/unban if appropriate;
+- leave room for future management features.
+
+Implementation decision:
+- shipped v12.11 local developer console without changing the existing app concept/storage model;
+- developer access uses the user-provided password through a hash check and session-only unlock state;
+- local users/progress/activity/remove/ban/unban are functional on the current browser;
+- IP collection and IP ban/unban were deliberately not faked or added through a third-party IP service;
+- IP controls are displayed as backend-required because the current static GitHub Pages architecture cannot securely observe/enforce global network identity;
+- future cloud user directory, remote progress, server audit log, and network-security sections are reserved in the UI.
