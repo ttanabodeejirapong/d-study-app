@@ -11,6 +11,7 @@ Before making any change, read:
 - `chatgpt-log/FULL_UPDATE_LOG.md`
 - `chatgpt-log/PROMPT_LOG.md`
 - `chatgpt-log/DEPLOYMENT_CHECKLIST.md`
+- `course-materials/README.md`
 
 Then inspect the current `main` branch. **Current code is the final source of truth.**
 
@@ -60,6 +61,19 @@ Current quiz coverage:
 - Lecture 2.1 GDP
 - Lecture 2.2 Unemployment & Inflation
 
+## Course-material storage policy
+
+Only these five current annotated lecture PDFs are intended to live in GitHub as actual files:
+1. Lecture 1
+2. Lecture 2.1
+3. Lecture 2.2
+4. Lecture 3
+5. Lecture 4 full/All
+
+Everything else—old exams, old lectures, exercises/answers, notes, textbooks, historical archives, and professor videos—should remain link-only under `course-materials/`.
+
+The Lecture 4 Part 1 PDF is not part of the canonical five-file set.
+
 ## Understand it requirement
 
 Understand it content should:
@@ -102,5 +116,4 @@ For risky changes, inspect the related storage and rendering logic first. Do not
 
 ## Documentation baseline
 
-This master prompt was created on 2026-09-22 against main commit:
-`8c4bd02958397143d4ba91f99f85fa27452e609d`
+This master prompt originated on 2026-09-22. Always inspect current `main` rather than assuming that original baseline is still current.
