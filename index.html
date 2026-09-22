@@ -514,6 +514,7 @@ body.dark .update-entry-top span{color:#aebdcc}
 .dev-lock-actions{display:flex;gap:8px;margin-top:12px}
 .dev-lock-actions input{flex:1;min-width:0}
 .dev-console{min-height:calc(100vh - 36px);display:grid;grid-template-rows:auto auto 1fr}
+.dev-console[hidden],.dev-lock[hidden]{display:none!important}
 .dev-topbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line)}
 .dev-title{display:flex;gap:12px;align-items:center}
 .dev-title-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:color-mix(in srgb,var(--blue) 12%,var(--card));color:var(--blue);font-weight:900}
@@ -3677,7 +3678,8 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.11</b><span>Developer Console</span></div><p>Added the password-gated For Dev management console for local-browser users, progress, activity logs, account removal, and local ban/unban controls, with backend-only IP controls clearly separated.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.12</b><span>Developer Access Fix</span></div><p>Fixed the developer lock so management content stays completely hidden until the password is entered, and now requires the password again every time For Dev is opened.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.11</b><span>Developer Console</span></div><p>Added the password-gated For Dev management console for local-browser users, progress, activity logs, account removal, and local ban/unban controls, with backend-only IP controls clearly separated.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.10</b><span>Understand it Readability</span></div><p>Expanded the Understand it card further, increased English/Thai explanation text size, enlarged its icon and controls, and strengthened the clickable hover/focus treatment.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.9</b><span>Understand it Visibility</span></div><p>Made the collapsible Understand it control larger, more readable, and much more obviously clickable with accent emphasis and expand/collapse cues.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.8</b><span>Bilingual Understand it</span></div><p>Made every lecture section's Understand it explanation collapsible and added an English/Thai switch with complete Thai explanations for every section.</p></article>
@@ -3713,7 +3715,7 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.11</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.12</b></div>
     </section>
   </div>
 
@@ -3738,7 +3740,7 @@ UNDERSTAND IT VISIBILITY
         <header class="dev-topbar">
           <div class="dev-title">
             <span class="dev-title-icon">D</span>
-            <div><h2 id="devConsoleTitle">D Study Management</h2><div class="small">Developer console • v12.11</div></div>
+            <div><h2 id="devConsoleTitle">D Study Management</h2><div class="small">Developer console • v12.12</div></div>
           </div>
           <div class="dev-top-actions">
             <span class="dev-mode-badge">● Local browser mode</span>
@@ -3800,8 +3802,8 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.11</b> • local developer management console</footer></div>
-<script>const APP_VERSION="12.11";
+</main><footer><b id="appVersionLabel">D Study App v12.12</b> • developer access lock fix</footer></div>
+<script>const APP_VERSION="12.12";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -3874,10 +3876,10 @@ const summaryNames={
 const summaryDocs={s1:"sum-l1-1-42",s2:"sum-l1-1-42",s3:"sum-l1-1-42",s4:"sum-l1-1-42",s5:"sum-l1-43-70",s6:"sum-l1-43-70",s7:"sum-l1-43-70",s8:"sum-l1-43-70",s9:"sum-l2-gdp",s10:"sum-l2-gdp",s11:"sum-l2-gdp",s12:"sum-l2-gdp",s13:"sum-l2-labor-inflation",s14:"sum-l2-labor-inflation",s15:"sum-l2-labor-inflation",s16:"sum-l2-labor-inflation"};
 const scoreMap={"Not Started":0,"Learning":25,"Learned · Not Reviewed":50,"Reviewed & Practiced":75,"Mastered":100};
 const USERS_KEY="d-study-users-v1", ACTIVE_KEY="d-study-active-user";
-const DEV_BANS_KEY="d-study-dev-bans-v1", DEV_ACTIVITY_KEY="d-study-dev-activity-v1", DEV_UNLOCK_SESSION_KEY="d-study-dev-unlocked";
+const DEV_BANS_KEY="d-study-dev-bans-v1", DEV_ACTIVITY_KEY="d-study-dev-activity-v1";
 const DEV_PASSWORD_HASH="a5e57e1761885aeec9f67067df47931dea50175c96181de7fd57b2cec6915771";
 let activeUser=null,state=null,quizMode="review",quizSet="l1a",quizPart="l1-foundations",quizSession=null,filtersReady=false,loginMode="signin",sessionExpiryTimer=null;
-let devSelectedUserId=null,devActiveView="overview";
+let devSelectedUserId=null,devActiveView="overview",devUnlocked=false;
 
 function getQuizFor(part=quizPart,mode=quizMode){
   const meta=quizParts[part]||quizParts["l1-all"];
@@ -4009,14 +4011,14 @@ function formatDevDate(value){
 }
 function openDevPanel(){
   const o=document.getElementById("devOverlay");if(!o)return;
+  devUnlocked=false;
+  showDevLock(true);
   o.classList.add("open");o.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-  const unlocked=sessionStorage.getItem(DEV_UNLOCK_SESSION_KEY)==="1";
-  showDevLock(!unlocked);
-  if(unlocked)renderDevConsole();
-  setTimeout(()=>document.getElementById(unlocked?"devCloseBtn":"devPassword")?.focus(),0);
+  setTimeout(()=>document.getElementById("devPassword")?.focus(),0);
 }
 function closeDevPanel(){
   const o=document.getElementById("devOverlay");if(!o)return;
+  devUnlocked=false;showDevLock(true);
   o.classList.remove("open");o.setAttribute("aria-hidden","true");document.body.style.overflow="";
   document.getElementById("devPanelBtn")?.focus();
 }
@@ -4027,12 +4029,12 @@ function showDevLock(locked){
 }
 async function unlockDevPanel(){
   const p=document.getElementById("devPassword")?.value||"",out=document.getElementById("devUnlockStatus");
-  if(await sha256Text(p)!==DEV_PASSWORD_HASH){if(out)out.textContent="Incorrect developer password.";return}
-  sessionStorage.setItem(DEV_UNLOCK_SESSION_KEY,"1");showDevLock(false);appendDevActivity("Developer console unlocked","Local management session opened.");
+  if(await sha256Text(p)!==DEV_PASSWORD_HASH){devUnlocked=false;if(out)out.textContent="Incorrect developer password.";showDevLock(true);return}
+  devUnlocked=true;showDevLock(false);appendDevActivity("Developer console unlocked","Local management session opened after password verification.");
   renderDevConsole();setTimeout(()=>document.getElementById("devCloseBtn")?.focus(),0);
 }
 function lockDevPanel(){
-  sessionStorage.removeItem(DEV_UNLOCK_SESSION_KEY);appendDevActivity("Developer console locked","Local management session locked.");showDevLock(true);
+  devUnlocked=false;appendDevActivity("Developer console locked","Local management session locked.");showDevLock(true);
   setTimeout(()=>document.getElementById("devPassword")?.focus(),0);
 }
 function switchDevView(view){
@@ -4042,7 +4044,7 @@ function switchDevView(view){
   if(view==="users")renderDevUsers();if(view==="activity")renderDevActivity();if(view==="security")renderDevSecurity();
 }
 function renderDevConsole(){
-  if(sessionStorage.getItem(DEV_UNLOCK_SESSION_KEY)!=="1")return;
+  if(!devUnlocked)return;
   const users=getUsers(),bans=getDevBans(),states=users.map(u=>devStateForUser(u.id));
   const attempts=states.reduce((n,s)=>n+(s.quizHistory?.length||0),0);
   const metrics=document.getElementById("devMetrics");
