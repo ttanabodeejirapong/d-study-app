@@ -43,6 +43,21 @@ Preserve:
 
 Do not reintroduce the reverted V13/Vibrant theme unless explicitly requested.
 
+## Developer management console
+
+Current app version includes a **For Dev** management console in Settings.
+
+Preserve:
+- password-gated developer console entry next to Update Log;
+- local user/progress overview;
+- local activity log;
+- local remove-user action;
+- local ban/unban enforcement;
+- developer snapshot export without PIN hashes;
+- clear messaging that IP/global administration is backend-only.
+
+Important: this app is still static GitHub Pages. The developer password gate is not server-grade security. Do not claim it is invisible or impossible to bypass. Do not add third-party IP collection just to simulate an IP console. Proper global users/IP bans require a backend.
+
 ## EC214 content rule
 
 Use the current professor materials as the main authority. Preserve professor-specific framing, annotations, formulas, examples, and terminology. Explanations should be detailed enough for a student who may not already understand the lecture shorthand.
@@ -113,6 +128,13 @@ Use the app's existing version convention. Do not invent a major-version jump wi
 Prefer targeted edits over rewrites. If an old prompt conflicts with current working code, preserve current behavior unless the user explicitly asks for the older behavior.
 
 For risky changes, inspect the related storage and rendering logic first. Do not reset user data as a shortcut.
+
+## Current release baseline
+
+- App version: **v12.11**
+- v12.11 adds the local developer management console.
+- Runtime commit: `8d4e16facf04e2f0b22020194960107853388f38`
+- The static/local architecture remains unchanged; no cloud backend exists yet.
 
 ## Documentation baseline
 
