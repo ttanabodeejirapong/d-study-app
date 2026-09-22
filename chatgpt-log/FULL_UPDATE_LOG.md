@@ -110,3 +110,27 @@ Important publishing constraint:
 - the GitHub repo is public;
 - third-party course/exam PDFs should not automatically be republished publicly without confirmation;
 - at least one historical PDF is approximately 292 MB and exceeds normal GitHub single-file limits.
+
+
+### Course-material archive changed to hybrid file/link policy
+User decision:
+- store only the five current full annotated professor lecture PDFs as actual GitHub files;
+- keep all historical/supplementary material as external links.
+
+Files added:
+- `course-materials/README.md`
+- `course-materials/full-annotated-lectures/README.md`
+- `course-materials/old-exams/README.md`
+- `course-materials/old-lectures/README.md`
+- `course-materials/exercises/README.md`
+- `course-materials/professor-recordings/README.md`
+
+Behavior/runtime impact:
+- none; documentation/archive structure only;
+- no changes to `index.html`, routes, localStorage, quizzes, summaries, or themes.
+
+Storage policy:
+- canonical file set: Lecture 1, Lecture 2.1, Lecture 2.2, Lecture 3, Lecture 4 full/All;
+- Lecture 4 Part 1 treated as overlapping partial copy, not canonical;
+- old exams/lectures/exercises/notes/textbooks remain on Drive and are linked;
+- teaching recordings remain YouTube links.
