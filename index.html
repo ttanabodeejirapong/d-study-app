@@ -6,88 +6,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/d-study-app/assets/app-v13.1.min.css"></head>
+<link rel="stylesheet" href="/d-study-app/assets/app-v13.2.css"></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">Multi-subject learning workspace • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
 <section id="subjectScreen" class="subject-screen" aria-label="Choose subject">
   <div class="subject-shell">
     <div class="subject-topbar">
-      <div><div class="eyebrow">D Study App • v13.1</div><h1>Choose your subject</h1><p>After you open an unlocked subject, D Study App remembers that active subject for 24 hours across the site. After 24 hours you return here, but an already-redeemed account only needs one click — no new password.</p></div>
+      <div><div class="eyebrow">D Study App • v13.2</div><h1>Choose your subject</h1><p>Opening an unlocked subject keeps it active for 24 hours. Preview is separate from Unlock/Open, so you can look around without redeeming access.</p></div>
       <div class="subject-user"><span id="subjectUserChip" class="userchip"></span><button id="subjectLogoutBtn" class="logout" type="button">Log out</button></div>
     </div>
     <div class="subject-grid">
-      <button class="subject-card live" id="subjectEc214Card" type="button" data-subject="ec214">
-        <span class="subject-icon">📘</span><span class="subject-state" id="subjectEc214State">Locked • Preview</span>
+      <article class="subject-card live" id="subjectEc214Card" data-subject="ec214">
+        <span class="subject-state" id="subjectEc214State">Locked</span>
         <strong>EC214</strong><span>Introductory Macroeconomics</span><small>Current study workspace</small>
-      </button>
-      <button class="subject-card coming previewable" type="button" data-coming-subject="coming-1"><span class="subject-icon">＋</span><span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>New subject</span><small>Preview subject structure</small></button>
-      <button class="subject-card coming previewable" type="button" data-coming-subject="coming-2"><span class="subject-icon">＋</span><span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>Future subject</span><small>Preview subject structure</small></button>
+        <div class="subject-card-actions"><button id="subjectEc214OpenBtn" type="button">Unlock EC214</button><button id="subjectEc214PreviewBtn" class="secondary" type="button">Preview</button></div>
+      </article>
+      <article class="subject-card coming">
+        <span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>New subject</span><small>Reserved for your next deployment</small>
+        <div class="subject-card-actions"><button class="secondary" type="button" data-coming-preview="coming-1">Preview</button></div>
+      </article>
+      <article class="subject-card coming">
+        <span class="subject-state">Coming soon</span><strong>Coming Soon</strong><span>Future subject</span><small>Reserved subject slot</small>
+        <div class="subject-card-actions"><button class="secondary" type="button" data-coming-preview="coming-2">Preview</button></div>
+      </article>
     </div>
-<section class="subject-preview" id="subjectPreviewPanel" hidden>
+    <section class="subject-preview" id="subjectPreviewPanel" hidden>
       <div class="subject-preview-head">
-        <div><div class="eyebrow">Subject Preview</div><h2 id="subjectPreviewTitle">EC214 Preview</h2><p class="small">A limited look at the workspace before unlocking. Locked preview cards are deliberately not clickable.</p></div>
-        <button class="secondary" id="subjectPreviewClose" type="button" aria-label="Close subject preview">✕</button>
+        <div><div class="eyebrow">Subject Preview</div><h2 id="subjectPreviewTitle">EC214 Preview</h2><p class="small">Preview uses the same navigation structure as the unlocked workspace. Only sample content is readable/interactive; locked study content remains unavailable.</p></div>
+        <button class="secondary" id="subjectPreviewClose" type="button" aria-label="Close subject preview">Close</button>
       </div>
       <div id="subjectPreviewBody"></div>
     </section>
-    <template id="ec214PreviewTemplate">
-      <div class="preview-page-strip" aria-label="Preview pages">
-        <span>📚 Progress</span><span>🗒️ Notes</span><span class="preview-free">📝 Summary sample</span><span class="preview-free">✅ Quiz sample</span><span>📈 History</span><span>🤖 Prompt</span><span>⚙️ Settings</span>
-      </div>
-      <div class="preview-layout">
-        <article class="preview-card">
-          <div class="preview-card-head"><b>📚 Progress</b><span class="preview-lock">Preview only</span></div>
-          <div class="preview-kpis"><span><b>—%</b><small>Overall</small></span><span><b>—</b><small>Reviewed</small></span><span><b>—</b><small>Learning</small></span></div>
-          <div class="preview-fade-lines"><i></i><i></i><i></i></div>
-        </article>
-        <article class="preview-card">
-          <div class="preview-card-head"><b>🗒️ Notes</b><span class="preview-lock">Preview only</span></div>
-          <p class="small">Notes Hub gathers Progress, quiz-section, and question notes. Images can be pasted and resized after unlock.</p>
-          <div class="preview-note-placeholder"><span>Weak point / สิ่งที่ยังงง…</span><span class="preview-image-chip">🖼 image</span></div>
-        </article>
-        <article class="preview-card preview-wide preview-sample">
-          <div class="preview-card-head"><b>📝 Summary — free sample</b><span class="preview-free-badge">Readable sample</span></div>
-          <h3>Economics, Scarcity, and Choice</h3>
-          <p>Economics studies how individuals, businesses, governments, and societies make choices while resources are scarce and incentives affect decisions.</p>
-          <div class="preview-keyline"><b>Decision frame:</b> scarce resource → choice → objective.</div>
-          <p class="small">This is intentionally only a short sample, not the full Lecture 1 summary.</p>
-          <div class="preview-locked-list">
-            <div><span>🔒 Lecture 1 — complete summary</span><small>Unlock required</small></div>
-            <div><span>🔒 Lecture 2 — GDP / Unemployment / Inflation</span><small>Unlock required</small></div>
-            <div><span>🔒 Lecture 3 — Economic Growth</span><small>Unlock required</small></div>
-            <div><span>🔒 Lecture 4 — Finance, Saving & Investment</span><small>Unlock required</small></div>
-          </div>
-        </article>
-        <article class="preview-card preview-wide preview-sample">
-          <div class="preview-card-head"><b>✅ Quiz — free sample</b><span class="preview-free-badge">3 questions</span></div>
-          <div id="previewQuizDemo"></div>
-          <div class="preview-locked-list">
-            <div><span>🔒 Full Reviewing quizzes</span><small>Unlock required</small></div>
-            <div><span>🔒 Full Mastering quizzes</span><small>Unlock required</small></div>
-            <div><span>🔒 Saved attempts & Mistake Log</span><small>Unlock required</small></div>
-          </div>
-        </article>
-        <article class="preview-card">
-          <div class="preview-card-head"><b>📈 Quiz History</b><span class="preview-lock">Locked</span></div>
-          <div class="preview-history-row"><span>Attempt history</span><span>—</span></div><div class="preview-history-row"><span>Mistake Log</span><span>🔒</span></div>
-        </article>
-        <article class="preview-card">
-          <div class="preview-card-head"><b>🤖 ChatGPT Prompt</b><span class="preview-lock">Locked</span></div>
-          <div class="preview-fade-lines"><i></i><i></i><i></i><i></i></div>
-        </article>
-        <article class="preview-card">
-          <div class="preview-card-head"><b>⚙️ Settings</b><span class="preview-lock">Locked</span></div>
-          <p class="small">Themes, appearance, text size, font, backup/import, and developer controls.</p>
-        </article>
-      </div>
-      <div class="preview-unlock-cta"><div><b>Ready to open the full EC214 workspace?</b><div class="small">Enter the subject password once. Your account keeps the redemption permanently on this browser.</div></div><button type="button" id="previewUnlockEc214">Unlock EC214</button></div>
-    </template>
     <div class="subject-unlock" id="subjectUnlockPanel" hidden>
-      <div><div class="eyebrow">EC214 access</div><h2>Enter the EC214 subject password</h2><p class="small">You only need to enter it once for this local account. After a successful unlock, this account keeps EC214 access even if the subject password later changes.</p></div>
+      <div><div class="eyebrow">EC214 access</div><h2>Enter the EC214 subject password</h2><p class="small">Enter it once for this local account. After successful redemption, the account keeps EC214 access; after a 24-hour active-subject session expires you only click Open EC214 again.</p></div>
       <div class="subject-unlock-row"><input id="subjectPasswordInput" type="password" autocomplete="off" placeholder="Subject password"><button id="subjectUnlockBtn" type="button">Unlock EC214</button><button id="subjectUnlockCancel" class="secondary" type="button">Cancel</button></div>
       <div class="login-error" id="subjectUnlockStatus"></div>
     </div>
-    <div class="subject-foot small">Current architecture note: profile redemption and the 24-hour active-subject session are local to this browser/device. A true global developer switch for “password required / not required” is not included because that would be device-only without a backend.</div>
+    <div class="subject-foot small">Access redemption and the 24-hour active-subject session remain local to this browser/device until a shared backend is connected.</div>
   </div>
 </section>
 <div id="appShell">
@@ -1347,7 +1302,8 @@ UNDERSTAND IT VISIBILITY
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v13.1</b><span>24h Subject Session, Preview & Full Midterm Quizzes</span></div><p>Keeps an opened subject active for 24 hours across app routes, adds a limited locked-subject preview with free Summary/Quiz samples, and adds complete Reviewing/Mastering quiz sets for Lectures 3 and 4.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v13.2</b><span>Graph Alignment, Thai Understand-it & Preview Workspace</span></div><p>Audits graph coordinates so points/intersections sit on the lines they describe, expands updated graph explanations in Thai, separates Preview from Unlock/Open, changes the default workspace to Midnight + Dark, and removes the image icon from note attachments.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v13.1</b><span>24h Subject Session, Preview & Full Midterm Quizzes</span></div><p>Keeps an opened subject active for 24 hours across app routes, adds a limited locked-subject preview with free Summary/Quiz samples, and adds complete Reviewing/Mastering quiz sets for Lectures 3 and 4.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v13.0</b><span>Subjects, Rich Notes & Graph Detail</span></div><p>Added the post-login subject chooser with one-time-per-account EC214 access, rich note images with resizing and auto-growing text areas, and more detailed lecture-grounded graph reading guides.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.13</b><span>Public Build Split</span></div><p>Moved the large inline CSS and JavaScript out of index.html into separate production assets so the public entry page exposes much less implementation code at a glance while preserving the existing app behavior.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.12</b><span>Developer Access Fix</span></div><p>Fixed the developer lock so management content stays completely hidden until the password is entered, and now requires the password again every time For Dev is opened.</p></article>
@@ -1387,7 +1343,7 @@ UNDERSTAND IT VISIBILITY
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v13.1</b></div>
+      <div class="update-log-foot small">Current build: <b>v13.2</b></div>
     </section>
   </div>
 
@@ -1494,5 +1450,5 @@ UNDERSTAND IT VISIBILITY
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v13.1</b> • 24h subject session, locked previews, and Lecture 3/4 quizzes</footer></div>
-<script src="/d-study-app/assets/app-v13.1.min.js"></script></body></html>
+</main><footer><b id="appVersionLabel">D Study App v13.2</b> • aligned graphs, bilingual graph explanations, Midnight preview workspace</footer></div>
+<script src="/d-study-app/assets/app-v13.2.js"></script></body></html>
