@@ -2145,6 +2145,121 @@ body.dark .deep-lang-switch{background:#1f2d3d;border-color:#4b6075}
 body.neo-ui.dark .deep-lang-switch{background:#102131!important;border-color:#334b60!important}
 body.midnight-ui.dark .deep-lang-switch{background:#1a1d21!important;border-color:#3a4047!important}
 body.midnight-ui.dark .deep-lang-switch button.active{background:linear-gradient(135deg,var(--theme-accent),var(--theme-accent2))!important}
+
+/* ============================================================
+   v12.9 — More noticeable / larger Understand it
+   ============================================================ */
+.summary-deep-dive{
+  margin-top:22px!important;
+  border:2px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 34%,var(--line))!important;
+  border-radius:15px!important;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb,var(--theme-accent,var(--blue)) 8%,var(--card)),
+      color-mix(in srgb,var(--theme-accent2,var(--blue)) 3%,var(--card)))!important;
+  box-shadow:0 7px 20px color-mix(in srgb,var(--theme-accent,var(--blue)) 8%,transparent)!important;
+  position:relative;
+}
+.summary-deep-dive::before{
+  content:"";
+  position:absolute;left:-2px;top:12px;bottom:12px;width:4px;border-radius:5px;
+  background:linear-gradient(180deg,var(--theme-accent,var(--blue)),var(--theme-accent2,var(--blue)));
+}
+.deep-dive-toggle{
+  min-height:74px;
+  padding:16px 18px!important;
+}
+.deep-dive-title{gap:13px}
+.deep-dive-title b{
+  font-size:16px!important;
+  line-height:1.2;
+  letter-spacing:-.01em
+}
+.deep-dive-title small{
+  font-size:11px!important;
+  line-height:1.35;
+  font-weight:700!important
+}
+.deep-brain{
+  width:38px!important;height:38px!important;border-radius:11px!important;
+  font-size:19px;
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 16%,var(--card))!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 22%,var(--line));
+  box-shadow:0 4px 11px color-mix(in srgb,var(--theme-accent,var(--blue)) 10%,transparent)
+}
+.deep-dive-action{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.deep-click-hint{
+  display:inline-flex;align-items:center;
+  padding:5px 9px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 30%,var(--line));
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 10%,var(--card));
+  color:var(--theme-accent,var(--blue));
+  font-size:9px;font-weight:900;letter-spacing:.01em;
+  white-space:nowrap
+}
+.deep-chevron{
+  display:grid;place-items:center;
+  width:30px;height:30px;border-radius:9px;
+  font-size:21px!important;
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 10%,var(--card));
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 22%,var(--line))
+}
+.summary-deep-dive.expanded{
+  box-shadow:0 10px 26px color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,transparent)!important
+}
+.summary-deep-dive.expanded .deep-dive-toggle{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 6%,var(--card))!important
+}
+.deep-dive-expanded{padding:0 18px 18px!important}
+.deep-dive-toolbar{padding:11px 0 12px!important}
+.deep-source-label{font-size:9px!important}
+.deep-lang-switch button{font-size:10px!important;padding:6px 11px!important}
+.deep-block{padding:13px!important}
+.deep-block h4{font-size:13px!important;margin-bottom:8px!important}
+.deep-block li{font-size:12px!important;line-height:1.6!important;margin:6px 0!important}
+.summary-deep-dive[data-lang="th"] .deep-block li{font-size:13px!important;line-height:1.72!important}
+.summary-deep-dive[data-lang="th"] .deep-block h4{font-size:13px!important}
+
+@media(hover:hover) and (pointer:fine){
+  .summary-deep-dive.collapsed:hover{
+    transform:translateY(-1px);
+    border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 58%,var(--line))!important;
+    box-shadow:0 10px 25px color-mix(in srgb,var(--theme-accent,var(--blue)) 13%,transparent)!important
+  }
+  .summary-deep-dive.collapsed:hover .deep-click-hint{
+    background:var(--theme-accent,var(--blue))!important;
+    color:#fff!important
+  }
+}
+body.dark .summary-deep-dive{
+  background:linear-gradient(135deg,
+    color-mix(in srgb,var(--theme-accent,var(--blue)) 13%,#202f41),
+    #202f41)!important
+}
+body.neo-ui.dark .summary-deep-dive{
+  background:linear-gradient(135deg,
+    color-mix(in srgb,var(--theme-accent) 15%,#142536),
+    #142536)!important
+}
+body.midnight-ui.dark .summary-deep-dive{
+  background:linear-gradient(135deg,
+    color-mix(in srgb,var(--theme-accent) 17%,#20242a),
+    #20242a)!important
+}
+body.midnight-ui.dark .deep-click-hint,
+body.midnight-ui.dark .deep-chevron{
+  background:color-mix(in srgb,var(--theme-accent) 20%,#22262b)!important;
+  border-color:color-mix(in srgb,var(--theme-accent) 38%,#3a4047)!important;
+  color:color-mix(in srgb,var(--theme-accent2) 78%,white)!important
+}
+@media(max-width:600px){
+  .deep-dive-toggle{padding:14px 14px!important;min-height:70px}
+  .deep-dive-title b{font-size:15px!important}
+  .deep-dive-title small{font-size:10px!important}
+  .deep-click-hint{display:none}
+  .deep-brain{width:35px!important;height:35px!important}
+  .deep-dive-expanded{padding:0 14px 14px!important}
+}
 </style></head>
 <body>
 <section id="loginScreen"><div class="login-card"><h1 style="color:#17365d">D Study App</h1><div class="small">EC214 learning tracker • local profile login</div><div class="login-tabs"><button id="signInTab" class="active">Sign in</button><button id="createTab">Create profile</button></div><div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="e.g. tan"></div><div class="field"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" maxlength="8" autocomplete="current-password" placeholder="4–8 digits"></div><button id="loginAction" style="width:100%;margin-top:6px">Sign in</button><div id="loginError" class="login-error"></div><div class="login-note">This is a local profile system, not a cloud account. Each profile gets separate progress on this browser, and every new profile starts at 0%. <b>The same username on another device is a separate local profile.</b> To move progress between Mac/iPad now, create the profile there and use Export full backup → Import full backup. Automatic cross-device sync would require a cloud backend.</div></div></section>
@@ -3008,7 +3123,7 @@ body.midnight-ui.dark .deep-lang-switch button.active{background:linear-gradient
   <div class="card">
     <div class="lecture-title">Prompt for ChatGPT</div>
     <div class="small" style="margin:6px 0 12px">For another student: copy this prompt into ChatGPT, then upload the current lecture files. They can also export their own progress JSON from this app and upload it.</div>
-    <textarea id="chatgptPrompt" readonly style="min-height:2180px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
+    <textarea id="chatgptPrompt" readonly style="min-height:2250px;line-height:1.5">I'm using D Study App for EC214 Introductory Macroeconomics.
 
 Please act as my study partner. The CURRENT professor lecture files I upload are the authoritative syllabus. Preserve the professor's terminology, annotations, organization, examples, and level of detail. Do not silently replace the lecture with generic economics knowledge.
 
@@ -3288,6 +3403,14 @@ BILINGUAL UNDERSTAND IT
   3) Common trap / จุดที่มักสับสน.
 - Thai should translate/explain the source-grounded English content faithfully. Do not introduce extra claims or examples in Thai that are absent from the source-grounded English version.
 - Switching language changes only the Understand it explanation; it must not change progress, notes, quiz data, or the main Summary language.
+
+
+UNDERSTAND IT VISIBILITY
+- The collapsed Understand it control must look obviously clickable, not like passive summary text.
+- Give it a stronger accent border/rail, larger heading/subheading, larger brain icon, visible chevron, and a compact "Click to expand" cue on desktop.
+- Expanded explanation text should be slightly larger than ordinary compact metadata so it is comfortable to read.
+- Keep the control noticeable without visually overpowering the actual lecture content.
+- Maintain this treatment consistently in Classic, Neo Dashboard, and Midnight Workspace, Light and Dark modes.
 </textarea>
     <div class="controls"><button id="copyPromptBtn">Copy prompt</button><span id="copyPromptStatus" class="small"></span></div>
   </div>
@@ -3378,7 +3501,8 @@ BILINGUAL UNDERSTAND IT
         <button class="secondary update-log-close" id="updateLogClose" type="button" aria-label="Close update log">✕</button>
       </div>
       <div class="update-log-list">
-        <article class="update-entry latest"><div class="update-entry-top"><b>v12.8</b><span>Bilingual Understand it</span></div><p>Made every lecture section's Understand it explanation collapsible and added an English/Thai switch with complete Thai explanations for every section.</p></article>
+        <article class="update-entry latest"><div class="update-entry-top"><b>v12.9</b><span>Understand it Visibility</span></div><p>Made the collapsible Understand it control larger, more readable, and much more obviously clickable with accent emphasis and expand/collapse cues.</p></article>
+        <article class="update-entry"><div class="update-entry-top"><b>v12.8</b><span>Bilingual Understand it</span></div><p>Made every lecture section's Understand it explanation collapsible and added an English/Thai switch with complete Thai explanations for every section.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.7</b><span>Mistake Log</span></div><p>Made incomplete/flagged Quiz History attempts clickable, with targeted review of wrong, Not sure, and Guessed questions including answers and explanations.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.6</b><span>Explanation-First Summaries</span></div><p>Expanded all five lecture summaries with plain-language reasoning, application examples, common traps, and Thai bridges; also rebuilt the Lecture 1 production/factor-income section in detail.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v12.5</b><span>Accent Consistency</span></div><p>Fixed remaining hard-coded theme colors so the selected palette now reaches active tabs, theme cards, badges, panel accent lines, hints, progress elements, and other non-semantic UI accents.</p></article>
@@ -3411,13 +3535,13 @@ BILINGUAL UNDERSTAND IT
         <article class="update-entry"><div class="update-entry-top"><b>v2.0</b><span>Review & Master</span></div><p>Added Reviewing/Mastering modes, confidence flags, and separate local user profiles.</p></article>
         <article class="update-entry"><div class="update-entry-top"><b>v1.0</b><span>First build</span></div><p>Created the original EC214 study tracker with basic progress and quiz functionality.</p></article>
       </div>
-      <div class="update-log-foot small">Current build: <b>v12.8</b></div>
+      <div class="update-log-foot small">Current build: <b>v12.9</b></div>
     </section>
   </div>
 </section>
 
-</main><footer><b id="appVersionLabel">D Study App v12.8</b> • collapsible bilingual Understand it across every lecture section</footer></div>
-<script>const APP_VERSION="12.8";
+</main><footer><b id="appVersionLabel">D Study App v12.9</b> • larger, clearer, bilingual Understand it controls</footer></div>
+<script>const APP_VERSION="12.9";
 const lectureRecordings=[
   {date:"5 Aug 2026",url:"https://youtu.be/MfZ21jt3GK4",note:"Regular session"},
   {date:"19 Aug 2026",url:"https://youtu.be/u-8Y27FGQDg",note:"Regular session"},
@@ -3918,7 +4042,7 @@ function renderSummaryDeepDives(){
     box.innerHTML=`
       <button class="deep-dive-toggle" type="button" aria-expanded="false">
         <span class="deep-dive-title"><span class="deep-brain">🧠</span><span><b>Understand it</b><small>Plain-language explanation • application • traps</small></span></span>
-        <span class="deep-chevron" aria-hidden="true">⌄</span>
+        <span class="deep-dive-action"><span class="deep-click-hint">Click to expand</span><span class="deep-chevron" aria-hidden="true">⌄</span></span>
       </button>
       <div class="deep-dive-expanded" hidden>
         <div class="deep-dive-toolbar">
@@ -3937,6 +4061,7 @@ function renderSummaryDeepDives(){
       box.classList.toggle("collapsed",!opening);
       box.classList.toggle("expanded",opening);
       toggle.setAttribute("aria-expanded",opening?"true":"false");
+      const cue=box.querySelector(".deep-click-hint");if(cue)cue.textContent=opening?"Click to collapse":"Click to expand";
     };
     box.querySelectorAll("[data-deep-lang]").forEach(btn=>btn.onclick=e=>{
       e.stopPropagation();
