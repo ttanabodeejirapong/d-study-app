@@ -1,16 +1,14 @@
-# Full Annotated Lectures — Canonical 5 Files
+# Full Annotated Lectures
 
-These are the only course-material PDFs intended to be stored directly in GitHub.
+The five current annotated professor lecture PDFs are **not stored in this public repository**.
 
-Canonical set:
-1. `EC214-1 Introduction to Economics 2026-2 Afternoon (All) (1).pdf`
-2. `EC214-2.1 Macroeconomic Indicators-GDP-2 Afternoon (All) (1).pdf`
-3. `EC214-2.2 Macroeconomic Indicators-Unemployment & Inflation-2 Afternoon (1)(1).pdf`
-4. `EC214-3 Economic Growth 2026-2 Afternoon (All) (1)(1).pdf`
-5. `EC214-4 Finance, Saving, and Investment-2 Afternoon (All)(1).pdf`
+They are maintained in the owner's private course-source archive and remain the primary EC214 source for summaries, explanations, and quiz construction.
 
-The separate `EC214-4 ... (part1)` file is an overlapping partial copy and is not part of the canonical five-file archive.
+Canonical source set:
+1. Lecture 1 — Introduction to Economics
+2. Lecture 2.1 — Macroeconomic Indicators: GDP
+3. Lecture 2.2 — Macroeconomic Indicators: Unemployment & Inflation
+4. Lecture 3 — Economic Growth
+5. Lecture 4 — Finance, Saving, and Investment (full / All version)
 
-## Source priority
-
-These current annotated professor lectures are the primary EC214 content source for summaries, explanations, and quiz construction.
+The separate Lecture 4 Part 1 file is an overlapping partial copy and is not part of the canonical five-file set.
