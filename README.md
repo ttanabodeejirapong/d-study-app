@@ -43,3 +43,12 @@ The engine is ready for:
 - per-deck and all-flashcard reset controls.
 
 Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId>::<userId>`. EC214 and TU101 must never share or overwrite flashcard progress.
+
+
+## v13.10
+
+- Fixed restored/deep-linked EC214 `/flashcards/` sessions opening Progress instead of Flashcards.
+- TU101 Lecture 1 / Chapter 1 now has a full source-grounded Summary built from the professor slide and the two assigned readings.
+- TU101 Lecture 1 Quiz now has 4 focused parts + a 40-question cumulative in both Reviewing and Mastering (40 questions per mode).
+- TU101 Quiz follows the EC214 study rules: randomized answer positions, autosaved drafts, section/question notes, Not sure/Guessed confidence, weighted learning score, conservative mastery progression, Quiz History, and Mistake Log.
+- Lectures 2–6 are not expanded into full summaries/quiz banks yet.
