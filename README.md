@@ -111,3 +111,38 @@ EC214 flashcard progress remains isolated under `d-study-flashcards::ec214::<use
 - Either the original credential or the corresponding subject-specific secondary token unlocks that subject.
 - The secondary hashes are isolated as `EC214_SECOND_TOKEN_HASH` and `TU101_SECOND_TOKEN_HASH`, so either secondary token can be removed later without changing the original credential path.
 - No academic state, flashcard state, notes, backups, subject-isolation keys, or existing unlocked-account records are changed.
+
+
+## v13.16 — TU101 Lectures 2–6 complete study library
+
+TU101 midterm coverage now extends the full official **Lectures 1–6** scope.
+
+Lecture 2–6 each add:
+- a source-grounded bilingual Summary with 7 focused study sections;
+- 4 focused quiz parts;
+- **40 Reviewing questions** and **40 Mastering questions** per lecture;
+- **40 flashcards** per lecture, separated into 4 focused decks;
+- an engine-generated **Full Lecture** flashcard deck whose 100% state means every card in that lecture has been remembered.
+
+Combined TU101 active-recall bank:
+- Reviewing: Lecture 1 (40) + Lectures 2–6 (200) = **240 questions**;
+- Mastering: Lecture 1 (40) + Lectures 2–6 (200) = **240 questions**;
+- Flashcards: Lecture 1 (42) + Lectures 2–6 (200) = **242 unique cards**;
+- Summary: 7 sections per lecture = **42 bilingual sections** across the six-lecture midterm scope.
+
+### Modular loading
+
+To avoid making the normal workspace unnecessarily heavy, Lectures 2–6 are split into separate assets:
+- `assets/tu101-l2-v13.16.min.js`
+- `assets/tu101-l3-v13.16.min.js`
+- `assets/tu101-l4-v13.16.min.js`
+- `assets/tu101-l5-v13.16.min.js`
+- `assets/tu101-l6-v13.16.min.js`
+
+Summary and Quiz load only the selected lecture module. Cross-lecture Notes and Flashcards load all five additional modules because those views need the full Lecture 1–6 content set.
+
+The shared engine remains `assets/tu101-v13.16.min.js`. Lecture 1 retains its existing quiz bank version and flashcard identities, including the old cumulative deck ID, so existing Lecture 1 drafts/history/flashcard notes and progress are not intentionally invalidated.
+
+Official scope remains **Lectures 1–6**. Climate Change / Human Security is intentionally excluded because the private official outline classifies it as **Lecture 7**, outside the midterm scope.
+
+No EC214 academic state, flashcard content, access credential, or storage namespace is changed by v13.16.
