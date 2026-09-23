@@ -26,3 +26,20 @@ Any change involving subject creation, subject switching, persistence, backup/im
 ## Public/private boundary
 
 Do not commit private lecture PDFs, historical exam source files, private prompt logs, user backups, or personal browser-state exports to this repository.
+
+
+## Flashcards
+
+v13.9 adds the same Flashcards workspace to EC214 and TU101, with no study cards populated yet.
+
+The engine is ready for:
+- separate part decks plus a cumulative deck;
+- tap/press to reveal the answer;
+- shuffle remaining cards;
+- Remembered / Haven’t remembered ratings;
+- automatic random repetition of only missed cards after the first pass until 100%;
+- autosave during play;
+- a per-deck “100% × N” completion counter;
+- per-deck and all-flashcard reset controls.
+
+Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId>::<userId>`. EC214 and TU101 must never share or overwrite flashcard progress.
