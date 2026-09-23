@@ -149,3 +149,11 @@ body.subject-tu101 #quiz> :not(#tu101QuizLayer){display:none!important}
 .emergency-recovery-modal{width:min(860px,100%)}
 .emergency-row{display:block}.emergency-row b{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
 @media(max-width:760px){.emergency-recovery-btn{left:10px;bottom:62px}}
+
+
+/* Recovery lives inside Settings only. */
+.emergency-recovery-btn,#emergencyRecoveryOverlay{display:none!important}
+.local-recovery-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 8px}
+.local-recovery-actions button{min-height:40px}
+.local-recovery-status{min-height:18px;margin-bottom:8px;color:var(--muted)}
+@media(max-width:760px){.local-recovery-actions{display:grid;grid-template-columns:1fr}.local-recovery-actions button{width:100%}}
