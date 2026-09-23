@@ -63,3 +63,14 @@ Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId
 - Existing TU101/EC214 subject isolation, notes, confidence flags, history data, and backup behavior are preserved.
 - v13.11 quiz-bank compatibility patch: revised Lecture 1 drafts and completion status are versioned so unfinished v13.10 drafts/history remain preserved but cannot be mistaken for progress on the new question bank.
 - v13.11.2 summary-link hotfix: quiz reading-guide links now use the bilingual summary title field, so section labels remain visible after the v13.11 data-shape change.
+
+
+## v13.12
+
+- TU101 Lecture 1 summary language controls are now independent: the main topic card has its own English/Thai toggle, and each expanded Understand-it box has a separate English/Thai toggle.
+- Fixed the v13.11 display glitch where the Thai topic bullet list could remain visible while English was selected; explicit hidden-state CSS now wins over the summary list layout.
+- Added seven self-contained visual study diagrams, one per Lecture 1 section, rebuilt from the professor-slide concepts to make relationships easier to see and memorize without depending on external image hosting.
+- Lecture 1 Flashcards are now populated for TU101: 4 focused decks containing 42 cards total, plus the engine-generated cumulative deck.
+- Flashcard fronts use English exam wording; answer sides use concise English explanations with short Thai memory support.
+- Flashcard content follows the professor Lecture 1 slide first and uses the existing subject-isolated storage key `d-study-flashcards::tu101::<userId>`; EC214 flashcard data is untouched.
+- Existing TU101 quiz-bank v13.11 compatibility, notes, history, drafts, confidence tracking, backup behavior, and EC214/TU101 academic-state isolation are preserved.
