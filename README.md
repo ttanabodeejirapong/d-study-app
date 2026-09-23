@@ -52,3 +52,12 @@ Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId
 - TU101 Lecture 1 Quiz now has 4 focused parts + a 40-question cumulative in both Reviewing and Mastering (40 questions per mode).
 - TU101 Quiz follows the EC214 study rules: randomized answer positions, autosaved drafts, section/question notes, Not sure/Guessed confidence, weighted learning score, conservative mastery progression, Quiz History, and Mistake Log.
 - Lectures 2–6 are not expanded into full summaries/quiz banks yet.
+
+
+## v13.11
+
+- TU101 Lecture 1 Summary was rewritten as a slide-first memorization sheet using 7 smaller sections rather than 5 dense sections.
+- English remains the default study language because the exam is English, but every Lecture 1 study card can now switch its full content to Thai (title, memory hook, bullets, and Understand-it explanation).
+- Coverage follows the professor slide as the primary checklist, including indigenous society, rice/water settlement, fermented food, animism and guardian spirits, stilt houses, Indianization/Sinicization/Islamization/Westernization, multi-ethnicity, migration, all five language families, Peranakan/Baba-Nyonya, hybrid culture, glocalization, cultural kinship, shared-culture disputes, Gordang Sambilan, palace/instrument similarities, and national-food examples.
+- TU101 Lecture 1 Quiz remains 4 focused parts + a 40-question cumulative in each mode. Reviewing and Mastering each contain 40 English questions, now rebalanced to be professor-slide-first; assigned readings are supporting context rather than the quiz backbone.
+- Existing TU101/EC214 subject isolation, drafts, history, notes, confidence flags, and backup behavior are preserved.
