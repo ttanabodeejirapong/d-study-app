@@ -84,3 +84,21 @@ Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId
 - Editing the note from Flashcards or from Notes Hub updates the same saved note.
 - Flashcard notes use the subject academic state, so they are included in normal subject backup/import behavior.
 - Existing flashcard progress, cumulative decks, quiz notes, and subject-isolation behavior are preserved.
+
+
+## v13.14 — Complete EC214 lecture flashcards
+
+EC214 now has a complete source-grounded flashcard bank across all five current lectures.
+
+- Lecture 1 — 77 cards
+- Lecture 2.1 GDP — 48 cards
+- Lecture 2.2 Unemployment & Inflation — 47 cards
+- Lecture 3 Economic Growth — 52 cards
+- Lecture 4 Finance, Saving & Investment — 56 cards
+- Total — 280 unique cards
+
+Each lecture is separated into four focused part decks plus its own **Full Lecture** deck. The Full Lecture deck is automatically built from every card in that lecture. Reaching 100% on a Full Lecture deck means the user has marked every lecture card Remembered, including clearing all missed-card retry rounds; the lecture then shows as complete with the existing `100% × N` counter.
+
+The same card identity is preserved between a focused part and its Full Lecture deck, so v13.13 flashcard notes/images stay attached to the same question and continue to appear in Notes Hub with the flashcard question and answer as context.
+
+EC214 flashcard progress remains isolated under `d-study-flashcards::ec214::<userId>`; TU101 flashcard progress/content is unchanged.
