@@ -142,3 +142,10 @@ body.subject-tu101 #quiz> :not(#tu101QuizLayer){display:none!important}
 .recovery-row .small{margin-top:4px;line-height:1.5}.recovery-row button{flex:0 0 auto}
 .recovery-empty{padding:12px 14px;border:1px dashed var(--line);border-radius:12px;background:var(--soft)}
 @media(max-width:760px){.recovery-row{align-items:stretch;flex-direction:column}.recovery-row button{width:100%}}
+
+
+/* Emergency browser recovery */
+.emergency-recovery-btn{position:fixed;left:18px;bottom:18px;z-index:1100;border-color:color-mix(in srgb,#f59e0b 45%,var(--line))!important;background:color-mix(in srgb,#f59e0b 8%,var(--card))!important}
+.emergency-recovery-modal{width:min(860px,100%)}
+.emergency-row{display:block}.emergency-row b{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:760px){.emergency-recovery-btn{left:10px;bottom:62px}}
