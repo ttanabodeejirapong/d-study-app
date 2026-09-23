@@ -62,3 +62,4 @@ Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId
 - TU101 Lecture 1 Quiz remains 4 focused parts + a 40-question cumulative in each mode. Reviewing and Mastering each contain 40 English questions, now rebalanced to be professor-slide-first; assigned readings are supporting context rather than the quiz backbone.
 - Existing TU101/EC214 subject isolation, notes, confidence flags, history data, and backup behavior are preserved.
 - v13.11 quiz-bank compatibility patch: revised Lecture 1 drafts and completion status are versioned so unfinished v13.10 drafts/history remain preserved but cannot be mistaken for progress on the new question bank.
+- v13.11.2 summary-link hotfix: quiz reading-guide links now use the bilingual summary title field, so section labels remain visible after the v13.11 data-shape change.
