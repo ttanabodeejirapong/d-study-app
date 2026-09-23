@@ -9,12 +9,15 @@
 (function(){
   var appearance="system";
   try{
+    try{sessionStorage.setItem("d-study-requested-path",location.pathname+location.search+location.hash)}catch(_e){}
+    var sharedPrefs=JSON.parse(localStorage.getItem("d-study-shared-preferences-v1")||"null");
+    if(sharedPrefs&&sharedPrefs.appearance) appearance=sharedPrefs.appearance;
     var active=JSON.parse(localStorage.getItem("d-study-active-user")||"null");
     var id=active&&active.id;
     if(!id) id=sessionStorage.getItem("d-study-active-user");
     if(id){
       var state=JSON.parse(localStorage.getItem("d-study-state::"+id)||"null");
-      if(state&&state.preferences&&state.preferences.appearance) appearance=state.preferences.appearance;
+      if((!sharedPrefs||!sharedPrefs.appearance)&&state&&state.preferences&&state.preferences.appearance) appearance=state.preferences.appearance;
     }
   }catch(e){}
   var systemDark=!!(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);

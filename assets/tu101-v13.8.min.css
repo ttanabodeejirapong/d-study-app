@@ -1,0 +1,16 @@
+
+body.subject-tu101 #summary> :not(#tu101SummaryLayer){display:none!important}
+body.subject-tu101 #quiz> :not(#tu101QuizLayer){display:none!important}
+#tu101SummaryLayer,#tu101QuizLayer{display:block}
+.tu101-card{border-color:color-mix(in srgb,#8b5cf6 40%,var(--line))}
+.tu101-scope-banner{margin:12px 0;padding:12px 14px;border:1px solid #d49a43;border-radius:13px;background:color-mix(in srgb,#f59e0b 9%,var(--card));line-height:1.5}
+.tu101-summary-card{margin:14px 0}.tu101-summary-card ul{line-height:1.55}
+.tu101-quiz-empty{text-align:center;padding:32px 18px}.tu101-quiz-empty h3{margin:6px 0}.tu101-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}.tu101-tags span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-size:12px;font-weight:700}
+.tu101-search-mark{background:#ffe066;color:#111827;padding:1px 2px;border-radius:3px}body.dark .tu101-search-mark{background:#ffd43b;color:#101318}
+.global-settings-btn{position:fixed;right:18px;bottom:18px;z-index:1100;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.global-settings-overlay{position:fixed;inset:0;z-index:1300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,10,20,.54);backdrop-filter:blur(7px)}
+.global-settings-overlay.open{display:flex}.global-settings-modal{width:min(760px,100%);max-height:min(88vh,820px);overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--card);padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.global-settings-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.global-settings-head h2{margin:3px 0 5px}.global-settings-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.shared-settings-controls .setting-row{margin-top:10px}.shared-theme-choices{margin-bottom:8px}.shared-swatches{margin-bottom:10px}
+.preview-linked-settings{grid-column:1/-1}
+@media(max-width:760px){.global-settings-btn{right:10px;bottom:10px}.global-settings-overlay{padding:10px}.global-settings-modal{padding:14px}.global-settings-foot{align-items:stretch;flex-direction:column}.tu101-tags{justify-content:flex-start}}
