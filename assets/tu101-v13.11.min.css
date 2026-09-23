@@ -1,0 +1,242 @@
+
+body.subject-tu101 #summary> :not(#tu101SummaryLayer){display:none!important}
+body.subject-tu101 #quiz> :not(#tu101QuizLayer){display:none!important}
+#tu101SummaryLayer,#tu101QuizLayer{display:block}
+.tu101-card{border-color:color-mix(in srgb,#8b5cf6 40%,var(--line))}
+.tu101-scope-banner{margin:12px 0;padding:12px 14px;border:1px solid #d49a43;border-radius:13px;background:color-mix(in srgb,#f59e0b 9%,var(--card));line-height:1.5}
+.tu101-summary-card{margin:14px 0}.tu101-summary-card ul{line-height:1.55}
+.tu101-quiz-empty{text-align:center;padding:32px 18px}.tu101-quiz-empty h3{margin:6px 0}.tu101-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}.tu101-tags span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-size:12px;font-weight:700}
+.tu101-search-mark{background:#ffe066;color:#111827;padding:1px 2px;border-radius:3px}body.dark .tu101-search-mark{background:#ffd43b;color:#101318}
+.global-settings-btn{position:fixed;right:18px;bottom:18px;z-index:1100;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.global-settings-overlay{position:fixed;inset:0;z-index:1300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,10,20,.54);backdrop-filter:blur(7px)}
+.global-settings-overlay.open{display:flex}.global-settings-modal{width:min(760px,100%);max-height:min(88vh,820px);overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--card);padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.global-settings-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.global-settings-head h2{margin:3px 0 5px}.global-settings-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.shared-settings-controls .setting-row{margin-top:10px}.shared-theme-choices{margin-bottom:8px}.shared-swatches{margin-bottom:10px}
+.preview-linked-settings{grid-column:1/-1}
+@media(max-width:760px){.global-settings-btn{right:10px;bottom:10px}.global-settings-overlay{padding:10px}.global-settings-modal{padding:14px}.global-settings-foot{align-items:stretch;flex-direction:column}.tu101-tags{justify-content:flex-start}}
+
+
+/* Linked Settings + Login/Preview polish hotfix */
+.shared-settings-controls{position:relative;z-index:4}
+.shared-settings-controls button,.shared-settings-controls select{pointer-events:auto!important;position:relative;z-index:5}
+.preview-linked-settings,.preview-linked-settings *{pointer-events:auto!important}
+.shared-settings-controls .ui-theme-choice,.shared-settings-controls .swatch,.shared-settings-controls select{cursor:pointer}
+
+/* Always show the five palette choices as five distinct colors. */
+.shared-swatches [data-shared-accent="navy"]{background:linear-gradient(145deg,#5279d8,#65b8e8)!important}
+.shared-swatches [data-shared-accent="violet"]{background:linear-gradient(145deg,#7564d7,#a07cf0)!important}
+.shared-swatches [data-shared-accent="forest"]{background:linear-gradient(145deg,#3b9f79,#63c9a4)!important}
+.shared-swatches [data-shared-accent="rose"]{background:linear-gradient(145deg,#bd5e7a,#df829b)!important}
+.shared-swatches [data-shared-accent="amber"]{background:linear-gradient(145deg,#a97836,#d9aa5b)!important}
+.shared-swatches .swatch{width:42px;height:42px;border-radius:12px!important;border:1px solid color-mix(in srgb,#fff 16%,var(--line))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 5px 13px rgba(0,0,0,.1)!important;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.shared-swatches .swatch:hover{transform:translateY(-2px) scale(1.045);filter:brightness(1.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 9px 18px rgba(0,0,0,.16)!important}
+.shared-swatches .swatch.active{transform:translateY(-1px);outline:2px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 72%,#fff)!important;outline-offset:3px}
+
+/* Softer, more responsive controls on Login and Preview surfaces. */
+#loginScreen .auth-card button,
+#loginScreen #loginPreviewBtn,
+.login-preview-panel button:not(.swatch),
+.subject-preview button:not(.swatch),
+.preview-workspace button:not(.swatch),
+.global-settings-btn{
+  border-radius:14px!important;
+  transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,filter .18s ease!important;
+}
+#loginScreen .auth-card button:hover:not(:disabled),
+#loginScreen #loginPreviewBtn:hover:not(:disabled),
+.login-preview-panel button:hover:not(:disabled),
+.subject-preview button:hover:not(:disabled),
+.preview-workspace button:hover:not(:disabled),
+.global-settings-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 9px 22px color-mix(in srgb,var(--theme-accent,var(--blue)) 17%,transparent)!important;
+  filter:brightness(1.035);
+}
+#loginScreen .auth-card button:active:not(:disabled),
+#loginScreen #loginPreviewBtn:active:not(:disabled),
+.login-preview-panel button:active:not(:disabled),
+.subject-preview button:active:not(:disabled),
+.preview-workspace button:active:not(:disabled),
+.global-settings-btn:active:not(:disabled){transform:translateY(0) scale(.985)}
+
+#loginScreen #loginAction{
+  background:linear-gradient(135deg,var(--theme-accent,var(--blue)),var(--theme-accent2,var(--blue2)))!important;
+  border-color:transparent!important;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-accent,var(--blue)) 20%,transparent);
+}
+#loginScreen #loginPreviewBtn{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 8%,var(--card))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 26%,var(--line))!important;
+}
+#loginScreen .login-tabs button{
+  background:transparent!important;
+  border:1px solid var(--line)!important;
+  color:var(--muted)!important;
+  box-shadow:none!important;
+}
+#loginScreen .login-tabs button.active{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,var(--card))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 45%,var(--line))!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent,var(--blue)) 14%,transparent)!important;
+}
+
+.login-preview-panel .preview-tabs,
+.subject-preview .preview-tabs{
+  gap:7px!important;
+  padding:6px!important;
+  border-radius:18px!important;
+  background:color-mix(in srgb,var(--card) 86%,transparent)!important;
+}
+.login-preview-panel .preview-tabs .tab,
+.subject-preview .preview-tabs .tab{
+  background:transparent!important;
+  color:var(--muted)!important;
+  border:1px solid transparent!important;
+  border-radius:13px!important;
+  box-shadow:none!important;
+}
+.login-preview-panel .preview-tabs .tab:hover:not(.active),
+.subject-preview .preview-tabs .tab:hover:not(.active){
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 7%,var(--card))!important;
+  color:var(--ink)!important;
+}
+.login-preview-panel .preview-tabs .tab.active,
+.subject-preview .preview-tabs .tab.active{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--theme-accent,var(--blue)) 88%,#fff 12%),var(--theme-accent2,var(--blue2)))!important;
+  color:#fff!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 55%,var(--line))!important;
+  box-shadow:0 6px 16px color-mix(in srgb,var(--theme-accent,var(--blue)) 24%,transparent)!important;
+  transform:none!important;
+}
+
+/* Disabled Preview chrome should look deliberately inactive, not like broken buttons. */
+.preview-workspace .userbar button:disabled,
+.preview-real-progress .quick-actions button:disabled{
+  opacity:.5!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent)!important;
+  color:var(--muted)!important;
+  box-shadow:none!important;
+}
+
+/* Give live Preview Settings controls clear interaction states. */
+.preview-linked-settings .ui-theme-choice{border-radius:16px!important}
+.preview-linked-settings .ui-theme-choice:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 45%,var(--line))!important}
+.preview-linked-settings select{border-radius:12px!important;transition:border-color .16s ease,box-shadow .16s ease}
+.preview-linked-settings select:hover,.preview-linked-settings select:focus{border-color:var(--theme-accent,var(--blue))!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--blue)) 12%,transparent)!important;outline:none}
+
+@media(max-width:760px){
+  .shared-swatches .swatch{width:40px;height:40px}
+  .login-preview-panel .preview-tabs,.subject-preview .preview-tabs{gap:5px}
+}
+
+
+/* EC214 local recovery */
+.local-recovery-card{margin-top:16px;border-color:color-mix(in srgb,#f59e0b 38%,var(--line))}
+.recovery-current{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--soft);margin:10px 0}
+.recovery-current.danger{border-color:#d97706;background:color-mix(in srgb,#f59e0b 10%,var(--card))}
+.recovery-list{display:grid;gap:9px;margin-top:10px}
+.recovery-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:var(--card)}
+.recovery-row .small{margin-top:4px;line-height:1.5}.recovery-row button{flex:0 0 auto}
+.recovery-empty{padding:12px 14px;border:1px dashed var(--line);border-radius:12px;background:var(--soft)}
+@media(max-width:760px){.recovery-row{align-items:stretch;flex-direction:column}.recovery-row button{width:100%}}
+
+
+/* Emergency browser recovery */
+.emergency-recovery-btn{position:fixed;left:18px;bottom:18px;z-index:1100;border-color:color-mix(in srgb,#f59e0b 45%,var(--line))!important;background:color-mix(in srgb,#f59e0b 8%,var(--card))!important}
+.emergency-recovery-modal{width:min(860px,100%)}
+.emergency-row{display:block}.emergency-row b{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:760px){.emergency-recovery-btn{left:10px;bottom:62px}}
+
+
+/* Recovery lives inside Settings only. */
+.emergency-recovery-btn,#emergencyRecoveryOverlay{display:none!important}
+.local-recovery-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 8px}
+.local-recovery-actions button{min-height:40px}
+.local-recovery-status{min-height:18px;margin-bottom:8px;color:var(--muted)}
+@media(max-width:760px){.local-recovery-actions{display:grid;grid-template-columns:1fr}.local-recovery-actions button{width:100%}}
+
+
+/* ===== v13.9 Shared Flashcards ===== */
+.flashcard-panel-actions{display:flex;align-items:center;gap:8px}
+.flashcard-empty-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.flashcard-empty-card{min-height:160px}
+.flashcard-empty-card h3,.flashcard-start-card h2,.flashcard-complete-card h2{margin:6px 0 8px}
+.flashcard-behavior-card{margin-top:12px}
+.flashcard-feature-list{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.flashcard-feature-list span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--soft);font-size:12px;font-weight:700}
+.flashcard-library-section{margin:16px 0 24px}
+.flashcard-deck-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.flashcard-deck-tile{display:flex;flex-direction:column;gap:12px}
+.flashcard-deck-tile.cumulative{border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 48%,var(--line))}
+.flashcard-deck-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.flashcard-deck-top h3{margin:5px 0 4px}
+.flashcard-100-badge{display:inline-flex;align-items:center;justify-content:center;min-width:72px;padding:7px 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 40%,var(--line));background:color-mix(in srgb,var(--theme-accent,var(--blue)) 10%,var(--card));font-size:12px;font-weight:800;white-space:nowrap}
+.flashcard-deck-meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.flashcard-deck-meta span{padding:5px 8px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
+.flashcard-deck-actions,.flashcard-start-actions,.flashcard-play-actions{display:flex;flex-wrap:wrap;gap:9px}
+.flashcard-session-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.flashcard-session-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flashcard-session-badges>span:not(.flashcard-100-badge){padding:7px 10px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-size:12px;font-weight:700}
+.flashcard-start-card{max-width:800px;margin:0 auto}
+.flashcard-complete-card{max-width:840px;margin:0 auto;display:flex;align-items:center;gap:24px}
+.flashcard-complete-ring{width:116px;height:116px;flex:0 0 116px;border-radius:50%;display:grid;place-items:center;border:10px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 58%,var(--line));background:color-mix(in srgb,var(--theme-accent,var(--blue)) 9%,var(--card));font-size:24px;font-weight:900}
+.flashcard-play-card{max-width:900px;margin:0 auto}
+.flashcard-progress-line{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,280px);align-items:center;gap:14px;margin-bottom:16px}
+.flashcard-progress-line>div:first-child{display:flex;flex-direction:column;gap:3px}
+.flashcard-mini-bar{height:8px;border-radius:999px;background:var(--soft);overflow:hidden;border:1px solid var(--line)}
+.flashcard-mini-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--theme-accent,var(--blue)),var(--theme-accent2,var(--blue2)))}
+.flashcard-memory-card{width:100%;min-height:310px;padding:28px;border-radius:24px;border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 28%,var(--line));background:linear-gradient(145deg,color-mix(in srgb,var(--theme-accent,var(--blue)) 6%,var(--card)),var(--card));color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;box-shadow:0 18px 42px rgba(0,0,0,.10);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.flashcard-memory-card:hover{transform:translateY(-2px);box-shadow:0 24px 50px rgba(0,0,0,.15);border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 52%,var(--line))}
+.flashcard-memory-card.revealed{background:linear-gradient(145deg,color-mix(in srgb,var(--theme-accent2,var(--blue2)) 9%,var(--card)),var(--card))}
+.flashcard-side-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.flashcard-memory-card strong{font-size:clamp(24px,4vw,42px);line-height:1.25;max-width:760px}
+.flashcard-tap-cue{font-size:12px;color:var(--muted)}
+.flashcard-play-actions{justify-content:center;margin-top:16px}
+.flashcard-remembered{background:color-mix(in srgb,#22c55e 78%,var(--theme-accent,var(--blue)))!important;border-color:transparent!important;color:white!important}
+.flashcard-missed{background:color-mix(in srgb,#ef4444 78%,var(--theme-accent,var(--blue)))!important;border-color:transparent!important;color:white!important}
+.flashcard-save-note{text-align:center;margin-top:10px}
+@media(max-width:760px){
+  .flashcard-empty-grid,.flashcard-deck-grid{grid-template-columns:1fr}
+  .flashcard-panel-actions{width:100%}.flashcard-panel-actions button{width:100%}
+  .flashcard-session-head{align-items:stretch;flex-direction:column}
+  .flashcard-session-badges{justify-content:space-between}
+  .flashcard-progress-line{grid-template-columns:1fr}
+  .flashcard-memory-card{min-height:260px;padding:22px 16px;border-radius:20px}
+  .flashcard-play-actions{display:grid;grid-template-columns:1fr}
+  .flashcard-play-actions button,.flashcard-start-actions button{width:100%}
+  .flashcard-complete-card{align-items:flex-start;flex-direction:column}.flashcard-complete-ring{width:96px;height:96px;flex-basis:96px}
+}
+
+
+/* ===== v13.10 TU101 Lecture 1 ===== */
+.tu101-l1-card{scroll-margin-top:120px}
+.tu101-l1-card>ul{display:grid;gap:8px;line-height:1.58}
+.tu101-l1-card>ul li{padding-left:3px}
+.tu101-lang-toggle{display:flex;justify-content:flex-end;gap:6px;margin:0 0 10px}
+.tu101-lang-toggle button{padding:6px 10px;min-height:auto;border-radius:999px}
+.tu101-lang-toggle button.active{background:var(--theme-accent,var(--blue));color:#fff;border-color:transparent}
+.tu101-next-summary{margin-top:16px}
+body.subject-tu101 #tu101QuizLayer .quiz-shell{display:block}
+body.subject-tu101 #tu101QuizLayer .part-picker{margin-top:14px}
+body.subject-tu101 #tu101QuizLayer .quiz-library{margin-bottom:12px}
+body.subject-tu101 #tu101QuizLayer .mode-switch{margin-top:12px}
+body.subject-tu101 #tu101QuizLayer .qnav a.secondary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-weight:700}
+body.subject-tu101 #tu101QuizLayer .qnav a.secondary:hover{border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 45%,var(--line));transform:translateY(-1px)}
+@media(max-width:760px){
+  .tu101-lang-toggle{justify-content:flex-start}
+  body.subject-tu101 #tu101QuizLayer .qnav a.secondary{width:100%}
+}
+
+/* ===== v13.11 TU101 bilingual memory summary ===== */
+.tu101-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.tu101-card-lang-toggle{display:flex;gap:6px;flex:0 0 auto}
+.tu101-card-lang-toggle button{padding:6px 10px;min-height:auto;border-radius:999px}
+.tu101-card-lang-toggle button.active{background:var(--theme-accent,var(--blue));color:#fff;border-color:transparent}
+.tu101-memory-hook{margin:10px 0 14px;padding:10px 12px;border-left:4px solid var(--theme-accent,var(--blue));border-radius:8px;background:color-mix(in srgb,var(--theme-accent,var(--blue)) 8%,var(--card));font-weight:800;line-height:1.5}
+.tu101-l1-card h2{margin-top:6px}
+.tu101-l1-card>ul{margin-top:10px}
+.tu101-l1-card [data-tu-copy="th"]{line-height:1.72}
+@media(max-width:760px){.tu101-card-top{align-items:flex-start;flex-direction:column}.tu101-card-lang-toggle{width:100%}.tu101-card-lang-toggle button{flex:1}}
