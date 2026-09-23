@@ -14,3 +14,120 @@ body.subject-tu101 #quiz> :not(#tu101QuizLayer){display:none!important}
 .shared-settings-controls .setting-row{margin-top:10px}.shared-theme-choices{margin-bottom:8px}.shared-swatches{margin-bottom:10px}
 .preview-linked-settings{grid-column:1/-1}
 @media(max-width:760px){.global-settings-btn{right:10px;bottom:10px}.global-settings-overlay{padding:10px}.global-settings-modal{padding:14px}.global-settings-foot{align-items:stretch;flex-direction:column}.tu101-tags{justify-content:flex-start}}
+
+
+/* Linked Settings + Login/Preview polish hotfix */
+.shared-settings-controls{position:relative;z-index:4}
+.shared-settings-controls button,.shared-settings-controls select{pointer-events:auto!important;position:relative;z-index:5}
+.preview-linked-settings,.preview-linked-settings *{pointer-events:auto!important}
+.shared-settings-controls .ui-theme-choice,.shared-settings-controls .swatch,.shared-settings-controls select{cursor:pointer}
+
+/* Always show the five palette choices as five distinct colors. */
+.shared-swatches [data-shared-accent="navy"]{background:linear-gradient(145deg,#5279d8,#65b8e8)!important}
+.shared-swatches [data-shared-accent="violet"]{background:linear-gradient(145deg,#7564d7,#a07cf0)!important}
+.shared-swatches [data-shared-accent="forest"]{background:linear-gradient(145deg,#3b9f79,#63c9a4)!important}
+.shared-swatches [data-shared-accent="rose"]{background:linear-gradient(145deg,#bd5e7a,#df829b)!important}
+.shared-swatches [data-shared-accent="amber"]{background:linear-gradient(145deg,#a97836,#d9aa5b)!important}
+.shared-swatches .swatch{width:42px;height:42px;border-radius:12px!important;border:1px solid color-mix(in srgb,#fff 16%,var(--line))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 5px 13px rgba(0,0,0,.1)!important;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.shared-swatches .swatch:hover{transform:translateY(-2px) scale(1.045);filter:brightness(1.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 9px 18px rgba(0,0,0,.16)!important}
+.shared-swatches .swatch.active{transform:translateY(-1px);outline:2px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 72%,#fff)!important;outline-offset:3px}
+
+/* Softer, more responsive controls on Login and Preview surfaces. */
+#loginScreen .auth-card button,
+#loginScreen #loginPreviewBtn,
+.login-preview-panel button:not(.swatch),
+.subject-preview button:not(.swatch),
+.preview-workspace button:not(.swatch),
+.global-settings-btn{
+  border-radius:14px!important;
+  transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,filter .18s ease!important;
+}
+#loginScreen .auth-card button:hover:not(:disabled),
+#loginScreen #loginPreviewBtn:hover:not(:disabled),
+.login-preview-panel button:hover:not(:disabled),
+.subject-preview button:hover:not(:disabled),
+.preview-workspace button:hover:not(:disabled),
+.global-settings-btn:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 9px 22px color-mix(in srgb,var(--theme-accent,var(--blue)) 17%,transparent)!important;
+  filter:brightness(1.035);
+}
+#loginScreen .auth-card button:active:not(:disabled),
+#loginScreen #loginPreviewBtn:active:not(:disabled),
+.login-preview-panel button:active:not(:disabled),
+.subject-preview button:active:not(:disabled),
+.preview-workspace button:active:not(:disabled),
+.global-settings-btn:active:not(:disabled){transform:translateY(0) scale(.985)}
+
+#loginScreen #loginAction{
+  background:linear-gradient(135deg,var(--theme-accent,var(--blue)),var(--theme-accent2,var(--blue2)))!important;
+  border-color:transparent!important;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--theme-accent,var(--blue)) 20%,transparent);
+}
+#loginScreen #loginPreviewBtn{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 8%,var(--card))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent,var(--blue)) 26%,var(--line))!important;
+}
+#loginScreen .login-tabs button{
+  background:transparent!important;
+  border:1px solid var(--line)!important;
+  color:var(--muted)!important;
+  box-shadow:none!important;
+}
+#loginScreen .login-tabs button.active{
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 11%,var(--card))!important;
+  color:var(--theme-accent,var(--blue))!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 45%,var(--line))!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent,var(--blue)) 14%,transparent)!important;
+}
+
+.login-preview-panel .preview-tabs,
+.subject-preview .preview-tabs{
+  gap:7px!important;
+  padding:6px!important;
+  border-radius:18px!important;
+  background:color-mix(in srgb,var(--card) 86%,transparent)!important;
+}
+.login-preview-panel .preview-tabs .tab,
+.subject-preview .preview-tabs .tab{
+  background:transparent!important;
+  color:var(--muted)!important;
+  border:1px solid transparent!important;
+  border-radius:13px!important;
+  box-shadow:none!important;
+}
+.login-preview-panel .preview-tabs .tab:hover:not(.active),
+.subject-preview .preview-tabs .tab:hover:not(.active){
+  background:color-mix(in srgb,var(--theme-accent,var(--blue)) 7%,var(--card))!important;
+  color:var(--ink)!important;
+}
+.login-preview-panel .preview-tabs .tab.active,
+.subject-preview .preview-tabs .tab.active{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--theme-accent,var(--blue)) 88%,#fff 12%),var(--theme-accent2,var(--blue2)))!important;
+  color:#fff!important;
+  border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 55%,var(--line))!important;
+  box-shadow:0 6px 16px color-mix(in srgb,var(--theme-accent,var(--blue)) 24%,transparent)!important;
+  transform:none!important;
+}
+
+/* Disabled Preview chrome should look deliberately inactive, not like broken buttons. */
+.preview-workspace .userbar button:disabled,
+.preview-real-progress .quick-actions button:disabled{
+  opacity:.5!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent)!important;
+  color:var(--muted)!important;
+  box-shadow:none!important;
+}
+
+/* Give live Preview Settings controls clear interaction states. */
+.preview-linked-settings .ui-theme-choice{border-radius:16px!important}
+.preview-linked-settings .ui-theme-choice:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--theme-accent,var(--blue)) 45%,var(--line))!important}
+.preview-linked-settings select{border-radius:12px!important;transition:border-color .16s ease,box-shadow .16s ease}
+.preview-linked-settings select:hover,.preview-linked-settings select:focus{border-color:var(--theme-accent,var(--blue))!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--blue)) 12%,transparent)!important;outline:none}
+
+@media(max-width:760px){
+  .shared-swatches .swatch{width:40px;height:40px}
+  .login-preview-panel .preview-tabs,.subject-preview .preview-tabs{gap:5px}
+}
