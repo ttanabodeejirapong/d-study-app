@@ -102,3 +102,12 @@ Each lecture is separated into four focused part decks plus its own **Full Lectu
 The same card identity is preserved between a focused part and its Full Lecture deck, so v13.13 flashcard notes/images stay attached to the same question and continue to appear in Notes Hub with the flashcard question and answer as context.
 
 EC214 flashcard progress remains isolated under `d-study-flashcards::ec214::<userId>`; TU101 flashcard progress/content is unchanged.
+
+
+## v13.15 — Secondary EC214 and TU101 access tokens
+
+- Added one **secondary EC214 token** while preserving the existing EC214 credential.
+- Added one **secondary TU101 token** while preserving the existing TU101 token.
+- Either the original credential or the corresponding subject-specific secondary token unlocks that subject.
+- The secondary hashes are isolated as `EC214_SECOND_TOKEN_HASH` and `TU101_SECOND_TOKEN_HASH`, so either secondary token can be removed later without changing the original credential path.
+- No academic state, flashcard state, notes, backups, subject-isolation keys, or existing unlocked-account records are changed.
