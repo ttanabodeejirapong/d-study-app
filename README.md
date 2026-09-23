@@ -74,3 +74,13 @@ Flashcard review state is subject-isolated under `d-study-flashcards::<subjectId
 - Flashcard fronts use English exam wording; answer sides use concise English explanations with short Thai memory support.
 - Flashcard content follows the professor Lecture 1 slide first and uses the existing subject-isolated storage key `d-study-flashcards::tu101::<userId>`; EC214 flashcard data is untouched.
 - Existing TU101 quiz-bank v13.11 compatibility, notes, history, drafts, confidence tracking, backup behavior, and EC214/TU101 academic-state isolation are preserved.
+
+
+## v13.13
+
+- Flashcards now support an autosaved note field on the revealed answer side.
+- A flashcard note is stored with a subject-aware flashcard key, so TU101 and EC214 cannot share or overwrite flashcard notes.
+- Notes Hub automatically includes saved flashcard notes with the original flashcard question and answer as context.
+- Editing the note from Flashcards or from Notes Hub updates the same saved note.
+- Flashcard notes use the subject academic state, so they are included in normal subject backup/import behavior.
+- Existing flashcard progress, cumulative decks, quiz notes, and subject-isolation behavior are preserved.
