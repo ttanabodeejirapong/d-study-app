@@ -156,3 +156,50 @@ No EC214 academic state, flashcard content, access credential, or storage namesp
 - The original EC214 credential remains active and unchanged.
 - Existing local accounts that already have TU101 `subjectAccess` are not revoked by this change; the removed token simply can no longer be used for a new unlock.
 - No TU101 academic state, quiz history/drafts, flashcards, notes, backups, or storage keys were changed.
+
+
+## v13.18 — TU101 notebook-summary gap audit
+
+Audited the uploaded handwritten TU101 summaries against the current app and added missing content without deleting or replacing the existing lecture material.
+
+Content was matched by **topic**, not by forcing the handwritten page number onto the app's existing lecture numbering:
+
+- Handwritten L1 Globalization → current app Globalization module.
+- Handwritten L2 Global History → current app Global History module.
+- Handwritten L4 ASEAN Between Giants → current app ASEAN Between Giants module.
+- Handwritten L5 Political Economy / International System → added as an explicit notebook supplement to the current Lecture 5 summary rather than replacing Politics & Democratization.
+
+### Added / expanded
+
+**Globalization**
+- Industrial Revolution / WTO link: transport + communication advances lower the cost of connecting markets.
+- Full compounding-catalyst chain: 2008 financial crisis → within-country inequality → populism + COVID / biological shock + geopolitical shock.
+- Deglobalization wording from the notebook: less connected / local replaces global.
+- Power-transition bridge: China military modernization → rising power → challenge hegemon → preserve / replace.
+- Security over pure cost efficiency.
+- Supply-chain rewiring: nearshoring, reshoring, friendshoring; CHIPS examples.
+- **Reglobalization**, including internal equality / stability → international cooperation.
+
+**ASEAN Between Giants**
+- Why Southeast Asia matters: maritime oil-transit chokepoints, power-vacuum logic, unresolved post-Cold War tensions.
+- U.S.-administration details from the notebook: Obama EAS/TAC, Trump FOIP / limiting-decoupling China, Biden liberal multilateralism plus QUAD / IPEF / AUKUS / Mekong-U.S.
+- Kuik reading expansion: entrapment, abandonment, polarization, marginalization; riskification; inclusive diversification; active impartiality; prudent contradictions; dynamic-not-fixed hedging.
+
+**Global History**
+- Explicit nation-building frame: Similarity vs Difference.
+- Notebook print mechanism: printer → vernacular → more readers/profit → print-capitalism.
+- Map memory line: where we are; nationalist history: who we've always been.
+- Rama V reform mechanics: 12-minister bureaucracy, manpower / corvée transformation, Paknam 1893 urgency, Provincial Reform 1897 / commissioners, military-centralization logic.
+
+**Lecture 5 notebook supplement**
+- China / India rise → multipolarity; hybrid models.
+- Power = military + economic/financial power.
+- Open market vs national sovereignty tension.
+- Capitalism / Communism / Socialism / State Capitalism typology.
+- China "Socialist Market Economy" / SOEs + private capital mix.
+- International-system definition: actors + relationships + rules/patterns.
+- Systemic-change theory: incremental accumulation vs critical juncture; drivers include war, revolution, globalization and technology.
+
+All new summary sections include compact concept-flow visuals using the existing TU101 summary renderer.
+
+Quiz banks, flashcards, storage keys, Lecture 1 compatibility, EC214 content, the original TU101 token, and the secondary EC214 token were not changed.
