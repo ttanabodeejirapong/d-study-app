@@ -203,3 +203,37 @@ Content was matched by **topic**, not by forcing the handwritten page number ont
 All new summary sections include compact concept-flow visuals using the existing TU101 summary renderer.
 
 Quiz banks, flashcards, storage keys, Lecture 1 compatibility, EC214 content, the original TU101 token, and the secondary EC214 token were not changed.
+
+
+## v13.19 — TU101 record-safe quiz & flashcard expansion
+
+This release extends the notebook-derived v13.18 Summary additions into practice content while preserving existing quiz records.
+
+Affected TU101 app lectures:
+- Globalization
+- ASEAN Between Giants
+- Global History
+- Lecture 5 notebook supplement
+
+Per affected lecture:
+- adds a new **Part 5 • Notebook Update**;
+- adds **10 Reviewing questions**;
+- adds **10 Mastering questions**;
+- adds **10 flashcards** with new stable IDs.
+
+Record-preservation design:
+- the original four quiz parts are unchanged;
+- the existing lecture `bankVersion` values are unchanged;
+- previous attempts/history still point to the same original part IDs and question banks;
+- new questions use a new part ID, so old drafts/scores do not collide with the expansion;
+- the legacy cumulative quiz deliberately excludes the notebook-update part and therefore remains **40 questions**;
+- existing flashcard parts and card IDs are unchanged;
+- new flashcards begin unreviewed while prior remembered/missed progress remains attached to the old card IDs.
+
+After expansion, each affected lecture has:
+- **50 Reviewing questions total**;
+- **50 Mastering questions total**;
+- **50 focused flashcards total**;
+- the existing **40-question legacy cumulative quiz** remains unchanged.
+
+No TU101/EC214 storage keys or access credentials are changed.
