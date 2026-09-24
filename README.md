@@ -146,3 +146,13 @@ The shared engine remains `assets/tu101-v13.16.min.js`. Lecture 1 retains its ex
 Official scope remains **Lectures 1–6**. Climate Change / Human Security is intentionally excluded because the private official outline classifies it as **Lecture 7**, outside the midterm scope.
 
 No EC214 academic state, flashcard content, access credential, or storage namespace is changed by v13.16.
+
+
+## v13.17 — Secondary TU101 token removed
+
+- Removed only the temporary **secondary TU101 token** added in v13.15.
+- The original TU101 token remains active and unchanged.
+- The secondary EC214 token remains active and unchanged.
+- The original EC214 credential remains active and unchanged.
+- Existing local accounts that already have TU101 `subjectAccess` are not revoked by this change; the removed token simply can no longer be used for a new unlock.
+- No TU101 academic state, quiz history/drafts, flashcards, notes, backups, or storage keys were changed.
