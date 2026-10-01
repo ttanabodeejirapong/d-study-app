@@ -237,3 +237,17 @@ After expansion, each affected lecture has:
 - the existing **40-question legacy cumulative quiz** remains unchanged.
 
 No TU101/EC214 storage keys or access credentials are changed.
+
+
+## v13.20 — Secondary EC214 token removed
+
+Removed the temporary secondary EC214 token from the active runtime.
+
+Behavior after this release:
+- the original EC214 password remains active;
+- the secondary EC214 token hash and acceptance path are removed from the current runtime;
+- EC214 unlock UI now asks only for the EC214 password;
+- the TU101 credential behavior is unchanged;
+- no academic state, quiz, flashcard, notes, backup/import, or storage-key changes were made.
+
+Important: subject access is stored locally after a successful unlock. Accounts that already unlocked EC214 before this release keep that local subject-access grant; this release prevents the removed secondary token from granting new EC214 access.
