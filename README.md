@@ -251,3 +251,22 @@ Behavior after this release:
 - no academic state, quiz, flashcard, notes, backup/import, or storage-key changes were made.
 
 Important: subject access is stored locally after a successful unlock. Accounts that already unlocked EC214 before this release keep that local subject-access grant; this release prevents the removed secondary token from granting new EC214 access.
+
+
+## v13.21 — EC214 professor formula integration, Lectures 1–4
+
+Audited the current professor PDFs for EC214 Lecture 1, Lecture 2.1 (GDP), Lecture 2.2 (Unemployment & Inflation), Lecture 3 (Economic Growth), and Lecture 4 (Finance, Saving & Investment).
+
+The Summary now places professor-used formulas/equations inside the topic where they are taught rather than leaving formulas only in end-of-lecture recap areas.
+
+Coverage includes:
+- Lecture 1: producer income identity; opportunity/accounting/economic cost; profit stack; demand/supply functions; market-equilibrium condition.
+- Lecture 2.1: GDP market-value notation; expenditure approach; income approach; net operating surplus; nominal/real GDP; base-year equality; GDP per capita.
+- Lecture 2.2: three labor-market indicator formulas; real wage; CPI basket formulas; inflation; GDP deflator and deflator inflation.
+- Lecture 3: Real GDP per person; growth formulas; Rule of 70; production function; labor productivity; Real GDP identity; Neoclassical growth decomposition.
+- Lecture 4: net investment; income/saving identities; wealth annotation; net worth; asset-return formula; loanable-funds source/use identities; equilibrium; budget position identities; surplus/deficit fund identities; Ricardo–Barro full-offset condition.
+
+Source-fidelity rule:
+- The Lecture 3 Key Formula slide prints “Real GDP in previous year” as the denominator in both the Real-GDP-per-person-growth row and Population-growth row. v13.21 preserves those two printed formulas verbatim and labels them explicitly as professor-slide print rather than silently correcting them.
+
+This release changes Summary content only. Quiz banks, quiz records, flashcard IDs/progress, storage keys, subject access, and EC214/TU101 credentials are unchanged.
