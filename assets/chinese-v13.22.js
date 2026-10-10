@@ -423,26 +423,46 @@ function stopDrawing(){
  const el=document.getElementById("cnWriter");
  if(el){el.classList.remove("cn-pseudo-full");if(document.fullscreenElement===el)document.exitFullscreen?.().catch(()=>{})}
 }
-// Some native paths restore a session before this extension loads.
+// The old core restores EC214/TU101 before this module runs. Its fallback can
+// rewrite the URL to /subjects/. An early bootstrap preserves the originally
+// requested path, allowing this module to honor the caller's subject.
 ensureCard();
 if(activeUser){
  const ss=getSubjectSession();
- const requested=sessionStorage.getItem("d-study-chinese-intent")||location.pathname;
+ const requested=sessionStorage.getItem("d-study-full-route-intent")||
+  sessionStorage.getItem("d-study-chinese-intent")||location.pathname;
  const requestedPath=String(requested).split("?")[0].split("#")[0];
+ const isChineseRoute=requestedPath.startsWith(BASE);
  const explicitOtherSubject=requestedPath.startsWith("/d-study-app/")&&
-  !requestedPath.startsWith(BASE)&&
+  !isChineseRoute&&
   !["/d-study-app/","/d-study-app/login/","/d-study-app/subjects/"].includes(requestedPath);
- if(ss&&ss.subjectId===ID&&ss.userId===userId()&&ss.expiresAt>Date.now()&&!explicitOtherSubject){
+ if(explicitOtherSubject){
+  // Do not hijack a TU101 or EC214 deep link just because Chinese was last open.
+  const intended=requestedPath.startsWith("/d-study-app/tu101/")?"tu101":"ec214";
+  if(hasSubjectAccess(activeUser,intended)){
+   history.replaceState({dStudy:true},"",requested);
+   if(activeSubject!==intended)enterSubject(intended,true);
+   else applyPathRoute();
+  }else if(!activeSubject||activeSubject===ID){
+   activeSubject=null;
+   document.getElementById("appShell").style.display="none";
+   renderSubjectHub();
+  }
+ }else if(isChineseRoute){
+  if(!hasSubjectAccess(activeUser,ID))grantSubjectAccess(ID);
+  history.replaceState({dStudy:true},"",requested);
+  enterSubject(ID,true);
+ }else if(ss&&ss.subjectId===ID&&ss.userId===userId()&&ss.expiresAt>Date.now()){
   if(!hasSubjectAccess(activeUser,ID))grantSubjectAccess(ID);
   enterSubject(ID,false);
-  if(requested.includes("/chinese/")){history.replaceState({dStudy:true},"",requested);applyPathRoute()}
- }else if(requested.includes("/chinese/")){
-  if(!hasSubjectAccess(activeUser,ID))grantSubjectAccess(ID);
-  enterSubject(ID,false);history.replaceState({dStudy:true},"",requested);applyPathRoute();
- }else if(isCn())ensureCnUI();
- else renderSubjectHub();
+ }else if(isCn()){
+  ensureCnUI();
+ }else if(!activeSubject){
+  renderSubjectHub();
+ }
 }
 const subjectBackButton=document.getElementById("backToSubjectsBtn");
 if(subjectBackButton)subjectBackButton.onclick=function(){backToSubjects()};
 sessionStorage.removeItem("d-study-chinese-intent");
+sessionStorage.removeItem("d-study-full-route-intent");
 })();
