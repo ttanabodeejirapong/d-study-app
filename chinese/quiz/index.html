@@ -9,7 +9,7 @@
 (function(){
   var appearance="system";
   try{
-    try{sessionStorage.setItem("d-study-requested-path",location.pathname+location.search+location.hash)}catch(_e){}
+    try{sessionStorage.setItem("d-study-requested-path",location.pathname+location.search+location.hash);sessionStorage.setItem("d-study-chinese-intent",location.pathname+location.search+location.hash)}catch(_e){}
     var sharedPrefs=JSON.parse(localStorage.getItem("d-study-shared-preferences-v1")||"null");
     if(sharedPrefs&&sharedPrefs.appearance) appearance=sharedPrefs.appearance;
     var active=JSON.parse(localStorage.getItem("d-study-active-user")||"null");
