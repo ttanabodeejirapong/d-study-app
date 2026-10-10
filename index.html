@@ -8,9 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css"><link rel="stylesheet" href="/d-study-app/assets/ux-v13.6.min.css"><link rel="stylesheet" href="/d-study-app/assets/tu101-v13.16.min.css"><link rel="stylesheet" href="/d-study-app/assets/chinese-v13.22.css?v=13.23">
 <script>(function(){
- if(location.pathname.indexOf("/d-study-app/chinese/")===0){
-  try{sessionStorage.setItem("d-study-chinese-intent",location.pathname+location.search+location.hash)}catch(_){}
- }
+ var p=location.pathname;
+ var full=p+location.search+location.hash;
+ try{
+  if(p.indexOf("/d-study-app/")===0&&
+   p!=="/d-study-app/login/"&&p!=="/d-study-app/subjects/"){
+   sessionStorage.setItem("d-study-full-route-intent",full);
+  }
+  if(p.indexOf("/d-study-app/chinese/")===0){
+   sessionStorage.setItem("d-study-chinese-intent",full);
+  }
+ }catch(_){}
 })();</script></head>
 <body>
 
