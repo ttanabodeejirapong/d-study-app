@@ -91,7 +91,7 @@ function updateChrome(){
  const h=document.querySelector("#appShell header h1");if(h)h.textContent="D Study App • Chinese";
  const s=document.querySelector("#appShell header .sub");if(s)s.textContent="Write → Check → Repeat • autosave + subject-isolated progress";
  document.querySelectorAll("#appShell nav.tabs a[data-tab]").forEach(a=>{const slug=a.dataset.tab==="tracker"?"progress":a.dataset.tab;a.href=BASE+slug+"/"});
- const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.22 • Chinese workspace";
+ const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.22.1 • Chinese workspace";
 }
 function setCnTheme(){
  // The TU101 theme masks its own summary/quiz panels. Clear it on Chinese entry
@@ -104,9 +104,9 @@ function renderCnProgress(){
  const deckList=banks(),completed=readFlash().decks||{};
  const n=layer("tracker","cnProgressLayer");
  if(!n)return;
- n.innerHTML='<div class="cn-hero"><div><div class="eyebrow">CHINESE STUDY DASHBOARD</div><strong>Chinese • 汉语</strong><p>Subject workspace is ready. Lessons, vocabulary, summaries and quiz banks will be added separately when you approve the source material.</p><div class="cn-actions"><button type="button" data-cn-nav="flashcards">Open writing practice</button><button type="button" class="secondary" data-cn-nav="notes">Open notes</button></div></div><div class="cn-icon">✍️</div></div>'+
+ n.innerHTML='<div class="cn-hero"><div><div class="eyebrow">CHINESE STUDY DASHBOARD</div><strong>Chinese • 汉语</strong><p>Writing Flashcards for Boya Chinese Lessons 6–10 are ready. Summaries and quizzes will be added later.</p><div class="cn-actions"><button type="button" data-cn-nav="flashcards">Open writing practice</button><button type="button" class="secondary" data-cn-nav="notes">Open notes</button></div></div><div class="cn-icon">✍️</div></div>'+
  '<div class="cn-kpis"><div class="card"><div class="small">Lessons available</div><strong>0</strong></div><div class="card"><div class="small">Writing decks</div><strong>'+deckList.length+'</strong></div><div class="card"><div class="small">Completed writing cycles</div><strong>'+Object.values(completed).reduce((n,x)=>n+(Number(x.completionCount)||0),0)+'</strong></div></div>'+
- '<div class="cn-empty" style="margin-top:18px"><h3>Ready for your Chinese course</h3><p>Content is intentionally not published yet. Writing canvas is available in Flashcards as a blank practice board.</p></div>'+
+ '<div class="cn-empty" style="margin-top:18px"><h3>Ready for your Chinese course</h3><p>169 writing flashcards across five lessons are ready. Select Flashcards to practice and retry missed words.</p></div>'+
  '<div class="cn-actions"><button class="secondary" id="cnBackupExport">Export Chinese backup</button><button class="secondary" id="cnBackupImport">Import Chinese backup</button><input hidden id="cnBackupFile" type="file" accept=".json,application/json"></div>';
  n.querySelector("#cnBackupExport").onclick=()=>exportData();
  n.querySelector("#cnBackupImport").onclick=()=>n.querySelector("#cnBackupFile").click();
