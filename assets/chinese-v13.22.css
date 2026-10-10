@@ -35,3 +35,19 @@ body.subject-chinese #tracker> :not(#cnProgressLayer),body.subject-chinese #summ
 
 /* Author display:flex rules must never override the HTML hidden state. */
 #cnWriter [hidden], #cnFlashcardsLayer [hidden] { display:none!important; }
+
+/* v13.23 • Chinese writing lesson navigation follows the D Study design tokens */
+.cn-lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 19px}
+.cn-lesson-card{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cn-lesson-card .eyebrow{font-size:11px;color:var(--muted)}
+.cn-lesson-card h3{font-size:25px;margin:2px 0 1px}
+.cn-lesson-hanzi{font-size:18px;line-height:1.65;font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-weight:650;overflow-wrap:anywhere}
+.cn-lesson-card p{margin:4px 0 8px;color:var(--muted)}
+.cn-lesson-link{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;align-self:flex-start;max-width:100%;padding:11px 16px;border:1px solid var(--blue);border-radius:12px;background:var(--blue);color:white!important;text-decoration:none!important;font-weight:700;line-height:1.35;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.cn-lesson-link:hover,.cn-lesson-link:focus-visible{filter:brightness(1.1);transform:translateY(-1px)}
+.cn-lesson-shortcuts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:17px}
+.cn-lesson-shortcuts a{display:inline-flex;padding:9px 13px;color:var(--blue);text-decoration:none;font-weight:750;border:1px solid var(--line);border-radius:11px;background:var(--soft)}
+.cn-study-note{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px;color:var(--muted);font-size:13px;line-height:1.7}
+body.midnight-ui .cn-lesson-link{background:var(--mw-purple,#6d5bd0);border-color:var(--mw-purple,#6d5bd0)}
+body.neo-ui .cn-lesson-link{background:var(--neo-blue,#1677ff);border-color:var(--neo-blue,#1677ff)}
+@media(max-width:640px){.cn-lesson-grid{grid-template-columns:1fr}.cn-lesson-card h3{font-size:22px}.cn-lesson-card{padding:17px}.cn-lesson-link{width:100%}}
