@@ -251,7 +251,7 @@ function startWriter(deck){
   const lookup=new Map(drawing.queue.map(card=>[card.id,card]));
   const restoreQueue=saved.queueIds.map(id=>lookup.get(id));
   const restoreMissed=Array.isArray(saved.missedIds)?saved.missedIds.map(id=>lookup.get(id)):[];
-  if(restoreQueue.length===drawing.queue.length&&restoreQueue.every(Boolean)&&restoreMissed.every(Boolean)&&
+  if(restoreQueue.length>0&&restoreQueue.length<=drawing.queue.length&&restoreQueue.every(Boolean)&&restoreMissed.every(Boolean)&&
      Number.isInteger(saved.index)&&saved.index>=0&&saved.index<=restoreQueue.length){
    drawing.queue=restoreQueue;drawing.missed=restoreMissed;drawing.index=saved.index;
    drawing.pass=Number.isInteger(saved.pass)&&saved.pass>=0?saved.pass:0;
