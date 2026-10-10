@@ -49,7 +49,7 @@ function ensureCard(){
  const grid=document.querySelector("#subjectScreen .subject-grid");
  if(!grid||document.getElementById("subjectChineseCard"))return;
  const card=document.createElement("article");card.className="subject-card live cn-card";card.id="subjectChineseCard";card.dataset.subject=ID;
- card.innerHTML='<span class="subject-state">Ready</span><strong>Chinese</strong><span>汉语 • Writing & Study</span><small>New subject • course material pending</small><div class="subject-card-actions"><button id="cnOpen" type="button">Open Chinese</button><button id="cnPreview" class="secondary" type="button">Preview</button></div>';
+ card.innerHTML='<span class="subject-state">Ready</span><strong>Chinese</strong><span>汉语 • Writing & Study</span><small>Boya Chinese • Lessons 6–10 ready</small><div class="subject-card-actions"><button id="cnOpen" type="button">Open Chinese</button><button id="cnPreview" class="secondary" type="button">Preview</button></div>';
  grid.insertBefore(card,grid.querySelector(".subject-card.coming"));
  document.getElementById("cnOpen").onclick=()=>chooseSubject(ID);
  document.getElementById("cnPreview").onclick=()=>openChinesePreview();
@@ -60,7 +60,7 @@ function openChinesePreview(){
  panel.hidden=false;
  const unlock=document.getElementById("subjectUnlockPanel");if(unlock)unlock.hidden=true;
  if(title)title.textContent="Chinese Preview";
- body.innerHTML='<div class="cn-hero"><div><div class="eyebrow">Chinese • 汉语</div><strong>Write to remember.</strong><p>The same D Study App workspace with an interactive writing-flashcard module. Course content is intentionally empty until reviewed sources are supplied.</p><button type="button" id="cnPreviewOpen">Open Chinese</button></div><div class="cn-icon">✍️</div></div>';
+ body.innerHTML='<div class="cn-hero"><div><div class="eyebrow">Chinese • 汉语</div><strong>Write to remember.</strong><p>Boya Chinese Lessons 6–10 have dedicated writing-flashcard pages.</p><button type="button" id="cnPreviewOpen">Open Chinese</button></div><div class="cn-icon">✍️</div></div>';
  document.getElementById("cnPreviewOpen").onclick=()=>chooseSubject(ID);
  panel.scrollIntoView({block:"start",behavior:"smooth"});
 }
@@ -106,7 +106,7 @@ function renderCnProgress(){
  if(!n)return;
  n.innerHTML='<div class="cn-hero"><div><div class="eyebrow">CHINESE STUDY DASHBOARD</div><strong>Chinese • 汉语</strong><p>Writing Flashcards for Boya Chinese Lessons 6–10 are ready. Summaries and quizzes will be added later.</p><div class="cn-actions"><button type="button" data-cn-nav="flashcards">Open writing practice</button><button type="button" class="secondary" data-cn-nav="notes">Open notes</button></div></div><div class="cn-icon">✍️</div></div>'+
  '<div class="cn-kpis"><div class="card"><div class="small">Lessons available</div><strong>0</strong></div><div class="card"><div class="small">Writing decks</div><strong>'+deckList.length+'</strong></div><div class="card"><div class="small">Completed writing cycles</div><strong>'+Object.values(completed).reduce((n,x)=>n+(Number(x.completionCount)||0),0)+'</strong></div></div>'+
- '<div class="cn-empty" style="margin-top:18px"><h3>Ready for your Chinese course</h3><p>169 writing flashcards across five lessons are ready. Select Flashcards to practice and retry missed words.</p></div>'+
+ '<div class="cn-empty" style="margin-top:18px"><h3>Ready to write</h3><p>169 flashcards in five lessons. Open a lesson or browse the Flashcards tab.</p><div class="cn-lesson-shortcuts">'+deckList.map(d=>'<a href="'+chineseLessonUrl(d.lesson)+'">บท '+Number(d.lesson)+' ↗</a>').join("")+'</div></div>'+
  '<div class="cn-actions"><button class="secondary" id="cnBackupExport">Export Chinese backup</button><button class="secondary" id="cnBackupImport">Import Chinese backup</button><input hidden id="cnBackupFile" type="file" accept=".json,application/json"></div>';
  n.querySelector("#cnBackupExport").onclick=()=>exportData();
  n.querySelector("#cnBackupImport").onclick=()=>n.querySelector("#cnBackupFile").click();
@@ -143,7 +143,7 @@ enterSubject=function(subjectId,remember=true){
  loadState();
  document.getElementById("subjectScreen").style.display="none";
  document.getElementById("appShell").style.display="block";
- setCnTheme();ensureCnUI();
+ applyPreferences();setCnTheme();ensureCnUI();
  const chip=document.getElementById("userChip");if(chip)chip.textContent="👤 "+activeUser.username;
  if(!location.pathname.startsWith(BASE))history.replaceState({dStudy:true},"",BASE+"progress/");
  applyPathRoute();
@@ -234,26 +234,30 @@ function readFlash(){
 }
 function saveFlash(obj){if(obj.subjectId!==ID)return;localStorage.setItem(flashStorage(),JSON.stringify(obj))}
 function mix(arr){const x=arr.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+function chineseLessonUrl(lesson){
+ const n=Number(lesson);
+ return BASE+"flashcards/lesson-"+(Number.isInteger(n)&&n>=6&&n<=10?n:6)+"/";
+}
 function renderCnFlashcards(){
  if(!isCn())return;
  stopDrawing();
- const root=document.getElementById("flashcards");if(!root)return;
- // Put the handwriting workspace BEFORE the deck picker, so it is immediately
- // visible at the tapped button's position, including on narrow iPad screens.
- root.innerHTML='<div id="cnFlashcardsLayer"><div class="cn-write" id="cnWritingMount"></div><div id="cnDeckSelection">'+
- '<div class="cn-intro"><div class="eyebrow">ACTIVE RECALL • HANDWRITING</div><h2>Chinese Writing Flashcards</h2><p>Choose Lesson 6–10, write each Hanzi from Pinyin, check the correct answer, and repeat missed words until 100%.</p></div>'+
- '<div class="cn-decks" id="cnDeckList"></div></div></div>';
- const decks=banks(),list=document.getElementById("cnDeckList"),stored=readFlash().decks;
- list.innerHTML=decks.map(d=>'<div class="cn-deck"><div><b>'+esc(d.label||d.id)+'</b><div class="small">'+d.cards.length+' words • 100% × '+(stored[d.id]?.completionCount||0)+'</div></div><button type="button" data-cn-deck="'+esc(d.id)+'">✍ Practice writing</button></div>').join("")+
- '<div class="cn-empty"><h3>'+(!decks.length?"Writing engine is ready":"Test the handwriting grid")+'</h3><p>Blank practice is not graded and will not change saved word progress.</p><button type="button" id="cnBlankStart">Open blank practice board</button></div>';
- // Delegate from the stable tab root. Re-rendering the deck list no longer drops
- // click handlers; touch/click targets work in both light and dark app themes.
- root.onclick=function(e){
-  const b=e.target.closest("button[data-cn-deck]");
-  if(b&&root.contains(b)){e.preventDefault();const d=banks().find(x=>x.id===b.dataset.cnDeck);if(d)startWriter(d);return}
-  const sandbox=e.target.closest("#cnBlankStart");
-  if(sandbox&&root.contains(sandbox)){e.preventDefault();startWriter(null)}
- };
+ const root=document.getElementById("flashcards");
+ if(!root)return;
+ const decks=banks(),stored=readFlash().decks||{};
+ root.innerHTML='<div id="cnFlashcardsLayer">'+
+ '<div class="cn-intro"><div class="eyebrow">CHINESE • ACTIVE RECALL</div><h2>✍ Chinese Writing Flashcards</h2><p>Choose a lesson to open its full handwriting practice page. Each lesson has its own link. Write from Pinyin, check the Hanzi, and retry missed words until 100%.</p></div>'+
+ '<div class="cn-lesson-grid">'+decks.map(d=>{
+  const complete=Number(stored[d.id]?.completionCount)||0;
+  return '<article class="card cn-lesson-card">'+
+  '<div class="eyebrow">BOYA CHINESE • LESSON '+Number(d.lesson)+'</div>'+
+  '<h3>บท '+Number(d.lesson)+'</h3>'+
+  '<div class="cn-lesson-hanzi">'+esc(d.title||"")+'</div>'+
+  '<p class="small">'+d.cards.length+' คำศัพท์ • จำครบ 100% × '+complete+' รอบ</p>'+
+  '<a class="cn-lesson-link" href="'+chineseLessonUrl(d.lesson)+'" aria-label="Practice writing lesson '+Number(d.lesson)+'">✍ Practice writing <span aria-hidden="true">↗</span></a>'+
+  '</article>';
+ }).join("")+'</div>'+
+ '<div class="cn-study-note"><b>Study mode:</b> Fullscreen handwriting grid, reveal answer, Remembered / Try again, and locally saved progress. Uses the same writing engine as the standalone version.</div>'+
+ '</div>';
 }
 function startWriter(deck){
  drawing.deck=deck;drawing.blank=!deck;drawing.queue=deck?mix(deck.cards.filter(c=>c.id&&c.h&&c.p)):[];drawing.missed=[];
@@ -434,5 +438,7 @@ if(activeUser){
  }else if(isCn())ensureCnUI();
  else renderSubjectHub();
 }
+const subjectBackButton=document.getElementById("backToSubjectsBtn");
+if(subjectBackButton)subjectBackButton.onclick=function(){backToSubjects()};
 sessionStorage.removeItem("d-study-chinese-intent");
 })();
