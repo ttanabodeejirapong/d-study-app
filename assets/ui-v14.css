@@ -1,0 +1,54 @@
+/* D Study App 14.0 — Shared, live Theme + Accent + Tactile UI layer.
+ * Pure presentation: no academic storage, quiz answers, records or subject routes.
+ * Load AFTER core / UX / TU101 / Chinese styles.
+ */
+:root{--v14-accent:var(--theme-accent,var(--blue,#1f4e78));--v14-accent2:var(--theme-accent2,var(--blue2,#2c6b9f));--v14-panel:var(--card,#fff);--v14-ink:var(--ink,#172033);--v14-muted:var(--muted,#6b7280);--v14-border:var(--line,#dbe2ea);--v14-quiet:var(--soft,#eef3f8);--v14-focus:color-mix(in srgb,var(--v14-accent) 40%,transparent);--v14-shadow:color-mix(in srgb,var(--v14-accent) 17%,transparent)}
+body.neo-ui{--v14-panel:var(--neo-card,var(--card));--v14-ink:var(--neo-ink,var(--ink));--v14-muted:var(--neo-muted,var(--muted));--v14-border:var(--neo-line,var(--line));--v14-quiet:var(--neo-card-2,var(--soft))}
+body.midnight-ui{--v14-panel:var(--mw-surface,var(--card));--v14-ink:var(--mw-ink,var(--ink));--v14-muted:var(--mw-muted,var(--muted));--v14-border:var(--mw-line,var(--line));--v14-quiet:var(--mw-surface-2,var(--soft))}
+body{--blue:var(--v14-accent);--blue2:var(--v14-accent2)}
+/* Reading surfaces across the app: preserve each theme's silhouette. */
+body :is(.cn-card,.cn-lesson-card,.cn-empty,.cn-study-note,.cn-deck,.cn-hero,.cn-writer,.cn-note,.cn-lesson-shortcuts a){border-color:var(--v14-border);color:var(--v14-ink)}
+body :is(.cn-empty,.cn-study-note,.cn-deck,.cn-hero,.cn-writer,.cn-note){background:var(--v14-panel)}
+body :is(.cn-empty,.cn-study-note,.cn-lesson-card p,.cn-hero p,.cn-intro p){color:var(--v14-muted)}
+body .cn-lesson-hanzi{color:var(--v14-ink)}
+body .cn-lesson-card{background:var(--v14-panel)!important;border-color:var(--v14-border)!important}
+body .cn-lesson-grid .cn-lesson-card:hover{border-color:color-mix(in srgb,var(--v14-accent) 42%,var(--v14-border))!important}
+/* The primary hue must follow the Settings accent in Classic, Neo and Midnight. */
+body .cn-lesson-link,body .cn-lesson-link:visited{background:linear-gradient(125deg,var(--v14-accent),var(--v14-accent2))!important;border-color:var(--v14-accent)!important;color:#fff!important}
+body .cn-lesson-shortcuts a{background:color-mix(in srgb,var(--v14-accent) 8%,var(--v14-panel))!important;color:var(--v14-accent)!important;border-color:color-mix(in srgb,var(--v14-accent) 26%,var(--v14-border))!important}
+body :is(#loginScreen,#subjectScreen,#appShell) :is(.eyebrow,.summary-kicker,.summary-link,.lecture-no,.slide-no){--blue:var(--v14-accent)}
+body .subject-card.live{border-color:color-mix(in srgb,var(--v14-accent) 24%,var(--v14-border));background:var(--v14-panel);color:var(--v14-ink)}
+body .subject-card.live:hover{border-color:var(--v14-accent);box-shadow:0 12px 30px var(--v14-shadow)}
+body .subject-card .subject-state{color:var(--v14-accent)}
+body .subject-card .subject-card-actions button:not(.secondary){background:var(--v14-accent)!important;color:#fff!important}
+body :is(.login-tabs button.active,.quiz-progress>div,.status-fill){background:var(--v14-accent)}
+body :is(.mode-btn.active,.part-btn.active,.ui-theme-choice.active,.qnum.current,.library-link.active,.swatch.active){border-color:var(--v14-accent)!important}
+body :is(.ui-theme-choice-icon,.subject-back-btn,.session-badge,.note-source-pill){--blue:var(--v14-accent)}
+body :is(.mode-btn.active,.part-btn.active,.ui-theme-choice.active,.library-link.active){box-shadow:0 0 0 2px color-mix(in srgb,var(--v14-accent) 13%,transparent)!important}
+body .cn-square{border-color:var(--v14-accent)}
+/* Make neutral secondary actions inherit their theme and hover tint. */
+body :is(.cn-lesson-shortcuts a,.cn-deck button.secondary,.cn-actions button.secondary,.cn-writer button.secondary){color:var(--v14-ink);border-color:var(--v14-border);background:var(--v14-quiet)}
+body :is(.cn-lesson-shortcuts a,.cn-deck button.secondary,.cn-actions button.secondary,.cn-writer button.secondary):hover{background:color-mix(in srgb,var(--v14-accent) 11%,var(--v14-quiet));border-color:var(--v14-accent)}
+/* Unified tap affordance, including semantic buttons without recoloring their meaning. */
+body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,a.cn-lesson-shortcuts a,a.subject-back-btn,a.recording-link,a.summary-link,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum,.flashcard-deck,.flashcard-choice,.flashcard-action){
+ -webkit-tap-highlight-color:transparent;
+ touch-action:manipulation;
+ transition:transform .14s cubic-bezier(.2,.85,.25,1),filter .14s ease,box-shadow .16s ease,border-color .16s ease,background-color .17s ease,color .15s ease;
+}
+body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,a.cn-lesson-shortcuts a,a.subject-back-btn,a.recording-link,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum):not(:disabled):not([aria-disabled="true"]):hover{
+ filter:brightness(1.065);
+}
+body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,a.cn-lesson-shortcuts a,a.subject-back-btn,a.recording-link,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum):not(:disabled):not([aria-disabled="true"]):active,
+body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,a.cn-lesson-shortcuts a,a.subject-back-btn,a.recording-link,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum).d14-pressed{
+ transform:translateY(2px) scale(.973)!important;filter:brightness(.92)!important;
+ box-shadow:inset 0 2px 8px rgba(0,0,0,.18),0 0 0 3px color-mix(in srgb,var(--v14-accent) 23%,transparent)!important;
+}
+body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum):focus-visible{outline:3px solid var(--v14-accent);outline-offset:3px}
+body :is(button,input,textarea,select):disabled,body [aria-disabled="true"]{cursor:not-allowed;opacity:.6}
+body :is(input,textarea,select):focus-visible{outline:2px solid var(--v14-accent);outline-offset:2px;box-shadow:0 0 0 3px color-mix(in srgb,var(--v14-accent) 13%,transparent)}
+/* A tap creates a brief ink pulse. It never captures or alters click behavior. */
+.d14-ripple-host{position:relative!important;isolation:isolate}
+.d14-ripple{position:absolute!important;inset:auto!important;display:block!important;border-radius:999px!important;background:color-mix(in srgb,#fff 40%,var(--v14-accent))!important;opacity:.32;transform:translate(-50%,-50%) scale(.12);animation:d14-pulse .43s cubic-bezier(.2,.7,.25,1) forwards;pointer-events:none!important;z-index:8}
+@keyframes d14-pulse{to{opacity:0;transform:translate(-50%,-50%) scale(2.15)}}
+@media(hover:none){body :is(button,a.tab,a.cn-lesson-link,.ui-theme-choice,.mode-btn,.part-btn){min-height:38px}}
+@media(prefers-reduced-motion:reduce){body :is(button,a.tab,a.quick-primary,a.quick-secondary,a.library-link,a.cn-lesson-link,a.cn-lesson-shortcuts a,.subject-card.live,.ui-theme-choice,.part-btn,.mode-btn,.qnum){transition:none!important}.d14-ripple{animation:none!important;opacity:0!important}}
