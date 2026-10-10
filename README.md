@@ -6,6 +6,15 @@ The current runtime code on `main` is the source of truth. Internal handoff mate
 
 Before making changes, read `AGENTS.md`.
 
+## v14.0 — Unified theme and tactile controls (October 2026)
+
+- New `assets/ui-v14.css` gives Progress, Summary, Quiz, Flashcards, Notes, Settings, Login and Subject Picker a single live Theme/Accent design language. Classic, Neo and Midnight respect navy, violet, forest, rose and amber in light/dark mode.
+- Buttons and clickable study cards respond to touch, mouse and keyboard with subtle press movement, focus feedback and an optional ink ripple; reduced-motion preferences are respected.
+- Chinese writing uses the same shared palette in `assets/writing-v14.css`, syncing changes to appearance, accent, font, and text size from `d-study-shared-preferences-v1` via `assets/writing-v14.js`.
+- All five Chinese writing routes (Lessons 6–10) use the same page and keep their stable 169 card IDs and local progress unchanged.
+- No EC214/TU101 quiz, summary, note, flashcard, access, or academic-storage engines were modified for this UI release.
+- Deployment verification includes static integration, JS syntax, 15 color-token combinations, lesson URL and source-word checks. Full real-device testing remains desirable.
+
 ## Data safety — subject isolation is mandatory
 
 EC214, TU101, and every future subject must remain independent at the academic-data level.
