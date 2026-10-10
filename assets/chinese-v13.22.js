@@ -236,14 +236,24 @@ function saveFlash(obj){if(obj.subjectId!==ID)return;localStorage.setItem(flashS
 function mix(arr){const x=arr.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
 function renderCnFlashcards(){
  if(!isCn())return;
+ stopDrawing();
  const root=document.getElementById("flashcards");if(!root)return;
- root.innerHTML='<div id="cnFlashcardsLayer"><div class="cn-intro"><div class="eyebrow">ACTIVE RECALL • HANDWRITING</div><h2>Chinese Writing Flashcards</h2><p>Recall each character by writing it, compare with the correct Hanzi, then mark Remembered or Try again. Missed cards repeat until you remember every card. No vocabulary has been imported yet.</p></div>'+
- '<div class="cn-decks" id="cnDeckList"></div><div class="cn-write" id="cnWritingMount"></div></div>';
+ // Put the handwriting workspace BEFORE the deck picker, so it is immediately
+ // visible at the tapped button's position, including on narrow iPad screens.
+ root.innerHTML='<div id="cnFlashcardsLayer"><div class="cn-write" id="cnWritingMount"></div><div id="cnDeckSelection">'+
+ '<div class="cn-intro"><div class="eyebrow">ACTIVE RECALL • HANDWRITING</div><h2>Chinese Writing Flashcards</h2><p>Choose Lesson 6–10, write each Hanzi from Pinyin, check the correct answer, and repeat missed words until 100%.</p></div>'+
+ '<div class="cn-decks" id="cnDeckList"></div></div></div>';
  const decks=banks(),list=document.getElementById("cnDeckList"),stored=readFlash().decks;
- list.innerHTML=decks.map(d=>'<div class="cn-deck"><div><b>'+esc(d.label||d.id)+'</b><div class="small">'+d.cards.length+' words • 100% × '+(stored[d.id]?.completionCount||0)+'</div></div><button data-cn-deck="'+esc(d.id)+'">Practice writing</button></div>').join("")+
- '<div class="cn-empty"><h3>'+(!decks.length?"Writing engine is ready":"Try the canvas")+'</h3><p>Practice on a blank grid to test finger, mouse or stylus drawing. No words, scores or progress are recorded in this demo.</p><button type="button" id="cnBlankStart">Open blank practice board</button></div>';
- document.getElementById("cnBlankStart").onclick=()=>startWriter(null);
- list.querySelectorAll("[data-cn-deck]").forEach(b=>b.onclick=()=>{const d=banks().find(x=>x.id===b.dataset.cnDeck);if(d)startWriter(d)});
+ list.innerHTML=decks.map(d=>'<div class="cn-deck"><div><b>'+esc(d.label||d.id)+'</b><div class="small">'+d.cards.length+' words • 100% × '+(stored[d.id]?.completionCount||0)+'</div></div><button type="button" data-cn-deck="'+esc(d.id)+'">✍ Practice writing</button></div>').join("")+
+ '<div class="cn-empty"><h3>'+(!decks.length?"Writing engine is ready":"Test the handwriting grid")+'</h3><p>Blank practice is not graded and will not change saved word progress.</p><button type="button" id="cnBlankStart">Open blank practice board</button></div>';
+ // Delegate from the stable tab root. Re-rendering the deck list no longer drops
+ // click handlers; touch/click targets work in both light and dark app themes.
+ root.onclick=function(e){
+  const b=e.target.closest("button[data-cn-deck]");
+  if(b&&root.contains(b)){e.preventDefault();const d=banks().find(x=>x.id===b.dataset.cnDeck);if(d)startWriter(d);return}
+  const sandbox=e.target.closest("#cnBlankStart");
+  if(sandbox&&root.contains(sandbox)){e.preventDefault();startWriter(null)}
+ };
 }
 function startWriter(deck){
  drawing.deck=deck;drawing.blank=!deck;drawing.queue=deck?mix(deck.cards.filter(c=>c.id&&c.h&&c.p)):[];drawing.missed=[];
@@ -261,13 +271,16 @@ function startWriter(deck){
   }
  }
  const mount=document.getElementById("cnWritingMount");if(!mount)return;
+ const picker=document.getElementById("cnDeckSelection");
+ if(picker)picker.hidden=true;
+ mount.hidden=false;
  mount.innerHTML='<div class="cn-writer" id="cnWriter"><div class="cn-writer-top"><div><strong>✍️ Writing practice</strong><span id="cnWriterPosition"></span></div><div class="cn-writer-tools"><button type="button" class="secondary" id="cnFs" aria-label="Toggle fullscreen">⛶ Fullscreen</button><button type="button" class="secondary" id="cnCloseWriter">✕</button></div></div>'+
  '<div class="cn-writer-stage" id="cnWriterStage"><div class="cn-writer-hint" id="cnWriterHint"></div><div class="cn-pinyin" id="cnPinyin"></div><div class="cn-square-zone" id="cnZone"><div class="cn-square" id="cnSquare"><canvas id="cnCanvas" aria-label="Chinese handwriting area"></canvas></div></div></div>'+
  '<div class="cn-reveal" id="cnReveal" hidden><div class="cn-compare"><div><div class="cn-caption">Your writing</div><div class="cn-compare-box"><canvas id="cnCompare"></canvas></div></div><div><div class="cn-caption">Correct answer</div><div class="cn-compare-box cn-hanzi" id="cnAnswer"></div></div></div><div class="cn-pinyin" id="cnRevealPinyin"></div><div class="cn-answer-meaning" id="cnMeaning"></div></div>'+
  '<div class="cn-writer-actions" id="cnDrawActions"><button type="button" class="secondary" id="cnClear">Clear</button><button type="button" id="cnCheck">Check writing</button></div>'+
  '<div class="cn-writer-actions" id="cnRateActions" hidden><button type="button" class="secondary" id="cnAgain">Try again</button><button type="button" id="cnYes">Remembered ✓</button></div></div>';
  const q=id=>document.getElementById(id);
- q("cnCloseWriter").onclick=()=>{stopDrawing();mount.innerHTML="";renderCnFlashcards()};
+ q("cnCloseWriter").onclick=()=>{renderCnFlashcards();document.getElementById("cnFlashcardsLayer")?.scrollIntoView({block:"start",behavior:"auto"})};
  q("cnFs").onclick=toggleFs;
  q("cnClear").onclick=()=>{drawing.strokes=[];painting();saveCurrentStrokes()};
  q("cnCheck").onclick=checkWriting;
@@ -285,7 +298,13 @@ function startWriter(deck){
   drawing.observer.observe(q("cnZone"));
  }
  window.addEventListener("resize",layoutSquare);
- requestAnimationFrame(layoutSquare);
+ // The original writer was appended below all decks. Its button appeared
+ // broken because the canvas opened off-screen, often several swipes lower.
+ requestAnimationFrame(()=>{
+  layoutSquare();
+  const writer=document.getElementById("cnWriter");
+  if(writer){writer.tabIndex=-1;writer.scrollIntoView({block:"start",behavior:"auto"});writer.focus({preventScroll:true})}
+ });
 }
 function currentCard(){return drawing.blank?null:drawing.queue[drawing.index]||null}
 function renderWritingCard(){
@@ -298,7 +317,7 @@ function renderWritingCard(){
    p.completionCount++;p.lastCompletedAt=new Date().toISOString();p.session=null;store.decks[d.id]=p;saveFlash(store);
    q("cnWriterStage").innerHTML='<div class="cn-empty"><h3>100% Remembered ✓</h3><p>You cleared every writing flashcard, including retries.</p><button type="button" id="cnDone">Back to flashcards</button></div>';
    q("cnDrawActions").hidden=true;q("cnRateActions").hidden=true;
-   q("cnDone").onclick=()=>renderCnFlashcards();return;
+   q("cnDone").onclick=()=>{renderCnFlashcards();document.getElementById("cnFlashcardsLayer")?.scrollIntoView({block:"start",behavior:"auto"})};return;
   }
  }
  const card=currentCard();drawing.review=false;drawing.strokes=[];
