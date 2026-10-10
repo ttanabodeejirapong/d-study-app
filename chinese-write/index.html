@@ -1,4 +1,4 @@
-<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><title>D Study App • Chinese Writing • Lessons 6–10</title><style>
+<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><title>D Study App v14 • Chinese Writing • Lessons 6–10</title><style>
 :root{--bg:#0b1019;--card:#131d2d;--ink:#eef5ff;--muted:#98a8be;--blue:#4e91d8;--blue2:#76b9f7;--line:#34465a;--soft:#1b2c42}
 *{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Thai",system-ui,Arial,sans-serif;min-height:100dvh}
 body.light{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--blue:#1f4e78;--blue2:#2c6b9f;--line:#dbe2ea;--soft:#eef3f8;color-scheme:light}
@@ -70,8 +70,8 @@ body.light .deck-link{color:var(--blue)}
 body.light .study-footer a{color:var(--blue)}
 @media(min-width:790px){.layout{grid-template-columns:minmax(190px,250px) minmax(0,1fr)}}
 @media(max-width:620px){.toplinks{margin-top:9px}.toplinks a{font-size:11px;padding:6px 8px}}
-</style></head><body>
-<header><h1>D Study App • Chinese ✍️</h1><p class="study-sub">Boya Chinese Elementary II • Writing Flashcards • บท 6–10</p><nav class="toplinks" aria-label="Study navigation"><a href="/d-study-app/chinese/flashcards/">← Chinese Flashcards</a><a href="/d-study-app/chinese/progress/">Chinese Dashboard</a><a href="/d-study-app/">D Study App</a></nav></header>
+</style><link rel="stylesheet" href="/d-study-app/assets/writing-v14.css?v=14.0"></head><body>
+<header><h1>D Study App • Chinese ✍️</h1><p class="study-sub">Boya Chinese Elementary II • Writing Flashcards • บท 6–10 • v14</p><nav class="toplinks" aria-label="Study navigation"><a href="/d-study-app/chinese/flashcards/">← Chinese Flashcards</a><a href="/d-study-app/chinese/progress/">Chinese Dashboard</a><a href="/d-study-app/">D Study App</a></nav></header>
 <main><div id="courseSection"><div class="layout"><aside class="card"><h2>เลือกบทเรียน</h2><div id="lessons" class="lessons"></div></aside>
 <section class="card"><div class="meta">CHINESE WRITING FLASHCARDS · 169 WORDS</div><h2 id="deckTitle"></h2><p class="muted">อ่านพินอิน → เขียนด้วยนิ้วหรือปากกา → เฉลยเทียบตัวจีน → เลือกจำได้/ยังจำไม่ได้</p><div class="stats" id="summary"></div><div class="tips">✍️ ช่องเขียนจะไม่ขยับระหว่างลากเส้น · รองรับเต็มจอ · สุ่มคำและวนคำที่ยังจำไม่ได้ซ้ำ · บันทึกอัตโนมัติในเบราว์เซอร์นี้</div><div class="panel-actions start"><label for="order">ลำดับ:</label><select id="order" style="background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px"><option value="random">สุ่มคำศัพท์</option><option value="ordered">เรียงตามหนังสือ</option></select><button id="startBtn">เริ่มฝึกเขียน</button><button class="secondary" id="reset">ล้างรอบที่ค้างอยู่</button></div><p id="source" class="book-ref"></p><div id="saveStatus" class="meta"></div></section></div></div>
 <section id="writer" aria-label="Chinese handwriting flashcards">
@@ -1698,4 +1698,4 @@ document.addEventListener("fullscreenchange",()=>requestAnimationFrame(layout));
 q("reset").onclick=()=>{if(!confirm("เริ่มบทนี้ใหม่? ความคืบหน้ารอบที่ค้างอยู่จะถูกล้าง แต่จำนวนรอบที่ทำสำเร็จยังคงอยู่"))return;
  const s=saved(),p=s.decks[deck.id]||{completionCount:0};p.session=null;s.decks[deck.id]=p;persist(s);showOverview()};
 showOverview();
-})();</script></body></html>
+})();</script><script src="/d-study-app/assets/writing-v14.js?v=14.0"></script><script src="/d-study-app/assets/ui-v14.js?v=14.0"></script></body></html>
