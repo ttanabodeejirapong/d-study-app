@@ -1,0 +1,1656 @@
+<!doctype html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><title>D Study App • Chinese Writing • Lessons 6–10</title><style>
+:root{--bg:#0b1019;--card:#131d2d;--ink:#eef5ff;--muted:#98a8be;--blue:#4e91d8;--blue2:#76b9f7;--line:#34465a;--soft:#1b2c42}
+*{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Thai",system-ui,Arial,sans-serif;min-height:100dvh}
+body.light{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--blue:#1f4e78;--blue2:#2c6b9f;--line:#dbe2ea;--soft:#eef3f8;color-scheme:light}
+button{font:inherit;cursor:pointer;background:var(--blue);border:1px solid transparent;color:#fff;border-radius:11px;font-size:14px;font-weight:700;padding:11px 16px}button.secondary{background:var(--soft);color:var(--ink);border-color:var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+header{background:linear-gradient(135deg,#142e51,#1f4e78);color:#fff;padding:22px max(16px,calc((100vw - 1180px)/2))}
+header h1{font-size:clamp(21px,3.3vw,29px);margin:0 0 5px}header p{font-size:13px;color:#d6e6f6;margin:0}
+main{max-width:1180px;margin:0 auto;padding:21px 16px 54px}.meta{font-size:12px;color:var(--muted)}
+h2{font-size:21px;margin:0 0 8px}p{line-height:1.65}.layout{display:grid;grid-template-columns:minmax(205px,270px) minmax(0,1fr);gap:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:18px;box-shadow:0 7px 27px #00000012}
+.lessons{display:flex;flex-direction:column;gap:9px}.lesson{border:1px solid var(--line);border-radius:13px;padding:11px 13px;background:var(--soft);text-align:left;color:var(--ink);width:100%;font-weight:650;line-height:1.45}
+.lesson.active{outline:2px solid var(--blue);background:color-mix(in srgb,var(--blue) 17%,var(--card))}
+.lesson small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:4px}
+.panel-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.muted{color:var(--muted)}.font-hanzi{font-family:"Noto Serif SC","Noto Sans SC","PingFang SC","Microsoft YaHei",serif}
+.stats{display:flex;gap:11px;flex-wrap:wrap;margin:14px 0}.stat{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:9px 13px;font-size:13px}
+.stat b{font-size:19px;display:block}.start{margin-top:14px}.tips{background:var(--soft);border:1px solid var(--line);padding:12px 14px;border-radius:13px;font-size:13px;line-height:1.8}
+#writer{display:none;position:relative;flex-direction:column;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:18px;overflow:hidden;height:min(79dvh,750px);min-height:420px;contain:layout style}
+#writer.visible{display:flex}#writer:fullscreen,#writer.pseudo{display:flex;position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-height:none;min-height:0;margin:0;border:0;border-radius:0;z-index:300;contain:layout style;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:var(--bg)}
+.writer-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 13px;gap:8px;flex:none}.writer-head .title{font-weight:800;font-size:13px}.writer-head .pos{font-size:12px;color:var(--muted);white-space:nowrap}.writer-head button{padding:7px 10px;font-size:12px}
+.progress{height:5px;background:var(--soft);width:100%}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--blue2));transition:width .2s}
+.write-pane{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;min-height:0;gap:7px;padding:9px 12px}.hint{font-size:12px;color:var(--muted);text-align:center}.pinyin{font-size:clamp(21px,5vw,34px);font-weight:750;color:var(--blue2);text-align:center}
+.square-zone{flex:1;min-height:0;min-width:0;display:flex;justify-content:center;align-items:center;width:100%;overflow:hidden;touch-action:none}
+.square{width:240px;height:240px;flex:none;border:2px solid var(--blue);border-radius:12px;position:relative;background:var(--card);overflow:hidden;touch-action:none}
+.square:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,transparent calc(50% - .5px),color-mix(in srgb,var(--blue) 22%,transparent) 50%,transparent calc(50% + .5px)),linear-gradient(90deg,transparent calc(50% - .5px),color-mix(in srgb,var(--blue) 22%,transparent) 50%,transparent calc(50% + .5px))}
+.square:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(45deg,transparent calc(50% - .6px),color-mix(in srgb,var(--blue) 15%,transparent) 50%,transparent calc(50% + .6px)),linear-gradient(-45deg,transparent calc(50% - .6px),color-mix(in srgb,var(--blue) 15%,transparent) 50%,transparent calc(50% + .6px))}
+#draw{position:relative;display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}
+.controls{padding:12px 15px 15px;display:flex;gap:10px;justify-content:center;flex:none}.controls button{min-width:115px}
+#answerPane{display:none;flex:1;min-height:0;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:10px}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:12px;max-width:100%}.compare-item{text-align:center;min-width:0}.compare-item small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.compare-box{width:100%;aspect-ratio:1/1;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}.compare-box canvas{width:100%;height:100%}
+#correct{font-size:clamp(27px,6vw,56px);text-align:center;overflow-wrap:anywhere;line-height:1.15}.meaning{font-size:19px;font-weight:800;text-align:center}.english{font-size:12px;color:var(--muted);text-align:center}.book-ref{font-size:11px;color:var(--muted)}
+#donePane{display:none;align-items:center;justify-content:center;flex-direction:column;flex:1;gap:16px;padding:20px;text-align:center}
+[hidden]{display:none!important}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:8px 20px 30px}
+@media(max-width:790px){.layout{grid-template-columns:1fr}.lessons{display:grid;grid-template-columns:repeat(5,minmax(118px,1fr));overflow-x:auto;gap:7px}.lesson{font-size:13px}.lesson small{font-size:11px}}
+@media(max-width:620px){header{padding:15px 14px}main{padding:12px 10px}.card{padding:12px}.lessons{grid-template-columns:repeat(5,135px)}#writer{height:72dvh;min-height:390px}#writer:fullscreen,#writer.pseudo{height:100dvh}.writer-head{padding:7px}.controls{padding:8px;gap:7px}.controls button{min-width:90px;flex:1;font-size:13px;padding:11px 7px}.compare{grid-template-columns:repeat(2,minmax(0,125px))}.pinyin{font-size:25px}}
+@media(max-height:650px){#writer:fullscreen .write-pane,#writer.pseudo .write-pane{padding:3px;gap:3px}#writer:fullscreen .controls,#writer.pseudo .controls{padding:6px}}
+</style></head><body>
+<header><h1>D Study App • Chinese ✍️</h1><p>HSK / Boya Chinese Elementary II • เขียนตัวจีนเพื่อจำศัพท์สอบ บท 6–10</p></header>
+<main><div id="courseSection"><div class="layout"><aside class="card"><h2>เลือกบทเรียน</h2><div id="lessons" class="lessons"></div></aside>
+<section class="card"><div class="meta">CHINESE WRITING FLASHCARDS · 169 WORDS</div><h2 id="deckTitle"></h2><p class="muted">อ่านพินอิน → เขียนด้วยนิ้วหรือปากกา → เฉลยเทียบตัวจีน → เลือกจำได้/ยังจำไม่ได้</p><div class="stats" id="summary"></div><div class="tips">✍️ ช่องเขียนจะไม่ขยับระหว่างลากเส้น · รองรับเต็มจอ · สุ่มคำและวนคำที่ยังจำไม่ได้ซ้ำ · บันทึกอัตโนมัติในเบราว์เซอร์นี้</div><div class="panel-actions start"><label for="order">ลำดับ:</label><select id="order" style="background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px"><option value="random">สุ่มคำศัพท์</option><option value="ordered">เรียงตามหนังสือ</option></select><button id="startBtn">เริ่มฝึกเขียน</button><button class="secondary" id="reset">ล้างรอบที่ค้างอยู่</button></div><p id="source" class="book-ref"></p><div id="saveStatus" class="meta"></div></section></div></div>
+<section id="writer" aria-label="Chinese handwriting flashcards">
+ <div class="writer-head"><div><span class="title">✍️ 写字练习</span><span class="pos" id="writerPos"></span></div><div class="panel-actions"><button id="fullscreen" class="secondary">⛶ เต็มจอ</button><button id="close" class="secondary">✕ ปิด</button></div></div><div class="progress"><div id="progressFill"></div></div>
+ <div id="writePane" class="write-pane"><div class="hint" id="hint"></div><div id="wordPinyin" class="pinyin"></div><div class="square-zone" id="zone"><div id="square" class="square"><canvas id="draw"></canvas></div></div></div>
+ <div id="answerPane"><div class="compare"><div class="compare-item"><small>ที่คุณเขียน</small><div class="compare-box"><canvas id="compare"></canvas></div></div><div class="compare-item"><small>คำตอบ</small><div class="compare-box font-hanzi" id="correct"></div></div></div><div class="pinyin" id="answerPinyin"></div><div id="meaning" class="meaning"></div><div id="english" class="english"></div><div id="bookPage" class="book-ref"></div></div>
+ <div id="donePane"></div>
+ <div class="controls" id="writeControls"><button class="secondary" id="undo">↶ ย้อนเส้น</button><button class="secondary" id="clear">ล้าง</button><button id="check">ดูเฉลย →</button></div>
+ <div class="controls" id="rateControls" hidden><button class="secondary" id="again">✕ ยังจำไม่ได้</button><button id="remember">✓ จำได้แล้ว</button></div>
+</section></main><footer>Prepared from the user-provided Boya Chinese Elementary II vocabulary tables. Course scans and original annotations remain in private storage.</footer><script>/* Boya Chinese Elementary II, 2nd edition: teacher/student-provided source.
+ * Vocabulary tables, textbook printed pages 34-35, 40-41, 47-48, 53-54, 60-61.
+ * 169 numbered textbook terms, 5 supplemental glossary/proper-name terms available separately.
+ * Source PDF and original handwritten annotations are PRIVATE in Drive and never shipped.
+ * Thai meanings are study aids; English glosses follow the supplied table.
+ */
+window.D_STUDY_CHINESE_WRITING_BANK={
+ source:"Boya Chinese Elementary II (Second Edition)",
+ version:"boya2-l06-l10-20261011",
+ decks:[
+  {
+    "id": "boya2-l06",
+    "label": "บทที่ 6 · 广告栏上贴着一个通知",
+    "lesson": 6,
+    "title": "广告栏上贴着一个通知",
+    "romanized": "Guǎnggàolán shàng tiēzhe yí ge tōngzhī",
+    "pdfPages": [
+      55,
+      56
+    ],
+    "bookPages": [
+      34,
+      35
+    ],
+    "cards": [
+      {
+        "id": "boya2-l06-001",
+        "n": 1,
+        "h": "围",
+        "p": "wéi",
+        "m": "ล้อมรอบ",
+        "en": "to enclose; to surround"
+      },
+      {
+        "id": "boya2-l06-002",
+        "n": 2,
+        "h": "发生",
+        "p": "fāshēng",
+        "m": "เกิดขึ้น",
+        "en": "to happen"
+      },
+      {
+        "id": "boya2-l06-003",
+        "n": 3,
+        "h": "过去",
+        "p": "guòqu",
+        "m": "ผ่านไป / ไปยัง",
+        "en": "to go over; to pass by"
+      },
+      {
+        "id": "boya2-l06-004",
+        "n": 4,
+        "h": "广告栏",
+        "p": "guǎnggàolán",
+        "m": "บอร์ดโฆษณา / เสาประกาศ",
+        "en": "advertisement column"
+      },
+      {
+        "id": "boya2-l06-005",
+        "n": 5,
+        "h": "贴",
+        "p": "tiē",
+        "m": "ติด / แปะ",
+        "en": "to paste"
+      },
+      {
+        "id": "boya2-l06-006",
+        "n": 6,
+        "h": "通知",
+        "p": "tōngzhī",
+        "m": "ประกาศ / แจ้งให้ทราบ",
+        "en": "notice; circular"
+      },
+      {
+        "id": "boya2-l06-007",
+        "n": 7,
+        "h": "活动",
+        "p": "huódòng",
+        "m": "กิจกรรม",
+        "en": "activity"
+      },
+      {
+        "id": "boya2-l06-008",
+        "n": 8,
+        "h": "读",
+        "p": "dú",
+        "m": "อ่าน",
+        "en": "to read"
+      },
+      {
+        "id": "boya2-l06-009",
+        "n": 9,
+        "h": "交流",
+        "p": "jiāoliú",
+        "m": "สื่อสาร / แลกเปลี่ยน",
+        "en": "to communicate"
+      },
+      {
+        "id": "boya2-l06-010",
+        "n": 10,
+        "h": "学院",
+        "p": "xuéyuàn",
+        "m": "วิทยาลัย",
+        "en": "college"
+      },
+      {
+        "id": "boya2-l06-011",
+        "n": 11,
+        "h": "将",
+        "p": "jiāng",
+        "m": "กำลังจะ / จะ",
+        "en": "be going to"
+      },
+      {
+        "id": "boya2-l06-012",
+        "n": 12,
+        "h": "组织",
+        "p": "zǔzhī",
+        "m": "จัดตั้ง / จัดกิจกรรม",
+        "en": "to organize"
+      },
+      {
+        "id": "boya2-l06-013",
+        "n": 13,
+        "h": "郊区",
+        "p": "jiāoqū",
+        "m": "ชานเมือง",
+        "en": "suburb"
+      },
+      {
+        "id": "boya2-l06-014",
+        "n": 14,
+        "h": "参观",
+        "p": "cānguān",
+        "m": "เยี่ยมชม",
+        "en": "to visit (a place)"
+      },
+      {
+        "id": "boya2-l06-015",
+        "n": 15,
+        "h": "学生证",
+        "p": "xuéshēngzhèng",
+        "m": "บัตรนักเรียน / นักศึกษา",
+        "en": "students’ ID"
+      },
+      {
+        "id": "boya2-l06-016",
+        "n": 16,
+        "h": "办公室",
+        "p": "bàngōngshì",
+        "m": "สำนักงาน / ห้องทำงาน",
+        "en": "office"
+      },
+      {
+        "id": "boya2-l06-017",
+        "n": 17,
+        "h": "办",
+        "p": "bàn",
+        "m": "จัดการ / ดำเนินการ",
+        "en": "to handle"
+      },
+      {
+        "id": "boya2-l06-018",
+        "n": 18,
+        "h": "手续",
+        "p": "shǒuxù",
+        "m": "ขั้นตอน / พิธีการ",
+        "en": "procedure"
+      },
+      {
+        "id": "boya2-l06-019",
+        "n": 19,
+        "h": "马上",
+        "p": "mǎshàng",
+        "m": "ทันที",
+        "en": "at once; immediately"
+      },
+      {
+        "id": "boya2-l06-020",
+        "n": 20,
+        "h": "拿",
+        "p": "ná",
+        "m": "หยิบ / ถือ / เอา",
+        "en": "to take"
+      },
+      {
+        "id": "boya2-l06-021",
+        "n": 21,
+        "h": "为了",
+        "p": "wèile",
+        "m": "เพื่อที่จะ",
+        "en": "in order to"
+      },
+      {
+        "id": "boya2-l06-022",
+        "n": 22,
+        "h": "鼓励",
+        "p": "gǔlì",
+        "m": "ให้กำลังใจ / สนับสนุน",
+        "en": "to encourage"
+      },
+      {
+        "id": "boya2-l06-023",
+        "n": 23,
+        "h": "积极",
+        "p": "jījí",
+        "m": "กระตือรือร้น",
+        "en": "active"
+      },
+      {
+        "id": "boya2-l06-024",
+        "n": 24,
+        "h": "体育",
+        "p": "tǐyù",
+        "m": "พลศึกษา / การออกกำลังกาย",
+        "en": "physical training"
+      },
+      {
+        "id": "boya2-l06-025",
+        "n": 25,
+        "h": "运动",
+        "p": "yùndòng",
+        "m": "กีฬา / การออกกำลังกาย",
+        "en": "sports"
+      },
+      {
+        "id": "boya2-l06-026",
+        "n": 26,
+        "h": "举办",
+        "p": "jǔbàn",
+        "m": "จัดงาน / จัดกิจกรรม",
+        "en": "to conduct; to hold"
+      },
+      {
+        "id": "boya2-l06-027",
+        "n": 27,
+        "h": "篮球",
+        "p": "lánqiú",
+        "m": "บาสเกตบอล",
+        "en": "basketball"
+      },
+      {
+        "id": "boya2-l06-028",
+        "n": 28,
+        "h": "地点",
+        "p": "dìdiǎn",
+        "m": "สถานที่",
+        "en": "place; site"
+      },
+      {
+        "id": "boya2-l06-029",
+        "n": 29,
+        "h": "部",
+        "p": "bù",
+        "m": "กระทรวง",
+        "en": "ministry"
+      }
+    ]
+  },
+  {
+    "id": "boya2-l07",
+    "label": "บทที่ 7 · 冰箱塞得满满的",
+    "lesson": 7,
+    "title": "冰箱塞得满满的",
+    "romanized": "Bīngxiāng sāi de mǎnmǎn de",
+    "pdfPages": [
+      61,
+      62
+    ],
+    "bookPages": [
+      40,
+      41
+    ],
+    "cards": [
+      {
+        "id": "boya2-l07-001",
+        "n": 1,
+        "h": "苹果",
+        "p": "píngguǒ",
+        "m": "แอปเปิล",
+        "en": "apple"
+      },
+      {
+        "id": "boya2-l07-002",
+        "n": 2,
+        "h": "报",
+        "p": "bào",
+        "m": "หนังสือพิมพ์",
+        "en": "newspaper"
+      },
+      {
+        "id": "boya2-l07-003",
+        "n": 3,
+        "h": "生病",
+        "p": "shēngbìng",
+        "m": "ป่วย",
+        "en": "to be sick"
+      },
+      {
+        "id": "boya2-l07-004",
+        "n": 4,
+        "h": "水果",
+        "p": "shuǐguǒ",
+        "m": "ผลไม้",
+        "en": "fruit"
+      },
+      {
+        "id": "boya2-l07-005",
+        "n": 5,
+        "h": "再说",
+        "p": "zàishuō",
+        "m": "อีกทั้ง / นอกจากนี้",
+        "en": "and then; furthermore"
+      },
+      {
+        "id": "boya2-l07-006",
+        "n": 6,
+        "h": "橘子",
+        "p": "júzi",
+        "m": "ส้ม",
+        "en": "orange"
+      },
+      {
+        "id": "boya2-l07-007",
+        "n": 7,
+        "h": "酸",
+        "p": "suān",
+        "m": "เปรี้ยว",
+        "en": "sour; tart"
+      },
+      {
+        "id": "boya2-l07-008",
+        "n": 8,
+        "h": "维生素",
+        "p": "wéishēngsù",
+        "m": "วิตามิน",
+        "en": "vitamin"
+      },
+      {
+        "id": "boya2-l07-009",
+        "n": 9,
+        "h": "结果",
+        "p": "jiéguǒ",
+        "m": "ผลปรากฏว่า / ผลลัพธ์",
+        "en": "as a result"
+      },
+      {
+        "id": "boya2-l07-010",
+        "n": 10,
+        "h": "放",
+        "p": "fàng",
+        "m": "วาง / ใส่",
+        "en": "to put"
+      },
+      {
+        "id": "boya2-l07-011",
+        "n": 11,
+        "h": "冰箱",
+        "p": "bīngxiāng",
+        "m": "ตู้เย็น",
+        "en": "refrigerator"
+      },
+      {
+        "id": "boya2-l07-012",
+        "n": 12,
+        "h": "塞",
+        "p": "sāi",
+        "m": "ยัด / ใส่จนแน่น",
+        "en": "to fill; to stuff in"
+      },
+      {
+        "id": "boya2-l07-013",
+        "n": 13,
+        "h": "满",
+        "p": "mǎn",
+        "m": "เต็ม",
+        "en": "full"
+      },
+      {
+        "id": "boya2-l07-014",
+        "n": 14,
+        "h": "看来",
+        "p": "kànlái",
+        "m": "ดูเหมือนว่า",
+        "en": "it looks like"
+      },
+      {
+        "id": "boya2-l07-015",
+        "n": 15,
+        "h": "该",
+        "p": "gāi",
+        "m": "ควร / สมควร",
+        "en": "should"
+      },
+      {
+        "id": "boya2-l07-016",
+        "n": 16,
+        "h": "猜",
+        "p": "cāi",
+        "m": "เดา",
+        "en": "to guess"
+      },
+      {
+        "id": "boya2-l07-017",
+        "n": 17,
+        "h": "动物",
+        "p": "dòngwù",
+        "m": "สัตว์",
+        "en": "animal"
+      },
+      {
+        "id": "boya2-l07-018",
+        "n": 18,
+        "h": "圆",
+        "p": "yuán",
+        "m": "กลม",
+        "en": "round"
+      },
+      {
+        "id": "boya2-l07-019",
+        "n": 19,
+        "h": "胖",
+        "p": "pàng",
+        "m": "อ้วน",
+        "en": "fat"
+      },
+      {
+        "id": "boya2-l07-020",
+        "n": 20,
+        "h": "身上",
+        "p": "shēnshang",
+        "m": "บนตัว / ตามร่างกาย",
+        "en": "on one’s body"
+      },
+      {
+        "id": "boya2-l07-021",
+        "n": 21,
+        "h": "毛",
+        "p": "máo",
+        "m": "ขนสัตว์",
+        "en": "fur"
+      },
+      {
+        "id": "boya2-l07-022",
+        "n": 22,
+        "h": "耳朵",
+        "p": "ěrduo",
+        "m": "หู",
+        "en": "ear"
+      },
+      {
+        "id": "boya2-l07-023",
+        "n": 23,
+        "h": "四肢",
+        "p": "sìzhī",
+        "m": "แขนขาทั้งสี่",
+        "en": "four limbs; arms and legs"
+      },
+      {
+        "id": "boya2-l07-024",
+        "n": 24,
+        "h": "眼圈",
+        "p": "yǎnquān",
+        "m": "บริเวณรอบดวงตา",
+        "en": "rim of the eye"
+      },
+      {
+        "id": "boya2-l07-025",
+        "n": 25,
+        "h": "戴",
+        "p": "dài",
+        "m": "สวม / ใส่ (เครื่องประดับ)",
+        "en": "to wear"
+      },
+      {
+        "id": "boya2-l07-026",
+        "n": 26,
+        "h": "副",
+        "p": "fù",
+        "m": "ลักษณนามสำหรับแว่นตา",
+        "en": "measure word (for glasses)"
+      },
+      {
+        "id": "boya2-l07-027",
+        "n": 27,
+        "h": "墨镜",
+        "p": "mòjìng",
+        "m": "แว่นกันแดด",
+        "en": "sunglasses"
+      },
+      {
+        "id": "boya2-l07-028",
+        "n": 28,
+        "h": "可爱",
+        "p": "kě'ài",
+        "m": "น่ารัก",
+        "en": "lovely; cute"
+      },
+      {
+        "id": "boya2-l07-029",
+        "n": 29,
+        "h": "食物",
+        "p": "shíwù",
+        "m": "อาหาร",
+        "en": "food"
+      },
+      {
+        "id": "boya2-l07-030",
+        "n": 30,
+        "h": "竹子",
+        "p": "zhúzi",
+        "m": "ไม้ไผ่",
+        "en": "bamboo"
+      },
+      {
+        "id": "boya2-l07-031",
+        "n": 31,
+        "h": "出来",
+        "p": "chūlái",
+        "m": "ออกมา",
+        "en": "to come out"
+      },
+      {
+        "id": "boya2-l07-032",
+        "n": 32,
+        "h": "熊猫",
+        "p": "xióngmāo",
+        "m": "หมีแพนด้า",
+        "en": "panda"
+      }
+    ]
+  },
+  {
+    "id": "boya2-l08",
+    "label": "บทที่ 8 · 比赛很精彩",
+    "lesson": 8,
+    "title": "比赛很精彩",
+    "romanized": "Bǐsài hěn jīngcǎi",
+    "pdfPages": [
+      68,
+      69
+    ],
+    "bookPages": [
+      47,
+      48
+    ],
+    "cards": [
+      {
+        "id": "boya2-l08-001",
+        "n": 1,
+        "h": "精彩",
+        "p": "jīngcǎi",
+        "m": "ยอดเยี่ยม / น่าตื่นเต้น",
+        "en": "wonderful"
+      },
+      {
+        "id": "boya2-l08-002",
+        "n": 2,
+        "h": "赢",
+        "p": "yíng",
+        "m": "ชนะ",
+        "en": "to win"
+      },
+      {
+        "id": "boya2-l08-003",
+        "n": 3,
+        "h": "输",
+        "p": "shū",
+        "m": "แพ้",
+        "en": "to lose; to be beaten"
+      },
+      {
+        "id": "boya2-l08-004",
+        "n": 4,
+        "h": "比",
+        "p": "bǐ",
+        "m": "แข่ง / เปรียบเทียบ (คะแนน)",
+        "en": "to compare (scores)"
+      },
+      {
+        "id": "boya2-l08-005",
+        "n": 5,
+        "h": "踢",
+        "p": "tī",
+        "m": "เตะ",
+        "en": "to kick; to play"
+      },
+      {
+        "id": "boya2-l08-006",
+        "n": 6,
+        "h": "平",
+        "p": "píng",
+        "m": "เสมอกัน / เท่ากัน",
+        "en": "flat; even"
+      },
+      {
+        "id": "boya2-l08-007",
+        "n": 7,
+        "h": "怪",
+        "p": "guài",
+        "m": "โทษ / ตำหนิ",
+        "en": "to blame; to complain"
+      },
+      {
+        "id": "boya2-l08-008",
+        "n": 8,
+        "h": "浪费",
+        "p": "làngfèi",
+        "m": "สิ้นเปลือง / เสียเปล่า",
+        "en": "to waste"
+      },
+      {
+        "id": "boya2-l08-009",
+        "n": 9,
+        "h": "射门",
+        "p": "shèmén",
+        "m": "ยิงประตู",
+        "en": "to shoot (at the goal)"
+      },
+      {
+        "id": "boya2-l08-010",
+        "n": 10,
+        "h": "要是",
+        "p": "yàoshi",
+        "m": "ถ้าหากว่า",
+        "en": "if"
+      },
+      {
+        "id": "boya2-l08-011",
+        "n": 11,
+        "h": "进去",
+        "p": "jìnqu",
+        "m": "เข้าไป",
+        "en": "to enter; to go in"
+      },
+      {
+        "id": "boya2-l08-012",
+        "n": 12,
+        "h": "胜利",
+        "p": "shènglì",
+        "m": "ชัยชนะ",
+        "en": "victory"
+      },
+      {
+        "id": "boya2-l08-013",
+        "n": 13,
+        "h": "一块儿",
+        "p": "yíkuàir",
+        "m": "ด้วยกัน",
+        "en": "together"
+      },
+      {
+        "id": "boya2-l08-014",
+        "n": 14,
+        "h": "洗澡",
+        "p": "xǐzǎo",
+        "m": "อาบน้ำ",
+        "en": "to take a bath; to take a shower"
+      },
+      {
+        "id": "boya2-l08-015",
+        "n": 15,
+        "h": "对手",
+        "p": "duìshǒu",
+        "m": "คู่ต่อสู้",
+        "en": "opponent"
+      },
+      {
+        "id": "boya2-l08-016",
+        "n": 16,
+        "h": "数学",
+        "p": "shùxué",
+        "m": "คณิตศาสตร์",
+        "en": "mathematics"
+      },
+      {
+        "id": "boya2-l08-017",
+        "n": 17,
+        "h": "厉害",
+        "p": "lìhai",
+        "m": "เก่งมาก / ร้ายกาจ",
+        "en": "tough"
+      },
+      {
+        "id": "boya2-l08-018",
+        "n": 18,
+        "h": "加油",
+        "p": "jiāyóu",
+        "m": "สู้ ๆ / เอาใจช่วย",
+        "en": "to cheer; to make an extra effort"
+      },
+      {
+        "id": "boya2-l08-019",
+        "n": 19,
+        "h": "响",
+        "p": "xiǎng",
+        "m": "ดัง / ส่งเสียง",
+        "en": "to ring; to make a sound"
+      },
+      {
+        "id": "boya2-l08-020",
+        "n": 20,
+        "h": "听见",
+        "p": "tīngjiàn",
+        "m": "ได้ยิน",
+        "en": "to hear"
+      },
+      {
+        "id": "boya2-l08-021",
+        "n": 21,
+        "h": "醒",
+        "p": "xǐng",
+        "m": "ตื่น",
+        "en": "to awaken; to be awake"
+      },
+      {
+        "id": "boya2-l08-022",
+        "n": 22,
+        "h": "急忙",
+        "p": "jímáng",
+        "m": "อย่างรีบร้อน",
+        "en": "in a hurry"
+      },
+      {
+        "id": "boya2-l08-023",
+        "n": 23,
+        "h": "爬",
+        "p": "pá",
+        "m": "ปีน / คลาน",
+        "en": "to get up; to crawl"
+      },
+      {
+        "id": "boya2-l08-024",
+        "n": 24,
+        "h": "起来",
+        "p": "qǐlai",
+        "m": "ขึ้นมา (หลังคำกริยา)",
+        "en": "upward movement after verbs"
+      },
+      {
+        "id": "boya2-l08-025",
+        "n": 25,
+        "h": "推",
+        "p": "tuī",
+        "m": "ผลัก",
+        "en": "to push"
+      },
+      {
+        "id": "boya2-l08-026",
+        "n": 26,
+        "h": "气",
+        "p": "qì",
+        "m": "อากาศ / ลม",
+        "en": "air"
+      },
+      {
+        "id": "boya2-l08-027",
+        "n": 27,
+        "h": "扔",
+        "p": "rēng",
+        "m": "โยน / ทิ้ง",
+        "en": "to throw"
+      },
+      {
+        "id": "boya2-l08-028",
+        "n": 28,
+        "h": "好不",
+        "p": "hǎobù",
+        "m": "ช่าง...เหลือเกิน (เน้นระดับสูง)",
+        "en": "indicates high degree before certain adjectives"
+      },
+      {
+        "id": "boya2-l08-029",
+        "n": 29,
+        "h": "上去",
+        "p": "shàngqu",
+        "m": "ขึ้นไปด้านบน",
+        "en": "to go upward"
+      },
+      {
+        "id": "boya2-l08-030",
+        "n": 30,
+        "h": "站",
+        "p": "zhàn",
+        "m": "สถานี / ป้ายหยุด",
+        "en": "stop; station"
+      },
+      {
+        "id": "boya2-l08-031",
+        "n": 31,
+        "h": "下来",
+        "p": "xiàlai",
+        "m": "ลงมา",
+        "en": "to come down"
+      },
+      {
+        "id": "boya2-l08-032",
+        "n": 32,
+        "h": "出租车",
+        "p": "chūzūchē",
+        "m": "รถแท็กซี่",
+        "en": "taxi"
+      },
+      {
+        "id": "boya2-l08-033",
+        "n": 33,
+        "h": "乌龟",
+        "p": "wūguī",
+        "m": "เต่า",
+        "en": "tortoise"
+      }
+    ]
+  },
+  {
+    "id": "boya2-l09",
+    "label": "บทที่ 9 · 我进不去了",
+    "lesson": 9,
+    "title": "我进不去了",
+    "romanized": "Wǒ jìn bu qù le",
+    "pdfPages": [
+      74,
+      75
+    ],
+    "bookPages": [
+      53,
+      54
+    ],
+    "cards": [
+      {
+        "id": "boya2-l09-001",
+        "n": 1,
+        "h": "腿",
+        "p": "tuǐ",
+        "m": "ขา",
+        "en": "leg"
+      },
+      {
+        "id": "boya2-l09-002",
+        "n": 2,
+        "h": "拐",
+        "p": "guǎi",
+        "m": "เดินกะเผลก",
+        "en": "to limp"
+      },
+      {
+        "id": "boya2-l09-003",
+        "n": 3,
+        "h": "因为",
+        "p": "yīnwèi",
+        "m": "เพราะว่า",
+        "en": "because; because of"
+      },
+      {
+        "id": "boya2-l09-004",
+        "n": 4,
+        "h": "来不及",
+        "p": "láibují",
+        "m": "ไม่ทันเวลา",
+        "en": "there’s not enough time"
+      },
+      {
+        "id": "boya2-l09-005",
+        "n": 5,
+        "h": "窗户",
+        "p": "chuānghu",
+        "m": "หน้าต่าง",
+        "en": "window"
+      },
+      {
+        "id": "boya2-l09-006",
+        "n": 6,
+        "h": "层",
+        "p": "céng",
+        "m": "ชั้น (อาคาร)",
+        "en": "storey; floor"
+      },
+      {
+        "id": "boya2-l09-007",
+        "n": 7,
+        "h": "隔壁",
+        "p": "gébì",
+        "m": "ข้างห้อง / ข้างบ้าน",
+        "en": "next door"
+      },
+      {
+        "id": "boya2-l09-008",
+        "n": 8,
+        "h": "水房",
+        "p": "shuǐfáng",
+        "m": "ห้องล้าง / ห้องซัก",
+        "en": "washing room"
+      },
+      {
+        "id": "boya2-l09-009",
+        "n": 9,
+        "h": "危险",
+        "p": "wēixiǎn",
+        "m": "อันตราย",
+        "en": "dangerous"
+      },
+      {
+        "id": "boya2-l09-010",
+        "n": 10,
+        "h": "往",
+        "p": "wǎng",
+        "m": "ไปทาง / มุ่งไป",
+        "en": "towards"
+      },
+      {
+        "id": "boya2-l09-011",
+        "n": 11,
+        "h": "跳",
+        "p": "tiào",
+        "m": "กระโดด",
+        "en": "to jump"
+      },
+      {
+        "id": "boya2-l09-012",
+        "n": 12,
+        "h": "一下子",
+        "p": "yíxiàzi",
+        "m": "ทันใดนั้น / ในพริบตา",
+        "en": "all at once; all of a sudden"
+      },
+      {
+        "id": "boya2-l09-013",
+        "n": 13,
+        "h": "摔",
+        "p": "shuāi",
+        "m": "ล้ม / หกล้ม",
+        "en": "to tumble; to fall"
+      },
+      {
+        "id": "boya2-l09-014",
+        "n": 14,
+        "h": "变成",
+        "p": "biànchéng",
+        "m": "กลายเป็น",
+        "en": "to turn into"
+      },
+      {
+        "id": "boya2-l09-015",
+        "n": 15,
+        "h": "近视",
+        "p": "jìnshì",
+        "m": "สายตาสั้น",
+        "en": "myopic; short-sighted"
+      },
+      {
+        "id": "boya2-l09-016",
+        "n": 16,
+        "h": "清楚",
+        "p": "qīngchu",
+        "m": "ชัดเจน",
+        "en": "clear"
+      },
+      {
+        "id": "boya2-l09-017",
+        "n": 17,
+        "h": "脱",
+        "p": "tuō",
+        "m": "ถอดออก",
+        "en": "to take off"
+      },
+      {
+        "id": "boya2-l09-018",
+        "n": 18,
+        "h": "挂",
+        "p": "guà",
+        "m": "แขวน",
+        "en": "to hang"
+      },
+      {
+        "id": "boya2-l09-019",
+        "n": 19,
+        "h": "墙",
+        "p": "qiáng",
+        "m": "กำแพง",
+        "en": "wall"
+      },
+      {
+        "id": "boya2-l09-020",
+        "n": 20,
+        "h": "掉",
+        "p": "diào",
+        "m": "ตก / หล่น",
+        "en": "to fall; to drop"
+      },
+      {
+        "id": "boya2-l09-021",
+        "n": 21,
+        "h": "钉子",
+        "p": "dīngzi",
+        "m": "ตะปู",
+        "en": "nail"
+      },
+      {
+        "id": "boya2-l09-022",
+        "n": 22,
+        "h": "只",
+        "p": "zhī",
+        "m": "ลักษณนามของสัตว์บางชนิด",
+        "en": "measure word for some animals"
+      },
+      {
+        "id": "boya2-l09-023",
+        "n": 23,
+        "h": "苍蝇",
+        "p": "cāngying",
+        "m": "แมลงวัน",
+        "en": "fly"
+      },
+      {
+        "id": "boya2-l09-024",
+        "n": 24,
+        "h": "立刻",
+        "p": "lìkè",
+        "m": "ทันที",
+        "en": "at once"
+      },
+      {
+        "id": "boya2-l09-025",
+        "n": 25,
+        "h": "飞",
+        "p": "fēi",
+        "m": "บิน",
+        "en": "to fly"
+      },
+      {
+        "id": "boya2-l09-026",
+        "n": 26,
+        "h": "蚊子",
+        "p": "wénzi",
+        "m": "ยุง",
+        "en": "mosquito"
+      },
+      {
+        "id": "boya2-l09-027",
+        "n": 27,
+        "h": "着",
+        "p": "zháo",
+        "m": "สำเร็จ / ได้ผล (ส่วนเสริมผลลัพธ์)",
+        "en": "verb complement indicating achieved result"
+      },
+      {
+        "id": "boya2-l09-028",
+        "n": 28,
+        "h": "落",
+        "p": "luò",
+        "m": "ตกลงมา",
+        "en": "to go down; to fall"
+      },
+      {
+        "id": "boya2-l09-029",
+        "n": 29,
+        "h": "轻",
+        "p": "qīng",
+        "m": "เบา",
+        "en": "light"
+      },
+      {
+        "id": "boya2-l09-030",
+        "n": 30,
+        "h": "巴掌",
+        "p": "bāzhang",
+        "m": "ฝ่ามือ",
+        "en": "palm; hand"
+      },
+      {
+        "id": "boya2-l09-031",
+        "n": 31,
+        "h": "下去",
+        "p": "xiàqu",
+        "m": "ลงไป",
+        "en": "to go down"
+      },
+      {
+        "id": "boya2-l09-032",
+        "n": 32,
+        "h": "突然",
+        "p": "tūrán",
+        "m": "ทันใดนั้น",
+        "en": "suddenly"
+      },
+      {
+        "id": "boya2-l09-033",
+        "n": 33,
+        "h": "感到",
+        "p": "gǎndào",
+        "m": "รู้สึก",
+        "en": "to feel"
+      }
+    ]
+  },
+  {
+    "id": "boya2-l10",
+    "label": "บทที่ 10 · 山上的风景美极了",
+    "lesson": 10,
+    "title": "山上的风景美极了",
+    "romanized": "Shān shàng de fēngjǐng měi jí le",
+    "pdfPages": [
+      82,
+      83
+    ],
+    "bookPages": [
+      60,
+      61
+    ],
+    "cards": [
+      {
+        "id": "boya2-l10-001",
+        "n": 1,
+        "h": "农村",
+        "p": "nóngcūn",
+        "m": "ชนบท / หมู่บ้าน",
+        "en": "village"
+      },
+      {
+        "id": "boya2-l10-002",
+        "n": 2,
+        "h": "所",
+        "p": "suǒ",
+        "m": "ลักษณนามสำหรับสถานที่ เช่น โรงเรียน",
+        "en": "measure word for houses and schools"
+      },
+      {
+        "id": "boya2-l10-003",
+        "n": 3,
+        "h": "敬老院",
+        "p": "jìnglǎoyuàn",
+        "m": "บ้านพักคนชรา",
+        "en": "old folks’ home"
+      },
+      {
+        "id": "boya2-l10-004",
+        "n": 4,
+        "h": "幼儿园",
+        "p": "yòu'éryuán",
+        "m": "โรงเรียนอนุบาล",
+        "en": "kindergarten; nursery school"
+      },
+      {
+        "id": "boya2-l10-005",
+        "n": 5,
+        "h": "游戏",
+        "p": "yóuxì",
+        "m": "เกม / การละเล่น",
+        "en": "game"
+      },
+      {
+        "id": "boya2-l10-006",
+        "n": 6,
+        "h": "农民",
+        "p": "nóngmín",
+        "m": "ชาวนา / เกษตรกร",
+        "en": "farmer"
+      },
+      {
+        "id": "boya2-l10-007",
+        "n": 7,
+        "h": "后来",
+        "p": "hòulái",
+        "m": "ภายหลัง / ต่อมา",
+        "en": "later; afterwards"
+      },
+      {
+        "id": "boya2-l10-008",
+        "n": 8,
+        "h": "附近",
+        "p": "fùjìn",
+        "m": "ใกล้เคียง / บริเวณใกล้ ๆ",
+        "en": "nearby"
+      },
+      {
+        "id": "boya2-l10-009",
+        "n": 9,
+        "h": "座",
+        "p": "zuò",
+        "m": "ลักษณนามภูเขาและอาคาร",
+        "en": "measure word for mountains and buildings"
+      },
+      {
+        "id": "boya2-l10-010",
+        "n": 10,
+        "h": "山",
+        "p": "shān",
+        "m": "ภูเขา",
+        "en": "mountain; hill"
+      },
+      {
+        "id": "boya2-l10-011",
+        "n": 11,
+        "h": "古老",
+        "p": "gǔlǎo",
+        "m": "เก่าแก่ / โบราณ",
+        "en": "ancient; age-old"
+      },
+      {
+        "id": "boya2-l10-012",
+        "n": 12,
+        "h": "雄伟",
+        "p": "xióngwěi",
+        "m": "ยิ่งใหญ่ / สง่างาม",
+        "en": "grand; imposing and great"
+      },
+      {
+        "id": "boya2-l10-013",
+        "n": 13,
+        "h": "地区",
+        "p": "dìqū",
+        "m": "ภูมิภาค / เขตพื้นที่",
+        "en": "district"
+      },
+      {
+        "id": "boya2-l10-014",
+        "n": 14,
+        "h": "百",
+        "p": "bǎi",
+        "m": "ร้อย",
+        "en": "hundred"
+      },
+      {
+        "id": "boya2-l10-015",
+        "n": 15,
+        "h": "云",
+        "p": "yún",
+        "m": "เมฆ",
+        "en": "cloud"
+      },
+      {
+        "id": "boya2-l10-016",
+        "n": 16,
+        "h": "草",
+        "p": "cǎo",
+        "m": "หญ้า",
+        "en": "grass"
+      },
+      {
+        "id": "boya2-l10-017",
+        "n": 17,
+        "h": "鸟",
+        "p": "niǎo",
+        "m": "นก",
+        "en": "bird"
+      },
+      {
+        "id": "boya2-l10-018",
+        "n": 18,
+        "h": "天上",
+        "p": "tiānshang",
+        "m": "บนท้องฟ้า",
+        "en": "in the sky"
+      },
+      {
+        "id": "boya2-l10-019",
+        "n": 19,
+        "h": "幅",
+        "p": "fú",
+        "m": "ลักษณนามสำหรับภาพวาด",
+        "en": "measure word for pictures"
+      },
+      {
+        "id": "boya2-l10-020",
+        "n": 20,
+        "h": "画儿",
+        "p": "huàr",
+        "m": "ภาพวาด",
+        "en": "picture; painting"
+      },
+      {
+        "id": "boya2-l10-021",
+        "n": 21,
+        "h": "后悔",
+        "p": "hòuhuǐ",
+        "m": "เสียใจภายหลัง / เสียดาย",
+        "en": "to regret"
+      },
+      {
+        "id": "boya2-l10-022",
+        "n": 22,
+        "h": "照",
+        "p": "zhào",
+        "m": "ถ่ายภาพ",
+        "en": "to photograph; to take a picture"
+      },
+      {
+        "id": "boya2-l10-023",
+        "n": 23,
+        "h": "相片",
+        "p": "xiàngpiàn",
+        "m": "รูปถ่าย",
+        "en": "photograph"
+      },
+      {
+        "id": "boya2-l10-024",
+        "n": 24,
+        "h": "阳光",
+        "p": "yángguāng",
+        "m": "แสงแดด",
+        "en": "sunlight"
+      },
+      {
+        "id": "boya2-l10-025",
+        "n": 25,
+        "h": "灿烂",
+        "p": "cànlàn",
+        "m": "สดใส / เปล่งประกาย",
+        "en": "brilliant; glorious"
+      },
+      {
+        "id": "boya2-l10-026",
+        "n": 26,
+        "h": "巨龙",
+        "p": "jùlóng",
+        "m": "มังกรยักษ์",
+        "en": "huge dragon"
+      },
+      {
+        "id": "boya2-l10-027",
+        "n": 27,
+        "h": "卧",
+        "p": "wò",
+        "m": "นอนหมอบ / นอนราบ",
+        "en": "to lie; to crouch"
+      },
+      {
+        "id": "boya2-l10-028",
+        "n": 28,
+        "h": "山峰",
+        "p": "shānfēng",
+        "m": "ยอดเขา",
+        "en": "mountain peak"
+      },
+      {
+        "id": "boya2-l10-029",
+        "n": 29,
+        "h": "低",
+        "p": "dī",
+        "m": "ต่ำ",
+        "en": "low"
+      },
+      {
+        "id": "boya2-l10-030",
+        "n": 30,
+        "h": "朝",
+        "p": "cháo",
+        "m": "มุ่งไปทาง",
+        "en": "towards"
+      },
+      {
+        "id": "boya2-l10-031",
+        "n": 31,
+        "h": "延伸",
+        "p": "yánshēn",
+        "m": "ทอดยาว / ยืดออก",
+        "en": "to extend; to stretch"
+      },
+      {
+        "id": "boya2-l10-032",
+        "n": 32,
+        "h": "站",
+        "p": "zhàn",
+        "m": "ยืน",
+        "en": "to stand"
+      },
+      {
+        "id": "boya2-l10-033",
+        "n": 33,
+        "h": "笑",
+        "p": "xiào",
+        "m": "ยิ้ม / หัวเราะ",
+        "en": "to smile; to laugh"
+      },
+      {
+        "id": "boya2-l10-034",
+        "n": 34,
+        "h": "开心",
+        "p": "kāixīn",
+        "m": "มีความสุข / ดีใจ",
+        "en": "happy; glad"
+      },
+      {
+        "id": "boya2-l10-035",
+        "n": 35,
+        "h": "右",
+        "p": "yòu",
+        "m": "ขวา",
+        "en": "right"
+      },
+      {
+        "id": "boya2-l10-036",
+        "n": 36,
+        "h": "食指",
+        "p": "shízhǐ",
+        "m": "นิ้วชี้",
+        "en": "index finger"
+      },
+      {
+        "id": "boya2-l10-037",
+        "n": 37,
+        "h": "中指",
+        "p": "zhōngzhǐ",
+        "m": "นิ้วกลาง",
+        "en": "middle finger"
+      },
+      {
+        "id": "boya2-l10-038",
+        "n": 38,
+        "h": "摆",
+        "p": "bǎi",
+        "m": "วาง / จัดวาง",
+        "en": "to lay; to set"
+      },
+      {
+        "id": "boya2-l10-039",
+        "n": 39,
+        "h": "T恤衫",
+        "p": "T xùshān",
+        "m": "เสื้อยืด",
+        "en": "T-shirt"
+      },
+      {
+        "id": "boya2-l10-040",
+        "n": 40,
+        "h": "上面",
+        "p": "shàngmian",
+        "m": "ด้านบน / ข้างบน",
+        "en": "above; upside"
+      },
+      {
+        "id": "boya2-l10-041",
+        "n": 41,
+        "h": "行",
+        "p": "háng",
+        "m": "แถว / บรรทัด",
+        "en": "line; row"
+      },
+      {
+        "id": "boya2-l10-042",
+        "n": 42,
+        "h": "登",
+        "p": "dēng",
+        "m": "ปีนขึ้น / ขึ้นสู่",
+        "en": "to ascend; to mount"
+      }
+    ]
+  }
+],
+ supplementary:[
+  {
+    "lesson": 6,
+    "n": "4a",
+    "h": "广告",
+    "p": "guǎnggào",
+    "m": "โฆษณา",
+    "en": "advertisement"
+  },
+  {
+    "lesson": 6,
+    "n": "4b",
+    "h": "栏",
+    "p": "lán",
+    "m": "คอลัมน์ / เสาประกาศ",
+    "en": "column"
+  },
+  {
+    "lesson": 6,
+    "n": "proper",
+    "h": "优胜杯",
+    "p": "Yōushèng Bēi",
+    "m": "ถ้วยยูเซิ่ง (ชื่อถ้วยรางวัล)",
+    "en": "Cup of Yousheng"
+  },
+  {
+    "lesson": 7,
+    "n": "proper",
+    "h": "西南地区",
+    "p": "Xīnán Dìqū",
+    "m": "ภาคตะวันตกเฉียงใต้ของจีน",
+    "en": "Southwest China"
+  },
+  {
+    "lesson": 10,
+    "n": "proper",
+    "h": "长城",
+    "p": "Chángchéng",
+    "m": "กำแพงเมืองจีน",
+    "en": "the Great Wall"
+  }
+]
+};
+</script><script>
+(function(){
+"use strict";
+const BANK=window.D_STUDY_CHINESE_WRITING_BANK;
+const q=id=>document.getElementById(id);
+const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const selector=q("lessons"), deckTitle=q("deckTitle"),summary=q("summary");
+let deck=BANK.decks[0],queue=[],missed=[],index=0,pass=0,strokes=[],drawing=false,pointer=null,strokeRect=null,observer=null;
+let wordMode="random",correctCount=0,visible=false;
+let appearance="system";try{const s=JSON.parse(localStorage.getItem("d-study-shared-preferences-v1")||"null");appearance=s?.appearance||"system"}catch(_){}
+const dark=appearance==="dark"||(appearance==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);document.body.classList.toggle("light",!dark);
+function userId(){try{const x=JSON.parse(localStorage.getItem("d-study-active-user")||"null");if(x?.id&&x.expiresAt>Date.now())return x.id}catch(_){}return "guest"}
+function stateKey(){return "d-study-chinese-flashcards::"+userId()}
+function saved(){const empty={subjectId:"chinese",version:1,decks:{}};try{const x=JSON.parse(localStorage.getItem(stateKey())||"null");return x?.subjectId==="chinese"&&x.decks&&typeof x.decks==="object"?x:empty}catch(_){return empty}}
+function persist(s){if(s.subjectId!=="chinese")return;try{localStorage.setItem(stateKey(),JSON.stringify(s))}catch(e){q("saveStatus").textContent="ไม่สามารถบันทึกบนเบราว์เซอร์นี้"}}
+function readProgress(){const x=saved().decks[deck.id];return x||{completionCount:0}}
+function saveCheckpoint(){const d=saved(),p=d.decks[deck.id]||{completionCount:0};p.session={queueIds:queue.map(c=>c.id),missedIds:missed.map(c=>c.id),index,pass,mode:wordMode};d.decks[deck.id]=p;persist(d)}
+const randomize=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+function pick(n){deck=BANK.decks.find(d=>d.lesson===n)||BANK.decks[0];showOverview()}
+function showOverview(){
+ selector.innerHTML=BANK.decks.map(d=>{const p=saved().decks[d.id]||{};return '<button class="lesson '+(d.id===deck.id?"active":"")+'" data-lesson="'+d.lesson+'"><b>บท '+d.lesson+'</b><small>'+d.cards.length+' คำ • ครบ '+(p.completionCount||0)+' รอบ</small></button>'}).join("");
+ selector.querySelectorAll("[data-lesson]").forEach(el=>el.onclick=()=>pick(Number(el.dataset.lesson)));
+ deckTitle.textContent='บทที่ '+deck.lesson+' — '+deck.title;
+ const p=readProgress();
+ summary.innerHTML='<div class="stat"><b>'+deck.cards.length+'</b>ศัพท์หลัก</div><div class="stat"><b>'+(p.completionCount||0)+'</b>รอบที่จำครบ 100%</div><div class="stat"><b>'+(p.session&&p.session.index<deck.cards.length?"มี":"ไม่มี")+'</b>รอบที่ค้างอยู่</div>';
+ q("source").textContent='อ้างอิงจากหน้าหนังสือ '+deck.bookPages.join("–")+' • '+BANK.source;
+ q("startBtn").textContent=p.session&&p.session.queueIds?.length?"▶ ฝึกต่อบท "+deck.lesson:"▶ เริ่มฝึกบท "+deck.lesson;
+ q("courseSection").hidden=false;q("writer").classList.remove("visible");visible=false;
+}
+function start(){
+ stop();
+ const p=readProgress(),rec=p.session;
+ wordMode=q("order").value;
+ queue=wordMode==="ordered"?deck.cards.slice():randomize(deck.cards);
+ missed=[];index=0;pass=0;correctCount=0;
+ if(rec&&Array.isArray(rec.queueIds)&&rec.mode===wordMode){
+  const lookup=new Map(deck.cards.map(c=>[c.id,c]));
+  const cand=rec.queueIds.map(id=>lookup.get(id));
+  const miss=Array.isArray(rec.missedIds)?rec.missedIds.map(id=>lookup.get(id)):[];
+  if(cand.length>0&&cand.length<=deck.cards.length&&cand.every(Boolean)&&miss.every(Boolean)&&Number.isInteger(rec.index)&&rec.index>=0&&rec.index<=cand.length){
+   queue=cand;missed=miss;index=rec.index;pass=Number.isInteger(rec.pass)?rec.pass:0;
+  }
+ }
+ q("courseSection").hidden=true;q("writer").classList.add("visible");visible=true;
+ const zone=q("zone");if("ResizeObserver" in window){observer=new ResizeObserver(()=>{if(!drawing)requestAnimationFrame(layout)});observer.observe(zone)}
+ window.addEventListener("resize",layout);render();requestAnimationFrame(layout);
+}
+function get(){return queue[index]}
+function render(){
+ if(index>=queue.length){
+  if(missed.length){queue=wordMode==="ordered"?missed.slice():randomize(missed);missed=[];index=0;pass++;saveCheckpoint()}
+  else return finish();
+ }
+ const card=get();if(!card)return finish();
+ strokes=[];
+ q("donePane").style.display="none";q("writePane").style.display="flex";q("answerPane").style.display="none";
+ q("writeControls").hidden=false;q("rateControls").hidden=true;
+ q("wordPinyin").textContent=card.p;
+ q("writerPos").textContent='บท '+deck.lesson+' • '+(index+1)+'/'+queue.length+(pass?' • รอบแก้ '+pass:'');
+ q("progressFill").style.width=Math.round(index/Math.max(1,queue.length)*100)+"%";
+ q("hint").textContent='คำที่ '+card.n+' ของบท '+deck.lesson+' • ดูพินอินแล้วเขียนตัวจีน';
+ q("correct").textContent=card.h;
+ q("answerPinyin").textContent=card.p;q("meaning").textContent=card.m;q("english").textContent=card.en;
+ q("bookPage").textContent='หมายเลขศัพท์ '+card.n+' • หน้าหนังสือ '+deck.bookPages.join("–");
+ requestAnimationFrame(layout);
+}
+function layout(){
+ const z=q("zone"),c=q("draw"),s=q("square");if(!z||!c||!z.isConnected||drawing||!visible||q("writePane").style.display==="none")return;
+ const box=z.getBoundingClientRect();if(box.width<60||box.height<60)return;
+ const size=Math.min(490,Math.floor(Math.min(box.width-4,box.height-4)));if(size<40)return;
+ if(s.style.width!==size+"px"){s.style.width=size+"px";s.style.height=size+"px"}
+ const px=Math.round(size*Math.min(3,devicePixelRatio||1));
+ if(c.width!==px||c.height!==px){c.width=px;c.height=px}paint();
+}
+function paint(){
+ const c=q("draw"),g=c.getContext("2d"),r=c.width;if(!r)return;g.clearRect(0,0,r,r);
+ g.lineWidth=Math.max(3,r*.018);g.strokeStyle=getComputedStyle(document.body).getPropertyValue("--ink").trim()||"#172033";g.lineCap="round";g.lineJoin="round";
+ strokes.forEach(points=>{if(!points.length)return;g.beginPath();g.moveTo(points[0][0]*r,points[0][1]*r);if(points.length===1)g.lineTo((points[0][0]+.001)*r,(points[0][1]+.001)*r);points.slice(1).forEach(p=>g.lineTo(p[0]*r,p[1]*r));g.stroke()});
+}
+function pos(e){const r=strokeRect;return[Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))]}
+q("draw").addEventListener("pointerdown",e=>{if(drawing||e.button>0)return;e.preventDefault();pointer=e.pointerId;drawing=true;strokeRect=e.currentTarget.getBoundingClientRect();strokes.push([pos(e)]);try{e.currentTarget.setPointerCapture(e.pointerId)}catch(_){}paint()});
+q("draw").addEventListener("pointermove",e=>{if(!drawing||e.pointerId!==pointer)return;e.preventDefault();strokes[strokes.length-1].push(pos(e));paint()});
+function end(e){if(!drawing||e.pointerId!==pointer)return;strokes[strokes.length-1].push(pos(e));drawing=false;pointer=null;strokeRect=null;paint();requestAnimationFrame(layout)}
+["pointerup","pointercancel","lostpointercapture"].forEach(ev=>q("draw").addEventListener(ev,end));
+q("clear").onclick=()=>{strokes=[];paint()};
+q("undo").onclick=()=>{strokes.pop();paint()};
+q("check").onclick=()=>{
+ const a=q("draw"),b=q("compare");b.width=a.width;b.height=a.height;b.getContext("2d").drawImage(a,0,0);
+ q("writePane").style.display="none";q("answerPane").style.display="flex";q("writeControls").hidden=true;q("rateControls").hidden=false;
+};
+q("again").onclick=()=>rate(false);q("remember").onclick=()=>rate(true);
+function rate(ok){if(!ok)missed.push(get());else correctCount++;index++;saveCheckpoint();render()}
+function finish(){
+ q("writePane").style.display="none";q("answerPane").style.display="none";q("writeControls").hidden=true;q("rateControls").hidden=true;q("donePane").style.display="flex";
+ q("progressFill").style.width="100%";
+ const s=saved(),p=s.decks[deck.id]||{completionCount:0};p.completionCount=(p.completionCount||0)+1;p.session=null;p.lastCompletedAt=new Date().toISOString();s.decks[deck.id]=p;persist(s);
+ q("donePane").innerHTML='<div style="font-size:50px">🎉</div><h2>บท '+deck.lesson+' — จำได้ครบ 100%!</h2><p>ผ่าน '+deck.cards.length+' คำ และทบทวนคำที่ลืมซ้ำจนหมดแล้ว</p><button id="doneBack">เลือกบทอื่น</button><button class="secondary" id="doneAgain">เริ่มบทนี้ใหม่</button>';
+ q("doneBack").onclick=close;q("doneAgain").onclick=()=>{q("order").value=wordMode;start()};
+}
+function stop(){if(observer){observer.disconnect();observer=null}window.removeEventListener("resize",layout);drawing=false;pointer=null;strokeRect=null}
+function close(){
+ stop();const el=q("writer");
+ if(document.fullscreenElement===el)document.exitFullscreen?.().catch(()=>{});
+ el.classList.remove("pseudo");showOverview();
+}
+q("close").onclick=close;
+q("startBtn").onclick=start;
+q("fullscreen").onclick=()=>{
+ const w=q("writer");if(document.fullscreenElement===w){document.exitFullscreen?.();return}
+ if(w.classList.contains("pseudo")){w.classList.remove("pseudo");requestAnimationFrame(layout);return}
+ if(w.requestFullscreen)Promise.resolve(w.requestFullscreen()).catch(()=>{w.classList.add("pseudo");requestAnimationFrame(layout)});
+ else{w.classList.add("pseudo");requestAnimationFrame(layout)}
+};
+document.addEventListener("fullscreenchange",()=>requestAnimationFrame(layout));
+q("reset").onclick=()=>{if(!confirm("เริ่มบทนี้ใหม่? ความคืบหน้ารอบที่ค้างอยู่จะถูกล้าง แต่จำนวนรอบที่ทำสำเร็จยังคงอยู่"))return;
+ const s=saved(),p=s.decks[deck.id]||{completionCount:0};p.session=null;s.decks[deck.id]=p;persist(s);showOverview()};
+showOverview();
+})();</script></body></html>
