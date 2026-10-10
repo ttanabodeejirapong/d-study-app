@@ -2,14 +2,14 @@
  * Pure presentation: no academic storage, quiz answers, records or subject routes.
  * Load AFTER core / UX / TU101 / Chinese styles.
  */
-:root{--v14-accent:var(--theme-accent,var(--blue,#1f4e78));--v14-accent2:var(--theme-accent2,var(--blue2,#2c6b9f));--v14-panel:var(--card,#fff);--v14-ink:var(--ink,#172033);--v14-muted:var(--muted,#6b7280);--v14-border:var(--line,#dbe2ea);--v14-quiet:var(--soft,#eef3f8);--v14-focus:color-mix(in srgb,var(--v14-accent) 40%,transparent);--v14-shadow:color-mix(in srgb,var(--v14-accent) 17%,transparent)}
+:root{--v14-accent:var(--theme-accent,#1f4e78);--v14-accent2:var(--theme-accent2,#2c6b9f);--v14-panel:var(--card,#fff);--v14-ink:var(--ink,#172033);--v14-muted:var(--muted,#6b7280);--v14-border:var(--line,#dbe2ea);--v14-quiet:var(--soft,#eef3f8);--v14-focus:color-mix(in srgb,var(--v14-accent) 40%,transparent);--v14-shadow:color-mix(in srgb,var(--v14-accent) 17%,transparent)}
 body.neo-ui{--v14-panel:var(--neo-card,var(--card));--v14-ink:var(--neo-ink,var(--ink));--v14-muted:var(--neo-muted,var(--muted));--v14-border:var(--neo-line,var(--line));--v14-quiet:var(--neo-card-2,var(--soft))}
 body.midnight-ui{--v14-panel:var(--mw-surface,var(--card));--v14-ink:var(--mw-ink,var(--ink));--v14-muted:var(--mw-muted,var(--muted));--v14-border:var(--mw-line,var(--line));--v14-quiet:var(--mw-surface-2,var(--soft))}
 body{--blue:var(--v14-accent);--blue2:var(--v14-accent2)}
 /* Reading surfaces across the app: preserve each theme's silhouette. */
 body :is(.cn-card,.cn-lesson-card,.cn-empty,.cn-study-note,.cn-deck,.cn-hero,.cn-writer,.cn-note,.cn-lesson-shortcuts a){border-color:var(--v14-border);color:var(--v14-ink)}
 body :is(.cn-empty,.cn-study-note,.cn-deck,.cn-hero,.cn-writer,.cn-note){background:var(--v14-panel)}
-body :is(.cn-empty,.cn-study-note,.cn-lesson-card p,.cn-hero p,.cn-intro p){color:var(--v14-muted)}
+body :is(.cn-study-note,.cn-lesson-card p,.cn-hero p,.cn-intro p,.cn-empty p){color:var(--v14-muted)}
 body .cn-lesson-hanzi{color:var(--v14-ink)}
 body .cn-lesson-card{background:var(--v14-panel)!important;border-color:var(--v14-border)!important}
 body .cn-lesson-grid .cn-lesson-card:hover{border-color:color-mix(in srgb,var(--v14-accent) 42%,var(--v14-border))!important}
