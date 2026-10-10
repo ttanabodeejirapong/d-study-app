@@ -34,8 +34,44 @@ footer{font-size:12px;color:var(--muted);text-align:center;padding:8px 20px 30px
 @media(max-width:790px){.layout{grid-template-columns:1fr}.lessons{display:grid;grid-template-columns:repeat(5,minmax(118px,1fr));overflow-x:auto;gap:7px}.lesson{font-size:13px}.lesson small{font-size:11px}}
 @media(max-width:620px){header{padding:15px 14px}main{padding:12px 10px}.card{padding:12px}.lessons{grid-template-columns:repeat(5,135px)}#writer{height:72dvh;min-height:390px}#writer:fullscreen,#writer.pseudo{height:100dvh}.writer-head{padding:7px}.controls{padding:8px;gap:7px}.controls button{min-width:90px;flex:1;font-size:13px;padding:11px 7px}.compare{grid-template-columns:repeat(2,minmax(0,125px))}.pinyin{font-size:25px}}
 @media(max-height:650px){#writer:fullscreen .write-pane,#writer.pseudo .write-pane{padding:3px;gap:3px}#writer:fullscreen .controls,#writer.pseudo .controls{padding:6px}}
+
+/* Chinese Writer v13.23: share D Study App's appearance / UI theme / accent. */
+body{transition:background-color .16s,color .16s}
+body[data-ui-theme="midnight"]{--bg:#111318;--card:#1c2029;--ink:#eef1f7;--muted:#a9b3c3;--blue:#7b6bea;--blue2:#a99bf8;--line:#353c4a;--soft:#262c36}
+body[data-ui-theme="midnight"].light{--bg:#f1f3f6;--card:#fff;--ink:#1b2028;--muted:#747d89;--blue:#6d5bd0;--blue2:#8f79f3;--line:#d9dde4;--soft:#f3f2fc}
+body[data-ui-theme="neo"]{--bg:#101d32;--card:#182b43;--ink:#f4f8ff;--muted:#acbfd6;--blue:#298cf3;--blue2:#56b9ff;--line:#314a66;--soft:#1b3552}
+body[data-ui-theme="neo"].light{--bg:#eef4fb;--card:#fff;--ink:#10223d;--muted:#65768c;--blue:#1677ff;--blue2:#22a5f5;--line:#d9e4f0;--soft:#eef6ff}
+body[data-ui-theme="classic"].light{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--blue:#1f4e78;--blue2:#2c6b9f;--line:#dbe2ea;--soft:#eef3f8}
+body[data-accent="violet"]{--blue:#7663d7;--blue2:#9e8af4}
+body[data-accent="forest"]{--blue:#2f9771;--blue2:#57bd91}
+body[data-accent="rose"]{--blue:#b65e7d;--blue2:#d58199}
+body[data-accent="amber"]{--blue:#ad8134;--blue2:#d4a750}
+body[data-ui-theme="midnight"] header{background:linear-gradient(125deg,#17191f,#252a34);border-bottom:1px solid #383e49}
+body[data-ui-theme="neo"].light header{background:linear-gradient(120deg,#fff,#f0f8ff);color:#10223d;border-bottom:1px solid #d9e4f0}
+body[data-ui-theme="classic"] header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+body[data-ui-theme="neo"] header{background:linear-gradient(120deg,#172b4e,#164b7a)}
+body[data-ui-theme="neo"].light header .study-sub{color:#536f8d}
+body[data-ui-theme="midnight"] .lesson.active{background:color-mix(in srgb,var(--blue) 12%,var(--card))}
+body[data-ui-theme="neo"] .card{box-shadow:0 8px 24px rgba(22,85,169,.1)}
+body[data-ui-theme="midnight"] .card{box-shadow:0 8px 25px rgba(18,21,28,.11)}
+.lesson{display:block;text-decoration:none;cursor:pointer;transition:background .14s,transform .14s}
+.lesson:hover{transform:translateY(-1px);border-color:var(--blue)}
+.lesson:focus-visible,.toplinks a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+header .study-sub{color:#dbe3f1}
+.toplinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.toplinks a{font:inherit;text-decoration:none;font-size:12px;font-weight:700;color:inherit;border:1px solid currentColor;border-radius:9px;padding:6px 10px;opacity:.9}
+.toplinks a:hover{opacity:1;background:color-mix(in srgb,currentColor 9%,transparent)}
+.deck-link{color:var(--blue2);font-weight:700;text-decoration:none;font-size:12px;display:inline-flex;align-items:center;margin-top:6px}
+body.light .deck-link{color:var(--blue)}
+.card{min-width:0}
+#writer.visible{margin:auto;width:100%}
+.study-footer{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.study-footer a{color:var(--blue2)}
+body.light .study-footer a{color:var(--blue)}
+@media(min-width:790px){.layout{grid-template-columns:minmax(190px,250px) minmax(0,1fr)}}
+@media(max-width:620px){.toplinks{margin-top:9px}.toplinks a{font-size:11px;padding:6px 8px}}
 </style></head><body>
-<header><h1>D Study App • Chinese ✍️</h1><p>HSK / Boya Chinese Elementary II • เขียนตัวจีนเพื่อจำศัพท์สอบ บท 6–10</p></header>
+<header><h1>D Study App • Chinese ✍️</h1><p class="study-sub">Boya Chinese Elementary II • Writing Flashcards • บท 6–10</p><nav class="toplinks" aria-label="Study navigation"><a href="/d-study-app/chinese/flashcards/">← Chinese Flashcards</a><a href="/d-study-app/chinese/progress/">Chinese Dashboard</a><a href="/d-study-app/">D Study App</a></nav></header>
 <main><div id="courseSection"><div class="layout"><aside class="card"><h2>เลือกบทเรียน</h2><div id="lessons" class="lessons"></div></aside>
 <section class="card"><div class="meta">CHINESE WRITING FLASHCARDS · 169 WORDS</div><h2 id="deckTitle"></h2><p class="muted">อ่านพินอิน → เขียนด้วยนิ้วหรือปากกา → เฉลยเทียบตัวจีน → เลือกจำได้/ยังจำไม่ได้</p><div class="stats" id="summary"></div><div class="tips">✍️ ช่องเขียนจะไม่ขยับระหว่างลากเส้น · รองรับเต็มจอ · สุ่มคำและวนคำที่ยังจำไม่ได้ซ้ำ · บันทึกอัตโนมัติในเบราว์เซอร์นี้</div><div class="panel-actions start"><label for="order">ลำดับ:</label><select id="order" style="background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px"><option value="random">สุ่มคำศัพท์</option><option value="ordered">เรียงตามหนังสือ</option></select><button id="startBtn">เริ่มฝึกเขียน</button><button class="secondary" id="reset">ล้างรอบที่ค้างอยู่</button></div><p id="source" class="book-ref"></p><div id="saveStatus" class="meta"></div></section></div></div>
 <section id="writer" aria-label="Chinese handwriting flashcards">
@@ -45,7 +81,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;padding:8px 20px 30px
  <div id="donePane"></div>
  <div class="controls" id="writeControls"><button class="secondary" id="undo">↶ ย้อนเส้น</button><button class="secondary" id="clear">ล้าง</button><button id="check">ดูเฉลย →</button></div>
  <div class="controls" id="rateControls" hidden><button class="secondary" id="again">✕ ยังจำไม่ได้</button><button id="remember">✓ จำได้แล้ว</button></div>
-</section></main><footer>Prepared from the user-provided Boya Chinese Elementary II vocabulary tables. Course scans and original annotations remain in private storage.</footer><script>/* Boya Chinese Elementary II, 2nd edition: teacher/student-provided source.
+</section></main><footer>ศัพท์จาก Boya Chinese Elementary II • เอกสารต้นฉบับยังอยู่ในพื้นที่ส่วนตัว • เลือกบทด้านบนเพื่อรับลิงก์เฉพาะบท</footer><script>/* Boya Chinese Elementary II, 2nd edition: teacher/student-provided source.
  * Vocabulary tables, textbook printed pages 34-35, 40-41, 47-48, 53-54, 60-61.
  * 169 numbered textbook terms, 5 supplemental glossary/proper-name terms available separately.
  * Source PDF and original handwritten annotations are PRIVATE in Drive and never shipped.
@@ -1543,10 +1579,20 @@ const BANK=window.D_STUDY_CHINESE_WRITING_BANK;
 const q=id=>document.getElementById(id);
 const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const selector=q("lessons"), deckTitle=q("deckTitle"),summary=q("summary");
-let deck=BANK.decks[0],queue=[],missed=[],index=0,pass=0,strokes=[],drawing=false,pointer=null,strokeRect=null,observer=null;
+const routeLesson=Number((location.pathname.match(/\/chinese\/flashcards\/lesson-(6|7|8|9|10)(?:\/|$)/)||[])[1]);
+const queryLesson=Number(new URLSearchParams(location.search).get("lesson"));
+const requestedLesson=[routeLesson,queryLesson].find(n=>Number.isInteger(n)&&n>=6&&n<=10)||6;
+let deck=BANK.decks.find(x=>x.lesson===requestedLesson)||BANK.decks[0],queue=[],missed=[],index=0,pass=0,strokes=[],drawing=false,pointer=null,strokeRect=null,observer=null;
 let wordMode="random",correctCount=0,visible=false;
-let appearance="system";try{const s=JSON.parse(localStorage.getItem("d-study-shared-preferences-v1")||"null");appearance=s?.appearance||"system"}catch(_){}
-const dark=appearance==="dark"||(appearance==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);document.body.classList.toggle("light",!dark);
+let pref={appearance:"system",uiTheme:"midnight",accent:"navy",textSize:"normal",font:"inter"};
+try{const s=JSON.parse(localStorage.getItem("d-study-shared-preferences-v1")||"null");if(s&&typeof s==="object")pref=Object.assign(pref,s)}catch(_){}
+const dark=pref.appearance==="dark"||(pref.appearance==="system"&&matchMedia("(prefers-color-scheme: dark)").matches);
+document.body.classList.toggle("light",!dark);
+document.body.dataset.uiTheme=["classic","neo","midnight"].includes(pref.uiTheme)?pref.uiTheme:"midnight";
+document.body.dataset.accent=pref.accent||"navy";
+if(pref.textSize==="large")document.body.style.fontSize="17px";
+const fonts={inter:'Inter,system-ui,sans-serif',poppins:'Poppins,system-ui,sans-serif',nunito:'"Nunito Sans",system-ui,sans-serif',manrope:'Manrope,system-ui,sans-serif',ibm:'"IBM Plex Sans",system-ui,sans-serif',merriweather:'Merriweather,Georgia,serif'};
+document.body.style.fontFamily=fonts[pref.font]||fonts.inter;
 function userId(){try{const x=JSON.parse(localStorage.getItem("d-study-active-user")||"null");if(x?.id&&x.expiresAt>Date.now())return x.id}catch(_){}return "guest"}
 function stateKey(){return "d-study-chinese-flashcards::"+userId()}
 function saved(){const empty={subjectId:"chinese",version:1,decks:{}};try{const x=JSON.parse(localStorage.getItem(stateKey())||"null");return x?.subjectId==="chinese"&&x.decks&&typeof x.decks==="object"?x:empty}catch(_){return empty}}
@@ -1556,8 +1602,7 @@ function saveCheckpoint(){const d=saved(),p=d.decks[deck.id]||{completionCount:0
 const randomize=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
 function pick(n){deck=BANK.decks.find(d=>d.lesson===n)||BANK.decks[0];showOverview()}
 function showOverview(){
- selector.innerHTML=BANK.decks.map(d=>{const p=saved().decks[d.id]||{};return '<button class="lesson '+(d.id===deck.id?"active":"")+'" data-lesson="'+d.lesson+'"><b>บท '+d.lesson+'</b><small>'+d.cards.length+' คำ • ครบ '+(p.completionCount||0)+' รอบ</small></button>'}).join("");
- selector.querySelectorAll("[data-lesson]").forEach(el=>el.onclick=()=>pick(Number(el.dataset.lesson)));
+ selector.innerHTML=BANK.decks.map(d=>{const p=saved().decks[d.id]||{};return '<a class="lesson '+(d.id===deck.id?"active":"")+'" href="/d-study-app/chinese/flashcards/lesson-'+d.lesson+'/" data-lesson="'+d.lesson+'"><b>บท '+d.lesson+'</b><small>'+d.cards.length+' คำ • ครบ '+(p.completionCount||0)+' รอบ</small><small style="color:var(--blue)">↗ เปิดแฟลชการ์ดบทนี้</small></a>'}).join("");
  deckTitle.textContent='บทที่ '+deck.lesson+' — '+deck.title;
  const p=readProgress();
  summary.innerHTML='<div class="stat"><b>'+deck.cards.length+'</b>ศัพท์หลัก</div><div class="stat"><b>'+(p.completionCount||0)+'</b>รอบที่จำครบ 100%</div><div class="stat"><b>'+(p.session&&p.session.index<deck.cards.length?"มี":"ไม่มี")+'</b>รอบที่ค้างอยู่</div>';
