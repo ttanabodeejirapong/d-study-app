@@ -428,7 +428,12 @@ ensureCard();
 if(activeUser){
  const ss=getSubjectSession();
  const requested=sessionStorage.getItem("d-study-chinese-intent")||location.pathname;
- if(ss&&ss.subjectId===ID&&ss.userId===userId()&&ss.expiresAt>Date.now()){
+ const explicitOtherSubject=requested.includes("/tu101/")||[
+  "/d-study-app/progress/","/d-study-app/notes/","/d-study-app/summary/",
+  "/d-study-app/quiz/","/d-study-app/history/","/d-study-app/flashcards/",
+  "/d-study-app/prompt/","/d-study-app/settings/"
+ ].some(path=>requested.startsWith(path));
+ if(ss&&ss.subjectId===ID&&ss.userId===userId()&&ss.expiresAt>Date.now()&&!explicitOtherSubject){
   if(!hasSubjectAccess(activeUser,ID))grantSubjectAccess(ID);
   enterSubject(ID,false);
   if(requested.includes("/chinese/")){history.replaceState({dStudy:true},"",requested);applyPathRoute()}
