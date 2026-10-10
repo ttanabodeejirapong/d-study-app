@@ -4,7 +4,7 @@ const ID="chinese", KEY_PREFIX="d-study-chinese-state::", FC_PREFIX="d-study-chi
 const SUBJECT_NAME="Chinese", BASE="/d-study-app/chinese/";
 const previous={stateKey:stateKey,draftKey:draftKey,oldDraftKey:oldDraftKey,loadState:loadState,persist:persist,
   enterSubject:enterSubject,backToSubjects:backToSubjects,renderSubjectHub:renderSubjectHub,
-  chooseSubject:chooseSubject,applyPathRoute:applyPathRoute,switchTab:switchTab,
+  chooseSubject:chooseSubject,applyPathRoute:applyPathRoute,switchTab:switchTab,saveQuizDraft:saveQuizDraft,
   renderTracker:renderTracker,renderHistory:renderHistory,renderNotesHub:renderNotesHub,
   exportData:exportData,importData:importData,resetData:resetData};
 const isCn=()=>activeSubject===ID;
@@ -33,6 +33,7 @@ function loadChinese(){
 stateKey=function(){return isCn()?stateStorage():previous.stateKey()};
 draftKey=function(mode=quizMode,part=quizPart){return isCn()?"d-study-chinese-draft::"+userId()+"::"+part+"::"+mode:previous.draftKey(mode,part)};
 oldDraftKey=function(mode=quizMode){return isCn()?"d-study-chinese-draft::"+userId()+"::legacy::"+mode:previous.oldDraftKey(mode)};
+saveQuizDraft=function(){if(isCn())return;return previous.saveQuizDraft()}; // Never store a prior subject quiz in Chinese drafts
 loadState=function(){if(isCn()){state=loadChinese();return}return previous.loadState()};
 persist=function(){
  if(!activeUser||!state)return;
