@@ -1,0 +1,55 @@
+/* D Study App v14 — Boya Chinese writing page theme adapter.
+ * Uses EXACT Classic/Neo/Midnight × navy/violet/forest/rose/amber palette
+ * defined in the main app (assets/app-v13.3.min.css).
+ */
+body[data-ui-theme="classic"][data-accent="navy"]{--v14-accent:#1f4e78;--v14-accent2:#2c6b9f}
+body[data-ui-theme="classic"][data-accent="violet"]{--v14-accent:#6650a4;--v14-accent2:#8068bd}
+body[data-ui-theme="classic"][data-accent="forest"]{--v14-accent:#2f6b57;--v14-accent2:#468872}
+body[data-ui-theme="classic"][data-accent="rose"]{--v14-accent:#9a4963;--v14-accent2:#b9627c}
+body[data-ui-theme="classic"][data-accent="amber"]{--v14-accent:#8a641d;--v14-accent2:#a77c29}
+body[data-ui-theme="neo"][data-accent="navy"]{--v14-accent:#1677ff;--v14-accent2:#22a5f5}
+body[data-ui-theme="neo"][data-accent="violet"]{--v14-accent:#7558ff;--v14-accent2:#a26cff}
+body[data-ui-theme="neo"][data-accent="forest"]{--v14-accent:#00a978;--v14-accent2:#31cf9a}
+body[data-ui-theme="neo"][data-accent="rose"]{--v14-accent:#f04778;--v14-accent2:#ff7a9d}
+body[data-ui-theme="neo"][data-accent="amber"]{--v14-accent:#d88a00;--v14-accent2:#ffbd38}
+body[data-ui-theme="midnight"][data-accent="navy"]{--v14-accent:#5279d8;--v14-accent2:#65b8e8}
+body[data-ui-theme="midnight"][data-accent="violet"]{--v14-accent:#7564d7;--v14-accent2:#a07cf0}
+body[data-ui-theme="midnight"][data-accent="forest"]{--v14-accent:#3b9f79;--v14-accent2:#63c9a4}
+body[data-ui-theme="midnight"][data-accent="rose"]{--v14-accent:#bd5e7a;--v14-accent2:#df829b}
+body[data-ui-theme="midnight"][data-accent="amber"]{--v14-accent:#a97836;--v14-accent2:#d9aa5b}
+body[data-ui-theme]{--blue:var(--v14-accent,#1f4e78);--blue2:var(--v14-accent2,#2c6b9f);--v14-focus:color-mix(in srgb,var(--v14-accent) 40%,transparent);--v14-shadow:color-mix(in srgb,var(--v14-accent) 20%,transparent)}
+body header{border-bottom:3px solid var(--v14-accent)!important}
+body[data-ui-theme="classic"] header{background:linear-gradient(135deg,var(--v14-accent),var(--v14-accent2));color:#fff}
+body[data-ui-theme="midnight"] header{background:linear-gradient(125deg,#17191f,#252a34)}
+body[data-ui-theme="neo"].light header{background:linear-gradient(115deg,#fff,#f0f8ff);color:#10223d}
+body[data-ui-theme="neo"]:not(.light) header{background:linear-gradient(115deg,#172b4e,#164b7a);color:#fff}
+body .card{border-color:var(--line);background:var(--card);color:var(--ink)}
+body .tips{border-color:color-mix(in srgb,var(--v14-accent) 24%,var(--line));background:color-mix(in srgb,var(--v14-accent) 7%,var(--soft))}
+body .stat{border-color:color-mix(in srgb,var(--v14-accent) 14%,var(--line));background:var(--soft);color:var(--ink)}
+body .lesson{border-color:var(--line);background:var(--soft);color:var(--ink)}
+body .lesson.active{outline:2px solid var(--v14-accent);border-color:var(--v14-accent);background:color-mix(in srgb,var(--v14-accent) 12%,var(--card))}
+body .lesson:hover{border-color:var(--v14-accent);box-shadow:0 7px 20px var(--v14-shadow)}
+body .lesson .deck-link{color:var(--v14-accent)}
+body button:not(.secondary){background:linear-gradient(130deg,var(--v14-accent),var(--v14-accent2));border-color:var(--v14-accent);color:#fff}
+body button.secondary{background:var(--soft);border-color:var(--line);color:var(--ink)}
+body :is(.toplinks a,.deck-link){border-color:currentColor}
+body :is(button,a.lesson,a.toplinks,a.deck-link){-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform .15s cubic-bezier(.2,.9,.3,1),filter .14s ease,box-shadow .17s ease,border-color .15s ease,background-color .15s ease}
+body :is(button,a.lesson,.toplinks a,a.deck-link):not(:disabled):hover{filter:brightness(1.06)}
+body :is(button,a.lesson,.toplinks a,a.deck-link):not(:disabled):active,
+body :is(button,a.lesson,.toplinks a,a.deck-link).d14-pressed{transform:translateY(2px) scale(.972)!important;filter:brightness(.9)!important;box-shadow:inset 0 2px 8px rgba(0,0,0,.18),0 0 0 3px var(--v14-focus)!important}
+body :is(button,a.lesson,.toplinks a,a.deck-link):focus-visible{outline:3px solid var(--v14-accent);outline-offset:3px}
+body :is(select,input):focus-visible{outline:2px solid var(--v14-accent);outline-offset:3px}
+body .progress>div{background:linear-gradient(90deg,var(--v14-accent),var(--v14-accent2))}
+body .square{border-color:var(--v14-accent)}
+body .pinyin{color:var(--v14-accent2);text-shadow:0 1px 0 color-mix(in srgb,var(--v14-accent) 20%,transparent)}
+body.light .pinyin{color:var(--v14-accent)}
+body .meta,body .hint,body .book-ref{color:var(--muted)}
+body .writer-head{border-color:var(--line)}
+body #writer{background:var(--card);color:var(--ink);border-color:var(--line)}
+body .compare-box{border-color:var(--line);background:var(--card)}
+body #meaning{color:var(--ink)}
+body button:disabled{opacity:.55;cursor:not-allowed}
+body .d14-ripple-host{position:relative!important;isolation:isolate}
+body .d14-ripple{position:absolute!important;display:block!important;border-radius:50%!important;background:color-mix(in srgb,#fff 45%,var(--v14-accent))!important;opacity:.28;transform:translate(-50%,-50%) scale(.12);animation:d14-writing-pulse .44s cubic-bezier(.2,.7,.25,1) forwards;pointer-events:none!important;z-index:7}
+@keyframes d14-writing-pulse{to{opacity:0;transform:translate(-50%,-50%) scale(2.15)}}
+@media(prefers-reduced-motion:reduce){body :is(button,a.lesson,.toplinks a){transition:none!important}body .d14-ripple{animation:none!important;opacity:0!important}}
