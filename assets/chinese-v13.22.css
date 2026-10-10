@@ -32,3 +32,6 @@ body.subject-chinese #tracker> :not(#cnProgressLayer),body.subject-chinese #summ
 .cn-privacy{color:var(--muted);font-size:12px;margin-top:8px}
 @media(max-width:650px){.cn-kpis{grid-template-columns:1fr}.cn-hero{padding:18px}.cn-writer{height:68dvh;min-height:395px}.cn-writer:fullscreen,.cn-writer.cn-pseudo-full{height:100dvh}.cn-writer-top{padding:9px 10px}.cn-writer-stage{padding:8px}.cn-writer-actions{padding:9px;gap:7px}.cn-writer-actions button{min-width:auto;flex:1;padding:10px 8px}}
 @media(max-height:600px){.cn-writer:fullscreen .cn-writer-stage,.cn-writer.cn-pseudo-full .cn-writer-stage{gap:3px;padding:6px}.cn-writer:fullscreen .cn-writer-actions,.cn-writer.cn-pseudo-full .cn-writer-actions{padding:6px}}
+
+/* Author display:flex rules must never override the HTML hidden state. */
+#cnWriter [hidden], #cnFlashcardsLayer [hidden] { display:none!important; }
