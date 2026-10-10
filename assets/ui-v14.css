@@ -14,7 +14,7 @@ body .cn-lesson-hanzi{color:var(--v14-ink)}
 body .cn-lesson-card{background:var(--v14-panel)!important;border-color:var(--v14-border)!important}
 body .cn-lesson-grid .cn-lesson-card:hover{border-color:color-mix(in srgb,var(--v14-accent) 42%,var(--v14-border))!important}
 /* The primary hue must follow the Settings accent in Classic, Neo and Midnight. */
-body .cn-lesson-link,body .cn-lesson-link:visited{background:linear-gradient(125deg,var(--v14-accent),var(--v14-accent2))!important;border-color:var(--v14-accent)!important;color:#fff!important}
+body[data-ui-theme] .cn-lesson-link,body[data-ui-theme] .cn-lesson-link:visited{background:linear-gradient(125deg,var(--v14-accent),var(--v14-accent2))!important;border-color:var(--v14-accent)!important;color:#fff!important}
 body .cn-lesson-shortcuts a{background:color-mix(in srgb,var(--v14-accent) 8%,var(--v14-panel))!important;color:var(--v14-accent)!important;border-color:color-mix(in srgb,var(--v14-accent) 26%,var(--v14-border))!important}
 body :is(#loginScreen,#subjectScreen,#appShell) :is(.eyebrow,.summary-kicker,.summary-link,.lecture-no,.slide-no){--blue:var(--v14-accent)}
 body .subject-card.live{border-color:color-mix(in srgb,var(--v14-accent) 24%,var(--v14-border));background:var(--v14-panel);color:var(--v14-ink)}
