@@ -94,6 +94,9 @@ function updateChrome(){
  const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.22 • Chinese workspace";
 }
 function setCnTheme(){
+ // The TU101 theme masks its own summary/quiz panels. Clear it on Chinese entry
+ // so Chinese's separate panels are visible even after TU101 → Subjects → Chinese.
+ if(isCn())document.body.classList.remove("subject-tu101");
  document.body.classList.toggle("subject-chinese",isCn());
  if(isCn())updateChrome();
 }
