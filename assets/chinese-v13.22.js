@@ -91,7 +91,7 @@ function updateChrome(){
  const h=document.querySelector("#appShell header h1");if(h)h.textContent="D Study App • Chinese";
  const s=document.querySelector("#appShell header .sub");if(s)s.textContent="Write → Check → Repeat • autosave + subject-isolated progress";
  document.querySelectorAll("#appShell nav.tabs a[data-tab]").forEach(a=>{const slug=a.dataset.tab==="tracker"?"progress":a.dataset.tab;a.href=BASE+slug+"/"});
- const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.22.1 • Chinese workspace";
+ const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.23 • Chinese workspace";
 }
 function setCnTheme(){
  // The TU101 theme masks its own summary/quiz panels. Clear it on Chinese entry
@@ -428,11 +428,10 @@ ensureCard();
 if(activeUser){
  const ss=getSubjectSession();
  const requested=sessionStorage.getItem("d-study-chinese-intent")||location.pathname;
- const explicitOtherSubject=requested.includes("/tu101/")||[
-  "/d-study-app/progress/","/d-study-app/notes/","/d-study-app/summary/",
-  "/d-study-app/quiz/","/d-study-app/history/","/d-study-app/flashcards/",
-  "/d-study-app/prompt/","/d-study-app/settings/"
- ].some(path=>requested.startsWith(path));
+ const requestedPath=String(requested).split("?")[0].split("#")[0];
+ const explicitOtherSubject=requestedPath.startsWith("/d-study-app/")&&
+  !requestedPath.startsWith(BASE)&&
+  !["/d-study-app/","/d-study-app/login/","/d-study-app/subjects/"].includes(requestedPath);
  if(ss&&ss.subjectId===ID&&ss.userId===userId()&&ss.expiresAt>Date.now()&&!explicitOtherSubject){
   if(!hasSubjectAccess(activeUser,ID))grantSubjectAccess(ID);
   enterSubject(ID,false);
