@@ -91,7 +91,7 @@ function updateChrome(){
  const h=document.querySelector("#appShell header h1");if(h)h.textContent="D Study App • Chinese";
  const s=document.querySelector("#appShell header .sub");if(s)s.textContent="Write → Check → Repeat • autosave + subject-isolated progress";
  document.querySelectorAll("#appShell nav.tabs a[data-tab]").forEach(a=>{const slug=a.dataset.tab==="tracker"?"progress":a.dataset.tab;a.href=BASE+slug+"/"});
- const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v13.23 • Chinese workspace";
+ const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v14.0 • Chinese workspace";
 }
 function setCnTheme(){
  // The TU101 theme masks its own summary/quiz panels. Clear it on Chinese entry
