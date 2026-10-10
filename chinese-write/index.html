@@ -1566,6 +1566,7 @@ function showOverview(){
  q("courseSection").hidden=false;q("writer").classList.remove("visible");visible=false;
 }
 function start(){
+ stop();
  const p=readProgress(),rec=p.session;
  wordMode=q("order").value;
  queue=wordMode==="ordered"?deck.cards.slice():randomize(deck.cards);
@@ -1574,7 +1575,7 @@ function start(){
   const lookup=new Map(deck.cards.map(c=>[c.id,c]));
   const cand=rec.queueIds.map(id=>lookup.get(id));
   const miss=Array.isArray(rec.missedIds)?rec.missedIds.map(id=>lookup.get(id)):[];
-  if(cand.length===deck.cards.length&&cand.every(Boolean)&&miss.every(Boolean)&&Number.isInteger(rec.index)&&rec.index>=0&&rec.index<=cand.length){
+  if(cand.length>0&&cand.length<=deck.cards.length&&cand.every(Boolean)&&miss.every(Boolean)&&Number.isInteger(rec.index)&&rec.index>=0&&rec.index<=cand.length){
    queue=cand;missed=miss;index=rec.index;pass=Number.isInteger(rec.pass)?rec.pass:0;
   }
  }
