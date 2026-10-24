@@ -15,6 +15,16 @@ Before making changes, read `AGENTS.md`.
 - No EC214/TU101 quiz, summary, note, flashcard, access, or academic-storage engines were modified for this UI release.
 - Deployment verification includes static integration, JS syntax, 15 color-token combinations, lesson URL and source-word checks. Full real-device testing remains desirable.
 
+## v14.1 — Boya Chinese Chapter 11 writing flashcards (October 2026)
+
+- Added the **34 numbered New Words and Expressions** from user-provided Boya Chinese Elementary II Chapter 11, **西红柿炒鸡蛋**, printed pages **66–67**.
+- Chapter 11 has its own directly shareable handwriting URL: `/d-study-app/chinese/flashcards/lesson-11/` and appears in the Chinese Flashcards and Progress lesson lists.
+- Uses the exact same write → check → remembered/try again flow, fullscreen grid, v14 Settings theme/Accent, and saved per-lesson review cycles. Each word has Hanzi, Pinyin, Thai study meaning and printed English gloss.
+- Lesson bank added in a **separate** `assets/chinese-boya-l11-v14.1.js` extension. All **169** original Lessons 6–10 card IDs and contents are unchanged; total currently **203** numbered study words across **6** decks.
+- The textbook's subordinate unnumbered `点` under item 12 `点着` is noted on the card, not added as an extra numbered term.
+- Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
+- No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
+
 ## Data safety — subject isolation is mandatory
 
 EC214, TU101, and every future subject must remain independent at the academic-data level.
