@@ -49,7 +49,7 @@ function ensureCard(){
  const grid=document.querySelector("#subjectScreen .subject-grid");
  if(!grid||document.getElementById("subjectChineseCard"))return;
  const card=document.createElement("article");card.className="subject-card live cn-card";card.id="subjectChineseCard";card.dataset.subject=ID;
- card.innerHTML='<span class="subject-state">Ready</span><strong>Chinese</strong><span>汉语 • Writing & Study</span><small>Boya Chinese • Lessons 6–10 ready</small><div class="subject-card-actions"><button id="cnOpen" type="button">Open Chinese</button><button id="cnPreview" class="secondary" type="button">Preview</button></div>';
+ card.innerHTML='<span class="subject-state">Ready</span><strong>Chinese</strong><span>汉语 • Writing & Study</span><small>Boya Chinese • Lessons 6–11 ready</small><div class="subject-card-actions"><button id="cnOpen" type="button">Open Chinese</button><button id="cnPreview" class="secondary" type="button">Preview</button></div>';
  grid.insertBefore(card,grid.querySelector(".subject-card.coming"));
  document.getElementById("cnOpen").onclick=()=>chooseSubject(ID);
  document.getElementById("cnPreview").onclick=()=>openChinesePreview();
@@ -60,7 +60,7 @@ function openChinesePreview(){
  panel.hidden=false;
  const unlock=document.getElementById("subjectUnlockPanel");if(unlock)unlock.hidden=true;
  if(title)title.textContent="Chinese Preview";
- body.innerHTML='<div class="cn-hero"><div><div class="eyebrow">Chinese • 汉语</div><strong>Write to remember.</strong><p>Boya Chinese Lessons 6–10 have dedicated writing-flashcard pages.</p><button type="button" id="cnPreviewOpen">Open Chinese</button></div><div class="cn-icon">✍️</div></div>';
+ body.innerHTML='<div class="cn-hero"><div><div class="eyebrow">Chinese • 汉语</div><strong>Write to remember.</strong><p>Boya Chinese Lessons 6–11 have dedicated writing-flashcard pages.</p><button type="button" id="cnPreviewOpen">Open Chinese</button></div><div class="cn-icon">✍️</div></div>';
  document.getElementById("cnPreviewOpen").onclick=()=>chooseSubject(ID);
  panel.scrollIntoView({block:"start",behavior:"smooth"});
 }
@@ -91,7 +91,7 @@ function updateChrome(){
  const h=document.querySelector("#appShell header h1");if(h)h.textContent="D Study App • Chinese";
  const s=document.querySelector("#appShell header .sub");if(s)s.textContent="Write → Check → Repeat • autosave + subject-isolated progress";
  document.querySelectorAll("#appShell nav.tabs a[data-tab]").forEach(a=>{const slug=a.dataset.tab==="tracker"?"progress":a.dataset.tab;a.href=BASE+slug+"/"});
- const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v14.0 • Chinese workspace";
+ const footer=document.getElementById("appVersionLabel");if(footer)footer.textContent="D Study App v14.1 • Chinese workspace";
 }
 function setCnTheme(){
  // The TU101 theme masks its own summary/quiz panels. Clear it on Chinese entry
@@ -104,9 +104,9 @@ function renderCnProgress(){
  const deckList=banks(),completed=readFlash().decks||{};
  const n=layer("tracker","cnProgressLayer");
  if(!n)return;
- n.innerHTML='<div class="cn-hero"><div><div class="eyebrow">CHINESE STUDY DASHBOARD</div><strong>Chinese • 汉语</strong><p>Writing Flashcards for Boya Chinese Lessons 6–10 are ready. Summaries and quizzes will be added later.</p><div class="cn-actions"><button type="button" data-cn-nav="flashcards">Open writing practice</button><button type="button" class="secondary" data-cn-nav="notes">Open notes</button></div></div><div class="cn-icon">✍️</div></div>'+
+ n.innerHTML='<div class="cn-hero"><div><div class="eyebrow">CHINESE STUDY DASHBOARD</div><strong>Chinese • 汉语</strong><p>Writing Flashcards for Boya Chinese Lessons 6–11 are ready. Summaries and quizzes will be added later.</p><div class="cn-actions"><button type="button" data-cn-nav="flashcards">Open writing practice</button><button type="button" class="secondary" data-cn-nav="notes">Open notes</button></div></div><div class="cn-icon">✍️</div></div>'+
  '<div class="cn-kpis"><div class="card"><div class="small">Lessons available</div><strong>0</strong></div><div class="card"><div class="small">Writing decks</div><strong>'+deckList.length+'</strong></div><div class="card"><div class="small">Completed writing cycles</div><strong>'+Object.values(completed).reduce((n,x)=>n+(Number(x.completionCount)||0),0)+'</strong></div></div>'+
- '<div class="cn-empty" style="margin-top:18px"><h3>Ready to write</h3><p>169 flashcards in five lessons. Open a lesson or browse the Flashcards tab.</p><div class="cn-lesson-shortcuts">'+deckList.map(d=>'<a href="'+chineseLessonUrl(d.lesson)+'">บท '+Number(d.lesson)+' ↗</a>').join("")+'</div></div>'+
+ '<div class="cn-empty" style="margin-top:18px"><h3>Ready to write</h3><p>203 flashcards in six lessons. Open a lesson or browse the Flashcards tab.</p><div class="cn-lesson-shortcuts">'+deckList.map(d=>'<a href="'+chineseLessonUrl(d.lesson)+'">บท '+Number(d.lesson)+' ↗</a>').join("")+'</div></div>'+
  '<div class="cn-actions"><button class="secondary" id="cnBackupExport">Export Chinese backup</button><button class="secondary" id="cnBackupImport">Import Chinese backup</button><input hidden id="cnBackupFile" type="file" accept=".json,application/json"></div>';
  n.querySelector("#cnBackupExport").onclick=()=>exportData();
  n.querySelector("#cnBackupImport").onclick=()=>n.querySelector("#cnBackupFile").click();
@@ -236,7 +236,7 @@ function saveFlash(obj){if(obj.subjectId!==ID)return;localStorage.setItem(flashS
 function mix(arr){const x=arr.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
 function chineseLessonUrl(lesson){
  const n=Number(lesson);
- return BASE+"flashcards/lesson-"+(Number.isInteger(n)&&n>=6&&n<=10?n:6)+"/";
+ return BASE+"flashcards/lesson-"+(Number.isInteger(n)&&n>=6&&n<=11?n:6)+"/";
 }
 function renderCnFlashcards(){
  if(!isCn())return;
