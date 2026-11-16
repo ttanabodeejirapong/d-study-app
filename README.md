@@ -25,6 +25,12 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.3.1 — Saved-note dots on quiz numbers)
+
+- Restored the original EC214 saved-question **purple dot** on each numbered Final Exams quiz question. The dot appears for any non-blank saved per-question note, including saved notes from older versions and across both Reviewing and Mastering banks.
+- Live notes show or hide the dot immediately without re-rendering the question or changing input focus; note records, quiz drafts, history, points and grading are unchanged.
+- Dark-mode and light-mode note markers match the original EC214 palette, including a visible indicator legend.
+
 ## EC214 Final Exams (v14.3 — Template feature parity)
 
 - Matched original EC214 core study behavior: full Lecture 5 summary search with clickable sections; quiz question search and topic hints; **Not sure** (0.7) and **Guessed** (0.4) weighted confidence flags, with confident correct = 1.0 and incorrect = 0.
