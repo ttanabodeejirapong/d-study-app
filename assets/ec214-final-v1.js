@@ -780,7 +780,7 @@ function renderSettings(){
  '<button type="button" class="final-action '+(p.textSize===key?"active":"")+'" data-pref="textSize" data-value="'+key+'" aria-pressed="'+(p.textSize===key)+'">'+label+'</button>').join("")+'</div>'+
  '<h3>Font</h3><div class="final-actions">'+[["inter","Inter"],["poppins","Poppins"],["nunito","Nunito Sans"],["manrope","Manrope"],["ibm","IBM Plex Sans"],["merriweather","Merriweather"]].map(([key,label])=>
  '<button type="button" class="final-action '+(p.font===key?"active":"")+'" data-pref="font" data-value="'+key+'" aria-pressed="'+(p.font===key)+'">'+label+'</button>').join("")+'</div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>EC214 Final data</h3><p class="final-mini">Storage namespace: d-study-ec214-final-state::[local profile]. Export/import includes only this subject. Cross-subject backups are rejected.</p>'+
+ '<div class="final-card" style="margin-top:14px"><h3>EC214 Final data</h3><p class="final-mini">Storage namespace: d-study-ec214-final-state::[local profile]. Export/import includes only this subject. Cross-subject backups are rejected. Saved part drafts are included in subject-only backups.</p>'+
  '<div class="final-actions"><button class="final-primary" id="finalExport">Export final backup</button><button class="final-action" id="finalImportBtn">Import final backup</button><input hidden type="file" id="finalImportFile" accept=".json,application/json"></div></div>';
  $("finalSettings").querySelectorAll("[data-pref]").forEach(btn=>btn.onclick=()=>{
   const p=sharedPrefs();p[btn.dataset.pref]=btn.dataset.value;storePut("d-study-shared-preferences-v1",p);theme();renderSettings();
@@ -795,8 +795,22 @@ function renderPrompt(){
  $("finalCopyPrompt").onclick=()=>navigator.clipboard.writeText($("finalPromptText").value).then(()=>setStatus("Prompt copied ✓")).catch(()=>setStatus("Copy not available; select the text manually"));
 }
 function exportData(){
- save();
- const out={app:"D Study App",subjectId:SUB,version:1,profileId:user.id,exportedAt:new Date().toISOString(),state,quizDrafts:{reviewing:draft("reviewing"),mastering:draft("mastering")}};
+ save();if(currentDraft)saveDraft();
+ const modes=["reviewing","mastering"];
+ const quizDrafts={};
+ for(const mode of modes){
+  // Keep the pre-v14.4 backup property for old full-length attempts.
+  const legacy=parse(storeGet(quizDraftKey(mode,"full")));
+  if(legacy&&legacy.subjectId===SUB&&legacy.profileId===user.id&&legacy.mode===mode)
+   quizDrafts[mode]=legacy;
+  quizDrafts[mode+"Parts"]={};
+  for(const p of PARTS[mode]){
+   const raw=parse(storeGet(quizDraftKey(mode,p.id)));
+   if(raw&&raw.subjectId===SUB&&raw.profileId===user.id&&raw.mode===mode&&raw.partId===p.id)
+    quizDrafts[mode+"Parts"][p.id]=raw;
+  }
+ }
+ const out={app:"D Study App",subjectId:SUB,version:2,profileId:user.id,exportedAt:new Date().toISOString(),state,quizDrafts};
  const blob=new Blob([JSON.stringify(out,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");
  link.href=url;link.download="d-study-ec214-final-"+user.username+"-backup.json";link.click();
  setTimeout(()=>URL.revokeObjectURL(url),1500);
@@ -806,17 +820,40 @@ function importData(e){
  const r=new FileReader();
  r.onload=()=>{
   const x=parse(r.result);
-  if(!x||x.subjectId!==SUB||!x.state||x.state.subjectId!==SUB||x.profileId!==user.id||x.state.profileId!==user.id){alert("Import blocked. This file is not an EC214 Final backup for this local profile.");return}
-  if(!confirm("Replace this profile’s EC214 Final records with the selected EC214 Final backup?"))return;
-  state=x.state;save();
-  if(x.quizDrafts)for(const mode of ["reviewing","mastering"]){
-   const d=x.quizDrafts[mode];
-   if(d&&d.subjectId===SUB&&d.profileId===user.id&&d.mode===mode&&d.lecture==="l5")storePut("d-study-ec214-final-draft::"+user.id+"::l5::"+mode,d);
+  if(!x||x.subjectId!==SUB||!x.state||x.state.subjectId!==SUB||x.profileId!==user.id||x.state.profileId!==user.id){
+   alert("Import blocked. This file is not an EC214 Final backup for this local profile.");return;
   }
-  currentDraft=null;buildOutline();renderAll();navigate("progress",false);alert("EC214 Final backup imported.");
+  if(!confirm("Replace this profile’s EC214 Final records with this backup? Other subjects are not affected."))return;
+  const drafts=[];
+  if(x.quizDrafts&&typeof x.quizDrafts==="object"){
+   for(const mode of ["reviewing","mastering"]){
+    const full=x.quizDrafts[mode];
+    if(full&&full.subjectId===SUB&&full.profileId===user.id&&full.mode===mode&&
+     full.lecture==="l5"&&(!full.partId||full.partId==="full")){
+     drafts.push([quizDraftKey(mode,"full"),full]);
+    }
+    const parts=x.quizDrafts[mode+"Parts"]||{};
+    for(const part of PARTS[mode]){
+     const d=parts[part.id];
+     if(d&&d.subjectId===SUB&&d.profileId===user.id&&d.mode===mode&&
+      d.lecture==="l5"&&d.partId===part.id){
+      drafts.push([quizDraftKey(mode,part.id),d]);
+     }
+    }
+   }
+  }
+  state=x.state;save();
+  for(const [key,value] of drafts)storePut(key,value);
+  const choice=state.quizSelection||{};
+  quizMode=qsets[choice.mode]?choice.mode:"reviewing";
+  quizPart=validPart(quizMode,choice[quizMode])?choice[quizMode]:"p1";
+  currentDraft=null;currentIndex=0;
+  buildOutline();renderAll();navigate("progress",false);
+  alert("EC214 Final backup imported. Saved parts and older full-lecture drafts remain available.");
  };
  r.readAsText(file);e.target.value="";
 }
+
 function renderAll(){renderProgress();renderBlankFlashcards();renderNotes();renderHistory();renderSettings();renderPrompt();renderQuiz()}
 function clickEvents(){
  document.addEventListener("click",function(e){
