@@ -466,7 +466,7 @@ function renderQuiz(){
   '<div class="final-hint-body" id="finalHintBody" hidden><b>'+esc(q.topic)+'</b><p class="final-mini">'+esc(q.ref)+'</p><p class="final-mini">This identifies the professor’s topic—not the correct answer.</p></div>'+
   choices+confUI+
   '<div class="final-actions"><button class="final-action '+(currentDraft.flags[q.id]?"active":"")+
-  '" id="finalFlag">'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
+  '" id="finalFlag" '+(submitted?"disabled":"")+'>'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
   explanation+
   '<div class="final-actions"><button class="final-action" id="finalPrevious" '+(currentIndex===0?"disabled":"")+'>← Previous</button>'+
   '<button class="final-primary" id="finalNext" '+(currentIndex===bank.length-1?"disabled":"")+'>Next →</button></div>'+
@@ -492,7 +492,7 @@ function renderQuiz(){
   currentDraft.confidence[q.id]=currentDraft.confidence[q.id]===picked?"confident":picked;
   saveDraft();renderQuiz();
  });
- $("finalFlag").onclick=()=>{currentDraft.flags[q.id]=!currentDraft.flags[q.id];saveDraft();renderQuiz()};
+ $("finalFlag").onclick=()=>{if(submitted)return;currentDraft.flags[q.id]=!currentDraft.flags[q.id];saveDraft();renderQuiz()};
  $("finalHintBtn").onclick=()=>{
   const panel=$("finalHintBody");panel.hidden=!panel.hidden;
   $("finalHintBtn").setAttribute("aria-expanded",String(!panel.hidden));
