@@ -446,7 +446,10 @@ function renderQuiz(){
   '<button type="button" class="final-action '+(confidence==="guessed"?"active":"")+'" data-confidence="guessed" aria-pressed="'+(confidence==="guessed")+'" '+(submitted?"disabled":"")+'>□ Guessed (40%)</button>'+
   '</div></div>';
  const cannotSubmit=answered<bank.length;
- const resultBanner=submitted?'<div class="final-card"><b>Attempt submitted · '+modeStatsLabel(quizMode)+'</b><p class="final-mini">Review any question’s explanation or start another attempt. Mistake Log records wrong and uncertain answers.</p></div>':"";
+ const resultBanner=submitted?'<div class="final-card"><b>Attempt submitted · '+modeStatsLabel(quizMode)+'</b><p class="final-mini">Review any question’s explanation or start another attempt. Mistake Log records wrong and uncertain answers.</p>'+
+  (resultData&&Array.isArray(resultData.topicResults)?'<details class="final-history-details"><summary>Topic results & learning mastery</summary>'+
+   '<div class="final-topic-results">'+resultData.topicResults.map(t=>'<div><b>'+esc(t.topic)+'</b><span>Raw '+t.raw+'% · Learning '+t.learning+'% · '+esc(t.status)+'</span></div>').join("")+'</div></details>':"")+
+  '</div>':"";
  const root=$("finalQuiz");
  root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2>'+
   '<p>Same confidence-weighted scoring as EC214. Drafts, attempt counts and mistake history are saved separately for Final Exams.</p></div>'+
@@ -702,7 +705,7 @@ function clickEvents(){
   const go=e.target.closest("[data-final-go]");
   if(go){navigate(go.dataset.finalGo);return}
   const section=e.target.closest("[data-summary-id]");
-  if(section){navigate("summary");const target=$("final-section-"+section.dataset.summaryId);if(target)target.scrollIntoView({block:"start",behavior:"smooth"});return}
+  if(section){navigate("summary");const target=$("final-section-"+section.dataset.summaryId);if(target){document.querySelectorAll(".final-search-target").forEach(x=>x.classList.remove("final-search-target"));target.classList.add("final-search-target");target.scrollIntoView({block:"start",behavior:"smooth"})}return}
  },true);
  document.addEventListener("change",e=>{
   const id=e.target.dataset.finalStatus;if(id&&state){state.lectureStates.l5[id]=e.target.value;save();renderSummaryProgress()}
