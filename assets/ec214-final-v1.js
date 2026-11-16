@@ -14,7 +14,7 @@ const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){retu
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
 let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
-function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizQuestionNotes:{},createdAt:new Date().toISOString()}}
+function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizTopicStats:{},quizQuestionNotes:{},createdAt:new Date().toISOString()}}
 const key=()=> "d-study-ec214-final-state::"+user.id;
 const quarantine=(tag,raw)=>{try{localStorage.setItem("d-study-ec214-final-quarantine::"+user.id+"::"+Date.now()+"::"+tag,raw)}catch(_){}};
 function loadState(){
@@ -22,7 +22,7 @@ function loadState(){
  const x=parse(raw);
  if(!x||x.subjectId!==SUB||x.profileId!==user.id){quarantine("subject-mismatch",raw);return newState()}
  const a=newState();
- for(const k of ["lectureStates","notes","quizDrafts","quizHistory","quizQuestionNotes"]){
+ for(const k of ["lectureStates","notes","quizDrafts","quizHistory","quizTopicStats","quizQuestionNotes"]){
   if(x[k]&&typeof x[k]==="object"&&(k!=="quizHistory"||Array.isArray(x[k])))a[k]=x[k];
  }
  return a;
@@ -394,13 +394,61 @@ function renderQuiz(){
 function submitQuiz(){
  const bank=qsets[quizMode];
  if(currentDraft.submitted)return;
- const filled=Object.keys(currentDraft.answers).length;
- if(filled<bank.length&&!confirm("You answered "+filled+" of "+bank.length+" questions. Submit anyway? Unanswered questions count as incorrect."))return;
- const wrong=bank.filter(x=>currentDraft.answers[x.id]!==x.ans).map(x=>({id:x.id,q:x.q,correct:x.ans,given:currentDraft.answers[x.id]??null,why:x.why,ref:x.ref,opts:x.opts}));
- const result={id:"final-l5-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),subjectId:SUB,lecture:"l5",mode:quizMode,at:new Date().toISOString(),score:bank.length-wrong.length,total:bank.length,percent:Math.round(100*(bank.length-wrong.length)/bank.length),wrong,flags:bank.filter(x=>currentDraft.flags[x.id]).map(x=>x.id)};
+ const filled=bank.filter(q=>Number.isInteger(currentDraft.answers[q.id])).length;
+ if(filled<bank.length){alert("Please answer all "+bank.length+" questions before submitting ("+(bank.length-filled)+" left).");return}
+ let score=0,learningPoints=0,guessed=0,unsure=0;
+ const byTopic={};
+ const reviewItems=[];
+ for(const q of bank){
+  const given=currentDraft.answers[q.id],correct=given===q.ans;
+  const conf=currentDraft.confidence[q.id]||"confident",flagged=!!currentDraft.flags[q.id];
+  const points=correct?confidenceWeight(conf):0;
+  if(correct)score++;
+  learningPoints+=points;
+  if(conf==="guessed")guessed++;
+  if(conf==="unsure")unsure++;
+  if(!byTopic[q.topic])byTopic[q.topic]={total:0,score:0,learningPoints:0,guessed:0,unsure:0,clean:true};
+  const t=byTopic[q.topic];t.total++;if(correct)t.score++;t.learningPoints+=points;
+  if(conf==="guessed")t.guessed++;if(conf==="unsure")t.unsure++;
+  if(!correct||conf!=="confident")t.clean=false;
+  if(!correct||conf!=="confident"||flagged){
+   reviewItems.push({id:q.id,q:q.q,correctIndex:q.ans,given,correct,confidence:conf,
+    flagged,points,why:q.why,ref:q.ref,opts:q.opts.slice(),topic:q.topic});
+  }
+ }
+ const topicResults=[];
+ for(const [topic,t] of Object.entries(byTopic)){
+  const key="l5::"+quizMode+"::"+topic;
+  const prev=state.quizTopicStats[key]||{attempts:0,bestAdjusted:0,masteryPasses:0};
+  const raw=Math.round(100*t.score/t.total),adj=Math.round(100*t.learningPoints/t.total);
+  const clean=t.clean&&t.score===t.total;
+  const masteryPasses=(prev.masteryPasses||0)+(quizMode==="mastering"&&clean?1:0);
+  const status=adj<60?"Learning":adj<80||t.guessed||t.unsure?"Practiced":
+   (quizMode==="mastering"&&masteryPasses>=2?"Mastered":"Strong");
+  const next={attempts:(prev.attempts||0)+1,bestAdjusted:Math.max(prev.bestAdjusted||0,adj),
+   latestAdjusted:adj,latestRaw:raw,guessed:t.guessed,unsure:t.unsure,masteryPasses,status};
+  state.quizTopicStats[key]=next;
+  topicResults.push({topic,raw,learning:adj,status,guessed:t.guessed,unsure:t.unsure});
+ }
+ const result={
+  id:"final-l5-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
+  subjectId:SUB,lecture:"l5",mode:quizMode,at:new Date().toISOString(),
+  score,total:bank.length,percent:Math.round(100*score/bank.length),
+  learningPoints:Number(learningPoints.toFixed(2)),
+  adjustedPercent:Math.round(100*learningPoints/bank.length),
+  guessed,unsure,answers:{...currentDraft.answers},
+  confidence:{...currentDraft.confidence},
+  wrong:reviewItems.filter(x=>!x.correct).map(x=>({
+   id:x.id,q:x.q,correct:x.correctIndex,given:x.given,confidence:x.confidence,
+   why:x.why,ref:x.ref,opts:x.opts,topic:x.topic
+  })),
+  reviewItems,topicResults,
+  flags:bank.filter(x=>currentDraft.flags[x.id]).map(x=>x.id)
+ };
  currentDraft.submitted=true;currentDraft.submittedAt=result.at;currentDraft.lastResult=result;
  state.quizHistory.push(result);save();saveDraft();renderQuiz();
 }
+
 function resetQuiz(){
  if(!confirm("Start a new "+quizMode+" attempt? Existing submitted history remains saved. Current draft answers will be replaced."))return;
  currentDraft=defaultDraft(quizMode);currentIndex=0;saveDraft();renderQuiz();
