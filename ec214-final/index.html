@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="color-scheme" content="light dark"><title>EC214 Final Exams · D Study App</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ux-v13.6.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/tu101-v13.16.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ui-v14.css?v=14.2">
+ <link rel="stylesheet" href="/d-study-app/assets/ec214-final-v1.css?v=14.2">
+</head>
+<body>
+<section id="finalAuth" class="final-hidden">
+ <div class="final-locked">
+  <div class="final-eyebrow">D STUDY APP · FINAL EXAMS</div>
+  <h2 id="finalAuthTitle">Unlock EC214 Final Exams</h2>
+  <p id="finalAuthText">EC214 Final Exams is a new subject with independent study progress.</p>
+  <div id="finalUnlockArea">
+   <label for="finalTokenInput" class="final-mini">EC214 Final token (unlock once per local profile)</label>
+   <input id="finalTokenInput" class="final-input" type="password" autocomplete="off" placeholder="Enter Final Exam token">
+   <div id="finalTokenError" role="alert" style="color:#db7075;font-size:13px;min-height:22px;margin-top:8px"></div>
+   <button type="button" id="finalTokenBtn" class="final-primary">Unlock Final Exams →</button>
+  </div>
+  <div class="final-actions">
+   <a id="finalLoginLink" href="/d-study-app/login/" class="final-primary final-hidden">Sign in to D Study App</a>
+   <button id="finalBackAuth" class="final-action" type="button">← Subjects</button>
+  </div>
+  <p class="final-mini">Access remains local to your browser profile, as in the existing D Study App. Keep your token private.</p>
+ </div>
+</section>
+<div id="finalShell" class="final-hidden">
+ <header>
+  <div class="final-wrap final-header-row">
+   <div><h1>D Study App • EC214 Final Exams</h1><p>Professor-first study · Lecture 5 onward · Independent progress and quiz history</p></div>
+   <div class="final-header-actions"><span id="finalUser" class="userchip"></span><button id="finalReturnSubjects" class="secondary">← Subjects</button></div>
+  </div>
+ </header>
+ <div class="final-wrap">
+  <div class="final-topnote">Final Exams · EC214 Introductory Macroeconomics · Faculty of Economics, Thammasat University · Asst. Prof. Dr. Winai Homsombat</div>
+  <nav class="final-nav" aria-label="EC214 Final navigation">
+   <a data-f-tab="progress" href="/d-study-app/ec214-final/progress/">📚 Progress</a>
+   <a data-f-tab="summary" href="/d-study-app/ec214-final/summary/">📖 Summary</a>
+   <a data-f-tab="quiz" href="/d-study-app/ec214-final/quiz/">🧠 Quiz</a>
+   <a data-f-tab="flashcards" href="/d-study-app/ec214-final/flashcards/">🗂️ Flashcards</a>
+   <a data-f-tab="notes" href="/d-study-app/ec214-final/notes/">📝 Notes</a>
+   <a data-f-tab="history" href="/d-study-app/ec214-final/history/">📊 History</a>
+   <a data-f-tab="prompt" href="/d-study-app/ec214-final/prompt/">💬 ChatGPT Prompt</a>
+   <a data-f-tab="settings" href="/d-study-app/ec214-final/settings/">⚙️ Settings</a>
+  </nav>
+  <main>
+   <section class="final-panel" id="f-progress"><div id="finalProgress"></div></section>
+   <section class="final-panel" id="f-summary">
+    <div class="final-heading"><div class="final-eyebrow">PROFESSOR LECTURE 5 · 49 PDF PAGES</div><h2>Aggregate Demand & Aggregate Supply</h2><p>13 source-grounded lessons. Read in order for the professor’s logic or jump to a section. Detailed graphs, schedules, annotated examples, and important distinctions are included.</p></div>
+    <div class="final-card" style="margin-bottom:16px"><div class="final-actions"><b>Lecture 5 Summary Mastery</b><span class="final-metric" style="font-size:22px" id="finalSummaryPct">0%</span></div><p class="final-mini">Mark each section as Learning, Reviewed or Mastered. More lectures will be added later without erasing progress.</p></div>
+    <div class="final-sum-layout"><aside class="final-card final-toc"><h3>Contents · Lecture 5</h3><div class="final-topics" id="finalTopics"></div></aside><div id="finalSections"></div></div>
+   </section>
+   <section class="final-panel" id="f-quiz"><div id="finalQuiz"></div></section>
+   <section class="final-panel" id="f-flashcards"><div id="finalFlashcards"></div></section>
+   <section class="final-panel" id="f-notes"><div id="finalNotes"></div></section>
+   <section class="final-panel" id="f-history"><div id="finalHistory"></div></section>
+   <section class="final-panel" id="f-prompt"><div id="finalPrompt"></div></section>
+   <section class="final-panel" id="f-settings"><div id="finalSettings"></div></section>
+  </main>
+  <div id="finalStatus" aria-live="polite" class="final-mini"></div>
+  <footer class="final-footer">D Study App v14.2 · EC214 Final Exams · Professor Lecture 5 · Private academic data remains local in your browser</footer>
+ </div>
+</div>
+<script src="/d-study-app/assets/ec214-final-l5-summary.js?v=14.2"></script>
+<script src="/d-study-app/assets/ec214-final-l5-quiz.js?v=14.2"></script>
+<script src="/d-study-app/assets/ec214-final-v1.js?v=14.2"></script>
+<script src="/d-study-app/assets/ui-v14.js?v=14.0"></script>
+</body></html>
