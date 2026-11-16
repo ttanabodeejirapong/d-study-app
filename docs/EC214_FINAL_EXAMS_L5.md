@@ -47,3 +47,11 @@ The quiz question picker shows a small violet saved-note dot if `state.quizQuest
 ## v14.3.2 — Reading layout parity with EC214
 
 The Final Exam stylesheet uses a larger base font (17px Normal / 19px Large); most Summary body text is approximately 18px Normal, quiz questions 21px, and answer choices 18px. The Summary library now sits above full-width article cards rather than taking a narrow permanent sidebar. Question controls, notes, history, tables, figure captions and other labels scale up for iPad/desktop and mobile. These changes preserve Classic/Neo/Midnight + accent tokens, tactile controls, and the noted-question purple-dot marker. Final Settings exposes the shared `textSize` and `font` controls, without adding new academic keys. Existing Lecture 5 content and quizzes remain unchanged.
+
+## v14.4 — Four quiz parts and professor summary deep links
+
+Reviewing: 12, 10, 11, 10 questions in p1–p4; Mastering: 11, 11, 10, 10 questions in p1–p4. Content and question IDs are identical to the existing lecture bank. Each part has its own draft key `d-study-ec214-final-draft::<profileId>::l5::<mode>::<partId>`. Submitted history contains `partId`; older attempts without `partId` remain legacy full-bank attempts. Existing full-draft keys are preserved and reachable only through the optional legacy control. Per-part completion counts and raw/weighted scores are computed from filtered history. Mastery statistics for a topic use a part-specific stats key in the existing EC214 Final state to avoid conflating topic fragments across two parts.
+
+Hints identify the professor's topic and source page but never reveal an answer. Each question links to `/d-study-app/ec214-final/summary/#final-section-<topicId>` with direct navigation and a return-to-quiz control; Notes search also switches to the correct part when opening a question. Cross-part question search remains available.
+
+Backup export/import retains the old `reviewing`/`mastering` full-draft properties when present, and appends validated `reviewingParts`/`masteringParts` objects for all four part drafts. Never write to other subjects' storage namespaces. No professor PDF or plaintext access token was uploaded publicly.
