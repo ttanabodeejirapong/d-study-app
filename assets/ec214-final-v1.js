@@ -438,32 +438,42 @@ function modeStatsLabel(mode){
 function renderQuizSearchResults(){
  const field=$("finalQuizSearch"),root=$("finalQuizSearchResults");
  if(!field||!root)return;
- const terms=field.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean),bank=qsets[quizMode];
+ const terms=field.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
  if(!terms.length){root.innerHTML="";return}
- const hits=bank.map((q,i)=>({q,i})).filter(({q})=>terms.every(t=>
-   [q.q,q.topic,q.opts.join(" "),q.why,q.ref].join(" ").toLocaleLowerCase().includes(t)));
- root.innerHTML='<div class="final-mini">'+hits.length+" question"+(hits.length===1?"":"s")+" found in "+quizMode+"</div>"+
-  (hits.length?hits.map(({q,i})=>'<button type="button" class="final-search-hit" data-quiz-jump="'+i+'">'+
-   '<span class="final-eyebrow">Question '+(i+1)+' · '+esc(q.topic)+'</span><b>'+esc(q.q)+'</b>'+
-   '<span>'+esc(q.ref)+'</span></button>').join(""):
-  '<div class="final-mini">No matching question. Try another phrase.</div>');
- root.querySelectorAll("[data-quiz-jump]").forEach(btn=>btn.onclick=()=>{
-  currentIndex=Number(btn.dataset.quizJump);saveDraft();renderQuiz();
+ // Search all questions in the current mode, even across the other short parts.
+ const hits=qsets[quizMode].map(q=>({q,part:partForQuestion(quizMode,q.id)})).filter(({q})=>
+  terms.every(t=>[q.q,q.topic,q.opts.join(" "),q.why,q.ref].join(" ").toLocaleLowerCase().includes(t)));
+ root.innerHTML='<div class="final-mini">'+hits.length+" matching question"+(hits.length===1?"":"s")+
+  " across all four "+quizMode+" parts</div>"+
+  (hits.length?hits.map(({q,part})=>{
+   const number=bankFor(quizMode,part).findIndex(x=>x.id===q.id)+1;
+   return '<button type="button" class="final-search-hit" data-quiz-id="'+esc(q.id)+'">'+
+    '<span class="final-eyebrow">'+partLabel(quizMode,part)+' · Q'+number+' · '+esc(q.topic)+'</span>'+
+    '<b>'+esc(q.q)+'</b><span>'+esc(q.ref)+'</span></button>';
+  }).join(""):'<div class="final-mini">No match. Try another topic, explanation or phrase.</div>');
+ root.querySelectorAll("[data-quiz-id]").forEach(btn=>btn.onclick=()=>{
+  const found=qsets[quizMode].find(q=>q.id===btn.dataset.quizId);if(!found)return;
+  const targetPart=partForQuestion(quizMode,found.id);
+  if(targetPart!==quizPart)selectPart(targetPart);
+  currentIndex=bankFor(quizMode,quizPart).findIndex(q=>q.id===found.id);
+  saveDraft();renderQuiz();
  });
 }
+
 function renderQuiz(){
  if(!state)return;
- if(!currentDraft||currentDraft.mode!==quizMode){
-  currentDraft=draft(quizMode);currentIndex=Math.max(0,Math.min(qsets[quizMode].length-1,currentDraft.index||0));
+ if(!currentDraft||currentDraft.mode!==quizMode||(currentDraft.partId||"full")!==quizPart){
+  currentDraft=draft(quizMode,quizPart);currentIndex=Math.max(0,Math.min(bankFor(quizMode,quizPart).length-1,currentDraft.index||0));
  }
- const bank=qsets[quizMode],q=bank[currentIndex];
+ const bank=bankFor(quizMode,quizPart),q=bank[currentIndex];
  if(!q)return;
  const submitted=!!currentDraft.submitted,confidence=currentDraft.confidence[q.id]||"confident";
  const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
  const flagged=bank.filter(x=>currentDraft.flags[x.id]).length;
  const unsure=bank.filter(x=>currentDraft.confidence[x.id]==="unsure").length;
  const guessed=bank.filter(x=>currentDraft.confidence[x.id]==="guessed").length;
- const st=modeStats(quizMode),resultData=currentDraft.lastResult;
+ const st=partStats(quizMode,quizPart),resultData=currentDraft.lastResult;
+ const summarySection=BOOK.sections.find(section=>section.id===q.topic)||BOOK.sections[0];
  const modeBar='<div class="final-mode-cards">'+["reviewing","mastering"].map(mode=>{
   const stats=modeStats(mode);
   return '<button type="button" class="final-mode-card '+(mode===quizMode?"active":"")+'" data-mode="'+mode+'">'+
@@ -472,7 +482,25 @@ function renderQuiz(){
    '<span>Best learning: '+(stats.best===null?"—":stats.best+"%")+'</span>'+
    '<small>Clean 100% × '+stats.perfect+'</small></button>';
  }).join("")+'</div>';
- const nums='<div class="final-questionbar">'+bank.map((x,i)=>
+ const partBar='<div class="final-part-heading"><h3>Choose a short part</h3>'+
+  '<p class="final-mini">One part at a time — about 10 questions. Each part remembers your answers and how many times you finished it.</p></div>'+
+  '<div class="final-part-grid">'+PARTS[quizMode].map(p=>{
+   const pb=bankFor(quizMode,p.id),stats=partStats(quizMode,p.id),saved=draft(quizMode,p.id);
+   const completed=pb.filter(q=>Number.isInteger(saved.answers[q.id])).length;
+   const text=stats.count?'Done '+stats.count+'× · Best '+(stats.best===null?"—":stats.best+"%"):
+      completed?('Continue '+completed+'/'+pb.length):'Not started';
+   return '<button type="button" class="final-part-card '+(p.id===quizPart?"active":"")+
+    '" data-final-part="'+p.id+'" aria-pressed="'+(p.id===quizPart)+'">'+
+    '<span class="final-part-name">'+partLabel(quizMode,p.id)+' <span>'+pb.length+' Q</span></span>'+
+    '<b>'+esc(p.title)+'</b><span class="final-part-desc">'+esc(p.description)+'</span>'+
+    '<span class="final-part-progress">'+esc(text)+(stats.perfect?' · 100% × '+stats.perfect:'')+'</span>'+
+    '<span class="final-part-meter"><i style="width:'+(100*completed/pb.length)+'%"></i></span></button>';
+  }).join("")+'</div>'+
+  (hasLegacyDraft(quizMode)?'<details class="final-legacy-quiz"><summary>Previous full-length quiz draft (optional)</summary>'+
+   '<p class="final-mini">A draft from the old 43/42-question version is still saved. You can finish or review it here, or use the four short parts above.</p>'+
+   '<button type="button" class="final-action '+(quizPart==="full"?"active":"")+
+   '" data-final-part="full">Open my previous full quiz</button></details>':"");
+ const nums='<div class="final-questionbar" role="group" aria-label="Questions in '+partLabel(quizMode,quizPart)+'">'+bank.map((x,i)=>
   '<button type="button" class="final-qnum '+(i===currentIndex?"current ":"")+
   (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
   (currentDraft.confidence[x.id]&&currentDraft.confidence[x.id]!=="confident"?"uncertain ":"")+
@@ -508,24 +536,26 @@ function renderQuiz(){
   '<button type="button" class="final-action '+(confidence==="guessed"?"active":"")+'" data-confidence="guessed" aria-pressed="'+(confidence==="guessed")+'" '+(submitted?"disabled":"")+'>□ Guessed (40%)</button>'+
   '</div></div>';
  const cannotSubmit=answered<bank.length;
- const resultBanner=submitted?'<div class="final-card"><b>Attempt submitted · '+modeStatsLabel(quizMode)+'</b><p class="final-mini">Review any question’s explanation or start another attempt. Mistake Log records wrong and uncertain answers.</p>'+
+ const resultBanner=submitted?'<div class="final-card"><b>'+partLabel(quizMode,quizPart)+' complete · '+st.count+' time'+(st.count===1?"":"s")+' · Best '+(st.best===null?"—":st.best+"%")+'</b><p class="final-mini">Review any question’s explanation or start another attempt. Mistake Log records wrong and uncertain answers.</p>'+
   (resultData&&Array.isArray(resultData.topicResults)?'<details class="final-history-details"><summary>Topic results & learning mastery</summary>'+
    '<div class="final-topic-results">'+resultData.topicResults.map(t=>'<div><b>'+esc(t.topic)+'</b><span>Raw '+t.raw+'% · Learning '+t.learning+'% · '+esc(t.status)+'</span></div>').join("")+'</div></details>':"")+
   '</div>':"";
  const root=$("finalQuiz");
  root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2>'+
-  '<p>Same confidence-weighted scoring as EC214. Drafts, attempt counts and mistake history are saved separately for Final Exams.</p></div>'+
-  modeBar+resultBanner+grade+rubric+
-  '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>🔎 Search this question bank</b></label>'+
+  '<p>Four manageable parts per mode (10–12 questions each). Hints and direct links to the matching Lecture Summary topic are available for every question. Progress is autosaved.</p></div>'+
+  modeBar+partBar+resultBanner+grade+rubric+
+  '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>🔎 Search all four '+quizMode+' parts</b></label>'+
   '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search labor, AD shifts, inflationary gap…" autocomplete="off">'+
   '<div id="finalQuizSearchResults" class="final-search-results"></div></div>'+
-  '<div class="final-quiz-tools"><span class="final-mini">Answered '+answered+'/'+bank.length+
+  '<div class="final-quiz-tools"><span class="final-mini"><b>'+partLabel(quizMode,quizPart)+'</b> · Answered '+answered+'/'+bank.length+
   ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
   '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
   nums+'<div class="final-card final-q"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
-  ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+'</div><h3>'+esc(q.q)+'</h3>'+
-  '<button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false">💡 Hint: show topic</button>'+
-  '<div class="final-hint-body" id="finalHintBody" hidden><b>'+esc(q.topic)+'</b><p class="final-mini">'+esc(q.ref)+'</p><p class="final-mini">This identifies the professor’s topic—not the correct answer.</p></div>'+
+  ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' · '+partLabel(quizMode,quizPart)+'</div><h3>'+esc(q.q)+'</h3>'+
+  '<div class="final-question-tools"><button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false" aria-controls="finalHintBody">💡 Hint: show topic</button>'+
+  '<a class="final-action final-summary-topic-link" href="'+BASE+'summary/#final-section-'+encodeURIComponent(summarySection.id)+
+  '" data-final-summary-topic="'+esc(summarySection.id)+'" title="Open the related Lecture 5 summary section">📖 Read this topic in Summary ↗</a></div>'+
+  '<div class="final-hint-body" id="finalHintBody" hidden><b>'+esc(summarySection.title)+'</b><p class="final-mini">'+esc(q.ref)+'</p><p class="final-mini">This tells you the topic, not the correct option.</p></div>'+
   choices+confUI+
   '<div class="final-actions"><button class="final-action '+(currentDraft.flags[q.id]?"active":"")+
   '" id="finalFlag" '+(submitted?"disabled":"")+'>'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
@@ -554,6 +584,7 @@ function renderQuiz(){
  search.oninput=()=>{quizSearchQuery=search.value;renderQuizSearchResults()};
  renderQuizSearchResults();
  root.querySelectorAll("[data-mode]").forEach(el=>el.onclick=()=>selectMode(el.dataset.mode));
+ root.querySelectorAll("[data-final-part]").forEach(el=>el.onclick=()=>selectPart(el.dataset.finalPart));
  root.querySelectorAll("[data-q-index]").forEach(el=>el.onclick=()=>{currentIndex=Number(el.dataset.qIndex);saveDraft();renderQuiz()});
  root.querySelectorAll("[data-answer]").forEach(el=>el.onclick=()=>{
   if(currentDraft.submitted)return;
