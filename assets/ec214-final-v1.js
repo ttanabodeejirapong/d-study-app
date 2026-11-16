@@ -146,6 +146,14 @@ function navigate(tab,push=true){
  if(tab==="flashcards")renderBlankFlashcards();
  if(tab==="summary")renderSummaryProgress();
  window.scrollTo({top:0,behavior:"instant"});
+ if(tab==="summary"&&location.hash&&location.hash.startsWith("#final-section-")){
+  const id=decodeURIComponent(location.hash.slice("#final-section-".length));
+  const target=$("final-section-"+id);
+  if(target){
+   const scroll=()=>{target.classList.add("final-search-target");target.scrollIntoView({block:"start",behavior:"auto"})};
+   if(window.requestAnimationFrame)window.requestAnimationFrame(scroll);else scroll();
+  }
+ }
 }
 function progressPct(){
  const done=BOOK.sections.reduce((n,s)=>n+({notstarted:0,learning:25,reviewed:75,mastered:100}[state.lectureStates.l5[s.id]||"notstarted"]||0),0);
@@ -302,7 +310,10 @@ function renderNoteSearchResults(){
    $("finalNoteEditor").focus();$("finalNoteEditor").scrollIntoView({block:"center"});
   }else{
    selectMode(found.mode);
-   currentIndex=found.index;saveDraft();navigate("quiz");renderQuiz();
+   const jumpPart=partForQuestion(found.mode,found.id);
+   selectPart(jumpPart);
+   currentIndex=bankFor(found.mode,jumpPart).findIndex(q=>q.id===found.id);
+   saveDraft();navigate("quiz");renderQuiz();
   }
  });
 }
@@ -608,7 +619,7 @@ function renderQuiz(){
 }
 
 function submitQuiz(){
- const bank=qsets[quizMode];
+ const bank=bankFor(quizMode,quizPart);
  if(currentDraft.submitted)return;
  const filled=bank.filter(q=>Number.isInteger(currentDraft.answers[q.id])).length;
  if(filled<bank.length){alert("Please answer all "+bank.length+" questions before submitting ("+(bank.length-filled)+" left).");return}
@@ -634,7 +645,7 @@ function submitQuiz(){
  }
  const topicResults=[];
  for(const [topic,t] of Object.entries(byTopic)){
-  const key="l5::"+quizMode+"::"+topic;
+  const key="l5::"+quizMode+"::"+quizPart+"::"+topic;
   const prev=state.quizTopicStats[key]||{attempts:0,bestAdjusted:0,masteryPasses:0};
   const raw=Math.round(100*t.score/t.total),adj=Math.round(100*t.learningPoints/t.total);
   const clean=t.clean&&t.score===t.total;
@@ -648,7 +659,7 @@ function submitQuiz(){
  }
  const result={
   id:"final-l5-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
-  subjectId:SUB,lecture:"l5",mode:quizMode,at:new Date().toISOString(),
+  subjectId:SUB,lecture:"l5",mode:quizMode,partId:quizPart,at:new Date().toISOString(),
   score,total:bank.length,percent:Math.round(100*score/bank.length),
   optionOrders:Object.fromEntries(bank.map(q=>[q.id,(currentDraft.optionOrders[q.id]||[0,1,2,3]).slice()])),
   questionSnapshot:bank.map(q=>({id:q.id,q:q.q,opts:q.opts.slice(),ans:q.ans,topic:q.topic,why:q.why,ref:q.ref})),
@@ -668,8 +679,8 @@ function submitQuiz(){
 }
 
 function resetQuiz(){
- if(!confirm("Start a new "+quizMode+" attempt? Existing submitted history remains saved. Current draft answers will be replaced."))return;
- currentDraft=defaultDraft(quizMode);currentIndex=0;saveDraft();renderQuiz();
+ if(!confirm("Start a new "+quizMode+" "+partLabel(quizMode,quizPart)+" attempt? Completed history remains saved. Only this part\u0027s current draft will be replaced."))return;
+ currentDraft=defaultDraft(quizMode,quizPart);currentIndex=0;saveDraft();renderQuiz();
 }
 function historyReviewItems(h){
  if(Array.isArray(h.reviewItems))return h.reviewItems;
@@ -709,7 +720,7 @@ function renderHistoryList(){
  const term=historySearchText.trim().toLocaleLowerCase();
  const h=state.quizHistory.filter(x=>x.lecture==="l5").slice().reverse().filter(x=>
   (historyFilterMode==="all"||x.mode===historyFilterMode)&&
-  (!term||[x.mode,x.at,...historyReviewItems(x).flatMap(z=>[z.q,z.topic,z.why,z.ref]),...(x.questionSnapshot||[]).flatMap(q=>[q.q,q.topic,q.why,q.ref])]
+  (!term||[x.mode,x.partId||"full",x.at,...historyReviewItems(x).flatMap(z=>[z.q,z.topic,z.why,z.ref]),...(x.questionSnapshot||[]).flatMap(q=>[q.q,q.topic,q.why,q.ref])]
    .join(" ").toLocaleLowerCase().includes(term)));
  root.innerHTML=h.length?h.map(x=>{
   const review=historyReviewItems(x);
@@ -717,7 +728,7 @@ function renderHistoryList(){
   const confidenceTracked=Number.isFinite(x.adjustedPercent);
   const perfect=confidenceTracked&&x.adjustedPercent===100&&x.score===x.total&&(x.guessed||0)===0&&(x.unsure||0)===0;
   return '<article class="final-history-item"><div class="final-actions" style="justify-content:space-between">'+
-   '<b>'+esc(x.mode.toUpperCase())+' · '+x.score+'/'+x.total+' raw ('+x.percent+'%)</b>'+
+   '<b>'+esc(x.mode.toUpperCase())+' · '+esc(partLabel(x.mode,x.partId||"full"))+' · '+x.score+'/'+x.total+' raw ('+x.percent+'%)</b>'+
    '<span class="final-mini">'+esc(new Date(x.at).toLocaleString())+'</span></div>'+
    '<div class="final-history-stats"><span>Learning: <b>'+learning+'</b></span>'+
    '<span>Guessed: <b>'+(x.guessed??"—")+'</b></span>'+
@@ -813,6 +824,22 @@ function clickEvents(){
   if(tab){e.preventDefault();navigate(tab.dataset.fTab);return}
   const go=e.target.closest("[data-final-go]");
   if(go){navigate(go.dataset.finalGo);return}
+  const summary=e.target.closest("a[data-final-summary-topic]");
+  if(summary&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey){
+   e.preventDefault();
+   if(currentDraft)saveDraft();
+   const topicId=summary.dataset.finalSummaryTopic;
+   if(!BOOK.sections.some(section=>section.id===topicId))return;
+   navigate("summary");
+   const url=BASE+"summary/#final-section-"+encodeURIComponent(topicId);
+   history.replaceState({dStudy:true,subject:SUB},"",url);
+   const target=$("final-section-"+topicId);
+   if(target){
+    document.querySelectorAll(".final-search-target").forEach(x=>x.classList.remove("final-search-target"));
+    target.classList.add("final-search-target");target.scrollIntoView({block:"start",behavior:"smooth"});
+   }
+   return;
+  }
   const section=e.target.closest("[data-summary-id]");
   if(section){navigate("summary");const target=$("final-section-"+section.dataset.summaryId);if(target){document.querySelectorAll(".final-search-target").forEach(x=>x.classList.remove("final-search-target"));target.classList.add("final-search-target");target.scrollIntoView({block:"start",behavior:"smooth"})}return}
  },true);
