@@ -32,3 +32,11 @@ Create a new professor-grounded content module and independent quiz bank for eac
 - Simulated lifecycle confirmed login gate, wrong token rejection, correct token granting only `ec214final`, notebook autosave, complete Mastering attempt, scored history, separate draft and reset preserving submitted history.
 - Existing EC214/TU101/Chinese academic sentinel states remained unchanged in tests.
 - Full real-browser iPad/Safari and account-scoped manual test should be done following deployment; automated mocks cannot prove every UI gesture.
+
+## v14.3 update — Existing EC214 template features
+
+- Cross-section summary search, searchable question bank, searchable Notes Hub and Mistake Log with direct navigation and source references.
+- Confidence decisions persist in independent mode-specific drafts (Confident=1.0, Not sure=0.7, Guessed=0.4, wrong=0); raw and adjusted learning scores saved independently after submission.
+- Completion counts are derived from EC214 Final history (Taken N times, best learning, clean 100% × N). A topic earns Mastered only after two clean Mastering passes.
+- Each new attempt saves option-shuffle order and full answer snapshots so past answers remain readable after later lecture additions.
+- Backward compatibility: v14.2 drafts default to their original A–D order without resetting answers or flags; v14.2 history is displayed without recalculation of unrecorded learning confidence. Existing professor Lecture 5 questions and IDs, original subject engines, and private source file remain unchanged.
