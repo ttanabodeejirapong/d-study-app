@@ -12,9 +12,31 @@ const storeGet=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const storePut=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){return fallback}};
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
-let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all",noteSearchText="";
+let user=null,state=null,currentTab="progress",quizMode="reviewing",quizPart="p1",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all",noteSearchText="";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
-function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizTopicStats:{},quizQuestionNotes:{},createdAt:new Date().toISOString()}}
+// Small, fixed parts retain every existing L5 question ID and professor topic.
+// R: 12 / 10 / 11 / 10; M: 11 / 11 / 10 / 10.
+const PARTS={
+ reviewing:[
+  {id:"p1",title:"AS: Core concepts",description:"Framework, production inputs, and why SRAS rises",from:0,to:12},
+  {id:"p2",title:"Supply & AD basics",description:"LRAS, supply shifts, and the AD spending identity",from:12,to:22},
+  {id:"p3",title:"AD shifts & equilibrium",description:"AD curve, shifts, multiplier and equilibrium",from:22,to:33},
+  {id:"p4",title:"GDP gaps & adjustment",description:"Recessionary / inflationary gaps and wages",from:33,to:43}
+ ],
+ mastering:[
+  {id:"p1",title:"Foundations & SRAS",description:"Framework, inputs, wages and supply shifts",from:0,to:11},
+  {id:"p2",title:"Supply costs & demand",description:"Shocks, spending identity and AD determinants",from:11,to:22},
+  {id:"p3",title:"Multiplier, equilibrium & gaps",description:"Induced spending, market pressures, output gaps",from:22,to:32},
+  {id:"p4",title:"Adjustment & synthesis",description:"Self-correction, labor markets and business cycles",from:32,to:42}
+ ]
+};
+const validPart=(mode,part)=>part==="full"||!!PARTS[mode]?.some(p=>p.id===part);
+const partInfo=(mode,part)=>PARTS[mode]?.find(p=>p.id===part);
+const bankFor=(mode,part)=>part==="full"?qsets[mode]:qsets[mode].slice(partInfo(mode,part)?.from||0,partInfo(mode,part)?.to||0);
+const partForQuestion=(mode,id)=>PARTS[mode]?.find(p=>qsets[mode].slice(p.from,p.to).some(q=>q.id===id))?.id||"p1";
+const partLabel=(mode,part)=>part==="full"?"Previous full-length quiz":("Part "+(Number(part.slice(1))||1));
+const quizDraftKey=(mode,part)=>"d-study-ec214-final-draft::"+user.id+"::l5::"+mode+(part==="full"?"":"::"+part);
+function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizTopicStats:{},quizQuestionNotes:{},quizSelection:{mode:"reviewing",reviewing:"p1",mastering:"p1"},createdAt:new Date().toISOString()}}
 const key=()=> "d-study-ec214-final-state::"+user.id;
 const quarantine=(tag,raw)=>{try{localStorage.setItem("d-study-ec214-final-quarantine::"+user.id+"::"+Date.now()+"::"+tag,raw)}catch(_){}};
 function loadState(){
@@ -22,7 +44,7 @@ function loadState(){
  const x=parse(raw);
  if(!x||x.subjectId!==SUB||x.profileId!==user.id){quarantine("subject-mismatch",raw);return newState()}
  const a=newState();
- for(const k of ["lectureStates","notes","quizDrafts","quizHistory","quizTopicStats","quizQuestionNotes"]){
+ for(const k of ["lectureStates","notes","quizDrafts","quizHistory","quizTopicStats","quizQuestionNotes","quizSelection"]){
   if(x[k]&&typeof x[k]==="object"&&(k!=="quizHistory"||Array.isArray(x[k])))a[k]=x[k];
  }
  return a;
@@ -89,6 +111,10 @@ function openApp(){
  $("finalAuth").classList.add("final-hidden");$("finalShell").classList.remove("final-hidden");
  $("finalUser").textContent="👤 "+user.username;
  state=loadState();
+ const choice=state.quizSelection||{};
+ quizMode=qsets[choice.mode]?choice.mode:"reviewing";
+ quizPart=validPart(quizMode,choice[quizMode])?choice[quizMode]:"p1";
+ currentDraft=null;currentIndex=0;
  if(!state.lectureStates.l5)state.lectureStates.l5={};
  if(!("l5" in state.notes))state.notes.l5="";
  theme();save();buildOutline();renderAll();
@@ -313,51 +339,84 @@ function renderNotes(){
  renderNoteSearchResults();
 }
 
-const draftKey=()=> "d-study-ec214-final-draft::"+user.id+"::l5::"+quizMode;
+const draftKey=()=>quizDraftKey(quizMode,quizPart);
 function shuffledOptionOrder(){
  const a=[0,1,2,3];
  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
  return a;
 }
-function defaultDraft(mode){
+function defaultDraft(mode,part=quizPart){
  const optionOrders={};
- (qsets[mode]||[]).forEach(q=>optionOrders[q.id]=shuffledOptionOrder());
- return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",
+ bankFor(mode,part).forEach(q=>optionOrders[q.id]=shuffledOptionOrder());
+ return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,partId:part,bankVersion:"l5-v1",
   answers:{},confidence:{},flags:{},optionOrders,index:0,submitted:false,submittedAt:null,lastResult:null};
 }
-function draft(mode){
- const raw=storeGet("d-study-ec214-final-draft::"+user.id+"::l5::"+mode);
- if(!raw)return defaultDraft(mode);
+function draft(mode,part=quizPart){
+ if(!validPart(mode,part))return defaultDraft(mode,"p1");
+ const raw=storeGet(quizDraftKey(mode,part));
+ if(!raw)return defaultDraft(mode,part);
  const parsed=parse(raw);
- if(!parsed||parsed.subjectId!==SUB||parsed.profileId!==user.id||parsed.mode!==mode||parsed.lecture!=="l5"){quarantine("invalid-draft",raw);return defaultDraft(mode)}
- const restored=Object.assign(defaultDraft(mode),parsed);
- // Keep v14.2 answers and review flags; add the new confidence map without
- // changing their existing meaning or deleting submitted records.
+ if(!parsed||parsed.subjectId!==SUB||parsed.profileId!==user.id||parsed.mode!==mode||parsed.lecture!=="l5"||
+   (parsed.partId||"full")!==part){
+  quarantine("invalid-draft-"+mode+"-"+part,raw);return defaultDraft(mode,part);
+ }
+ const restored=Object.assign(defaultDraft(mode,part),parsed);
+ restored.partId=part;
  restored.confidence=restored.confidence&&typeof restored.confidence==="object"&&!Array.isArray(restored.confidence)?restored.confidence:{};
- restored.answers=restored.answers&&typeof restored.answers==="object"?restored.answers:{};
- restored.flags=restored.flags&&typeof restored.flags==="object"?restored.flags:{};
- // v14.2 drafts had a fixed A–D option sequence. Retain exactly that order
- // if the draft predates v14.3, so their saved answers remain visually stable.
+ restored.answers=restored.answers&&typeof restored.answers==="object"&&!Array.isArray(restored.answers)?restored.answers:{};
+ restored.flags=restored.flags&&typeof restored.flags==="object"&&!Array.isArray(restored.flags)?restored.flags:{};
  if(!parsed.optionOrders){
   restored.optionOrders={};
-  (qsets[mode]||[]).forEach(q=>restored.optionOrders[q.id]=[0,1,2,3]);
+  bankFor(mode,part).forEach(q=>restored.optionOrders[q.id]=[0,1,2,3]);
  }
  return restored;
 }
 let currentDraft=null;
 function saveDraft(){
  if(!user||!currentDraft)return;
- if(currentDraft.subjectId!==SUB||currentDraft.profileId!==user.id||currentDraft.mode!==quizMode)return;
+ if(currentDraft.subjectId!==SUB||currentDraft.profileId!==user.id||
+  currentDraft.mode!==quizMode||(currentDraft.partId||"full")!==quizPart)return;
  currentDraft.index=currentIndex;
  try{storePut(draftKey(),currentDraft)}catch(e){setStatus("Quiz draft autosave unavailable")}
+}
+function rememberPart(){
+ state.quizSelection=state.quizSelection||{mode:"reviewing",reviewing:"p1",mastering:"p1"};
+ state.quizSelection.mode=quizMode;
+ state.quizSelection[quizMode]=quizPart;
+ save();
 }
 function selectMode(mode){
  if(!qsets[mode])return;
  if(currentDraft)saveDraft();
  quizMode=mode;
- currentDraft=draft(mode);currentIndex=Math.max(0,Math.min(qsets[mode].length-1,currentDraft.index||0));
+ const saved=state.quizSelection?.[mode]||"p1";
+ quizPart=validPart(mode,saved)?saved:"p1";
+ rememberPart();
+ currentDraft=draft(mode,quizPart);
+ currentIndex=Math.max(0,Math.min(bankFor(mode,quizPart).length-1,currentDraft.index||0));
  submittedView=!!currentDraft.submitted;
  renderQuiz();
+}
+function selectPart(part){
+ if(!validPart(quizMode,part))return;
+ if(currentDraft)saveDraft();
+ quizPart=part;
+ rememberPart();
+ currentDraft=draft(quizMode,part);
+ currentIndex=Math.max(0,Math.min(bankFor(quizMode,part).length-1,currentDraft.index||0));
+ submittedView=!!currentDraft.submitted;
+ renderQuiz();
+}
+function partAttempts(mode,part){return modeAttempts(mode).filter(h=>(h.partId||"full")===part)}
+function partStats(mode,part){
+ const attempts=partAttempts(mode,part),tracked=attempts.filter(h=>Number.isFinite(h.adjustedPercent));
+ return {count:attempts.length,best:tracked.length?Math.max(...tracked.map(h=>h.adjustedPercent)):null,
+  perfect:tracked.filter(h=>h.adjustedPercent===100&&h.score===h.total&&(h.guessed||0)===0&&(h.unsure||0)===0).length};
+}
+function hasLegacyDraft(mode){
+ const d=parse(storeGet(quizDraftKey(mode,"full")));
+ return !!(d&&d.subjectId===SUB&&d.profileId===user.id&&d.mode===mode&&
+  (d.submitted||Object.keys(d.answers||{}).length));
 }
 
 function confidenceWeight(value){return value==="guessed"?0.4:value==="unsure"?0.7:1}
