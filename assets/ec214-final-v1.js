@@ -417,7 +417,10 @@ function renderQuiz(){
   '<button type="button" title="Question '+(i+1)+'" class="final-qnum '+(i===currentIndex?"current ":"")+
   (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
   (currentDraft.confidence[x.id]&&currentDraft.confidence[x.id]!=="confident"?"uncertain ":"")+
-  (currentDraft.flags[x.id]?"flagged ":"")+'" data-q-index="'+i+'">'+(i+1)+'</button>').join("")+'</div>';
+  (currentDraft.flags[x.id]?"flagged ":"")+
+  (String(state.quizQuestionNotes?.[x.id]||"").trim()?"noted ":"")+
+  '" data-q-index="'+i+'" title="Question '+(i+1)+(String(state.quizQuestionNotes?.[x.id]||"").trim()?" · Has saved note":"")+'">'+(i+1)+'</button>').join("")+
+  '</div><div class="final-question-note-legend"><i class="final-saved-note-dot" aria-hidden="true"></i> Colored dot = saved question note</div>';
  const order=currentDraft.optionOrders?.[q.id]||[0,1,2,3];
  const choices=order.map((original,shown)=>{
   const selected=currentDraft.answers[q.id]===original;
@@ -476,7 +479,18 @@ function renderQuiz(){
   (submitted?"Already submitted":cannotSubmit?"Answer "+(bank.length-answered)+" more to submit":"Submit "+(quizMode==="reviewing"?"Reviewing":"Mastering"))+'</button>'+
   '<button class="final-action" id="finalResetQuiz">New attempt</button></div>';
  const note=$("finalQNote");note.value=state.quizQuestionNotes[q.id]||"";
- note.oninput=e=>{state.quizQuestionNotes[q.id]=e.target.value;save()};
+ // Mirror the original EC214 purple note dot on the numbered question grid,
+ // updating in place while the student writes (no re-render / cursor jump).
+ note.oninput=e=>{
+  state.quizQuestionNotes[q.id]=e.target.value;
+  save();
+  const numbered=root.querySelector('.final-qnum[data-q-index="'+currentIndex+'"]');
+  if(numbered){
+   const hasNote=!!e.target.value.trim();
+   numbered.classList.toggle("noted",hasNote);
+   numbered.title="Question "+(currentIndex+1)+(hasNote?" · Has saved note":"");
+  }
+ };
  const search=$("finalQuizSearch");search.value=quizSearchQuery;
  search.oninput=()=>{quizSearchQuery=search.value;renderQuizSearchResults()};
  renderQuizSearchResults();
