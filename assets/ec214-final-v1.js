@@ -12,7 +12,7 @@ const storeGet=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const storePut=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){return fallback}};
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
-let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all";
+let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all",noteSearchText="";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
 function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizTopicStats:{},quizQuestionNotes:{},createdAt:new Date().toISOString()}}
 const key=()=> "d-study-ec214-final-state::"+user.id;
@@ -230,14 +230,89 @@ function graph(type){
 function renderBlankFlashcards(){
  $("finalFlashcards").innerHTML='<div class="final-heading"><div class="final-eyebrow">Reserved · not populated</div><h2>Flashcards</h2><p>The flashcard workspace is intentionally empty for EC214 Final Exams, as requested. It will not borrow the cards or progress from EC214 midterm or other subjects.</p></div><div class="final-card"><h3>Ready for future lectures</h3><p>No cards or completion scores are created yet.</p></div>';
 }
-function renderNotes(){
- const node=$("finalNotes");
- node.innerHTML='<div class="final-heading"><div class="final-eyebrow">Private subject notebook</div><h2>EC214 Final · Lecture Notes</h2><p>Independent of midterm EC214, TU101 and Chinese. Autosaved only to this browser’s EC214 Final academic storage.</p></div><div class="final-card"><label for="finalNoteEditor"><b>Lecture 5 · AD–AS</b></label><textarea class="final-input final-notes" id="finalNoteEditor" placeholder="Professor’s extra remarks, formulas, questions to review…"></textarea><p class="final-mini" id="finalNoteStatus">Your notes are saved locally, in EC214 Final only.</p></div>';
- $("finalNoteEditor").value=state.notes.l5||"";
- $("finalNoteEditor").addEventListener("input",function(){
-  state.notes.l5=this.value;save();$("finalNoteStatus").textContent="Autosaved ✓";
+function allNoteItems(){
+ const items=[];
+ const lecture=String(state.notes.l5||"");
+ if(lecture.trim())items.push({id:"lecture-l5",kind:"lecture",title:"Lecture 5 · General notes",text:lecture});
+ for(const mode of ["reviewing","mastering"]){
+  for(const [index,q] of qsets[mode].entries()){
+   const text=String(state.quizQuestionNotes[q.id]||"");
+   if(text.trim())items.push({id:q.id,kind:"question",mode,index,
+    title:mode+" · Q"+(index+1)+": "+q.q,text});
+  }
+ }
+ return items;
+}
+function notesPackText(){
+ let s="D Study App • EC214 Final Exams • Lecture 5\nGenerated "+new Date().toLocaleString()+
+  "\nSource: my saved local notes and quiz uncertainty (not the professor slide text)\n\n";
+ const items=allNoteItems();
+ s+=items.length?items.map(x=>x.title+"\n"+x.text+"\n").join("\n"):"No saved notes yet.\n";
+ const flagged=state.quizHistory.filter(h=>h.lecture==="l5").flatMap(h=>
+  historyReviewItems(h).map(x=>({mode:h.mode,date:h.at,item:x})));
+ if(flagged.length){
+  s+="\n=== Mistakes / Guessed / Not sure / Flagged ===\n";
+  s+=flagged.map(({mode,date,item})=>
+   "["+mode+" · "+date+"] "+item.q+"\n"+item.why+
+   "\nConfidence: "+(item.confidence||"not tracked")+"\nSource: "+item.ref+"\n").join("\n");
+ }
+ return s;
+}
+function renderNoteSearchResults(){
+ const root=$("finalNoteSearchResults"),input=$("finalNoteSearch");
+ if(!root||!input)return;
+ const query=input.value.trim(),terms=query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+ const items=allNoteItems(),hits=items.filter(x=>terms.every(t=>
+  (x.title+" "+x.text).toLocaleLowerCase().includes(t)));
+ root.innerHTML='<div class="final-mini">'+hits.length+' matching saved note'+(hits.length===1?"":"s")+'</div>'+
+  (hits.length?hits.map(x=>'<button type="button" class="final-search-hit" data-note-jump="'+esc(x.id)+'">'+
+   '<span class="final-eyebrow">'+(x.kind==="lecture"?"Lecture notebook":esc(x.mode+" · Question "+(x.index+1)))+'</span>'+
+   '<b>'+esc(x.title)+'</b><span>'+esc(x.text.slice(0,195))+'</span></button>').join(""):
+   '<p class="final-mini">No saved notes matched. Quiz notes and notebook text appear here after you write them.</p>');
+ root.querySelectorAll("[data-note-jump]").forEach(btn=>btn.onclick=()=>{
+  const found=items.find(x=>x.id===btn.dataset.noteJump);
+  if(!found)return;
+  if(found.kind==="lecture"){
+   $("finalNoteEditor").focus();$("finalNoteEditor").scrollIntoView({block:"center"});
+  }else{
+   selectMode(found.mode);
+   currentIndex=found.index;saveDraft();navigate("quiz");renderQuiz();
+  }
  });
 }
+function renderNotes(){
+ const root=$("finalNotes");
+ root.innerHTML='<div class="final-heading"><div class="final-eyebrow">Private subject notebook</div>'+
+ '<h2>EC214 Final · Notes Hub</h2><p>Search general notes and notes attached to questions in Reviewing and Mastering. All saved only under your EC214 Final profile.</p></div>'+
+ '<div class="final-card"><label for="finalNoteEditor"><b>Lecture 5 · AD–AS</b></label>'+
+ '<textarea class="final-input final-notes" id="finalNoteEditor" placeholder="Professor’s extra remarks, formulas, questions to review…"></textarea>'+
+ '<p class="final-mini" id="finalNoteStatus">Autosaved locally, in EC214 Final only.</p></div>'+
+ '<div class="final-card final-search-box"><label for="finalNoteSearch"><b>🔎 Search all saved Final Exam notes</b></label>'+
+ '<input id="finalNoteSearch" class="final-input" type="search" placeholder="Search notes, questions, confusion, formulas…" autocomplete="off">'+
+ '<div id="finalNoteSearchResults" class="final-search-results"></div></div>'+
+ '<div class="final-card"><h3>🤖 AI Notes Pack</h3>'+
+ '<p class="final-mini">Copy only your saved notebook, question notes and uncertain/mistaken answers—never the whole professor PDF or full summary.</p>'+
+ '<textarea id="finalNotesPack" class="final-input" rows="8" readonly aria-label="AI Notes Pack"></textarea>'+
+ '<div class="final-actions"><button class="final-primary" id="finalCopyNotesPack">Copy for ChatGPT</button>'+
+ '<button class="final-action" id="finalRefreshNotesPack">Refresh</button></div>'+
+ '<div id="finalNotePackStatus" class="final-mini" aria-live="polite"></div></div>';
+ const editor=$("finalNoteEditor");editor.value=state.notes.l5||"";
+ editor.addEventListener("input",function(){
+  state.notes.l5=this.value;save();$("finalNoteStatus").textContent="Autosaved ✓";
+  renderNoteSearchResults();$("finalNotesPack").value=notesPackText();
+ });
+ const search=$("finalNoteSearch");search.value=noteSearchText;
+ search.oninput=()=>{noteSearchText=search.value;renderNoteSearchResults()};
+ $("finalNotesPack").value=notesPackText();
+ $("finalRefreshNotesPack").onclick=()=>{$("finalNotesPack").value=notesPackText();$("finalNotePackStatus").textContent="Pack refreshed ✓"};
+ $("finalCopyNotesPack").onclick=()=>{
+  const text=notesPackText();
+  if(!navigator.clipboard||!navigator.clipboard.writeText){$("finalNotePackStatus").textContent="Select the text and copy manually.";return}
+  navigator.clipboard.writeText(text).then(()=>{$("finalNotePackStatus").textContent="Copied ✓"},()=>{$("finalNotePackStatus").textContent="Could not copy; select the text manually."});
+ };
+ renderNoteSearchResults();
+}
+
 const draftKey=()=> "d-study-ec214-final-draft::"+user.id+"::l5::"+quizMode;
 function defaultDraft(mode){return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",answers:{},confidence:{},flags:{},index:0,submitted:false,submittedAt:null,lastResult:null}}
 function draft(mode){
