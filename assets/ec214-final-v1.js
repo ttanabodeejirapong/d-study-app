@@ -12,7 +12,7 @@ const storeGet=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const storePut=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){return fallback}};
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
-let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="";
+let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
 function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizTopicStats:{},quizQuestionNotes:{},createdAt:new Date().toISOString()}}
 const key=()=> "d-study-ec214-final-state::"+user.id;
@@ -127,16 +127,31 @@ function progressPct(){
 }
 function renderProgress(){
  const pct=progressPct(),attempts=state.quizHistory.filter(x=>x.lecture==="l5");
- const latest=attempts.at(-1);
+ const r=modeStats("reviewing"),m=modeStats("mastering"),latest=attempts.at(-1);
+ const latestLearn=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":latest?"not tracked":"—";
+ const masteryTopics=Object.values(state.quizTopicStats||{}).filter(x=>x&&x.status==="Mastered").length;
  $("finalProgress").innerHTML=
- '<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • 2026–2</div><h2>Final Exam Study Dashboard</h2><p>Lecture 5 is ready. Later lecture slots will be populated from the professor’s files without resetting your records.</p></div>'+
- '<div class="final-grid"><article class="final-card"><span class="final-mini">Summary mastery · L5</span><span class="final-metric">'+pct+'%</span><div class="final-meter"><span style="width:'+pct+'%"></span></div></article>'+
- '<article class="final-card"><span class="final-mini">Quiz attempts</span><span class="final-metric">'+attempts.length+'</span><span class="final-mini">Reviewing + Mastering · saved separately</span></article>'+
- '<article class="final-card"><span class="final-mini">Most recent result</span><span class="final-metric">'+(latest?latest.score+'/'+latest.total:"—")+'</span><span class="final-mini">'+(latest?esc(latest.mode)+" · "+new Date(latest.at).toLocaleDateString():"No submitted attempt yet")+'</span></article></div>'+
- '<div class="final-card"><h3>📘 Lecture 5 · Aggregate Demand and Aggregate Supply</h3><p>'+BOOK.sections.length+' in-depth summary sections · '+QB.reviewing.length+' Reviewing questions · '+QB.mastering.length+' Mastering questions. Includes diagrams, the professor’s numerical examples and long-run wage adjustment.</p>'+
- '<div class="final-actions"><button class="final-primary" data-final-go="summary">Read Summary →</button><button class="final-action" data-final-go="quiz">Practice Quiz</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Coming later</h3><p>Lectures 6 onward will get their own summaries, quizzes and mastery tracking. Flashcards remain empty as requested.</p></div>';
+ '<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • 2026–2</div><h2>Final Exam Study Dashboard</h2>'+
+ '<p>Track Lecture 5 summary progress, confidence-weighted quiz points, retakes and mistakes. Future professor lectures will be added here without resetting your records.</p></div>'+
+ '<div class="final-grid">'+
+ '<article class="final-card"><span class="final-mini">Summary mastery · Lecture 5</span><span class="final-metric">'+pct+'%</span><div class="final-meter"><span style="width:'+pct+'%"></span></div><span class="final-mini">'+BOOK.sections.length+' detailed sections</span></article>'+
+ '<article class="final-card"><span class="final-mini">Reviewing · Completed</span><span class="final-metric">'+r.count+' ×</span><span class="final-mini">Best learning '+(r.best===null?"—":r.best+"%")+' · Clean 100% × '+r.perfect+'</span></article>'+
+ '<article class="final-card"><span class="final-mini">Mastering · Completed</span><span class="final-metric">'+m.count+' ×</span><span class="final-mini">Best learning '+(m.best===null?"—":m.best+"%")+' · Clean 100% × '+m.perfect+'</span></article></div>'+
+ '<div class="final-grid final-grid-two"><article class="final-card"><h3>Most recent attempt</h3><div class="final-metric">'+(latest?latest.score+"/"+latest.total:"—")+'</div>'+
+ '<p class="final-mini">Raw accuracy: '+(latest?latest.percent+"%":"—")+' · Learning: '+latestLearn+
+ ' · '+(latest?esc(latest.mode):"Not started")+'</p></article>'+
+ '<article class="final-card"><h3>Practice & mastery</h3><div class="final-metric">'+masteryTopics+'</div>'+
+ '<p class="final-mini">Mastered topic results (two clean Mastering passes required). Existing older attempts remain recorded without invented learning points.</p></article></div>'+
+ '<div class="final-card"><h3>📘 Lecture 5 · Aggregate Demand and Aggregate Supply</h3><p>'+
+ BOOK.sections.length+' in-depth summary sections · '+QB.reviewing.length+' Reviewing questions · '+
+ QB.mastering.length+' Mastering questions. Includes professor graphs, numerical examples and long-run wage adjustment.</p>'+
+ '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
+ '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
+ '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>Coming later</h3>'+
+ '<p>Lectures 6 onward will have separate content and quiz attempts, with the same learning-score rules. Flashcards remain empty as requested.</p></div>';
 }
+
 function buildOutline(){
  const toc=$("finalTopics");
  toc.innerHTML=BOOK.sections.map(s=>'<button type="button" class="final-topic" data-summary-id="'+esc(s.id)+'">'+esc(s.title)+'</button>').join("");
@@ -453,12 +468,80 @@ function resetQuiz(){
  if(!confirm("Start a new "+quizMode+" attempt? Existing submitted history remains saved. Current draft answers will be replaced."))return;
  currentDraft=defaultDraft(quizMode);currentIndex=0;saveDraft();renderQuiz();
 }
-function renderHistory(){
- const h=state.quizHistory.filter(x=>x.lecture==="l5").slice().reverse();
- $("finalHistory").innerHTML='<div class="final-heading"><div class="final-eyebrow">Practice record</div><h2>EC214 Final · Quiz History</h2><p>Reviewing and Mastering results are recorded independently. Mistakes and professor-based explanations are available after submission.</p></div>'+
- (h.length?h.map(x=>'<article class="final-history-item"><div class="final-actions" style="justify-content:space-between"><b>'+esc(x.mode.toUpperCase())+' — '+x.score+'/'+x.total+' ('+x.percent+'%)</b><span class="final-mini">'+esc(new Date(x.at).toLocaleString())+'</span></div>'+
- '<details><summary>Review '+x.wrong.length+' missed questions + explanations</summary>'+x.wrong.map((z,i)=>'<div class="final-explain" style="margin:9px 0"><b>'+(i+1)+'. '+esc(z.q)+'</b><p>Correct: '+esc(z.opts[z.correct])+'</p><p>'+esc(z.why)+'</p><span class="final-mini">'+esc(z.ref)+'</span></div>').join("")+'</details></article>').join(""):'<div class="final-card"><h3>No completed quizzes yet</h3><p>Take Reviewing or Mastering to build your mistake history.</p></div>');
+function historyReviewItems(h){
+ if(Array.isArray(h.reviewItems))return h.reviewItems;
+ // Older (v14.2) attempts stored only wrong-answer snapshots; don't invent
+ // previous confidence selections or full answer history.
+ return (Array.isArray(h.wrong)?h.wrong:[]).map(z=>({
+  ...z,correctIndex:z.correct,confidence:z.confidence||"unknown",correct:false,
+  flagged:false,points:0,topic:z.topic||"",legacy:true
+ }));
 }
+function renderHistory(){
+ const r=modeStats("reviewing"),m=modeStats("mastering");
+ const root=$("finalHistory");
+ root.innerHTML='<div class="final-heading"><div class="final-eyebrow">Practice record</div>'+
+ '<h2>EC214 Final · Quiz History & Mistake Log</h2>'+
+ '<p>All completed attempts are saved, including how many times you retook each mode, raw accuracy, learning points, unsure/guessed responses and professor explanations.</p></div>'+
+ '<div class="final-grid final-grid-two">'+["reviewing","mastering"].map(mode=>{
+  const st=mode==="reviewing"?r:m;
+  return '<div class="final-card"><h3>'+ (mode==="reviewing"?"Reviewing":"Mastering")+'</h3>'+
+   '<span class="final-metric">'+st.count+' time'+(st.count===1?"":"s")+'</span>'+
+   '<span class="final-mini">Best learning: '+(st.best===null?"not tracked":st.best+"%")+
+   ' · Clean 100% × '+st.perfect+'</span></div>';
+ }).join("")+'</div>'+
+ '<div class="final-card final-search-box" style="margin-top:13px"><label for="finalHistorySearch"><b>🔎 Search history and mistake log</b></label>'+
+ '<div class="final-search-line"><input id="finalHistorySearch" type="search" class="final-input" placeholder="Search question, explanation or topic…">'+
+ '<select id="finalHistoryMode" class="final-input final-history-filter">'+
+ '<option value="all">Both modes</option><option value="reviewing">Reviewing</option><option value="mastering">Mastering</option></select></div></div>'+
+ '<div id="finalHistoryList"></div>';
+ const search=$("finalHistorySearch"),select=$("finalHistoryMode");
+ search.value=historySearchText;select.value=historyFilterMode;
+ search.oninput=()=>{historySearchText=search.value;renderHistoryList()};
+ select.onchange=()=>{historyFilterMode=select.value;renderHistoryList()};
+ renderHistoryList();
+}
+function renderHistoryList(){
+ const root=$("finalHistoryList");if(!root)return;
+ const term=historySearchText.trim().toLocaleLowerCase();
+ const h=state.quizHistory.filter(x=>x.lecture==="l5").slice().reverse().filter(x=>
+  (historyFilterMode==="all"||x.mode===historyFilterMode)&&
+  (!term||[x.mode,x.at,...historyReviewItems(x).flatMap(z=>[z.q,z.topic,z.why,z.ref])]
+   .join(" ").toLocaleLowerCase().includes(term)));
+ root.innerHTML=h.length?h.map(x=>{
+  const review=historyReviewItems(x);
+  const learning=Number.isFinite(x.adjustedPercent)?x.adjustedPercent+"%":"not tracked (older attempt)";
+  const confidenceTracked=Number.isFinite(x.adjustedPercent);
+  const perfect=confidenceTracked&&x.adjustedPercent===100&&x.score===x.total&&(x.guessed||0)===0&&(x.unsure||0)===0;
+  return '<article class="final-history-item"><div class="final-actions" style="justify-content:space-between">'+
+   '<b>'+esc(x.mode.toUpperCase())+' · '+x.score+'/'+x.total+' raw ('+x.percent+'%)</b>'+
+   '<span class="final-mini">'+esc(new Date(x.at).toLocaleString())+'</span></div>'+
+   '<div class="final-history-stats"><span>Learning: <b>'+learning+'</b></span>'+
+   '<span>Guessed: <b>'+(x.guessed??"—")+'</b></span>'+
+   '<span>Not sure: <b>'+(x.unsure??"—")+'</b></span>'+
+   '<span>Review items: <b>'+review.length+'</b></span>'+
+   (perfect?'<span class="final-perfect">✓ Clean 100%</span>':"")+'</div>'+
+   (Array.isArray(x.topicResults)&&x.topicResults.length?
+    '<details class="final-history-details"><summary>Topic scores & learning status ('+x.topicResults.length+')</summary>'+
+    '<div class="final-topic-results">'+x.topicResults.map(t=>
+     '<div><b>'+esc(t.topic)+'</b><span>Raw '+t.raw+'% · Learning '+t.learning+'% · '+esc(t.status)+'</span></div>').join("")+'</div></details>':"")+
+   '<details class="final-history-details"><summary>📝 Mistake Log · '+review.length+' wrong / unsure / guessed / flagged</summary>'+
+   (review.length?review.map((z,i)=>{
+    const ans=Number.isInteger(z.correctIndex)?z.correctIndex:z.correct;
+    const given=Number.isInteger(z.given)&&z.opts&&z.opts[z.given]?z.opts[z.given]:"Unanswered";
+    const correct=z.opts&&z.opts[ans]||"";
+    const reason=z.correct?"Flagged or uncertain, even though the raw answer was correct.":
+     "Incorrect or unanswered.";
+    return '<div class="final-explain final-history-review"><b>'+(i+1)+'. '+esc(z.q)+'</b>'+
+     '<p>'+esc(reason)+' · Confidence: '+esc(z.confidence==="unknown"?"not recorded":z.confidence||"confident")+
+     (z.flagged?" · ☆ Flagged":"")+'</p><p>Your answer: '+esc(given)+'</p>'+
+     '<p>Correct: '+esc(correct)+'</p><p>'+esc(z.why)+'</p>'+
+     '<span class="final-mini">Professor source: '+esc(z.ref)+'</span></div>';
+   }).join(""):'<p class="final-mini">No review items — clean attempt ✓</p>')+
+   '</details></article>';
+ }).join(""):'<div class="final-card"><h3>No matching attempts</h3><p class="final-mini">Complete Reviewing or Mastering, or clear your search filters.</p></div>';
+}
+
 function renderSettings(){
  const p=sharedPrefs();
  $("finalSettings").innerHTML='<div class="final-heading"><div class="final-eyebrow">Shared appearance · subject-isolated academics</div><h2>EC214 Final Settings</h2><p>Appearance, font and colors sync with your other D Study subjects. Study records stay separately stored under EC214 Final.</p></div>'+
