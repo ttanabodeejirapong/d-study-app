@@ -25,6 +25,16 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.3 — Template feature parity)
+
+- Matched original EC214 core study behavior: full Lecture 5 summary search with clickable sections; quiz question search and topic hints; **Not sure** (0.7) and **Guessed** (0.4) weighted confidence flags, with confident correct = 1.0 and incorrect = 0.
+- Distinct **raw accuracy** and **learning score**, plus per-topic status. Clean 100% Mastering passes count toward the Mastered topic status after two qualifying passes.
+- Reviewing and Mastering show **Taken N times**, best learning percentage, and clean 100% completion count, independently tracked from saved history.
+- Searchable Quiz History, Mistake Log including correct-but-uncertain answers, professor-page explanations, and full answer snapshots for newly submitted attempts.
+- Question options shuffle for newly started attempts; legacy v14.2 drafts keep original A–D order and all saved selections.
+- Searchable Final Notes Hub and copyable AI Notes Pack from the user's notes and mistakes. Existing raw scores, drafts, notes and subject access remain intact; earlier attempts without saved confidence show **not tracked** instead of invented adjusted scores.
+- Lecture 5 still contains 13 professor-grounded summary sections, 43 Reviewing and 42 Mastering questions. Flashcards remain intentionally empty.
+
 ## EC214 Final Exams (v14.2 — Lecture 5)
 
 - Added EC214 Final Exams as a fourth, independent subject on the same subject-picker template, with its own hashed token for locally authorized profiles. Existing EC214, TU101, and Chinese credentials/access are unchanged.
