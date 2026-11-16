@@ -25,6 +25,18 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.2 — Lecture 5)
+
+- Added EC214 Final Exams as a fourth, independent subject on the same subject-picker template, with its own hashed token for locally authorized profiles. Existing EC214, TU101, and Chinese credentials/access are unchanged.
+- A dedicated static-shell study workspace lives at `/ec214-final/` and shares the Classic/Neo/Midnight + accent styling (with eight direct tab routes).
+- Professor-first Lecture 5 Aggregate Demand and Aggregate Supply Summary: **13 detailed sections** based on the 49-page Lecture 5 file, including redrawable AD/AS diagrams, SRAS/LRAS, shifts and price-level movements, GDP and price schedules, multiplier, shock scenarios, equilibrium, recessionary/inflationary gaps and self-correction.
+- Lecture 5 quizzes: **43 Reviewing + 42 Mastering** original questions, with slide page references, explanations, independent drafts, confidence flags, subject-only question notes, scored attempt history and mistake review.
+- Flashcards are intentionally **blank** until explicitly requested. Later lecture slots are reserved.
+- Subject academic state: `d-study-ec214-final-state::<userId>`; drafts: `d-study-ec214-final-draft::<userId>::l5::<mode>`. Both validate `subjectId=ec214final` and `profileId`. Cross-subject backup import is blocked.
+- Shared appearance is read from `d-study-shared-preferences-v1` and is intentionally not a new subject-specific academic key.
+- The professor’s original PDF is stored in connected **private Drive**, not publicly shipped with the repo. The summary's source references distinguish slide pages from constructed practice examples.
+- The client-side token is a local browser gate (hashed in public code), **not server-backed authentication**.
+
 ## Data safety — subject isolation is mandatory
 
 EC214, TU101, and every future subject must remain independent at the academic-data level.
