@@ -73,7 +73,7 @@ async function unlock(){
  const i=users.findIndex(u=>u.id===user.id);
  if(i<0){error.textContent="Profile is missing from this browser. Sign in again.";return}
  users[i].subjectAccess=users[i].subjectAccess||{};
- users[i].subjectAccess[SUB]={unlockedAt:new Date().toISOString(),version:"14.2"};
+ users[i].subjectAccess[SUB]={unlockedAt:new Date().toISOString(),version:"14.3"};
  storePut(usersKey,users);
  user=users[i];input.value="";
  openApp();
