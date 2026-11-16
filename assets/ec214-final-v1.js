@@ -671,9 +671,14 @@ function renderHistoryList(){
 
 function renderSettings(){
  const p=sharedPrefs();
- $("finalSettings").innerHTML='<div class="final-heading"><div class="final-eyebrow">Shared appearance · subject-isolated academics</div><h2>EC214 Final Settings</h2><p>Appearance, font and colors sync with your other D Study subjects. Study records stay separately stored under EC214 Final.</p></div>'+
+ $("finalSettings").innerHTML='<div class="final-heading"><div class="final-eyebrow">Shared appearance · subject-isolated academics</div><h2>EC214 Final Settings</h2><p>Adjust Theme, Accent, Text size and Font just like EC214. Settings sync across subjects; Final Exam notes, progress and scores remain separate.</p></div>'+
  '<div class="final-card"><h3>Interface theme</h3><div class="final-actions">'+["classic","neo","midnight"].map(x=>'<button class="final-action '+(p.uiTheme===x?"active":"")+'" data-pref="uiTheme" data-value="'+x+'">'+x[0].toUpperCase()+x.slice(1)+'</button>').join("")+'</div><h3>Accent</h3><div class="final-actions">'+["navy","violet","forest","rose","amber"].map(x=>'<button class="final-action '+(p.accent===x?"active":"")+'" data-pref="accent" data-value="'+x+'">'+x+'</button>').join("")+'</div>'+
- '<h3>Appearance</h3><div class="final-actions">'+["system","light","dark"].map(x=>'<button class="final-action '+(p.appearance===x?"active":"")+'" data-pref="appearance" data-value="'+x+'">'+x+'</button>').join("")+'</div></div>'+
+ '<h3>Appearance</h3><div class="final-actions">'+["system","light","dark"].map(x=>'<button class="final-action '+(p.appearance===x?"active":"")+'" data-pref="appearance" data-value="'+x+'">'+x+'</button>').join("")+'</div>'+
+ '<h3>Text size</h3><p class="final-mini">Same shared reading-size setting as EC214. Larger text applies immediately to Summary, Quiz, Notes and other Final pages.</p>'+
+ '<div class="final-actions">'+[["normal","Normal"],["large","Large · easier to read"]].map(([key,label])=>
+ '<button type="button" class="final-action '+(p.textSize===key?"active":"")+'" data-pref="textSize" data-value="'+key+'" aria-pressed="'+(p.textSize===key)+'">'+label+'</button>').join("")+'</div>'+
+ '<h3>Font</h3><div class="final-actions">'+[["inter","Inter"],["poppins","Poppins"],["nunito","Nunito Sans"],["manrope","Manrope"],["ibm","IBM Plex Sans"],["merriweather","Merriweather"]].map(([key,label])=>
+ '<button type="button" class="final-action '+(p.font===key?"active":"")+'" data-pref="font" data-value="'+key+'" aria-pressed="'+(p.font===key)+'">'+label+'</button>').join("")+'</div></div>'+
  '<div class="final-card" style="margin-top:14px"><h3>EC214 Final data</h3><p class="final-mini">Storage namespace: d-study-ec214-final-state::[local profile]. Export/import includes only this subject. Cross-subject backups are rejected.</p>'+
  '<div class="final-actions"><button class="final-primary" id="finalExport">Export final backup</button><button class="final-action" id="finalImportBtn">Import final backup</button><input hidden type="file" id="finalImportFile" accept=".json,application/json"></div></div>';
  $("finalSettings").querySelectorAll("[data-pref]").forEach(btn=>btn.onclick=()=>{
