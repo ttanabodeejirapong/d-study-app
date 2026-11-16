@@ -314,7 +314,17 @@ function renderNotes(){
 }
 
 const draftKey=()=> "d-study-ec214-final-draft::"+user.id+"::l5::"+quizMode;
-function defaultDraft(mode){return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",answers:{},confidence:{},flags:{},index:0,submitted:false,submittedAt:null,lastResult:null}}
+function shuffledOptionOrder(){
+ const a=[0,1,2,3];
+ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+ return a;
+}
+function defaultDraft(mode){
+ const optionOrders={};
+ (qsets[mode]||[]).forEach(q=>optionOrders[q.id]=shuffledOptionOrder());
+ return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",
+  answers:{},confidence:{},flags:{},optionOrders,index:0,submitted:false,submittedAt:null,lastResult:null};
+}
 function draft(mode){
  const raw=storeGet("d-study-ec214-final-draft::"+user.id+"::l5::"+mode);
  if(!raw)return defaultDraft(mode);
@@ -326,6 +336,12 @@ function draft(mode){
  restored.confidence=restored.confidence&&typeof restored.confidence==="object"&&!Array.isArray(restored.confidence)?restored.confidence:{};
  restored.answers=restored.answers&&typeof restored.answers==="object"?restored.answers:{};
  restored.flags=restored.flags&&typeof restored.flags==="object"?restored.flags:{};
+ // v14.2 drafts had a fixed A–D option sequence. Retain exactly that order
+ // if the draft predates v14.3, so their saved answers remain visually stable.
+ if(!parsed.optionOrders){
+  restored.optionOrders={};
+  (qsets[mode]||[]).forEach(q=>restored.optionOrders[q.id]=[0,1,2,3]);
+ }
  return restored;
 }
 let currentDraft=null;
@@ -402,18 +418,21 @@ function renderQuiz(){
   (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
   (currentDraft.confidence[x.id]&&currentDraft.confidence[x.id]!=="confident"?"uncertain ":"")+
   (currentDraft.flags[x.id]?"flagged ":"")+'" data-q-index="'+i+'">'+(i+1)+'</button>').join("")+'</div>';
- const choices=q.opts.map((o,i)=>{
-  const selected=currentDraft.answers[q.id]===i;
+ const order=currentDraft.optionOrders?.[q.id]||[0,1,2,3];
+ const choices=order.map((original,shown)=>{
+  const selected=currentDraft.answers[q.id]===original;
   return '<button type="button" class="final-choice '+(selected?"selected ":"")+
-   (submitted&&i===q.ans?"correct ":"")+
-   (submitted&&selected&&i!==q.ans?"wrong":"")+
-   '" data-answer="'+i+'" '+(submitted?"disabled":"")+'>'+String.fromCharCode(65+i)+'. '+esc(o)+'</button>';
+   (submitted&&original===q.ans?"correct ":"")+
+   (submitted&&selected&&original!==q.ans?"wrong":"")+
+   '" data-answer="'+original+'" '+(submitted?"disabled":"")+'>'+
+   String.fromCharCode(65+shown)+'. '+esc(q.opts[original])+'</button>';
  }).join("");
  const weight=confidenceWeight(confidence);
  const answer=currentDraft.answers[q.id],correct=answer===q.ans;
- const explanation=submitted?'<div class="final-explain"><b>Correct answer: '+String.fromCharCode(65+q.ans)+' — '+esc(q.opts[q.ans])+'</b>'+
+ const legacySubmitted=submitted&&resultData&&!Number.isFinite(resultData.adjustedPercent);
+ const explanation=submitted?'<div class="final-explain"><b>Correct answer: '+String.fromCharCode(65+Math.max(0,order.indexOf(q.ans)))+' — '+esc(q.opts[q.ans])+'</b>'+
   '<p>Your answer: '+(Number.isInteger(answer)?esc(q.opts[answer]):"Unanswered")+' '+(correct?"✓":"✗")+
-  ' · Confidence: '+(confidence==="guessed"?"Guessed":confidence==="unsure"?"Not sure":"Confident")+
+  ' · Confidence: '+(legacySubmitted?"not tracked in older attempt":confidence==="guessed"?"Guessed":confidence==="unsure"?"Not sure":"Confident")+
   ' · Learning points: '+(correct?weight.toFixed(1):"0.0")+' / 1</p><p>'+esc(q.why)+'</p>'+
   '<span class="final-mini">Professor source: '+esc(q.ref)+'</span></div>':"";
  const grade=submitted&&resultData?'<div class="final-score-grid">'+
@@ -524,6 +543,8 @@ function submitQuiz(){
   id:"final-l5-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
   subjectId:SUB,lecture:"l5",mode:quizMode,at:new Date().toISOString(),
   score,total:bank.length,percent:Math.round(100*score/bank.length),
+  optionOrders:Object.fromEntries(bank.map(q=>[q.id,(currentDraft.optionOrders[q.id]||[0,1,2,3]).slice()])),
+  questionSnapshot:bank.map(q=>({id:q.id,q:q.q,opts:q.opts.slice(),ans:q.ans,topic:q.topic,why:q.why,ref:q.ref})),
   learningPoints:Number(learningPoints.toFixed(2)),
   adjustedPercent:Math.round(100*learningPoints/bank.length),
   guessed,unsure,answers:{...currentDraft.answers},
