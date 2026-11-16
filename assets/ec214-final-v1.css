@@ -107,3 +107,20 @@ body #finalShell .final-choice.selected{border-color:var(--final-accent)!importa
 .final-note-results{margin:10px 0}
 @media(max-width:680px){.final-search-results{grid-template-columns:1fr}.final-score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.final-topic-results{grid-template-columns:1fr}}
 @media(max-width:420px){.final-mode-cards{grid-template-columns:1fr}.final-history-filter{width:134px!important;max-width:43%}.final-search-line{gap:7px}}
+
+/* v14.3.1: original EC214 saved-question note dot in Final quiz number grid. */
+.final-questionbar .final-qnum{position:relative;overflow:visible}
+.final-questionbar .final-qnum.noted::after{
+ content:"";position:absolute;right:4px;top:3px;width:7px;height:7px;
+ border-radius:50%;background:#7b63d1;
+ box-shadow:0 0 0 2px rgba(123,99,209,.22);
+ pointer-events:none;
+}
+body.dark .final-questionbar .final-qnum.noted::after{
+ background:#ae9aff;box-shadow:0 0 0 2px rgba(174,154,255,.25)
+}
+.final-question-note-legend{display:flex;align-items:center;justify-content:flex-end;gap:6px;
+ margin:-3px 3px 12px;color:var(--final-muted);font-size:11px}
+.final-saved-note-dot{width:7px;height:7px;display:inline-block;flex:0 0 7px;
+ border-radius:50%;background:#7b63d1}
+body.dark .final-saved-note-dot{background:#ae9aff}
