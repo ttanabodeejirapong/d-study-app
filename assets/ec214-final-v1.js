@@ -163,7 +163,9 @@ function renderProgress(){
  const pct=progressPct(),attempts=state.quizHistory.filter(x=>x.lecture==="l5");
  const r=modeStats("reviewing"),m=modeStats("mastering"),latest=attempts.at(-1);
  const latestLearn=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":latest?"not tracked":"—";
- const masteryTopics=Object.values(state.quizTopicStats||{}).filter(x=>x&&x.status==="Mastered").length;
+ const masteryTopics=new Set(Object.entries(state.quizTopicStats||{})
+  .filter(([k,v])=>k.startsWith("l5::mastering::")&&v&&v.status==="Mastered")
+  .map(([k])=>k.split("::").at(-1))).size;
  $("finalProgress").innerHTML=
  '<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • 2026–2</div><h2>Final Exam Study Dashboard</h2>'+
  '<p>Track Lecture 5 summary progress, confidence-weighted quiz points, retakes and mistakes. Future professor lectures will be added here without resetting your records.</p></div>'+
@@ -493,7 +495,12 @@ function renderQuiz(){
    '<span>Best learning: '+(stats.best===null?"—":stats.best+"%")+'</span>'+
    '<small>Clean 100% × '+stats.perfect+'</small></button>';
  }).join("")+'</div>';
- const partBar='<div class="final-part-heading"><h3>Choose a short part</h3>'+
+ const activePart=partInfo(quizMode,quizPart);
+ const focusMode=answered>0||submitted;
+ const partBar='<details class="final-parts-menu" '+(focusMode?"":"open")+'> '+
+  '<summary><b>'+partLabel(quizMode,quizPart)+' · '+esc(activePart?activePart.title:"Old full-length quiz")+
+  ' ('+bank.length+' questions)</b><span>Change part ▾</span></summary>'+
+  '<div class="final-part-heading"><h3>Choose a short part</h3>'+
   '<p class="final-mini">One part at a time — about 10 questions. Each part remembers your answers and how many times you finished it.</p></div>'+
   '<div class="final-part-grid">'+PARTS[quizMode].map(p=>{
    const pb=bankFor(quizMode,p.id),stats=partStats(quizMode,p.id),saved=draft(quizMode,p.id);
@@ -510,7 +517,7 @@ function renderQuiz(){
   (hasLegacyDraft(quizMode)?'<details class="final-legacy-quiz"><summary>Previous full-length quiz draft (optional)</summary>'+
    '<p class="final-mini">A draft from the old 43/42-question version is still saved. You can finish or review it here, or use the four short parts above.</p>'+
    '<button type="button" class="final-action '+(quizPart==="full"?"active":"")+
-   '" data-final-part="full">Open my previous full quiz</button></details>':"");
+   '" data-final-part="full">Open my previous full quiz</button></details>':"")+'</details>';
  const nums='<div class="final-questionbar" role="group" aria-label="Questions in '+partLabel(quizMode,quizPart)+'">'+bank.map((x,i)=>
   '<button type="button" class="final-qnum '+(i===currentIndex?"current ":"")+
   (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
@@ -554,10 +561,11 @@ function renderQuiz(){
  const root=$("finalQuiz");
  root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2>'+
   '<p>Four manageable parts per mode (10–12 questions each). Hints and direct links to the matching Lecture Summary topic are available for every question. Progress is autosaved.</p></div>'+
-  modeBar+partBar+resultBanner+grade+rubric+
-  '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>🔎 Search all four '+quizMode+' parts</b></label>'+
+  modeBar+partBar+resultBanner+grade+
+  '<details class="final-study-tools"><summary>🔎 Search questions & learning-points guide (optional)</summary>'+rubric+
+  '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>Search all four '+quizMode+' parts</b></label>'+
   '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search labor, AD shifts, inflationary gap…" autocomplete="off">'+
-  '<div id="finalQuizSearchResults" class="final-search-results"></div></div>'+
+  '<div id="finalQuizSearchResults" class="final-search-results"></div></div></details>'+
   '<div class="final-quiz-tools"><span class="final-mini"><b>'+partLabel(quizMode,quizPart)+'</b> · Answered '+answered+'/'+bank.length+
   ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
   '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
