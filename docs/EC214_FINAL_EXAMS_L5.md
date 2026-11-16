@@ -43,3 +43,7 @@ Create a new professor-grounded content module and independent quiz bank for eac
 
 ## v14.3.1 — Question-number note indicator
 The quiz question picker shows a small violet saved-note dot if `state.quizQuestionNotes[questionId]` contains non-whitespace text. It updates immediately on textarea input and restores on any quiz re-render or browser reload. It is independent of answered/flagged/uncertain indicators, and never changes quiz grading. Existing per-question records are reused without a migration.
+
+## v14.3.2 — Reading layout parity with EC214
+
+The Final Exam stylesheet uses a larger base font (17px Normal / 19px Large); most Summary body text is approximately 18px Normal, quiz questions 21px, and answer choices 18px. The Summary library now sits above full-width article cards rather than taking a narrow permanent sidebar. Question controls, notes, history, tables, figure captions and other labels scale up for iPad/desktop and mobile. These changes preserve Classic/Neo/Midnight + accent tokens, tactile controls, and the noted-question purple-dot marker. Final Settings exposes the shared `textSize` and `font` controls, without adding new academic keys. Existing Lecture 5 content and quizzes remain unchanged.
