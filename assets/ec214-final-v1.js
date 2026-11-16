@@ -12,7 +12,7 @@ const storeGet=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const storePut=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){return fallback}};
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
-let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false;
+let user=null,state=null,currentTab="progress",quizMode="reviewing",currentIndex=0,submittedView=false,quizSearchQuery="";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
 function newState(){return {subjectId:SUB,profileId:user.id,schemaVersion:1,lectureStates:{"l5":{}},notes:{"l5":""},quizDrafts:{},quizHistory:[],quizQuestionNotes:{},createdAt:new Date().toISOString()}}
 const key=()=> "d-study-ec214-final-state::"+user.id;
@@ -224,13 +224,19 @@ function renderNotes(){
  });
 }
 const draftKey=()=> "d-study-ec214-final-draft::"+user.id+"::l5::"+quizMode;
-function defaultDraft(mode){return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",answers:{},flags:{},index:0,submitted:false,submittedAt:null,lastResult:null}}
+function defaultDraft(mode){return {subjectId:SUB,profileId:user.id,lecture:"l5",mode,bankVersion:"l5-v1",answers:{},confidence:{},flags:{},index:0,submitted:false,submittedAt:null,lastResult:null}}
 function draft(mode){
  const raw=storeGet("d-study-ec214-final-draft::"+user.id+"::l5::"+mode);
  if(!raw)return defaultDraft(mode);
  const parsed=parse(raw);
  if(!parsed||parsed.subjectId!==SUB||parsed.profileId!==user.id||parsed.mode!==mode||parsed.lecture!=="l5"){quarantine("invalid-draft",raw);return defaultDraft(mode)}
- return Object.assign(defaultDraft(mode),parsed);
+ const restored=Object.assign(defaultDraft(mode),parsed);
+ // Keep v14.2 answers and review flags; add the new confidence map without
+ // changing their existing meaning or deleting submitted records.
+ restored.confidence=restored.confidence&&typeof restored.confidence==="object"&&!Array.isArray(restored.confidence)?restored.confidence:{};
+ restored.answers=restored.answers&&typeof restored.answers==="object"?restored.answers:{};
+ restored.flags=restored.flags&&typeof restored.flags==="object"?restored.flags:{};
+ return restored;
 }
 let currentDraft=null;
 function saveDraft(){
@@ -247,40 +253,144 @@ function selectMode(mode){
  submittedView=!!currentDraft.submitted;
  renderQuiz();
 }
+
+function confidenceWeight(value){return value==="guessed"?0.4:value==="unsure"?0.7:1}
+function modeAttempts(mode){return state.quizHistory.filter(h=>h.lecture==="l5"&&h.mode===mode)}
+function modeStats(mode){
+ const all=modeAttempts(mode),learn=all.filter(h=>Number.isFinite(h.adjustedPercent));
+ const best=learn.length?Math.max(...learn.map(h=>h.adjustedPercent)):null;
+ const latest=all.length?all[all.length-1]:null;
+ const perfect=learn.filter(h=>h.adjustedPercent===100&&h.score===h.total&&(h.guessed||0)===0&&(h.unsure||0)===0).length;
+ return {count:all.length,best,latest,perfect};
+}
+function modeStatsLabel(mode){
+ const st=modeStats(mode);
+ return st.count===0?"Not taken yet":
+  "Taken "+st.count+" time"+(st.count===1?"":"s")+
+  " • Best learning: "+(st.best===null?"not tracked":st.best+"%")+
+  " • Clean 100% × "+st.perfect;
+}
+function renderQuizSearchResults(){
+ const field=$("finalQuizSearch"),root=$("finalQuizSearchResults");
+ if(!field||!root)return;
+ const terms=field.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean),bank=qsets[quizMode];
+ if(!terms.length){root.innerHTML="";return}
+ const hits=bank.map((q,i)=>({q,i})).filter(({q})=>terms.every(t=>
+   [q.q,q.topic,q.opts.join(" "),q.why,q.ref].join(" ").toLocaleLowerCase().includes(t)));
+ root.innerHTML='<div class="final-mini">'+hits.length+" question"+(hits.length===1?"":"s")+" found in "+quizMode+"</div>"+
+  (hits.length?hits.map(({q,i})=>'<button type="button" class="final-search-hit" data-quiz-jump="'+i+'">'+
+   '<span class="final-eyebrow">Question '+(i+1)+' · '+esc(q.topic)+'</span><b>'+esc(q.q)+'</b>'+
+   '<span>'+esc(q.ref)+'</span></button>').join(""):
+  '<div class="final-mini">No matching question. Try another phrase.</div>');
+ root.querySelectorAll("[data-quiz-jump]").forEach(btn=>btn.onclick=()=>{
+  currentIndex=Number(btn.dataset.quizJump);saveDraft();renderQuiz();
+ });
+}
 function renderQuiz(){
  if(!state)return;
- if(!currentDraft||currentDraft.mode!==quizMode){currentDraft=draft(quizMode);currentIndex=currentDraft.index||0}
- const bank=qsets[quizMode],q=bank[currentIndex],submitted=currentDraft.submitted;
- const answered=Object.keys(currentDraft.answers).length,flagged=Object.values(currentDraft.flags).filter(Boolean).length;
- const qRoot=$("finalQuiz");
- const modeBar='<div class="final-actions"><button class="final-action '+(quizMode==="reviewing"?"active":"")+'" data-mode="reviewing">Reviewing · '+QB.reviewing.length+'</button><button class="final-action '+(quizMode==="mastering"?"active":"")+'" data-mode="mastering">Mastering · '+QB.mastering.length+'</button></div>';
- const nums='<div class="final-questionbar">'+bank.map((x,i)=>'<button title="Question '+(i+1)+'" class="final-qnum '+(i===currentIndex?"current ":"")+(currentDraft.answers[x.id]!=null?"answered":"")+'" data-q-index="'+i+'">'+(i+1)+'</button>').join("")+'</div>';
- let choices=q.opts.map((o,i)=>'<button class="final-choice '+(currentDraft.answers[q.id]===i?"selected ":"")+(submitted&&i===q.ans?"correct ":"")+(submitted&&currentDraft.answers[q.id]===i&&i!==q.ans?"wrong":"")+'" data-answer="'+i+'" '+(submitted?"disabled":"")+'>'+(String.fromCharCode(65+i))+'. '+esc(o)+'</button>').join("");
- const explain=submitted?'<div class="final-explain"><b>Correct answer: '+String.fromCharCode(65+q.ans)+' — '+esc(q.opts[q.ans])+'</b><p>'+esc(q.why)+'</p><span class="final-mini">Source: '+esc(q.ref)+'</span></div>':"";
- const result=submitted&&currentDraft.lastResult?'<div class="final-card"><b>Submitted result: '+currentDraft.lastResult.score+'/'+currentDraft.lastResult.total+' ('+currentDraft.lastResult.percent+'%)</b><p class="final-mini">Missed questions are recorded in Quiz History. Revisit the explanations below or start a new attempt.</p></div>':"";
- qRoot.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2><p>Distinct banks, autosaved progress, confidence flags, results and detailed explanations. The questions are grounded in your professor’s Lecture 5 slides.</p></div>'+
- modeBar+result+
- '<div class="final-quiz-tools"><span class="final-mini">Answered '+answered+'/'+bank.length+' · Flagged '+flagged+'</span><span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
- nums+'<div class="final-card final-q"><div class="final-eyebrow">'+esc(q.topic)+' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+'</div><h3>'+esc(q.q)+'</h3>'+choices+
- '<div class="final-actions"><button class="final-action '+(currentDraft.flags[q.id]?"active":"")+'" id="finalFlag">'+(currentDraft.flags[q.id]?"★ Flagged":"☆ Flag to review")+'</button></div>'+explain+
- '<div class="final-actions"><button class="final-action" id="finalPrevious" '+(currentIndex===0?"disabled":"")+'>← Previous</button><button class="final-primary" id="finalNext" '+(currentIndex===bank.length-1?"disabled":"")+'>Next →</button></div>'+
- '<label for="finalQNote" class="final-mini">Personal question note (autosaved)</label><textarea id="finalQNote" class="final-input" rows="2" placeholder="What confused me about this question?"></textarea></div>'+
- '<div class="final-actions"><button class="final-primary" id="finalSubmit" '+(submitted?"disabled":"")+'>Submit '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' ('+answered+'/'+bank.length+' answered)</button>'+
- '<button class="final-action" id="finalResetQuiz">New attempt</button></div>';
- $("finalQNote").value=state.quizQuestionNotes[q.id]||"";
- $("finalQNote").oninput=e=>{state.quizQuestionNotes[q.id]=e.target.value;save()};
- qRoot.querySelectorAll("[data-mode]").forEach(el=>el.onclick=()=>selectMode(el.dataset.mode));
- qRoot.querySelectorAll("[data-q-index]").forEach(el=>el.onclick=()=>{currentIndex=Number(el.dataset.qIndex);saveDraft();renderQuiz()});
- qRoot.querySelectorAll("[data-answer]").forEach(el=>el.onclick=()=>{
+ if(!currentDraft||currentDraft.mode!==quizMode){
+  currentDraft=draft(quizMode);currentIndex=Math.max(0,Math.min(qsets[quizMode].length-1,currentDraft.index||0));
+ }
+ const bank=qsets[quizMode],q=bank[currentIndex];
+ if(!q)return;
+ const submitted=!!currentDraft.submitted,confidence=currentDraft.confidence[q.id]||"confident";
+ const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
+ const flagged=bank.filter(x=>currentDraft.flags[x.id]).length;
+ const unsure=bank.filter(x=>currentDraft.confidence[x.id]==="unsure").length;
+ const guessed=bank.filter(x=>currentDraft.confidence[x.id]==="guessed").length;
+ const st=modeStats(quizMode),resultData=currentDraft.lastResult;
+ const modeBar='<div class="final-mode-cards">'+["reviewing","mastering"].map(mode=>{
+  const stats=modeStats(mode);
+  return '<button type="button" class="final-mode-card '+(mode===quizMode?"active":"")+'" data-mode="'+mode+'">'+
+   '<b>'+ (mode==="reviewing"?"Reviewing":"Mastering")+' · '+qsets[mode].length+' Q</b>'+
+   '<span>Completed '+stats.count+' time'+(stats.count===1?"":"s")+'</span>'+
+   '<span>Best learning: '+(stats.best===null?"—":stats.best+"%")+'</span>'+
+   '<small>Clean 100% × '+stats.perfect+'</small></button>';
+ }).join("")+'</div>';
+ const nums='<div class="final-questionbar">'+bank.map((x,i)=>
+  '<button type="button" title="Question '+(i+1)+'" class="final-qnum '+(i===currentIndex?"current ":"")+
+  (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
+  (currentDraft.confidence[x.id]&&currentDraft.confidence[x.id]!=="confident"?"uncertain ":"")+
+  (currentDraft.flags[x.id]?"flagged ":"")+'" data-q-index="'+i+'">'+(i+1)+'</button>').join("")+'</div>';
+ const choices=q.opts.map((o,i)=>{
+  const selected=currentDraft.answers[q.id]===i;
+  return '<button type="button" class="final-choice '+(selected?"selected ":"")+
+   (submitted&&i===q.ans?"correct ":"")+
+   (submitted&&selected&&i!==q.ans?"wrong":"")+
+   '" data-answer="'+i+'" '+(submitted?"disabled":"")+'>'+String.fromCharCode(65+i)+'. '+esc(o)+'</button>';
+ }).join("");
+ const weight=confidenceWeight(confidence);
+ const answer=currentDraft.answers[q.id],correct=answer===q.ans;
+ const explanation=submitted?'<div class="final-explain"><b>Correct answer: '+String.fromCharCode(65+q.ans)+' — '+esc(q.opts[q.ans])+'</b>'+
+  '<p>Your answer: '+(Number.isInteger(answer)?esc(q.opts[answer]):"Unanswered")+' '+(correct?"✓":"✗")+
+  ' · Confidence: '+(confidence==="guessed"?"Guessed":confidence==="unsure"?"Not sure":"Confident")+
+  ' · Learning points: '+(correct?weight.toFixed(1):"0.0")+' / 1</p><p>'+esc(q.why)+'</p>'+
+  '<span class="final-mini">Professor source: '+esc(q.ref)+'</span></div>':"";
+ const grade=submitted&&resultData?'<div class="final-score-grid">'+
+  '<div class="final-score-card"><small>Raw score</small><b>'+resultData.score+'/'+resultData.total+'</b></div>'+
+  '<div class="final-score-card"><small>Raw accuracy</small><b>'+resultData.percent+'%</b></div>'+
+  '<div class="final-score-card"><small>Learning score</small><b>'+(Number.isFinite(resultData.adjustedPercent)?resultData.adjustedPercent+"%":"Not tracked")+'</b></div>'+
+  '<div class="final-score-card"><small>Uncertain</small><b>'+(resultData.guessed||0)+' guessed · '+(resultData.unsure||0)+' not sure</b></div></div>':"";
+ const rubric='<div class="final-rubric"><b>Learning points</b> · Correct + Confident = <b>1.0</b> · Correct + Not sure = <b>0.7</b> · Correct + Guessed = <b>0.4</b> · Wrong = <b>0</b>. Reviewing cannot award Mastered.</div>';
+ const confUI='<div class="final-confidence"><b>Confidence check</b><p class="final-mini">Leave both unselected if confident. Tap a flag again to return to Confident.</p><div class="final-actions">'+
+  '<button type="button" class="final-action '+(confidence==="unsure"?"active":"")+'" data-confidence="unsure" aria-pressed="'+(confidence==="unsure")+'" '+(submitted?"disabled":"")+'>□ Not sure (70%)</button>'+
+  '<button type="button" class="final-action '+(confidence==="guessed"?"active":"")+'" data-confidence="guessed" aria-pressed="'+(confidence==="guessed")+'" '+(submitted?"disabled":"")+'>□ Guessed (40%)</button>'+
+  '</div></div>';
+ const cannotSubmit=answered<bank.length;
+ const resultBanner=submitted?'<div class="final-card"><b>Attempt submitted · '+modeStatsLabel(quizMode)+'</b><p class="final-mini">Review any question’s explanation or start another attempt. Mistake Log records wrong and uncertain answers.</p></div>':"";
+ const root=$("finalQuiz");
+ root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2>'+
+  '<p>Same confidence-weighted scoring as EC214. Drafts, attempt counts and mistake history are saved separately for Final Exams.</p></div>'+
+  modeBar+resultBanner+grade+rubric+
+  '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>🔎 Search this question bank</b></label>'+
+  '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search labor, AD shifts, inflationary gap…" autocomplete="off">'+
+  '<div id="finalQuizSearchResults" class="final-search-results"></div></div>'+
+  '<div class="final-quiz-tools"><span class="final-mini">Answered '+answered+'/'+bank.length+
+  ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
+  '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
+  nums+'<div class="final-card final-q"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
+  ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+'</div><h3>'+esc(q.q)+'</h3>'+
+  '<button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false">💡 Hint: show topic</button>'+
+  '<div class="final-hint-body" id="finalHintBody" hidden><b>'+esc(q.topic)+'</b><p class="final-mini">'+esc(q.ref)+'</p><p class="final-mini">This identifies the professor’s topic—not the correct answer.</p></div>'+
+  choices+confUI+
+  '<div class="final-actions"><button class="final-action '+(currentDraft.flags[q.id]?"active":"")+
+  '" id="finalFlag">'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
+  explanation+
+  '<div class="final-actions"><button class="final-action" id="finalPrevious" '+(currentIndex===0?"disabled":"")+'>← Previous</button>'+
+  '<button class="final-primary" id="finalNext" '+(currentIndex===bank.length-1?"disabled":"")+'>Next →</button></div>'+
+  '<label for="finalQNote" class="final-mini">Personal question note (autosaved)</label>'+
+  '<textarea id="finalQNote" class="final-input" rows="2" placeholder="Why I chose this, what confused me, professor wording…"></textarea></div>'+
+  '<div class="final-actions"><button class="final-primary" id="finalSubmit" '+(submitted||cannotSubmit?"disabled":"")+'>'+
+  (submitted?"Already submitted":cannotSubmit?"Answer "+(bank.length-answered)+" more to submit":"Submit "+(quizMode==="reviewing"?"Reviewing":"Mastering"))+'</button>'+
+  '<button class="final-action" id="finalResetQuiz">New attempt</button></div>';
+ const note=$("finalQNote");note.value=state.quizQuestionNotes[q.id]||"";
+ note.oninput=e=>{state.quizQuestionNotes[q.id]=e.target.value;save()};
+ const search=$("finalQuizSearch");search.value=quizSearchQuery;
+ search.oninput=()=>{quizSearchQuery=search.value;renderQuizSearchResults()};
+ renderQuizSearchResults();
+ root.querySelectorAll("[data-mode]").forEach(el=>el.onclick=()=>selectMode(el.dataset.mode));
+ root.querySelectorAll("[data-q-index]").forEach(el=>el.onclick=()=>{currentIndex=Number(el.dataset.qIndex);saveDraft();renderQuiz()});
+ root.querySelectorAll("[data-answer]").forEach(el=>el.onclick=()=>{
   if(currentDraft.submitted)return;
   currentDraft.answers[q.id]=Number(el.dataset.answer);saveDraft();renderQuiz();
  });
+ root.querySelectorAll("[data-confidence]").forEach(el=>el.onclick=()=>{
+  if(currentDraft.submitted)return;
+  const picked=el.dataset.confidence;
+  currentDraft.confidence[q.id]=currentDraft.confidence[q.id]===picked?"confident":picked;
+  saveDraft();renderQuiz();
+ });
  $("finalFlag").onclick=()=>{currentDraft.flags[q.id]=!currentDraft.flags[q.id];saveDraft();renderQuiz()};
+ $("finalHintBtn").onclick=()=>{
+  const panel=$("finalHintBody");panel.hidden=!panel.hidden;
+  $("finalHintBtn").setAttribute("aria-expanded",String(!panel.hidden));
+ };
  $("finalPrevious").onclick=()=>{currentIndex=Math.max(0,currentIndex-1);saveDraft();renderQuiz()};
  $("finalNext").onclick=()=>{currentIndex=Math.min(bank.length-1,currentIndex+1);saveDraft();renderQuiz()};
  $("finalSubmit").onclick=submitQuiz;
- $("finalResetQuiz").onclick=()=>resetQuiz();
+ $("finalResetQuiz").onclick=resetQuiz;
 }
+
 function submitQuiz(){
  const bank=qsets[quizMode];
  if(currentDraft.submitted)return;
