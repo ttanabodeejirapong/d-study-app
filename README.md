@@ -25,6 +25,16 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.4 — Four short quiz parts and lecture topic links)
+
+- ADHD-friendly shorter quiz sessions: the 43 Reviewing questions are split into **4 parts (12 / 10 / 11 / 10)** and the 42 Mastering questions into **4 parts (11 / 11 / 10 / 10)**. All existing lecture questions, stable IDs, correct answers and explanations are unchanged.
+- Each part has its own local draft (saved answers, flags, not-sure/guessed confidence and shuffled options), per-part attempt count, best learning score and clean 100% count. The original confidence-weighted grading and mastery logic still apply.
+- Every question retains the topic-only **Hint** and adds an actual Summary deep link to the matching Lecture 5 section, with a button to return to the quiz and resume the same question.
+- Search continues across the **entire** selected Reviewing or Mastering bank, and jumps automatically to the part containing a matching question.
+- Unfinished v14.3.2 **full-length drafts are retained** under their existing storage keys, available behind an optional Previous full-length quiz control. Previous full-lecture history and raw/learning scores remain untouched and identified as full-length attempts.
+- Final-only backup/export/import now includes every part draft and older full-session draft, validates subject/profile/mode/part identity, and continues rejecting foreign subject backups.
+- Flashcards remain blank and all other subjects' academic data are unchanged.
+
 ## EC214 Final Exams (v14.3.2 — EC214-sized reading layout)
 
 - Restored **readability parity** with the original EC214: the Final Exams UI no longer uses compact 11–14px typography for key study text. Quiz question prompts are approximately 21px, answer choices ~18px, summary body ~18px, and smaller metadata/labels are increased.
