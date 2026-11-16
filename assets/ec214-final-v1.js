@@ -602,7 +602,7 @@ function renderHistoryList(){
  const term=historySearchText.trim().toLocaleLowerCase();
  const h=state.quizHistory.filter(x=>x.lecture==="l5").slice().reverse().filter(x=>
   (historyFilterMode==="all"||x.mode===historyFilterMode)&&
-  (!term||[x.mode,x.at,...historyReviewItems(x).flatMap(z=>[z.q,z.topic,z.why,z.ref])]
+  (!term||[x.mode,x.at,...historyReviewItems(x).flatMap(z=>[z.q,z.topic,z.why,z.ref]),...(x.questionSnapshot||[]).flatMap(q=>[q.q,q.topic,q.why,q.ref])]
    .join(" ").toLocaleLowerCase().includes(term)));
  root.innerHTML=h.length?h.map(x=>{
   const review=historyReviewItems(x);
@@ -634,7 +634,21 @@ function renderHistoryList(){
      '<p>Correct: '+esc(correct)+'</p><p>'+esc(z.why)+'</p>'+
      '<span class="final-mini">Professor source: '+esc(z.ref)+'</span></div>';
    }).join(""):'<p class="final-mini">No review items — clean attempt ✓</p>')+
-   '</details></article>';
+   '</details>'+
+   (Array.isArray(x.questionSnapshot)&&x.questionSnapshot.length?
+    '<details class="final-history-details"><summary>📋 Review all '+x.questionSnapshot.length+' answers</summary>'+
+    x.questionSnapshot.map((q,i)=>{
+     const chosen=x.answers&&x.answers[q.id],ok=chosen===q.ans;
+     const ordering=x.optionOrders&&x.optionOrders[q.id]||[0,1,2,3];
+     const label=n=>String.fromCharCode(65+Math.max(0,ordering.indexOf(n)));
+     const confidence=x.confidence&&x.confidence[q.id]||"confident";
+     return '<div class="final-explain final-history-review"><b>'+(i+1)+'. '+esc(q.q)+'</b>'+
+      '<p>Your answer: '+(Number.isInteger(chosen)?label(chosen)+'. '+esc(q.opts[chosen]):"Unanswered")+
+      ' · '+(ok?"✓ Correct":"✗ Incorrect")+' · '+esc(confidence)+'</p>'+
+      '<p>Correct: '+label(q.ans)+'. '+esc(q.opts[q.ans])+'</p>'+
+      '<p>'+esc(q.why)+'</p><span class="final-mini">'+esc(q.ref)+'</span></div>';
+    }).join("")+'</details>':"")+
+   '</article>';
  }).join(""):'<div class="final-card"><h3>No matching attempts</h3><p class="final-mini">Complete Reviewing or Mastering, or clear your search filters.</p></div>';
 }
 
