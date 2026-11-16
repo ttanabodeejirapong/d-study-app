@@ -414,7 +414,7 @@ function renderQuiz(){
    '<small>Clean 100% × '+stats.perfect+'</small></button>';
  }).join("")+'</div>';
  const nums='<div class="final-questionbar">'+bank.map((x,i)=>
-  '<button type="button" title="Question '+(i+1)+'" class="final-qnum '+(i===currentIndex?"current ":"")+
+  '<button type="button" class="final-qnum '+(i===currentIndex?"current ":"")+
   (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
   (currentDraft.confidence[x.id]&&currentDraft.confidence[x.id]!=="confident"?"uncertain ":"")+
   (currentDraft.flags[x.id]?"flagged ":"")+
