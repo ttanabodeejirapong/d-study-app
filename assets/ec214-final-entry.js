@@ -39,12 +39,15 @@ function preview(){
 }
 renderSubjectHub=function(){oldHub();ensure()};
 ensure();
-if(activeUser&&location.pathname.startsWith("/d-study-app/subjects")){
+if(activeUser){
  const returning=sessionStorage.getItem("d-study-final-return-subjects");
  if(returning){
   sessionStorage.removeItem("d-study-final-return-subjects");
-  // Persist the last subject through the existing backwards-compatible wrappers.
+  // Legacy session restoration may rewrite /subjects/ before this late module
+  // runs. Honor the user's explicit Return to Subjects action regardless of path.
   if(activeSubject)backToSubjects();else renderSubjectHub();
- }else if(document.getElementById("subjectScreen").style.display!=="none")ensure();
+ }else if(location.pathname.startsWith("/d-study-app/subjects/")){
+  ensure();
+ }
 }
 })();
