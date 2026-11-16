@@ -25,6 +25,16 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.3.2 — EC214-sized reading layout)
+
+- Restored **readability parity** with the original EC214: the Final Exams UI no longer uses compact 11–14px typography for key study text. Quiz question prompts are approximately 21px, answer choices ~18px, summary body ~18px, and smaller metadata/labels are increased.
+- Summary uses full-width professor-slide reading cards with a readable section jump library above them; no longer squeezes the main article into a narrow column beside a sidebar.
+- Quiz has a centered, spacious original-EC214-style reading column, larger tap targets, and clearer question numbers (saved-note purple dots retained).
+- Notes, Search, History, Settings, rubrics, source references and explanation panels have larger typography and spacing.
+- The **Text size (Normal / Large)** and **Font** selectors from the original EC214 are now exposed in Final Exams Settings and write the existing shared appearance key only. They apply without clearing quiz drafts or changing academic state.
+- Still uses the selected Classic/Neo/Midnight theme and accent color.
+- Pure presentation + shared appearance UI; all quiz banks, Professor Lecture 5 Summary, token, academic notes, draft/history schema, and other subjects are unchanged.
+
 ## EC214 Final Exams (v14.3.1 — Saved-note dots on quiz numbers)
 
 - Restored the original EC214 saved-question **purple dot** on each numbered Final Exams quiz question. The dot appears for any non-blank saved per-question note, including saved notes from older versions and across both Reviewing and Mastering banks.
