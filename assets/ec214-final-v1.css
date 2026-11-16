@@ -54,3 +54,56 @@ body #finalShell .final-nav a.active{color:var(--final-accent)!important;border-
 body #finalShell .final-action.active{color:var(--final-accent)!important;border-color:var(--final-accent)!important}
 body #finalShell .final-metric{color:var(--final-accent)!important}
 body #finalShell .final-choice.selected{border-color:var(--final-accent)!important}
+
+/* v14.3 · Matching original EC214 search, confidence and mastery experience */
+.final-search-box{margin:14px 0 20px}
+.final-search-box label{display:block;font-size:15px;margin-bottom:4px}
+.final-search-box p{margin:5px 0 12px}
+.final-search-line{display:flex;align-items:center;gap:9px;margin:10px 0}
+.final-search-line .final-input{min-width:0;flex:1}
+.final-search-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.final-search-hit{width:100%;display:flex;flex-direction:column;gap:5px;text-align:left;align-items:start;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;line-height:1.45;cursor:pointer;min-width:0}
+.final-search-hit b{font-size:13px}
+.final-search-hit span:last-child{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.final-search-hit:hover,.final-search-hit:focus-visible{outline:0;border-color:var(--final-accent);background:color-mix(in srgb,var(--final-accent) 7%,var(--card))}
+.final-search-hit:active{transform:scale(.987);filter:brightness(.94)}
+.final-search-target{outline:3px solid color-mix(in srgb,var(--final-accent) 65%,transparent);outline-offset:3px}
+.final-quiz-search-box{padding:13px 16px;margin:14px 0}
+.final-quiz-search-box input{margin-top:8px}
+.final-mode-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}
+.final-mode-card{display:flex;flex-direction:column;align-items:start;text-align:left;gap:6px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer}
+.final-mode-card b{font-size:16px}
+.final-mode-card span{font-size:13px;color:var(--muted)}
+.final-mode-card small{color:var(--final-accent);font-weight:750}
+.final-mode-card.active{border:2px solid var(--final-accent);background:color-mix(in srgb,var(--final-accent) 8%,var(--card));box-shadow:0 0 0 2px color-mix(in srgb,var(--final-accent) 11%,transparent)}
+.final-mode-card:hover{border-color:var(--final-accent)}
+.final-rubric{border-left:4px solid var(--final-accent);background:color-mix(in srgb,var(--final-accent) 8%,var(--card));border-radius:0 13px 13px 0;margin:12px 0;padding:13px 15px;font-size:13px;line-height:1.75}
+.final-confidence{padding:14px 15px;background:var(--soft);border:1px solid var(--line);border-radius:12px;margin:14px 0}
+.final-confidence .final-mini{margin:5px 0}
+.final-confidence .final-actions{margin:8px 0 0}
+.final-confidence .final-action.active{border:2px solid var(--final-accent);background:color-mix(in srgb,var(--final-accent) 13%,var(--card));color:var(--final-accent)}
+.final-qnum.uncertain{box-shadow:inset 0 -3px #e8a940}
+.final-qnum.flagged{outline:1px dashed var(--final-accent);outline-offset:-4px}
+.final-score-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:13px 0}
+.final-score-card{border-radius:13px;border:1px solid var(--line);background:var(--card);padding:12px;display:flex;flex-direction:column;gap:5px}
+.final-score-card small{color:var(--muted);font-size:12px}
+.final-score-card b{font-size:clamp(14px,2.2vw,21px);color:var(--final-accent);overflow-wrap:anywhere}
+.final-hint{font-size:12px;padding:7px 11px;min-height:32px}
+.final-hint-body{background:var(--soft);border:1px solid var(--line);padding:11px 14px;border-radius:12px;margin:9px 0}
+.final-hint-body p{margin:4px 0}
+.final-grid-two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.final-history-stats{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:13px 0}
+.final-history-stats>span{padding:6px 10px;background:var(--soft);border:1px solid var(--line);border-radius:9px;font-size:12px}
+.final-history-stats b{color:var(--final-accent)}
+.final-history-stats .final-perfect{border-color:#2c9b6e;color:#2c9b6e;font-weight:850}
+.final-history-details{margin:10px 0;background:var(--soft);border:1px solid var(--line);padding:11px 13px;border-radius:11px}
+.final-history-details summary{font-size:13px;font-weight:750;cursor:pointer}
+.final-history-review{margin:10px 0;background:var(--card)}
+.final-topic-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.final-topic-results>div{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:4px}
+.final-topic-results b{font-size:13px}
+.final-topic-results span{font-size:12px;color:var(--muted)}
+.final-history-filter{flex:0 0 auto!important;width:168px!important;max-width:45%}
+.final-note-results{margin:10px 0}
+@media(max-width:680px){.final-search-results{grid-template-columns:1fr}.final-score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.final-topic-results{grid-template-columns:1fr}}
+@media(max-width:420px){.final-mode-cards{grid-template-columns:1fr}.final-history-filter{width:134px!important;max-width:43%}.final-search-line{gap:7px}}
