@@ -148,6 +148,33 @@ function buildOutline(){
   s.html+
   '<div class="final-actions"><label class="final-mini" for="stat-'+esc(s.id)+'">Mark your understanding:</label><select id="stat-'+esc(s.id)+'" class="final-input" data-final-status="'+esc(s.id)+'" style="max-width:230px"><option value="notstarted">Not started</option><option value="learning">Learning</option><option value="reviewed">Reviewed & practiced</option><option value="mastered">Mastered</option></select></div></article>').join("");
  renderSummaryProgress();
+ bindSummarySearch();
+}
+function sectionText(section){
+ // Search professor-grounded summary copy without indexing markup/CSS.
+ return [section.title,section.priority,section.pages,
+  section.html.replace(/<[^>]*>/g," ").replace(/&(?:nbsp|amp|lt|gt);/g," ").replace(/\\s+/g," ")
+ ].join(" ").replace(/\s+/g," ").trim();
+}
+function bindSummarySearch(){
+ const input=$("finalSummarySearch"),clear=$("finalSummaryClear"),results=$("finalSummarySearchResults"),meta=$("finalSummarySearchStatus");
+ if(!input||!results)return;
+ const run=()=>{
+  const query=input.value.trim(),terms=query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  if(!terms.length){results.innerHTML="";meta.textContent="Searches all "+BOOK.sections.length+" Lecture 5 sections";return}
+  const hits=BOOK.sections.map(sec=>({sec,text:sectionText(sec)})).filter(x=>terms.every(t=>x.text.toLocaleLowerCase().includes(t)));
+  meta.textContent=hits.length+" matching section"+(hits.length===1?"":"s");
+  results.innerHTML=hits.length?hits.map(({sec,text})=>{
+   const at=Math.max(0,text.toLocaleLowerCase().indexOf(terms[0]));
+   const start=Math.max(0,at-55),summary=text.slice(start,start+195);
+   return '<button type="button" class="final-search-hit" data-summary-id="'+esc(sec.id)+'">'+
+    '<span class="final-eyebrow">'+esc(sec.pages)+'</span><b>'+esc(sec.title)+'</b>'+
+    '<span>'+esc((start?"…":"")+summary+(start+195<text.length?"…":""))+'</span></button>';
+  }).join(""):'<div class="final-mini">No results for “'+esc(query)+'”. Try a shorter term or an alternate phrase.</div>';
+ };
+ input.oninput=run;
+ if(clear)clear.onclick=()=>{input.value="";run();input.focus()};
+ run();
 }
 function renderSummaryProgress(){
  if(!state)return;
