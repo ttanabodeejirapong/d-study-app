@@ -40,3 +40,17 @@ html{scroll-behavior:smooth}body{min-height:100dvh}button,a,input,textarea,selec
 @media(max-width:820px){.final-sum-layout{grid-template-columns:1fr}.final-toc{position:static;max-height:none}.final-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.final-toc .final-topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}}
 @media(max-width:600px){.final-wrap{width:calc(100% - 22px)}#finalShell header{padding:15px 0}.final-header-row h1{font-size:20px}.final-grid{grid-template-columns:1fr 1fr;gap:9px}.final-card{padding:14px}.final-section{padding:17px 15px}.final-compare{grid-template-columns:1fr}.final-toc .final-topics{grid-template-columns:1fr}.final-nav a{font-size:12px;padding:9px 10px}.final-metric{font-size:27px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Adapt the existing theme surface tokens on this independent subject. */
+body{--final-accent:var(--theme-accent,var(--blue,#1f4e78));--final-accent2:var(--theme-accent2,var(--blue2,#2c6b9f))}
+body.neo-ui{--card:var(--neo-card);--soft:var(--neo-card-2);--ink:var(--neo-ink);--muted:var(--neo-muted);--line:var(--neo-line)}
+body.midnight-ui{--card:var(--mw-surface);--soft:var(--mw-surface-2);--ink:var(--mw-ink);--muted:var(--mw-muted);--line:var(--mw-line)}
+body.neo-ui #finalShell header,body.neo-ui.dark #finalShell header,
+body.midnight-ui #finalShell header,body.midnight-ui.dark #finalShell header{background:linear-gradient(120deg,color-mix(in srgb,var(--final-accent) 42%,#151923),#171b24)!important;color:#f5f7ff!important;border-color:var(--final-accent)!important}
+body #finalShell .final-card,body #finalAuth .final-locked{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+body #finalShell .final-card:before{display:none!important}
+body #finalShell .final-primary,body #finalAuth .final-primary{background:linear-gradient(125deg,var(--final-accent),var(--final-accent2))!important;border-color:var(--final-accent)!important;color:#fff!important}
+body #finalShell .final-nav a.active{color:var(--final-accent)!important;border-color:var(--final-accent)!important;background:color-mix(in srgb,var(--final-accent) 13%,var(--card))!important}
+body #finalShell .final-action.active{color:var(--final-accent)!important;border-color:var(--final-accent)!important}
+body #finalShell .final-metric{color:var(--final-accent)!important}
+body #finalShell .final-choice.selected{border-color:var(--final-accent)!important}
