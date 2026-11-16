@@ -40,3 +40,6 @@ Create a new professor-grounded content module and independent quiz bank for eac
 - Completion counts are derived from EC214 Final history (Taken N times, best learning, clean 100% × N). A topic earns Mastered only after two clean Mastering passes.
 - Each new attempt saves option-shuffle order and full answer snapshots so past answers remain readable after later lecture additions.
 - Backward compatibility: v14.2 drafts default to their original A–D order without resetting answers or flags; v14.2 history is displayed without recalculation of unrecorded learning confidence. Existing professor Lecture 5 questions and IDs, original subject engines, and private source file remain unchanged.
+
+## v14.3.1 — Question-number note indicator
+The quiz question picker shows a small violet saved-note dot if `state.quizQuestionNotes[questionId]` contains non-whitespace text. It updates immediately on textarea input and restores on any quiz re-render or browser reload. It is independent of answered/flagged/uncertain indicators, and never changes quiz grading. Existing per-question records are reused without a migration.
