@@ -183,11 +183,32 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
     '<div class="final-score-card"><small>Times completed</small><b>'+done.tries+' ×</b></div>'+
     '<div class="final-score-card"><small>Best learning</small><b>'+done.best+'%</b></div></div>'+
     '<p class="final-mini">This is a reconstructed practice key, not an official graded Google Form result. Tap question numbers to review explanations.</p></div>':"";
+  const reviewSummary=submitted&&currentDraft.lastResult?(()=>{
+   const res=currentDraft.lastResult;
+   const wrong=bank.filter(x=>currentDraft.answers[x.id]!==x.ans);
+   const uncertain=bank.filter(x=>["unsure","guessed"].includes(currentDraft.confidence[x.id]));
+   const flagged=bank.filter(x=>currentDraft.flags[x.id]);
+   const needs=bank.filter(x=>wrong.includes(x)||uncertain.includes(x)||flagged.includes(x));
+   return '<section class="final-card final-mock-result" id="finalMockReviewSummary" aria-label="Submission summary">'+
+    '<h3>Study review — Part '+escape(currentPart.slice(1))+'</h3>'+
+    '<p><b>'+res.score+'/10 correct</b> · '+(10-res.score)+' incorrect · '+res.learningPercent+'% confidence-adjusted learning score</p>'+
+    '<p class="final-mini">Review priority: '+wrong.length+' incorrect, '+uncertain.length+' uncertain or guessed, '+flagged.length+' flagged. Categories can overlap. Practice key is inferred, not official.</p>'+
+    (needs.length?'<h4>Questions to revisit</h4><div class="final-mock-review">'+needs.map(x=>{
+      const n=bank.indexOf(x)+1,chosen=currentDraft.answers[x.id];
+      return '<div class="final-explain"><b>Q'+n+' · '+escape(x.topic)+'</b>'+
+       '<p>'+escape(x.q)+'</p>'+
+       '<p>Your answer: '+escape(x.opts[chosen]||"No response")+(chosen===x.ans?' ✓':' ✗')+'</p>'+
+       '<p>Practice answer: '+escape(x.opts[x.ans])+'</p>'+
+       '<p>'+escape(x.explanation)+'</p>'+
+       '<button type="button" class="final-action" data-mock-review-index="'+(n-1)+'">Review this question</button></div>';
+     }).join("")+'</div>':'<p>All answers were correct and none were marked uncertain or flagged.</p>')+
+    '<p class="final-mini">Use the numbered questions below to review all ten answers and their explanations.</p></section>';
+  })():"";
   const actions='<div class="final-actions"><button type="button" class="final-primary" id="finalMockSubmit" '+(submitted||answered<10?"disabled":"")+'>'+
    (submitted?"Already submitted":answered<10?("Answer "+(10-answered)+" more to submit"):"Submit this 10-question part")+
    '</button><button type="button" class="final-action" id="finalMockReset">New attempt for Part '+currentPart.slice(1)+'</button></div>';
   const history=renderHistory();
-  root.innerHTML=header+partChooser()+result+
+  root.innerHTML=header+partChooser()+result+reviewSummary+
    '<details class="final-study-tools final-mock-tools"><summary>🔎 Search all 30 mock questions (optional)</summary>'+
     '<input id="finalMockSearch" class="final-input" type="search" autocomplete="off" placeholder="Search money supply, multiplier, fiscal policy…">'+
     '<div id="finalMockResults" class="final-search-results"></div></details>'+
@@ -200,6 +221,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
    if(number)number.classList.toggle("noted",!!e.target.value.trim());
   };
   root.querySelectorAll("[data-mock-part]").forEach(el=>el.onclick=()=>choose(el.dataset.mockPart));
+  root.querySelectorAll("[data-mock-review-index]").forEach(el=>el.onclick=()=>{index=Number(el.dataset.mockReviewIndex);saveDraft();render()});
   root.querySelectorAll("[data-mock-index]").forEach(el=>el.onclick=()=>{index=Number(el.dataset.mockIndex);saveDraft();render()});
   root.querySelectorAll("[data-mock-answer]").forEach(el=>el.onclick=()=>{if(submitted)return;currentDraft.answers[q.id]=Number(el.dataset.mockAnswer);saveDraft();render()});
   root.querySelectorAll("[data-mock-confidence]").forEach(el=>el.onclick=()=>{if(submitted)return;
@@ -263,6 +285,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   };
   currentDraft.submitted=true;currentDraft.lastResult=result;
   state.history.push(result);saveState();saveDraft();render();
+  const review=$("finalMockReviewSummary");if(review){review.scrollIntoView({behavior:"smooth",block:"start"});review.setAttribute("tabindex","-1");review.focus({preventScroll:true})}
  }
  function reset(){
   if(!confirm("Start a new attempt for this 10-question part? Completed history and notes will be preserved."))return;
