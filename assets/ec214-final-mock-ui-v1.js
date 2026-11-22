@@ -285,6 +285,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   };
   currentDraft.submitted=true;currentDraft.lastResult=result;
   state.history.push(result);saveState();saveDraft();render();
+  const review=$("finalMockReviewSummary");if(review){review.scrollIntoView({behavior:"smooth",block:"start"});review.setAttribute("tabindex","-1");review.focus({preventScroll:true})}
  }
  function reset(){
   if(!confirm("Start a new attempt for this 10-question part? Completed history and notes will be preserved."))return;
