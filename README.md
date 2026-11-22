@@ -25,6 +25,17 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.5 — Complete question-visual audit)
+
+- Audited every one of Lecture 5's **85** quiz questions (43 Reviewing, 42 Mastering) against the privately stored professor source and the current official Summary/Question banks.
+- Added an appropriate graph, input-data table, formula/data panel or conceptual sequence to **82** questions: **39 graphs, 17 tables, 18 process diagrams, and 8 formula panels**.
+- Three pure-definition/policy-reasoning questions (R004, R043, M038) remain text-only to avoid unnecessary distractions.
+- Tables cover the professor's SRAS and AD schedules, AD–AS equilibrium, the worked potential GDP problem, wage-rate computations and output-gap examples; numerical question data are preserved exactly.
+- Diagrams show AD/AS/LRAS, shifts, output gaps and potential-versus-actual GDP with responsive, theme-linked SVG. For shock questions, dashed alternatives are **not solved answers**.
+- Source slide images and the private professor PDF are **not** published: charts are original conceptual redraws; formulas and tables preserve information already available from professor material / the quiz statement.
+- Accessible captions, semantic tables, readable mobile scaling, theme colors and reduced-motion support. Works with all four quiz parts and the existing Hint, Summary links, scoring, saved notes and 100% completion counts.
+- New isolated visual module: `assets/ec214-final-l5-visuals-v14.5.js`, loaded after the quiz bank but before the Final runtime. For future lectures, perform an explicit all-question visual audit; do not assume purely textual quiz prompts are sufficient.
+
 ## EC214 Final Exams (v14.4 — Four short quiz parts and lecture topic links)
 
 - ADHD-friendly shorter quiz sessions: the 43 Reviewing questions are split into **4 parts (12 / 10 / 11 / 10)** and the 42 Mastering questions into **4 parts (11 / 11 / 10 / 10)**. All existing lecture questions, stable IDs, correct answers and explanations are unchanged.
