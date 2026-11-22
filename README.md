@@ -25,6 +25,15 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.6 — 30-question original Screenshot Mock)
+
+- Adds a completely separate **Final Mock** tab at `/d-study-app/ec214-final/mock/`, preserving the existing v14.5 professor-based Lecture 5 visual audit and all 43 Reviewing / 42 Mastering question IDs, notes and history.
+- The **30 original questions** were transcribed from 17 owner-provided Google Forms screenshots, with the original 3 form sections of 10 questions, original 4/5 answer choice counts, wording and order. Source images remain in the owner's private Drive; only the study reconstruction is public.
+- The original AE₀ / AE₁ / 45° Aggregate Expenditure diagram is **redrawn in responsive SVG** for questions 4 and 7. Calculations in questions 6, 8, 11 and 18 include source-value tables.
+- Supports the EC214 template features: one question at a time, topic-only hints, related Lecture 5 Summary link where an actual matching section exists, saved question notes (purple number dots), Confident/Not sure/Guessed points (1 / .7 / .4 for correct), flagged questions, source explanations, 3 independently saved 10-question parts, attempt counts, best scores, searchable questions, history/mistake review and responsive Classic/Neo/Midnight accents.
+- This is an **inferred practice answer key**; the user screenshots do not show an official answer key. The app labels this limitation and does not present the inferred grading as official.
+- New isolated keys: `d-study-ec214-final-mock-state::<userId>` and `d-study-ec214-final-mock-draft::<userId>::v1::<partId>`, with explicit subject/profile/exam validation, plus subject-specific backup support. Pre-existing EC214 Final, EC214, TU101 and Chinese records/credentials remain unchanged. Prior-version backups without mock data do not delete mock work.
+
 ## EC214 Final Exams (v14.5 — Complete question-visual audit)
 
 - Audited every one of Lecture 5's **85** quiz questions (43 Reviewing, 42 Mastering) against the privately stored professor source and the current official Summary/Question banks.
