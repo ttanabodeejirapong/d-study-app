@@ -480,6 +480,10 @@ function renderQuiz(){
  }
  const bank=bankFor(quizMode,quizPart),q=bank[currentIndex];
  if(!q)return;
+ // All 85 L5 questions were audited against the lecture. Visuals are
+ // rendered only when useful and never alter answer IDs or grading.
+ const renderVisual=window.D_STUDY_FINAL_L5_RENDER_VISUAL;
+ const questionVisual=typeof renderVisual==="function"?renderVisual(q.id):"";
  const submitted=!!currentDraft.submitted,confidence=currentDraft.confidence[q.id]||"confident";
  const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
  const flagged=bank.filter(x=>currentDraft.flags[x.id]).length;
@@ -571,6 +575,7 @@ function renderQuiz(){
   '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
   nums+'<div class="final-card final-q"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
   ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' · '+partLabel(quizMode,quizPart)+'</div><h3>'+esc(q.q)+'</h3>'+
+  questionVisual+
   '<div class="final-question-tools"><button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false" aria-controls="finalHintBody">💡 Hint: show topic</button>'+
   '<a class="final-action final-summary-topic-link" href="'+BASE+'summary/#final-section-'+encodeURIComponent(summarySection.id)+
   '" data-final-summary-topic="'+esc(summarySection.id)+'" title="Open the related Lecture 5 summary section">📖 Read this topic in Summary ↗</a></div>'+
