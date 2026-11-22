@@ -480,6 +480,54 @@ function renderQuizSearchResults(){
  });
 }
 
+/* All Lecture 5 bank questions audited: show exact professor schedules when
+ * the question depends on a table, and make neutral reference diagrams
+ * available as optional hints for curve/graph topics. Stable quiz IDs unchanged.
+ */
+function lecture5Visual(q){
+ const sras=[
+  ["100","12.0"],["105","12.5"],["110","13.0"],["115","13.5"],["120","14.0"]
+ ];
+ const ad=[["130","12.0"],["120","12.5"],["110","13.0"],["100","13.5"],["90","14.0"]];
+ const work=[["100","1,150","1,050"],["110","1,100","1,100"],["120","1,050","1,150"],
+  ["130","1,000","1,200"],["140","950","1,250"],["150","900","1,300"],["160","850","1,350"]];
+ const lookup={
+  "l5-r-011":["Professor's short-run AS schedule",["Price level (P)","Real GDP supplied ($T)"],sras],
+  "l5-r-012":["Professor's short-run AS schedule",["Price level (P)","Real GDP supplied ($T)"],sras],
+  "l5-m-006":["Professor's short-run AS schedule",["Price level (P)","Real GDP supplied ($T)"],sras],
+  "l5-r-024":["Professor's aggregate demand schedule",["Price level (P)","Real GDP demanded ($T)"],ad],
+  "l5-m-017":["Professor's aggregate demand schedule",["Price level (P)","Real GDP demanded ($T)"],ad],
+  "l5-r-037":["Professor's worked AD–AS equilibrium data",["Price level (P)","Real GDP demanded ($bn)","Real GDP supplied ($bn)"],work],
+  "l5-r-038":["Professor's worked AD–AS equilibrium data",["Price level (P)","Real GDP demanded ($bn)","Real GDP supplied ($bn)"],work],
+  "l5-m-005":["Given real-wage data",["Variable","Before","After"],[["Money wage (W)","200","200"],["Price level (P)","100","125"]]],
+  "l5-m-008":["Given proportional wage/price change",["Variable","Change"],[["Money wage (W)","+20%"],["Price level (P)","+20%"]]],
+  "l5-m-015":["Given planned expenditure ($bn)",["Component","Value"],[["Consumption C","500"],["Investment I","150"],["Government purchases G","200"],["Exports X","80"],["Imports M","130"]]],
+  "l5-m-016":["Change to the expenditure identity",["Component","Change"],[["Imports M","+25"],["C, I, G and X","unchanged"]]],
+  "l5-r-036":["Given real GDP ($bn)",["Quantity","Value"],[["Potential Yᶠ","1,050"],["Actual Yₑ","1,000"]]],
+  "l5-m-029":["Given real GDP ($bn)",["Quantity","Value"],[["Potential Yᶠ","1,050"],["Equilibrium AD and AS at P=110","1,100"]]],
+  "l5-m-030":["Given real GDP",["Quantity","Value"],[["Equilibrium Yₑ","1,200"],["Potential Yᶠ","1,350"]]],
+  "l5-m-031":["Given real GDP",["Quantity","Value"],[["Equilibrium Yₑ","14.0 trillion"],["Potential Yᶠ","13.0 trillion"]]],
+  "l5-r-033":["Professor's equilibrium example",["P","AD ($T)","SRAS ($T)"],[["100","13.5","12.0"],["110","13.0","13.0"],["120","12.5","14.0"]]],
+  "l5-m-026":["Professor's equilibrium example",["P","AD ($T)","SRAS ($T)"],[["100","13.5","12.0"],["110","13.0","13.0"],["120","12.5","14.0"]]],
+  "l5-m-027":["Professor's equilibrium example",["P","AD ($T)","SRAS ($T)"],[["100","13.5","12.0"],["110","13.0","13.0"],["120","12.5","14.0"]]],
+  "l5-m-028":["Professor's equilibrium example",["P","AD ($T)","SRAS ($T)"],[["100","13.5","12.0"],["110","13.0","13.0"],["120","12.5","14.0"]]]
+ };
+ const row=lookup[q.id];
+ const table=row?'<div class="final-l5-table" role="region" aria-label="'+esc(row[0])+'" tabindex="0">'+
+  '<div class="final-mini"><b>'+esc(row[0])+'</b> · Values given in the professor slides or question</div>'+
+  '<table class="final-table"><thead><tr>'+row[1].map(h=>'<th scope="col">'+esc(h)+'</th>').join("")+
+  '</tr></thead><tbody>'+row[2].map(c=>'<tr>'+c.map(v=>'<td>'+esc(v)+'</td>').join("")+'</tr>').join("")+
+  '</tbody></table></div>':"";
+ const topicGraphs={
+  "overview":"overview","as-slopes":"as-slope","long-run":"lras","as-shifts":"as-slope",
+  "ad-slopes":"ad-slope","ad-shifts":"ad-slope","multiplier":"multiplier",
+  "equilibrium":"equilibrium","gaps":"overview","long-adjustment":"overview","growth-cycle":"overview"
+ };
+ const figure=topicGraphs[q.topic]?'<details class="final-l5-graph"><summary>📈 Related lecture graph (optional visual hint)</summary>'+
+  '<p class="final-mini">Conceptual reference graph. Read the question to decide which variable or curve changes; this diagram is not the answer.</p>'+
+  graph(topicGraphs[q.topic])+'</details>':"";
+ return table+figure;
+}
 function renderQuiz(){
  if(!state)return;
  if(!currentDraft||currentDraft.mode!==quizMode||(currentDraft.partId||"full")!==quizPart){
@@ -577,7 +625,7 @@ function renderQuiz(){
   ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
   '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
   nums+'<div class="final-card final-q"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
-  ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' · '+partLabel(quizMode,quizPart)+'</div><h3>'+esc(q.q)+'</h3>'+
+  ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' · '+partLabel(quizMode,quizPart)+'</div><h3>'+esc(q.q)+'</h3>'+lecture5Visual(q)+
   '<div class="final-question-tools"><button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false" aria-controls="finalHintBody">💡 Hint: show topic</button>'+
   '<a class="final-action final-summary-topic-link" href="'+BASE+'summary/#final-section-'+encodeURIComponent(summarySection.id)+
   '" data-final-summary-topic="'+esc(summarySection.id)+'" title="Open the related Lecture 5 summary section">📖 Read this topic in Summary ↗</a></div>'+
