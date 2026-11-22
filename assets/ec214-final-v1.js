@@ -480,6 +480,34 @@ function renderQuizSearchResults(){
  });
 }
 
+
+function quizResultReview(bank){
+ const d=currentDraft, r=d&&d.lastResult;
+ if(!d||!d.submitted||!r)return "";
+ const wrong=bank.filter(q=>d.answers[q.id]!==q.ans);
+ const cards=bank.map((q,i)=>({q,i,given:d.answers[q.id],confidence:d.confidence[q.id]||"confident",flagged:!!d.flags[q.id]}))
+  .filter(x=>x.given!==x.q.ans||x.confidence!=="confident"||x.flagged);
+ const getAnswer=(x,idx)=>{
+  if(!Number.isInteger(idx)||!x.q.opts[idx])return "Unanswered";
+  const order=d.optionOrders&&d.optionOrders[x.q.id]||[0,1,2,3];
+  const pos=order.indexOf(idx);
+  return (pos<0?"":String.fromCharCode(65+pos)+". ")+x.q.opts[idx];
+ };
+ const all=bank.map((q,i)=>'<button type="button" data-result-index="'+i+'" class="final-result-answer '+(d.answers[q.id]===q.ans?"is-correct":"is-wrong")+'">Q'+(i+1)+' '+(d.answers[q.id]===q.ans?"✓":"✗")+'</button>').join("");
+ const details=cards.map(x=>
+  '<article class="final-result-review-item"><div class="final-result-review-head"><b>Question '+(x.i+1)+' · '+(x.given!==x.q.ans?"Wrong":x.confidence==="guessed"?"Guessed":x.confidence==="unsure"?"Not sure":"Flagged")+'</b><button type="button" class="final-action" data-result-index="'+x.i+'">Open question</button></div>'+
+  '<p>'+esc(x.q.q)+'</p><p><b>Your answer:</b> '+esc(getAnswer(x,x.given))+'</p>'+
+  '<p><b>Correct answer:</b> '+esc(getAnswer(x,x.q.ans))+'</p>'+
+  '<p>'+esc(x.q.why)+'</p><small>'+esc(x.q.ref)+'</small></article>').join("");
+ return '<section id="finalQuizResultSummary" class="final-card final-quiz-result-summary" role="region" aria-label="Quiz results" tabindex="-1">'+
+ '<h3>Quiz results · '+partLabel(quizMode,quizPart)+'</h3>'+
+ '<p>Final marks: <b>'+r.score+' / '+r.total+'</b> · Wrong: <b>'+wrong.length+'</b> · Learning score: <b>'+(Number.isFinite(r.adjustedPercent)?r.adjustedPercent+"%":"Not tracked")+'</b></p>'+
+ '<p class="final-mini">✓ Correct · ✗ Incorrect. Select a question to see the answer in context.</p>'+
+ '<div class="final-result-answer-grid">'+all+'</div>'+
+ '<h4>Questions to review ('+cards.length+')</h4>'+
+ (details||'<p class="final-mini">No incorrect or uncertain answers to review.</p>')+'</section>';
+}
+
 function renderQuiz(){
  if(!state)return;
  if(!currentDraft||currentDraft.mode!==quizMode||(currentDraft.partId||"full")!==quizPart){
@@ -490,7 +518,14 @@ function renderQuiz(){
  // All 85 L5 questions were audited against the lecture. Visuals are
  // rendered only when useful and never alter answer IDs or grading.
  const renderVisual=window.D_STUDY_FINAL_L5_RENDER_VISUAL;
- const questionVisual=typeof renderVisual==="function"?renderVisual(q.id):"";
+ let questionVisual="";
+ try{questionVisual=typeof renderVisual==="function"?renderVisual(q.id):""}catch(e){console.error("Lecture 5 quiz visual failed",q.id,e)}
+ if(!questionVisual&&q.id==="l5-m-017"){
+  // Source-grounded fallback for slide 22 if a cached browser misses the visual module.
+  questionVisual='<figure class="final-question-visual final-v-table"><div class="final-visual-table-scroll"><table class="final-visual-table"><thead><tr><th>Price level (P)</th><th>AD: Real GDP demanded ($T)</th></tr></thead><tbody>'+
+   [[130,12],[120,12.5],[110,13],[100,13.5],[90,14]].map(row=>'<tr><td>'+row[0]+'</td><td>'+row[1]+'</td></tr>').join("")+
+   '</tbody></table></div><figcaption>Slide 22 · Aggregate-demand schedule (professor PDF p. 26).</figcaption></figure>';
+ }
  const submitted=!!currentDraft.submitted,confidence=currentDraft.confidence[q.id]||"confident";
  const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
  const flagged=bank.filter(x=>currentDraft.flags[x.id]).length;
@@ -559,6 +594,7 @@ function renderQuiz(){
   '<div class="final-score-card"><small>Raw accuracy</small><b>'+resultData.percent+'%</b></div>'+
   '<div class="final-score-card"><small>Learning score</small><b>'+(Number.isFinite(resultData.adjustedPercent)?resultData.adjustedPercent+"%":"Not tracked")+'</b></div>'+
   '<div class="final-score-card"><small>Uncertain</small><b>'+(resultData.guessed||0)+' guessed · '+(resultData.unsure||0)+' not sure</b></div></div>':"";
+ const reviewSummary=quizResultReview(bank);
  const rubric='<div class="final-rubric"><b>Learning points</b> · Correct + Confident = <b>1.0</b> · Correct + Not sure = <b>0.7</b> · Correct + Guessed = <b>0.4</b> · Wrong = <b>0</b>. Reviewing cannot award Mastered.</div>';
  const confUI='<div class="final-confidence"><b>Confidence check</b><p class="final-mini">Leave both unselected if confident. Tap a flag again to return to Confident.</p><div class="final-actions">'+
   '<button type="button" class="final-action '+(confidence==="unsure"?"active":"")+'" data-confidence="unsure" aria-pressed="'+(confidence==="unsure")+'" '+(submitted?"disabled":"")+'>□ Not sure (70%)</button>'+
@@ -572,7 +608,7 @@ function renderQuiz(){
  const root=$("finalQuiz");
  root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 5</div><h2>Reviewing & Mastering Quizzes</h2>'+
   '<p>Four manageable parts per mode (10–12 questions each). Hints and direct links to the matching Lecture Summary topic are available for every question. Progress is autosaved.</p></div>'+
-  modeBar+partBar+resultBanner+grade+
+  modeBar+partBar+reviewSummary+resultBanner+
   '<details class="final-study-tools"><summary>🔎 Search questions & learning-points guide (optional)</summary>'+rubric+
   '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>Search all four '+quizMode+' parts</b></label>'+
   '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search labor, AD shifts, inflationary gap…" autocomplete="off">'+
@@ -580,7 +616,7 @@ function renderQuiz(){
   '<div class="final-quiz-tools"><span class="final-mini"><b>'+partLabel(quizMode,quizPart)+'</b> · Answered '+answered+'/'+bank.length+
   ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
   '<span class="final-mini">Question '+(currentIndex+1)+' of '+bank.length+'</span></div>'+
-  nums+'<div class="final-card final-q"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
+  nums+'<div class="final-card final-q" id="finalQuizQuestion" tabindex="-1"><div class="final-eyebrow">Question '+(currentIndex+1)+' of '+bank.length+
   ' · '+(quizMode==="reviewing"?"Reviewing":"Mastering")+' · '+partLabel(quizMode,quizPart)+'</div><h3>'+esc(q.q)+'</h3>'+
   questionVisual+
   '<div class="final-question-tools"><button type="button" class="final-action final-hint" id="finalHintBtn" aria-expanded="false" aria-controls="finalHintBody">💡 Hint: show topic</button>'+
@@ -591,6 +627,7 @@ function renderQuiz(){
   '<div class="final-actions"><button class="final-action '+(currentDraft.flags[q.id]?"active":"")+
   '" id="finalFlag" '+(submitted?"disabled":"")+'>'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
   explanation+
+  (submitted?'<div class="final-actions"><button class="final-action" id="finalBackToQuizResults">↑ Back to results</button></div>':'')+
   '<div class="final-actions"><button class="final-action" id="finalPrevious" '+(currentIndex===0?"disabled":"")+'>← Previous</button>'+
   '<button class="final-primary" id="finalNext" '+(currentIndex===bank.length-1?"disabled":"")+'>Next →</button></div>'+
   '<label for="finalQNote" class="final-mini">Personal question note (autosaved)</label>'+
@@ -617,6 +654,16 @@ function renderQuiz(){
  root.querySelectorAll("[data-mode]").forEach(el=>el.onclick=()=>selectMode(el.dataset.mode));
  root.querySelectorAll("[data-final-part]").forEach(el=>el.onclick=()=>selectPart(el.dataset.finalPart));
  root.querySelectorAll("[data-q-index]").forEach(el=>el.onclick=()=>{currentIndex=Number(el.dataset.qIndex);saveDraft();renderQuiz()});
+ root.querySelectorAll("[data-result-index]").forEach(el=>el.onclick=()=>{
+  currentIndex=Number(el.dataset.resultIndex);saveDraft();renderQuiz();
+  const target=$("finalQuizQuestion");
+  if(target){target.scrollIntoView({behavior:"smooth",block:"start"});target.focus({preventScroll:true})}
+ });
+ const back=$("finalBackToQuizResults");
+ if(back)back.onclick=()=>{
+  const target=$("finalQuizResultSummary");
+  if(target){target.scrollIntoView({behavior:"smooth",block:"start"});target.focus({preventScroll:true})}
+ };
  root.querySelectorAll("[data-answer]").forEach(el=>el.onclick=()=>{
   if(currentDraft.submitted)return;
   currentDraft.answers[q.id]=Number(el.dataset.answer);saveDraft();renderQuiz();
@@ -696,6 +743,12 @@ function submitQuiz(){
  };
  currentDraft.submitted=true;currentDraft.submittedAt=result.at;currentDraft.lastResult=result;
  state.quizHistory.push(result);save();saveDraft();renderQuiz();
+ // Submit happens near the last question; bring the summary and wrong answers into view.
+ const target=$("finalQuizResultSummary");
+ if(target){
+  const reveal=()=>{target.scrollIntoView({behavior:"smooth",block:"start"});target.focus({preventScroll:true})};
+  if(typeof requestAnimationFrame==="function")requestAnimationFrame(reveal);else reveal();
+ }
 }
 
 function resetQuiz(){
