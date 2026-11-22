@@ -12,7 +12,7 @@ const storeGet=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const storePut=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const parse=(s,fallback=null)=>{try{return JSON.parse(s)||fallback}catch(_){return fallback}};
 const usersKey="d-study-users-v1",activeKey="d-study-active-user";
-let user=null,state=null,currentTab="progress",quizMode="reviewing",quizPart="p1",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all",noteSearchText="";
+let mock=null,user=null,state=null,currentTab="progress",quizMode="reviewing",quizPart="p1",currentIndex=0,submittedView=false,quizSearchQuery="",historySearchText="",historyFilterMode="all",noteSearchText="";
 const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
 // Small, fixed parts retain every existing L5 question ID and professor topic.
 // R: 12 / 10 / 11 / 10; M: 11 / 11 / 10 / 10.
@@ -117,10 +117,13 @@ function openApp(){
  currentDraft=null;currentIndex=0;
  if(!state.lectureStates.l5)state.lectureStates.l5={};
  if(!("l5" in state.notes))state.notes.l5="";
+ if(window.DStudyCreateFinalMock){
+  mock=window.DStudyCreateFinalMock({user,onSummary:openMockSummary});
+ }
  theme();save();buildOutline();renderAll();
  const path=location.pathname.replace(/\/+$/,"");
  const part=path.split("/").filter(Boolean).at(-1);
- const tab=["progress","summary","quiz","flashcards","notes","history","prompt","settings"].includes(part)?part:"progress";
+ const tab=["progress","summary","quiz","mock","flashcards","notes","history","prompt","settings"].includes(part)?part:"progress";
  navigate(tab,false);
 }
 function goSubjects(){
@@ -128,7 +131,7 @@ function goSubjects(){
  location.href="/d-study-app/subjects/";
 }
 function navigate(tab,push=true){
- if(!["progress","summary","quiz","flashcards","notes","history","prompt","settings"].includes(tab))tab="progress";
+ if(!["progress","summary","quiz","mock","flashcards","notes","history","prompt","settings"].includes(tab))tab="progress";
  currentTab=tab;
  if(push)history.pushState({dStudy:true,subject:SUB},"",BASE+tab+"/");
  document.querySelectorAll(".final-nav a[data-f-tab]").forEach(a=>{
@@ -141,6 +144,7 @@ function navigate(tab,push=true){
  if(tab==="history")renderHistory();
  if(tab==="notes")renderNotes();
  if(tab==="quiz")renderQuiz();
+ if(tab==="mock"&&mock)mock.render();
  if(tab==="settings")renderSettings();
  if(tab==="prompt")renderPrompt();
  if(tab==="flashcards")renderBlankFlashcards();
@@ -184,6 +188,9 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
  '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
  '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📝 Final Exam Mock · 30 Questions</h3>'+
+ '<p>Reconstructed from 17 screenshots of the original Google Form. Three short sets of 10, including redrawable Aggregate Expenditure graphs, original A–E choices where applicable, topic hints and confidence scoring. Practice answer key is inferred, not official.</p>'+
+ '<div class="final-actions"><button class="final-primary" data-final-go="mock">Practice Final Mock →</button></div></div>'+
  '<div class="final-card" style="margin-top:14px"><h3>Coming later</h3>'+
  '<p>Lectures 6 onward will have separate content and quiz attempts, with the same learning-score rules. Flashcards remain empty as requested.</p></div>';
 }
@@ -818,7 +825,7 @@ function exportData(){
     quizDrafts[mode+"Parts"][p.id]=raw;
   }
  }
- const out={app:"D Study App",subjectId:SUB,version:2,profileId:user.id,exportedAt:new Date().toISOString(),state,quizDrafts};
+ const out={app:"D Study App",subjectId:SUB,version:3,profileId:user.id,exportedAt:new Date().toISOString(),state,quizDrafts,...(mock?mock.exportBundle():{})};
  const blob=new Blob([JSON.stringify(out,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");
  link.href=url;link.download="d-study-ec214-final-"+user.username+"-backup.json";link.click();
  setTimeout(()=>URL.revokeObjectURL(url),1500);
@@ -830,6 +837,9 @@ function importData(e){
   const x=parse(r.result);
   if(!x||x.subjectId!==SUB||!x.state||x.state.subjectId!==SUB||x.profileId!==user.id||x.state.profileId!==user.id){
    alert("Import blocked. This file is not an EC214 Final backup for this local profile.");return;
+  }
+  if(mock&&!mock.validBundle(x.mockState,x.mockDrafts)){
+   alert("Import blocked: mock backup contains data from another subject, profile, or exam.");return;
   }
   if(!confirm("Replace this profile’s EC214 Final records with this backup? Other subjects are not affected."))return;
   const drafts=[];
@@ -852,6 +862,7 @@ function importData(e){
   }
   state=x.state;save();
   for(const [key,value] of drafts)storePut(key,value);
+  if(mock)mock.importBundle(x.mockState,x.mockDrafts);
   const choice=state.quizSelection||{};
   quizMode=qsets[choice.mode]?choice.mode:"reviewing";
   quizPart=validPart(quizMode,choice[quizMode])?choice[quizMode]:"p1";
@@ -862,7 +873,19 @@ function importData(e){
  r.readAsText(file);e.target.value="";
 }
 
-function renderAll(){renderProgress();renderBlankFlashcards();renderNotes();renderHistory();renderSettings();renderPrompt();renderQuiz()}
+function openMockSummary(topicId){
+ if(!BOOK.sections.some(section=>section.id===topicId))return;
+ if(mock)mock.saveDraft();
+ navigate("summary");
+ history.replaceState({dStudy:true,subject:SUB},"",BASE+"summary/#final-section-"+encodeURIComponent(topicId));
+ const el=$("final-section-"+topicId);
+ if(el){
+  document.querySelectorAll(".final-search-target").forEach(x=>x.classList.remove("final-search-target"));
+  el.classList.add("final-search-target");
+  el.scrollIntoView({block:"start",behavior:"smooth"});
+ }
+}
+function renderAll(){renderProgress();renderBlankFlashcards();renderNotes();renderHistory();renderSettings();renderPrompt();renderQuiz();if(mock)mock.render()}
 function clickEvents(){
  document.addEventListener("click",function(e){
   const tab=e.target.closest("a[data-f-tab]");
