@@ -10,7 +10,7 @@ function ensure(){
   card=document.createElement("article");
   card.className="subject-card live";card.id="subjectEcFinalCard";card.dataset.subject=SUBJECT;
   card.innerHTML='<span class="subject-state" id="finalSubjectState">Locked</span>'+
-  '<strong>EC214 Final Exams</strong><span>Introductory Macroeconomics · Final</span><small>Lecture 5 AD–AS • Search, confidence points, quiz history • More lectures coming</small>'+
+  '<strong>EC214 Final Exams</strong><span>Introductory Macroeconomics · Final</span><small>Lecture 5 AD–AS + 30-question screenshot Mock • Study in short parts</small>'+
   '<div class="subject-card-actions"><button id="finalSubjectOpenBtn" type="button">Unlock Final Exams</button><button type="button" id="finalSubjectPreviewBtn" class="secondary">Preview</button></div>';
   const coming=grid.querySelector(".subject-card.coming");if(coming)grid.insertBefore(card,coming);else grid.appendChild(card);
   document.getElementById("finalSubjectOpenBtn").onclick=()=>location.assign(URL);
@@ -32,7 +32,7 @@ function preview(){
  const old=document.getElementById("subjectUnlockPanel");if(old)old.hidden=true;
  p.hidden=false;if(title)title.textContent="EC214 Final Exams Preview";
  body.innerHTML='<div class="cn-hero"><div><div class="eyebrow">EC214 FINAL · 2026–2</div><strong>Read → Review → Master.</strong>'+
- '<p>New isolated final-exam workspace with Lecture 5 Summary search, separate Reviewing and Mastering quizzes, confidence-weighted points, attempt counts, Mistake Log, notes, history and backups. Flashcards intentionally empty; later lectures will be added.</p>'+
+ '<p>New isolated final-exam workspace with Lecture 5 Summary search, separate Reviewing and Mastering quizzes, confidence-weighted points, attempt counts, Mistake Log, notes, history and backups. New 30-question Final Mock in 3 sets of 10 includes the original AE diagram; the inferred key is labeled. Flashcards intentionally empty; later lectures will be added.</p>'+
  '<button type="button" id="finalPreviewOpen">Open EC214 Final</button></div><div class="cn-icon">📈</div></div>';
  document.getElementById("finalPreviewOpen").onclick=()=>location.assign(URL);
  p.scrollIntoView({block:"start",behavior:"smooth"});
