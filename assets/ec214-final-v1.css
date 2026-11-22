@@ -452,3 +452,14 @@ body.dark #f-mock .final-qnum.noted::after{background:#ae9aff}
  #f-mock .final-parts-menu>summary span{display:block;margin-top:4px}
  #f-mock .final-mock-question .final-summary-topic-link{flex:1 1 100%;text-align:center}
 }
+
+/* v14.5 professor lecture schedule support in existing Lecture 5 quizzes */
+#f-quiz .final-l5-table{margin:16px 0 20px;overflow-x:auto;border:1px solid var(--final-border);border-radius:12px;padding:12px 15px;background:var(--card)}
+#f-quiz .final-l5-table .final-table{min-width:380px;width:100%;font-size:.95em;margin:9px 0}
+#f-quiz .final-l5-table .final-table td,#f-quiz .final-l5-table .final-table th{padding:11px 13px;line-height:1.5}
+#f-quiz .final-l5-graph{margin:13px 0 18px;border:1px dashed var(--final-border);border-radius:13px;padding:12px 15px;background:var(--card)}
+#f-quiz .final-l5-graph>summary{cursor:pointer;color:var(--final-accent);font-size:.94em;line-height:1.5;font-weight:750}
+#f-quiz .final-l5-graph .final-chart{max-width:620px;overflow:hidden;margin:13px auto 4px}
+#f-quiz .final-l5-graph .final-chart svg{width:100%;height:auto}
+#f-quiz .final-l5-graph .final-chart figcaption{font-size:.86em;line-height:1.6}
+@media(max-width:530px){#f-quiz .final-l5-table{padding:10px 9px}#f-quiz .final-l5-graph{padding:10px 11px}}
