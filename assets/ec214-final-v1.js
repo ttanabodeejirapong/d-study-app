@@ -480,6 +480,34 @@ function renderQuizSearchResults(){
  });
 }
 
+
+function quizResultReview(bank){
+ const d=currentDraft, r=d&&d.lastResult;
+ if(!d||!d.submitted||!r)return "";
+ const wrong=bank.filter(q=>d.answers[q.id]!==q.ans);
+ const cards=bank.map((q,i)=>({q,i,given:d.answers[q.id],confidence:d.confidence[q.id]||"confident",flagged:!!d.flags[q.id]}))
+  .filter(x=>x.given!==x.q.ans||x.confidence!=="confident"||x.flagged);
+ const getAnswer=(x,idx)=>{
+  if(!Number.isInteger(idx)||!x.q.opts[idx])return "Unanswered";
+  const order=d.optionOrders&&d.optionOrders[x.q.id]||[0,1,2,3];
+  const pos=order.indexOf(idx);
+  return (pos<0?"":String.fromCharCode(65+pos)+". ")+x.q.opts[idx];
+ };
+ const all=bank.map((q,i)=>'<button type="button" data-result-index="'+i+'" class="final-result-answer '+(d.answers[q.id]===q.ans?"is-correct":"is-wrong")+'">Q'+(i+1)+' '+(d.answers[q.id]===q.ans?"✓":"✗")+'</button>').join("");
+ const details=cards.map(x=>
+  '<article class="final-result-review-item"><div class="final-result-review-head"><b>Question '+(x.i+1)+' · '+(x.given!==x.q.ans?"Wrong":x.confidence==="guessed"?"Guessed":x.confidence==="unsure"?"Not sure":"Flagged")+'</b><button type="button" class="final-action" data-result-index="'+x.i+'">Open question</button></div>'+
+  '<p>'+esc(x.q.q)+'</p><p><b>Your answer:</b> '+esc(getAnswer(x,x.given))+'</p>'+
+  '<p><b>Correct answer:</b> '+esc(getAnswer(x,x.q.ans))+'</p>'+
+  '<p>'+esc(x.q.why)+'</p><small>'+esc(x.q.ref)+'</small></article>').join("");
+ return '<section id="finalQuizResultSummary" class="final-card final-quiz-result-summary" role="region" aria-label="Quiz results" tabindex="-1">'+
+ '<h3>Quiz results · '+partLabel(quizMode,quizPart)+'</h3>'+
+ '<p>Final marks: <b>'+r.score+' / '+r.total+'</b> · Wrong: <b>'+wrong.length+'</b> · Learning score: <b>'+(Number.isFinite(r.adjustedPercent)?r.adjustedPercent+"%":"Not tracked")+'</b></p>'+
+ '<p class="final-mini">✓ Correct · ✗ Incorrect. Select a question to see the answer in context.</p>'+
+ '<div class="final-result-answer-grid">'+all+'</div>'+
+ '<h4>Questions to review ('+cards.length+')</h4>'+
+ (details||'<p class="final-mini">No incorrect or uncertain answers to review.</p>')+'</section>';
+}
+
 function renderQuiz(){
  if(!state)return;
  if(!currentDraft||currentDraft.mode!==quizMode||(currentDraft.partId||"full")!==quizPart){
