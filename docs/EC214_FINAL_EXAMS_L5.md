@@ -55,3 +55,11 @@ Reviewing: 12, 10, 11, 10 questions in p1–p4; Mastering: 11, 11, 10, 10 questi
 Hints identify the professor's topic and source page but never reveal an answer. Each question links to `/d-study-app/ec214-final/summary/#final-section-<topicId>` with direct navigation and a return-to-quiz control; Notes search also switches to the correct part when opening a question. Cross-part question search remains available.
 
 Backup export/import retains the old `reviewing`/`mastering` full-draft properties when present, and appends validated `reviewingParts`/`masteringParts` objects for all four part drafts. Never write to other subjects' storage namespaces. No professor PDF or plaintext access token was uploaded publicly.
+
+## v14.5 — Per-question visual and table coverage
+
+The professor's 49-page Lecture 5 PDF remains a private Drive source. Every currently published Lecture 5 question was audited and assigned a visual type in the separate `assets/ec214-final-l5-visuals-v14.5.js` module. Of 85 total IDs, 82 display one visual: 39 theme-colored conceptual SVG graphs, 17 semantic data tables, 18 study-process flows, 8 formula panels. R004/R043/M038 were explicitly audited and left text-only because a diagram would add no meaningful learning value.
+
+The professor AS and AD schedules, numerical AD–AS equilibrium, full output-gap example, money-wage/price example and GDP spending components are represented as readable tabular/formula inputs. The graph for an unseen shock is deliberately neutral (two alternatives), without drawing the correct answer. Every SVG has an accessible description and caption; tables have column headers and horizontal scroll on narrow screens. Original professor slide images/PDF are not copied to public GitHub.
+
+When adding a future lecture's quiz: review all questions against the original approved source, explicitly classify each question as graph/table/formula/flow/none, validate coverage, and test that question IDs, answer options, confidence scoring, four-part progress, and quiz history remain intact. No source text, quiz IDs or academic data formats changed for v14.5.
