@@ -518,7 +518,14 @@ function renderQuiz(){
  // All 85 L5 questions were audited against the lecture. Visuals are
  // rendered only when useful and never alter answer IDs or grading.
  const renderVisual=window.D_STUDY_FINAL_L5_RENDER_VISUAL;
- const questionVisual=typeof renderVisual==="function"?renderVisual(q.id):"";
+ let questionVisual="";
+ try{questionVisual=typeof renderVisual==="function"?renderVisual(q.id):""}catch(e){console.error("Lecture 5 quiz visual failed",q.id,e)}
+ if(!questionVisual&&q.id==="l5-m-017"){
+  // Source-grounded fallback for slide 22 if a cached browser misses the visual module.
+  questionVisual='<figure class="final-question-visual final-v-table"><div class="final-visual-table-scroll"><table class="final-visual-table"><thead><tr><th>Price level (P)</th><th>AD: Real GDP demanded ($T)</th></tr></thead><tbody>'+
+   [[130,12],[120,12.5],[110,13],[100,13.5],[90,14]].map(row=>'<tr><td>'+row[0]+'</td><td>'+row[1]+'</td></tr>').join("")+
+   '</tbody></table></div><figcaption>Slide 22 · Aggregate-demand schedule (professor PDF p. 26).</figcaption></figure>';
+ }
  const submitted=!!currentDraft.submitted,confidence=currentDraft.confidence[q.id]||"confident";
  const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
  const flagged=bank.filter(x=>currentDraft.flags[x.id]).length;
