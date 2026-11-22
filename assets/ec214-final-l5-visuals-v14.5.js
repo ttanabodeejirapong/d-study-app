@@ -439,7 +439,7 @@ function render(id){
  if(spec.kind==="graph"){
   const captions={
    axes:"Identify the axes on the professor's AD–AS framework. Labels intentionally withheld for this axis-identification question.",
-   equilibrium:"AD and short-run AS intersect in the macroeconomic model (conceptual, not to scale).",
+   equilibrium:"Use the plotted AD and SRAS curves to identify the equilibrium yourself (conceptual, not to scale).",
    sras:"Short-run aggregate supply: compare movements along one curve with changes in the curve itself.",
    ad:"Aggregate demand: consider price level and quantity of real GDP demanded.",
    potential:"Short-run AS compared with the vertical potential-output reference line Yᶠ.",
