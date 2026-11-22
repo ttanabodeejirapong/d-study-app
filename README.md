@@ -25,6 +25,18 @@ Before making changes, read `AGENTS.md`.
 - Original source PDF is stored in the user's private Google Drive **Chinese — Private Sources**; source scans are not committed to this public repository.
 - No academic-storage keys, quiz records, notes, EC214/TU101 engines, or previous flashcard state schemas are modified.
 
+## EC214 Final Exams (v14.5 — 30-question Screenshot Mock)
+
+- New **Final Mock** navigation tab and direct route `/ec214-final/mock/`, separate from all Lecture 5 Reviewing/Mastering quiz drafts and history.
+- **30 questions faithfully transcribed** from 17 user-supplied Google Forms screenshots, in the form's original **3 sets of 10**; preserves the original four/five answer-choice counts, ordering and question text, while adding original explanations and an **inferred** practice key because screenshots do not show a marked official answer key.
+- Q4 and Q7 reproduce the supplied **Keynesian Aggregate Expenditure 45° graph**, AE₀/AE₁ and Y₁/Y₂/Y₃, as responsive, accessible SVG (not a published screenshot file). Q6, Q8, Q11 and Q18 show neutral source-number tables.
+- Same D Study behavior: one question at a time, subject-theme styling, 3-part focus cards, notes with purple question-number dots, Not sure/Guessed confidence-weighted points, flags, topic hints, optional searching, autosaved per-part drafts, raw/learning score, history and mistake explanations, and direct related Lecture 5 Summary links where that topic actually exists.
+- Source screenshots and private mock material remain in the owner's connected **private Drive** folder, NOT public GitHub. Public only contains the reconstructed questions and original in-app diagram.
+- Mock academic storage has its **own** validated keys `d-study-ec214-final-mock-state::<profileId>` and `d-study-ec214-final-mock-draft::<profileId>::v1::<partId>`; the original EC214 Final lecture L5 state and all other subjects remain untouched.
+- EC214 Final backup/export/import includes independently validated mock state and drafts when present; importing legacy backups without mock records does not erase newer mock work.
+- Detailed unprovided future-lecture summaries are **not invented**. Hints show the topic without giving an answer; Summary links only point to real existing Lecture 5 sections.
+- The Google Forms source shows questions but not answers: the app prominently states the key is inferred and not officially graded.
+
 ## EC214 Final Exams (v14.4 — Four short quiz parts and lecture topic links)
 
 - ADHD-friendly shorter quiz sessions: the 43 Reviewing questions are split into **4 parts (12 / 10 / 11 / 10)** and the 42 Mastering questions into **4 parts (11 / 11 / 10 / 10)**. All existing lecture questions, stable IDs, correct answers and explanations are unchanged.
