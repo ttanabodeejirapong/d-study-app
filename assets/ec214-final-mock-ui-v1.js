@@ -131,7 +131,10 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
  }
  function render(){
   const root=$("finalMock");if(!root)return;
-  if(!currentDraft||currentDraft.partId!==currentPart)currentDraft=readDraft(currentPart);
+  if(!currentDraft||currentDraft.partId!==currentPart){
+   currentDraft=readDraft(currentPart);
+   index=Number(currentDraft.index)||0; // Resume the exact saved question after refresh.
+  }
   const bank=byPart(currentPart);
   index=clamp(Number(index)||0,0,bank.length-1);
   const q=bank[index],submitted=currentDraft.submitted,answer=currentDraft.answers[q.id],confidence=currentDraft.confidence[q.id]||"confident";
