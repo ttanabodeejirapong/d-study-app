@@ -554,7 +554,7 @@ body.dark #f-mock .final-qnum.noted::after{background:#ae9aff}
 #f-quiz .final-quiz-result-summary h3{margin:8px 0 12px;font-size:clamp(1.35rem,3vw,1.8rem)}
 #f-quiz .final-quiz-result-summary h4{margin:22px 0 10px}
 #f-quiz .final-result-answer-grid{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 20px}
-#f-quiz .final-result-answer{cursor:pointer;min-width:63px;min-height:42px;padding:9px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-weight:700}
+#f-quiz .final-result-answer{cursor:pointer;min-width:63px;min-height:42px;padding:9px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700}
 #f-quiz .final-result-answer.is-correct{border-color:#64a58c}
 #f-quiz .final-result-answer.is-wrong{border-color:#d7838e;background:color-mix(in srgb,#d7838e 9%,var(--card))}
 #f-quiz .final-result-review-item{border:1px solid var(--line);border-radius:13px;padding:15px;margin-top:12px;background:var(--card);overflow-wrap:anywhere}
