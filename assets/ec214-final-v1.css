@@ -563,3 +563,17 @@ body.dark #f-mock .final-qnum.noted::after{background:#ae9aff}
 #f-quiz .final-result-review-item small{color:var(--muted)}
 #f-quiz #finalQuizQuestion{scroll-margin-top:15px}
 @media(max-width:600px){#f-quiz .final-quiz-result-summary{padding:15px}#f-quiz .final-result-answer{min-width:54px}}
+
+/* Retake actions for lecture quizzes v14.10: visible immediately with the score. */
+#f-quiz .final-quiz-retake-actions{
+ display:flex;flex-wrap:wrap;align-items:center;gap:12px;
+ padding:12px 0 16px;margin:8px 0 14px;border-bottom:1px solid var(--final-border);
+}
+#f-quiz .final-quiz-retake-actions .final-primary{font-size:1em;min-height:46px}
+#f-quiz .final-quiz-retake-actions .final-mini{flex:1 1 190px}
+#f-quiz .final-quiz-retake-actions .final-primary:focus-visible{
+ outline:3px solid var(--final-accent);outline-offset:3px;
+}
+@media(max-width:600px){
+ #f-quiz .final-quiz-retake-actions .final-primary{width:100%}
+}

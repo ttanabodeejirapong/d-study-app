@@ -501,7 +501,9 @@ function quizResultReview(bank){
   '<p><b>Correct answer:</b> '+esc(getAnswer(x,x.q.ans))+'</p>'+
   '<p>'+esc(x.q.why)+'</p><small>'+esc(x.q.ref)+'</small></article>').join("");
  return '<section id="finalQuizResultSummary" class="final-card final-quiz-result-summary" role="region" aria-label="Quiz results" tabindex="-1">'+
- '<h3>Quiz results · '+partLabel(quizMode,quizPart)+'</h3>'+
+ '<h3>Quiz results · '+partLabel(quizMode,quizPart)+'</h3>'+ 
+ '<div class="final-quiz-retake-actions"><button type="button" class="final-primary" data-final-retake="1">↻ Retake '+partLabel(quizMode,quizPart)+' now</button>'+ 
+ '<span class="final-mini">Start a new attempt whenever you like. Previous completed marks, mistake reviews and personal notes stay saved.</span></div>'+
  '<p>Final marks: <b>'+r.score+' / '+r.total+'</b> · Wrong: <b>'+wrong.length+'</b> · Learning score: <b>'+(Number.isFinite(r.adjustedPercent)?r.adjustedPercent+"%":"Not tracked")+'</b></p>'+
  '<p class="final-mini">✓ Correct · ✗ Incorrect. Select a question to see the answer in context.</p>'+
  '<div class="final-result-answer-grid">'+all+'</div>'+
@@ -635,7 +637,7 @@ function renderQuiz(){
   '<textarea id="finalQNote" class="final-input" rows="2" placeholder="Why I chose this, what confused me, professor wording…"></textarea></div>'+
   '<div class="final-actions"><button class="final-primary" id="finalSubmit" '+(submitted||cannotSubmit?"disabled":"")+'>'+
   (submitted?"Already submitted":cannotSubmit?"Answer "+(bank.length-answered)+" more to submit":"Submit "+(quizMode==="reviewing"?"Reviewing":"Mastering"))+'</button>'+
-  '<button class="final-action" id="finalResetQuiz">New attempt</button></div>';
+  '<button type="button" class="final-action" id="finalResetQuiz">'+(submitted?'↻ Retake this part':'Restart this part')+'</button></div>';
  const note=$("finalQNote");note.value=state.quizQuestionNotes[q.id]||"";
  // Mirror the original EC214 purple note dot on the numbered question grid,
  // updating in place while the student writes (no re-render / cursor jump).
@@ -684,6 +686,7 @@ function renderQuiz(){
  $("finalNext").onclick=()=>{currentIndex=Math.min(bank.length-1,currentIndex+1);saveDraft();renderQuiz()};
  $("finalSubmit").onclick=submitQuiz;
  $("finalResetQuiz").onclick=resetQuiz;
+ root.querySelectorAll("[data-final-retake]").forEach(btn=>btn.onclick=resetQuiz);
 }
 
 function submitQuiz(){
@@ -753,8 +756,23 @@ function submitQuiz(){
 }
 
 function resetQuiz(){
- if(!confirm("Start a new "+quizMode+" "+partLabel(quizMode,quizPart)+" attempt? Completed history remains saved. Only this part\u0027s current draft will be replaced."))return;
- currentDraft=defaultDraft(quizMode,quizPart);currentIndex=0;saveDraft();renderQuiz();
+ // A finished attempt is archived in History. Retaking must be a single click,
+ // not a browser confirmation hidden at the very bottom of the old question.
+ if(!currentDraft)return;
+ const unfinished=(!currentDraft.submitted&&Object.keys(currentDraft.answers||{}).length>0);
+ if(unfinished&&!confirm("Restart "+quizMode+" "+partLabel(quizMode,quizPart)+"? Your unfinished answers for this part will be cleared. Completed attempts in History and saved notes remain unchanged."))return;
+ currentDraft=defaultDraft(quizMode,quizPart);
+ currentIndex=0;
+ submittedView=false;
+ saveDraft();
+ renderQuiz();
+ // Returning to question 1 makes it obvious the new attempt is ready.
+ const question=$("finalQuizQuestion");
+ if(question){
+  const reveal=()=>{question.scrollIntoView({block:"start",behavior:"smooth"});question.focus({preventScroll:true})};
+  if(typeof requestAnimationFrame==="function")requestAnimationFrame(reveal);else reveal();
+ }
+ setStatus("New "+partLabel(quizMode,quizPart)+" attempt ready — previous scores are kept in History.");
 }
 function historyReviewItems(h){
  if(Array.isArray(h.reviewItems))return h.reviewItems;
