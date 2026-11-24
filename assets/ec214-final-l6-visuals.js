@@ -9,8 +9,17 @@ const point=(x,y,label)=>'<circle cx="'+x+'" cy="'+y+'" r="4.5" fill="currentCol
 const axes=(x,y)=>path("M60 22 V225 H465","currentColor",false,1.7)+txt(9,16,y)+txt(460,253,x,"currentColor","end");
 const svg=(content,caption)=>'<svg viewBox="0 0 480 264" role="img" aria-label="'+esc(caption)+'" xmlns="http://www.w3.org/2000/svg">'+content+'</svg>';
 const fig=(content,caption)=>'<figure class="final-chart final-question-visual">'+content+'<figcaption>'+esc(caption)+'</figcaption></figure>';
-const ad=(offset,label)=>path("M100 "+(66+offset)+" L400 "+(206+offset),blue)+txt(405,206+offset,label,blue);
-const as=(offset,label)=>path("M100 "+(206+offset)+" L400 "+(66+offset),green)+txt(405,66+offset,label,green);
+// Clip curve endpoints to the plotting area without changing any intersections.
+const curve=(offset,label,rising)=>{
+ const y=x=>(rising?206-(x-100)*140/300:66+(x-100)*140/300)+offset;
+ let a=100,b=400;
+ while((y(a)<33||y(a)>220)&&a<b)a++;
+ while((y(b)<33||y(b)>220)&&b>a)b--;
+ const color=rising?green:blue;
+ return path("M"+a+" "+y(a)+" L"+b+" "+y(b),color)+txt(Math.min(438,b+6),Math.min(219,y(b)+4),label,color);
+};
+const ad=(offset,label)=>curve(offset,label,false);
+const as=(offset,label)=>curve(offset,label,true);
 function market(kind,caption){
  let c=axes("Real GDP (Y)","Price level (P)");
  if(kind==="longrun"){c+=path("M250 29 V225",green)+txt(258,34,"LRAS",green)+ad(0,"AD₀")+ad(-54,"AD₁")+point(250,136,"E₀")+point(250,82,"E₁")+txt(250,244,"Yᶠ","currentColor","middle");}
@@ -35,11 +44,11 @@ function phillips(kind){
  if(long){c+=path("M255 30 V225",purple,false,3)+point(255,155,"E₀")+point(255,69,"E₁")+txt(265,33,"LRPC",purple)+txt(255,244,"uₙ",purple,"middle");}
  else {
   c+=path("M115 40 C150 105 198 139 250 157 C315 179 373 198 435 203",blue,false,4);
-  c+=point(250,157,"A")+point(177,121,"B")+point(340,188,"C");
+  c+=point(250,157,"A")+point(177,117,"B")+point(340,188,"C");
   if(!hide)c+=path("M60 157 H250 V225","currentColor",true,1.2)+txt(54,161,"10", "currentColor","end")+txt(250,244,"6","currentColor","middle");
   c+=txt(425,194,"SRPC",blue,"end");
  }
- return fig(svg(c,"Phillips curve illustration"),"Conceptual redraw of Lecture 6 PDF "+(long?"p. 21.":"p. 19; A corresponds to about 6% unemployment and 10% inflation.")+(hide?" Axis labels withheld.":""));
+ return fig(svg(c,"Phillips curve illustration"),hide?"Conceptual redraw. Axis labels intentionally withheld.":"Conceptual redraw of Lecture 6 PDF "+(long?"p. 21.":"p. 19; A corresponds to about 6% unemployment and 10% inflation."));
 }
 const table=(headers,rows,caption)=>fig('<div class="final-visual-table-scroll"><table class="final-table final-visual-table"><thead><tr>'+headers.map(x=>'<th scope="col">'+esc(x)+'</th>').join("")+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+esc(x)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>',caption);
 function render(kind){
