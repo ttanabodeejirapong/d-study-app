@@ -191,8 +191,9 @@ function renderProgress(){
  '<div class="final-card" style="margin-top:14px"><h3>📝 Final Exam Mock · 30 Questions</h3>'+
  '<p>Reconstructed from 17 private screenshots of the original Google Form. Three short sets of 10, with the Aggregate Expenditure graph, four or five original answer choices, topic hints, confidence scoring and saved progress. The practice answer key is inferred, not official.</p>'+
  '<div class="final-actions"><button class="final-primary" data-final-go="mock">Practice Final Mock →</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Coming later</h3>'+
- '<p>Lectures 6 onward will have separate content and quiz attempts, with the same learning-score rules. Flashcards remain empty as requested.</p></div>';
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 6 · Business Cycle</h3>'+
+ '<p>8 summary sections, 30 Reviewing and 30 Mastering questions, with AD–AS and Phillips curve visuals. Lecture 6 saves its own progress and quiz attempts, keeping Lecture 5 data intact.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l6/summary/">Read Lecture 6 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l6/quiz/">Lecture 6 Quiz</a></div></div>';
 }
 
 function buildOutline(){
