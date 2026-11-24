@@ -150,7 +150,7 @@ const SPEC={
   },
   "l5-r-035": {
     "kind": "graph",
-    "variant": "gap"
+    "variant": "inflation-gap"
   },
   "l5-r-036": {
     "kind": "table",
@@ -314,11 +314,11 @@ const SPEC={
   },
   "l5-m-032": {
     "kind": "graph",
-    "variant": "gap"
+    "variant": "gap-benchmark"
   },
   "l5-m-042": {
     "kind": "graph",
-    "variant": "gap"
+    "variant": "initial-gap"
   },
   "l5-m-033": {
     "kind": "flow",
@@ -366,6 +366,19 @@ function graph(variant,caption){
   if(label)lines+='<text x="'+x+'" y="'+y+'" fill="'+color+'" font-size="15" font-weight="700">'+escape(label)+'</text>';
  };
  const potential=()=>line('M302 216 L302 30','var(--final-v-potential)','Yᶠ',311,32,true,.95);
+ const gapGraph=(potentialX)=>{
+  // Locate the intersection of the actual AD and SRAS segments, not the center of the drawing.
+  const x=124+132/(127/318+139/320),y=67+(x-124)*127/318;
+  ad();as();
+  line('M'+potentialX+' 216 V30','var(--final-v-potential)','Yᶠ',potentialX+8,29,true,.95);
+  lines+='<path d="M65 '+y+' H'+x+' V216" stroke="var(--final-v-axis)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>'+
+   '<circle cx="'+x+'" cy="'+y+'" r="5" fill="var(--final-v-dot)"/>'+
+   '<text x="'+(x-10)+'" y="'+(y-11)+'" text-anchor="end" fill="var(--final-v-axis)" font-size="14" font-weight="700">E</text>'+
+   '<text x="'+x+'" y="233" text-anchor="middle" fill="var(--final-v-axis)" font-size="15" font-weight="700">Yₑ</text>'+
+   '<text x="'+potentialX+'" y="233" text-anchor="middle" fill="var(--final-v-potential)" font-size="15" font-weight="700">Yᶠ</text>'+
+   '<path d="M'+Math.min(x,potentialX)+' 243 H'+Math.max(x,potentialX)+'" stroke="var(--final-v-axis)" stroke-width="1.4" fill="none"/>'+
+   '<text x="'+((x+potentialX)/2)+'" y="255" text-anchor="middle" fill="var(--final-v-axis)" font-size="12">Output gap</text>';
+ };
  const ad=()=>line('M124 67 L442 194','var(--final-v-ad)','AD',447,195);
  const as=()=>line('M124 199 L444 60','var(--final-v-as)','SRAS',444,52);
  let axisLabels=variant==="axes"?"Vertical axis (?)":"Price level (P)";
@@ -378,8 +391,8 @@ function graph(variant,caption){
   case "potential":as();potential();break;
   case "as-shock":ad();as();line('M84 199 L404 60','var(--final-v-ghost)','?',404,55,true,.62);line('M164 199 L484 60','var(--final-v-ghost)','?',480,59,true,.62);break;
   case "ad-shock":as();ad();line('M84 67 L402 194','var(--final-v-ghost)','?',402,198,true,.62);line('M164 67 L482 194','var(--final-v-ghost)','?',476,193,true,.62);break;
-  case "recession-gap":ad();as();potential();lines+='<text x="278" y="229" fill="var(--final-v-axis)" font-size="13">Yₑ ? Yᶠ</text>';break;
-  case "gap":potential();ad();as();lines+='<text x="248" y="231" fill="var(--final-v-axis)" font-size="14">Compare Yₑ and Yᶠ</text>';break;
+  case "recession-gap":case "gap":case "gap-benchmark":case "initial-gap":gapGraph(370);break;
+  case "inflation-gap":gapGraph(195);break;
   case "supply-ad":ad();as();line('M84 199 L404 60','var(--final-v-ghost)','?',404,55,true,.62);break;
   case "trend":
    line('M105 183 C195 165 272 125 447 62','var(--final-v-potential)','Potential',394,48,true,.88);
@@ -387,10 +400,10 @@ function graph(variant,caption){
    break;
   default:as();ad();
  }
- const svg='<svg viewBox="0 0 540 260" role="img" aria-label="'+escape(caption)+'" xmlns="http://www.w3.org/2000/svg">'+
+ const svg='<svg viewBox="0 0 540 278" role="img" aria-label="'+escape(caption)+'" xmlns="http://www.w3.org/2000/svg">'+
   '<g aria-hidden="true"><path d="M65 24 V216 H513" '+stroke+'/>'+
   '<text x="12" y="15" font-size="13" fill="var(--final-v-axis)">'+escape(axisLabels)+'</text>'+
-  '<text x="386" y="252" font-size="13" fill="var(--final-v-axis)">'+escape(horizontal)+'</text>'+
+  '<text x="386" y="271" font-size="13" fill="var(--final-v-axis)">'+escape(horizontal)+'</text>'+
   '<path d="M65 76 H502 M65 142 H502" stroke="var(--final-v-grid)" stroke-width="1" stroke-dasharray="3 7"/>'+
   lines+'</g></svg>';
  return figure("graph",svg,caption||"Conceptual diagram (not to scale). Decide what moves or shifts; dashed alternatives are not answers.");
@@ -445,7 +458,10 @@ function render(id){
    potential:"Short-run AS compared with the vertical potential-output reference line Yᶠ.",
    "as-shock":"Analyze the supplied change in production inputs or costs. Dotted alternatives mark possible AS shifts, not the correct answer.",
    "ad-shock":"Analyze the supplied expenditure shock. Dotted alternatives mark possible AD shifts, not the correct answer.",
-   gap:"Compare equilibrium output Yₑ against potential output Yᶠ to classify the gap.",
+   gap:"Compare equilibrium output Yₑ against the vertical reference Yᶠ.",
+   "inflation-gap":"Compare the labeled output coordinates Yₑ and Yᶠ.",
+   "gap-benchmark":"E is the AD–SRAS intersection; Yₑ and Yᶠ are different coordinates in this example. They coincide only at full-employment equilibrium.",
+   "initial-gap":"Initial equilibrium before the policy change; the final equilibrium depends on the size of the AD shift.",
    "recession-gap":"Compare actual output to potential output; interpret the labor market and possible adjustment.",
    "supply-ad":"Compare an AD movement with an AS shift, keeping the given shock in mind.",
    trend:"Conceptual actual GDP cycle and potential GDP trend. The assumed numeric growth rate is deliberately not shown."
