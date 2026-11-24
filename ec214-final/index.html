@@ -478,10 +478,10 @@ function graph(variant,caption){
    break;
   default:as();ad();
  }
- const svg='<svg viewBox="0 0 540 260" role="img" aria-label="'+escape(caption)+'" xmlns="http://www.w3.org/2000/svg">'+
+ const svg='<svg viewBox="0 0 540 278" role="img" aria-label="'+escape(caption)+'" xmlns="http://www.w3.org/2000/svg">'+
   '<g aria-hidden="true"><path d="M65 24 V216 H513" '+stroke+'/>'+
   '<text x="12" y="15" font-size="13" fill="var(--final-v-axis)">'+escape(axisLabels)+'</text>'+
-  '<text x="386" y="252" font-size="13" fill="var(--final-v-axis)">'+escape(horizontal)+'</text>'+
+  '<text x="386" y="271" font-size="13" fill="var(--final-v-axis)">'+escape(horizontal)+'</text>'+
   '<path d="M65 76 H502 M65 142 H502" stroke="var(--final-v-grid)" stroke-width="1" stroke-dasharray="3 7"/>'+
   lines+'</g></svg>';
  return figure("graph",svg,caption||"Conceptual diagram (not to scale). Decide what moves or shifts; dashed alternatives are not answers.");
