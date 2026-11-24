@@ -1050,7 +1050,7 @@ window.D_STUDY_FINAL_L5_QUIZZES={
         "Government debt"
       ],
       "ans": 2,
-      "why": "Compare equilibrium real GDP from AD–AS against Yᶠ.",
+      "why": "Potential GDP (Yᶠ) is the full-employment benchmark, not the AD–SRAS intersection. In the diagram equilibrium output Yₑ lies left of Yᶠ, illustrating a recessionary gap. At full-employment equilibrium Yₑ = Yᶠ; the benchmark does not have to be in the middle of the graph.",
       "ref": "PDF 38–41",
       "id": "l5-m-032"
     },
