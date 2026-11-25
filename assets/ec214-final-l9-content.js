@@ -1,0 +1,1017 @@
+/* EC214 Lecture 9 Money and Inflation — professor-first summaries and original Reviewing/Mastering practice. No Final Mock modifications. */
+window.D_STUDY_FINAL_L9={
+  "id": "l9",
+  "title": "Lecture 9 · Money and Inflation",
+  "subtitle": "Professor: Asst. Prof. Dr. Winai Homsombat · EC214 · 2026-2 Afternoon",
+  "lecture": 9,
+  "sourcePages": 37,
+  "sections": [
+    {
+      "id": "l9-overview",
+      "title": "01 · Money, monetary policy and the lecture roadmap",
+      "pages": "PDF pp. 4–6",
+      "priority": "Core roadmap",
+      "fig": "roadmap",
+      "html": "<p class=\"lead\">Lecture 9 has two main goals. First, explain how <b>money demand and money supply determine the short-run nominal interest rate</b>. Second, explain how in the <b>long run</b> the quantity of money determines the price level and how money growth brings inflation.</p><p>The professor frames the policy interest rate as the monetary-policy tool. To change the interest rate, the central bank intervenes in the money market by changing the money supply.</p><div class=\"final-focus\">Keep the horizons separate: <b>short run → nominal interest rate adjusts</b>; <b>long run → price level adjusts while real GDP is at potential</b>.</div>"
+    },
+    {
+      "id": "l9-definition",
+      "title": "02 · What is money? Definition and functions",
+      "pages": "PDF pp. 8–9",
+      "priority": "Core definition",
+      "fig": "functions",
+      "html": "<p><b>Money</b> is any commodity or token generally accepted as a means of payment. It must be recognizable and divisible into small parts.</p><p>The lecture gives three functions:</p><ul><li><b>Medium of exchange</b> — generally accepted in return for goods and services.</li><li><b>Unit of account</b> — an agreed measure for stating prices.</li><li><b>Store of value</b> — can be held and exchanged later for goods and services.</li></ul>"
+    },
+    {
+      "id": "l9-m1m2",
+      "title": "03 · Official measures of money: M1 and M2",
+      "pages": "PDF pp. 10–11",
+      "priority": "High priority",
+      "fig": "m1m2",
+      "html": "<p><b>M1</b> consists of currency, traveler's checks and checkable deposits owned by individuals and businesses. The professor annotates this as money that can be used instantly and links it to the money supply in the money market.</p><p><b>M2</b> includes M1 plus savings deposits, small-time deposits, money market funds and other deposits.</p><p>The test of whether something is money is whether it is generally accepted as a means of payment. M1 passes this test. Some M2 savings deposits are also usable as payment, while some time deposits and money-market funds are not instantly convertible.</p>"
+    },
+    {
+      "id": "l9-realmoney",
+      "title": "04 · Real economy versus money economy",
+      "pages": "PDF pp. 12–13",
+      "priority": "Core distinction",
+      "fig": "real-money",
+      "html": "<p>The <b>real economy</b> focuses on production and consumption of goods and services. Real factors independent of the price level determine potential GDP and the natural unemployment rate.</p><p>The <b>money economy</b> focuses on the means of payment: currency and bank deposits. Banks create money and the central bank influences the quantity of money through money-market operations.</p><p>The professor proposes a two-step analysis: first, central-bank actions and the short-term nominal interest rate; second, long-run effects on the price level and inflation.</p>"
+    },
+    {
+      "id": "l9-md",
+      "title": "05 · Money demand and the opportunity cost of holding money",
+      "pages": "PDF pp. 15–18",
+      "priority": "Exam priority",
+      "fig": "money-demand",
+      "html": "<p>The <b>quantity of money demanded</b> is the amount households and firms choose to hold. The money-demand curve relates quantity of money demanded to the <b>nominal interest rate</b>, holding other influences fixed.</p><p>The opportunity cost of holding money is the <b>interest forgone on an alternative asset</b>. Therefore, when the nominal interest rate falls, holding money becomes less costly and quantity of money demanded rises.</p><p>The professor's schedule shows approximately: at 6% → $0.98T demanded; at 5% → $1.00T; at 4% → $1.02T.</p>"
+    },
+    {
+      "id": "l9-mdshifts",
+      "title": "06 · Movement along money demand versus shifts in money demand",
+      "pages": "PDF pp. 17–19",
+      "priority": "High priority",
+      "fig": "md-shift",
+      "html": "<p>A change in the <b>nominal interest rate</b> changes the <b>quantity of money demanded</b>, so it is a movement along the existing money-demand curve.</p><p>Other influences shift the curve. The lecture highlights three:</p><ol><li><b>Price level</b>.</li><li><b>Real GDP</b>.</li><li><b>Financial technology</b>.</li></ol><p>The professor's annotations emphasize that a higher price level means more money is needed to buy a given basket, and higher real GDP implies more transactions.</p>"
+    },
+    {
+      "id": "l9-ms",
+      "title": "07 · Money supply and short-run equilibrium",
+      "pages": "PDF pp. 20–22",
+      "priority": "Exam priority",
+      "fig": "money-market",
+      "html": "<p>On a given day, the quantity of money supplied is fixed independently of the nominal interest rate. It is determined by actions of the banking system and central bank, so the short-run money-supply curve is <b>vertical</b>.</p><p>The nominal interest rate adjusts until <b>quantity of money demanded = quantity of money supplied</b>. In the professor's example, equilibrium is at about <b>5% and $1.00T</b>.</p>"
+    },
+    {
+      "id": "l9-adjustment",
+      "title": "08 · Interest-rate adjustment through the bond market",
+      "pages": "PDF pp. 23–26",
+      "priority": "Exam priority",
+      "fig": "bond-adjust",
+      "html": "<p><b>Bond price and interest rate move in opposite directions.</b> The bond pays a specified dollar interest amount; its interest rate equals that payment divided by the bond price.</p><p>At <b>6%</b> in the professor's money-market example, money held/supplied exceeds money demanded. People use excess money to <b>buy bonds</b>; bond prices rise and the interest rate falls toward 5%.</p><p>At <b>4%</b>, money demanded exceeds money held/supplied. People <b>sell bonds</b> to obtain cash; bond prices fall and the interest rate rises toward 5%.</p>"
+    },
+    {
+      "id": "l9-centralbank",
+      "title": "09 · Changing the interest rate by changing money supply",
+      "pages": "PDF p. 27",
+      "priority": "High priority",
+      "fig": "ms-shift",
+      "html": "<p>To change the nominal interest rate, the central bank changes the quantity of money:</p><ul><li><b>Money supply increases → nominal interest rate falls.</b></li><li><b>Money supply decreases → nominal interest rate rises.</b></li></ul><p>The professor links a lower policy interest rate to a lower cost of using money, which can raise consumption and investment and therefore aggregate demand in the short run.</p>"
+    },
+    {
+      "id": "l9-longrun",
+      "title": "10 · The long-run money market and the value of money",
+      "pages": "PDF pp. 29–33",
+      "priority": "Exam priority",
+      "fig": "long-run-money",
+      "html": "<p>In the long run, the economy is at full employment / potential GDP, so real GDP is fixed for this analysis. The professor contrasts this with the short run: <b>short run → interest rate adjusts</b>; <b>long run → price level adjusts</b>.</p><p>The <b>value of money = 1/P</b>. A higher price level means a lower real value of money.</p><p>Starting from long-run equilibrium, the lecture's example increases money supply by <b>10%</b>, from $1.0T to $1.1T. The professor states that the price level rises by 10%, from 1.00 to 1.10, restoring long-run equilibrium while real GDP remains at potential.</p>"
+    },
+    {
+      "id": "l9-quantitytheory",
+      "title": "11 · Quantity theory and the equation of exchange",
+      "pages": "PDF pp. 34–36",
+      "priority": "Exam priority",
+      "fig": "quantity-theory",
+      "html": "<p>The quantity theory of money says that when real GDP equals potential GDP, an increase in the quantity of money brings an equal percentage increase in the price level, other things remaining the same.</p><p>The equation of exchange is <b>M × V = P × Y</b>, where M is the quantity of money, V velocity of circulation, P the price level and Y real GDP.</p><p>Velocity is the number of times per year the average unit of money is used to buy final goods and services. For the long-run prediction, the lecture assumes <b>Y is fixed at potential GDP</b> and <b>V is relatively stable</b>, so P is proportional to M.</p>"
+    },
+    {
+      "id": "l9-synthesis",
+      "title": "12 · Short-run versus long-run monetary transmission",
+      "pages": "PDF pp. 5, 27, 29–36",
+      "priority": "Mastering synthesis",
+      "fig": "synthesis",
+      "html": "<p>Use this sequence to integrate the lecture:</p><table class=\"final-table\"><thead><tr><th>Horizon</th><th>Initial monetary change</th><th>Main adjustment</th><th>Key outcome</th></tr></thead><tbody><tr><td>Short run</td><td>MS ↑</td><td>Nominal r ↓</td><td>C/I and AD can rise</td></tr><tr><td>Short run</td><td>MS ↓</td><td>Nominal r ↑</td><td>C/I and AD can fall</td></tr><tr><td>Long run at potential Y</td><td>Persistent/higher M</td><td>P adjusts</td><td>Money quantity determines the price level</td></tr></tbody></table><p>The existing Final Mock's monetary questions are useful style references for distinguishing short-run real effects from long-run price-level/inflation effects, but Lecture 9's professor PDF remains the content authority.</p>"
+    }
+  ]
+};
+window.D_STUDY_FINAL_L9_QUIZZES={
+  "lecture": 9,
+  "reviewing": [
+    {
+      "topic": "l9-overview",
+      "q": "Lecture 9's first learning outcome asks how money demand and money supply determine the:",
+      "opts": [
+        "Real wage",
+        "Nominal interest rate",
+        "Natural unemployment rate",
+        "Government budget"
+      ],
+      "ans": 1,
+      "why": "The first learning outcome is short-run money-market determination of the nominal interest rate.",
+      "ref": "Lecture 9 PDF p. 4",
+      "visual": "roadmap",
+      "id": "l9-r-001"
+    },
+    {
+      "topic": "l9-overview",
+      "q": "In the long run, the lecture emphasizes that the quantity of money determines the:",
+      "opts": [
+        "Price level",
+        "Natural unemployment rate",
+        "Potential GDP growth rate directly",
+        "Fiscal budget balance"
+      ],
+      "ans": 0,
+      "why": "The second learning outcome focuses on money quantity and the price level/inflation.",
+      "ref": "Lecture 9 PDF p. 4",
+      "visual": "roadmap",
+      "id": "l9-r-002"
+    },
+    {
+      "topic": "l9-definition",
+      "q": "Money is defined as something generally accepted as:",
+      "opts": [
+        "A means of payment",
+        "A government bond",
+        "A tax payment",
+        "Physical capital"
+      ],
+      "ans": 0,
+      "why": "General acceptance as payment is the core definition.",
+      "ref": "Lecture 9 PDF p. 8",
+      "visual": "functions",
+      "id": "l9-r-003"
+    },
+    {
+      "topic": "l9-definition",
+      "q": "Which is NOT one of the three functions of money listed in the lecture?",
+      "opts": [
+        "Medium of exchange",
+        "Unit of account",
+        "Store of value",
+        "Factor of production"
+      ],
+      "ans": 3,
+      "why": "The lecture lists the first three functions.",
+      "ref": "Lecture 9 PDF p. 9",
+      "visual": "functions",
+      "id": "l9-r-004"
+    },
+    {
+      "topic": "l9-definition",
+      "q": "A unit of account is:",
+      "opts": [
+        "A measure used to state prices",
+        "A bond interest payment",
+        "The opportunity cost of money",
+        "A tax rate"
+      ],
+      "ans": 0,
+      "why": "It is the agreed measure for pricing goods and services.",
+      "ref": "Lecture 9 PDF p. 9",
+      "visual": "functions",
+      "id": "l9-r-005"
+    },
+    {
+      "topic": "l9-m1m2",
+      "q": "M1 includes:",
+      "opts": [
+        "Currency and checkable deposits",
+        "Only savings deposits",
+        "Only small-time deposits",
+        "Only money-market funds"
+      ],
+      "ans": 0,
+      "why": "The lecture lists currency, travelers checks and checkable deposits in M1.",
+      "ref": "Lecture 9 PDF p. 10",
+      "visual": "m1m2",
+      "id": "l9-r-006"
+    },
+    {
+      "topic": "l9-m1m2",
+      "q": "M2 consists of:",
+      "opts": [
+        "Only currency",
+        "M1 plus savings and other near-money deposits",
+        "Only demand deposits",
+        "M1 minus checkable deposits"
+      ],
+      "ans": 1,
+      "why": "M2 is broader than M1.",
+      "ref": "Lecture 9 PDF p. 10",
+      "visual": "m1m2",
+      "id": "l9-r-007"
+    },
+    {
+      "topic": "l9-m1m2",
+      "q": "Which statement best matches the lecture?",
+      "opts": [
+        "Every component of M2 is instantly usable as payment",
+        "M1 passes the means-of-payment test",
+        "M1 excludes currency",
+        "M2 is smaller than M1"
+      ],
+      "ans": 1,
+      "why": "M1 is directly characterized as money under the payment test.",
+      "ref": "Lecture 9 PDF p. 11",
+      "visual": "m1m2",
+      "id": "l9-r-008"
+    },
+    {
+      "topic": "l9-realmoney",
+      "q": "The real economy focuses on:",
+      "opts": [
+        "Production and consumption of goods/services",
+        "Only the nominal interest rate",
+        "Only currency balances",
+        "Only bond prices"
+      ],
+      "ans": 0,
+      "why": "Real factors and real production/consumption define the real-economy side.",
+      "ref": "Lecture 9 PDF p. 12",
+      "visual": "real-money",
+      "id": "l9-r-009"
+    },
+    {
+      "topic": "l9-realmoney",
+      "q": "The money economy focuses on money as:",
+      "opts": [
+        "The means of payment",
+        "Potential GDP itself",
+        "Government purchases",
+        "A physical input"
+      ],
+      "ans": 0,
+      "why": "The slide defines the money side through currency/bank deposits used as payment.",
+      "ref": "Lecture 9 PDF p. 12",
+      "visual": "real-money",
+      "id": "l9-r-010"
+    },
+    {
+      "topic": "l9-md",
+      "q": "Quantity of money demanded means:",
+      "opts": [
+        "The amount households and firms choose to hold",
+        "The amount the government taxes",
+        "All bonds outstanding",
+        "Potential GDP"
+      ],
+      "ans": 0,
+      "why": "That is the slide definition.",
+      "ref": "Lecture 9 PDF p. 15",
+      "visual": "money-demand",
+      "id": "l9-r-011"
+    },
+    {
+      "topic": "l9-md",
+      "q": "The opportunity cost of holding money is:",
+      "opts": [
+        "Interest forgone on an alternative asset",
+        "The tax rate",
+        "The inflation rate necessarily",
+        "Government spending"
+      ],
+      "ans": 0,
+      "why": "Holding money sacrifices interest on alternative assets.",
+      "ref": "Lecture 9 PDF p. 15",
+      "visual": "money-demand",
+      "id": "l9-r-012"
+    },
+    {
+      "topic": "l9-md",
+      "q": "When the nominal interest rate falls, quantity of money demanded:",
+      "opts": [
+        "Falls",
+        "Rises",
+        "Is fixed",
+        "Becomes zero"
+      ],
+      "ans": 1,
+      "why": "Lower opportunity cost encourages more money holding.",
+      "ref": "Lecture 9 PDF pp. 16–17",
+      "visual": "money-demand",
+      "id": "l9-r-013"
+    },
+    {
+      "topic": "l9-md",
+      "q": "At a nominal interest rate of 5% in the professor's schedule, quantity of money demanded is about:",
+      "opts": [
+        "$0.98T",
+        "$1.00T",
+        "$1.02T",
+        "$5T"
+      ],
+      "ans": 1,
+      "why": "The schedule shows 5% with 1.00 trillion.",
+      "ref": "Lecture 9 PDF p. 16",
+      "visual": "md-table",
+      "id": "l9-r-014"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "A change in the nominal interest rate causes:",
+      "opts": [
+        "A shift of money demand due to price level",
+        "A movement along the money-demand curve",
+        "A shift of money supply",
+        "A change in potential GDP"
+      ],
+      "ans": 1,
+      "why": "Interest-rate changes alter quantity demanded along a given MD curve.",
+      "ref": "Lecture 9 PDF pp. 17–19",
+      "visual": "md-shift",
+      "id": "l9-r-015"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "Which is one of the three main shifters of money demand?",
+      "opts": [
+        "Price level",
+        "Government budget balance only",
+        "Potential GDP alone",
+        "Tax law"
+      ],
+      "ans": 0,
+      "why": "Price level, real GDP and financial technology are listed.",
+      "ref": "Lecture 9 PDF p. 19",
+      "visual": "md-shift",
+      "id": "l9-r-016"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "Higher real GDP tends to affect money demand because:",
+      "opts": [
+        "There are more transactions requiring money",
+        "It makes money supply vertical",
+        "It automatically lowers all prices",
+        "It eliminates financial technology"
+      ],
+      "ans": 0,
+      "why": "More economic activity raises transactions and desired money balances.",
+      "ref": "Lecture 9 PDF pp. 18–19",
+      "visual": "md-shift",
+      "id": "l9-r-017"
+    },
+    {
+      "topic": "l9-ms",
+      "q": "On a given day, the quantity of money supplied is:",
+      "opts": [
+        "Fixed independently of the interest rate",
+        "Downward sloping with the interest rate",
+        "Chosen only by households",
+        "Equal to potential GDP"
+      ],
+      "ans": 0,
+      "why": "The lecture draws a vertical short-run money-supply curve.",
+      "ref": "Lecture 9 PDF p. 20",
+      "visual": "money-market",
+      "id": "l9-r-018"
+    },
+    {
+      "topic": "l9-ms",
+      "q": "Money supply is determined by:",
+      "opts": [
+        "Banking-system and central-bank actions",
+        "Only households' preference",
+        "Only the price level",
+        "Only real GDP"
+      ],
+      "ans": 0,
+      "why": "The banking system and Fed/central bank determine quantity supplied.",
+      "ref": "Lecture 9 PDF p. 20",
+      "visual": "money-market",
+      "id": "l9-r-019"
+    },
+    {
+      "topic": "l9-ms",
+      "q": "Money-market equilibrium occurs when:",
+      "opts": [
+        "Money demanded equals money supplied",
+        "Bond price equals GDP",
+        "Price level equals interest rate",
+        "M1 equals M2"
+      ],
+      "ans": 0,
+      "why": "The nominal interest rate adjusts to equate Md and Ms.",
+      "ref": "Lecture 9 PDF p. 22",
+      "visual": "money-market",
+      "id": "l9-r-020"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "Bond prices and nominal interest rates move:",
+      "opts": [
+        "In the same direction",
+        "In opposite directions",
+        "Independently with no relation",
+        "Only when GDP changes"
+      ],
+      "ans": 1,
+      "why": "The lecture explicitly states an inverse relationship.",
+      "ref": "Lecture 9 PDF p. 23",
+      "visual": "bond-adjust",
+      "id": "l9-r-021"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "At 6% in the professor's example, money supplied exceeds money demanded. People tend to:",
+      "opts": [
+        "Buy bonds",
+        "Sell bonds",
+        "Increase taxes",
+        "Reduce money supply directly"
+      ],
+      "ans": 0,
+      "why": "They use excess money to buy bonds.",
+      "ref": "Lecture 9 PDF p. 24",
+      "visual": "bond-adjust",
+      "id": "l9-r-022"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "When people buy bonds in the 6% case, bond prices:",
+      "opts": [
+        "Fall and interest rises",
+        "Rise and interest falls",
+        "Stay fixed",
+        "Rise and interest also rises"
+      ],
+      "ans": 1,
+      "why": "Bond-price increase lowers the interest rate.",
+      "ref": "Lecture 9 PDF p. 24",
+      "visual": "bond-adjust",
+      "id": "l9-r-023"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "At 4%, money demanded exceeds money supplied. People tend to:",
+      "opts": [
+        "Buy bonds",
+        "Sell bonds",
+        "Cut taxes",
+        "Increase M2 automatically"
+      ],
+      "ans": 1,
+      "why": "They sell bonds to obtain cash.",
+      "ref": "Lecture 9 PDF p. 25",
+      "visual": "bond-adjust",
+      "id": "l9-r-024"
+    },
+    {
+      "topic": "l9-centralbank",
+      "q": "If the central bank increases money supply, the nominal interest rate:",
+      "opts": [
+        "Falls",
+        "Rises",
+        "Cannot change",
+        "Becomes inflation exactly"
+      ],
+      "ans": 0,
+      "why": "The p. 27 graph shows a rightward Ms shift lowering r.",
+      "ref": "Lecture 9 PDF p. 27",
+      "visual": "ms-shift",
+      "id": "l9-r-025"
+    },
+    {
+      "topic": "l9-centralbank",
+      "q": "If the central bank decreases money supply, the nominal interest rate:",
+      "opts": [
+        "Falls",
+        "Rises",
+        "Stays at 5% by law",
+        "Becomes zero"
+      ],
+      "ans": 1,
+      "why": "A leftward Ms shift raises r.",
+      "ref": "Lecture 9 PDF p. 27",
+      "visual": "ms-shift",
+      "id": "l9-r-026"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "In the lecture's long-run analysis, real GDP is:",
+      "opts": [
+        "Fixed at potential GDP",
+        "Determined by money supply",
+        "Always zero",
+        "Equal to nominal GDP"
+      ],
+      "ans": 0,
+      "why": "Long-run Y is at full employment/potential.",
+      "ref": "Lecture 9 PDF p. 29",
+      "visual": "long-run-money",
+      "id": "l9-r-027"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "The value of money is defined as:",
+      "opts": [
+        "P",
+        "1/P",
+        "M×V",
+        "Y/M"
+      ],
+      "ans": 1,
+      "why": "The lecture defines value of money as the inverse of the price level.",
+      "ref": "Lecture 9 PDF p. 30",
+      "visual": "long-run-money",
+      "id": "l9-r-028"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "The equation of exchange is:",
+      "opts": [
+        "M + V = P + Y",
+        "M × V = P × Y",
+        "M/P = V/Y",
+        "M − V = P − Y"
+      ],
+      "ans": 1,
+      "why": "The quantity theory uses MV=PY.",
+      "ref": "Lecture 9 PDF pp. 34–35",
+      "visual": "quantity-theory",
+      "id": "l9-r-029"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "Velocity of circulation is:",
+      "opts": [
+        "The number of times money is used to buy final goods/services per year",
+        "The nominal interest rate",
+        "The price level",
+        "Potential GDP"
+      ],
+      "ans": 0,
+      "why": "That is the lecture definition.",
+      "ref": "Lecture 9 PDF p. 35",
+      "visual": "quantity-theory",
+      "id": "l9-r-030"
+    }
+  ],
+  "mastering": [
+    {
+      "topic": "l9-overview",
+      "q": "Which pairing is correct? I. Short run: nominal interest rate adjusts. II. Long run: price level adjusts. III. Long run: real GDP changes one-for-one with money supply.",
+      "opts": [
+        "I and II only",
+        "I and III only",
+        "II and III only",
+        "I, II and III"
+      ],
+      "ans": 0,
+      "why": "The lecture separates short-run r adjustment from long-run P adjustment; Y is fixed at potential in the long-run model.",
+      "ref": "Lecture 9 PDF pp. 13, 29",
+      "visual": "synthesis",
+      "id": "l9-m-001"
+    },
+    {
+      "topic": "l9-definition",
+      "q": "A token is widely accepted in exchange, provides a common price measure, and can be saved for later purchases. It performs:",
+      "opts": [
+        "Only medium-of-exchange function",
+        "All three listed functions of money",
+        "Only store-of-value function",
+        "No function of money"
+      ],
+      "ans": 1,
+      "why": "Those descriptions correspond to medium, unit of account and store of value.",
+      "ref": "Lecture 9 PDF pp. 8–9",
+      "visual": "functions",
+      "id": "l9-m-002"
+    },
+    {
+      "topic": "l9-m1m2",
+      "q": "Which set is ordered from narrower to broader official money measure?",
+      "opts": [
+        "M2 then M1",
+        "M1 then M2",
+        "Price level then M1",
+        "M2 then GDP"
+      ],
+      "ans": 1,
+      "why": "M2 includes M1 plus additional deposits/funds.",
+      "ref": "Lecture 9 PDF pp. 10–11",
+      "visual": "m1m2",
+      "id": "l9-m-003"
+    },
+    {
+      "topic": "l9-m1m2",
+      "q": "Which statement is most careful about M2?",
+      "opts": [
+        "Every M2 component is instantly spendable",
+        "No M2 component counts as money",
+        "Some M2 savings deposits can be means of payment, while other components are not instantly convertible",
+        "M2 contains no M1 assets"
+      ],
+      "ans": 2,
+      "why": "This reproduces the lecture's qualification on p. 11.",
+      "ref": "Lecture 9 PDF p. 11",
+      "visual": "m1m2",
+      "id": "l9-m-004"
+    },
+    {
+      "topic": "l9-realmoney",
+      "q": "The professor's two-step framework first studies central-bank effects on _____, then long-run effects on _____.",
+      "opts": [
+        "the budget; taxes",
+        "the short-term nominal interest rate; price level/inflation",
+        "potential GDP; natural unemployment",
+        "exports; imports"
+      ],
+      "ans": 1,
+      "why": "This is the explicit real/money interaction roadmap.",
+      "ref": "Lecture 9 PDF p. 13",
+      "visual": "roadmap",
+      "id": "l9-m-005"
+    },
+    {
+      "topic": "l9-md",
+      "q": "Using the professor's schedule, moving from r=6% to r=4% changes money demanded from:",
+      "opts": [
+        "$1.02T to $0.98T",
+        "$0.98T to $1.02T",
+        "$1.00T to $1.00T",
+        "$6T to $4T"
+      ],
+      "ans": 1,
+      "why": "Lower r raises desired money balances from 0.98 to 1.02T.",
+      "ref": "Lecture 9 PDF p. 16",
+      "visual": "md-table",
+      "id": "l9-m-006"
+    },
+    {
+      "topic": "l9-md",
+      "q": "Why is the money-demand curve downward sloping with respect to nominal r?",
+      "opts": [
+        "Higher r increases the opportunity cost of holding money",
+        "Higher r makes money supply larger automatically",
+        "Higher r lowers the price level by definition",
+        "Higher r increases potential GDP"
+      ],
+      "ans": 0,
+      "why": "The forgone return on alternative assets rises with r.",
+      "ref": "Lecture 9 PDF pp. 15–18",
+      "visual": "money-demand",
+      "id": "l9-m-007"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "The price level rises while r is held fixed. What happens to the money-demand curve?",
+      "opts": [
+        "It shifts toward greater desired money balances",
+        "It moves up the same curve because r changed",
+        "It becomes vertical",
+        "It shifts money supply"
+      ],
+      "ans": 0,
+      "why": "Higher prices require more nominal money for transactions; this is a shifter, not a movement from r.",
+      "ref": "Lecture 9 PDF pp. 18–19",
+      "visual": "md-shift",
+      "id": "l9-m-008"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "Which statements are correct? I. r changes quantity demanded along MD. II. Real GDP can shift MD. III. Financial technology can shift MD.",
+      "opts": [
+        "I only",
+        "I and II only",
+        "II and III only",
+        "I, II and III"
+      ],
+      "ans": 3,
+      "why": "All three match the lecture's distinction.",
+      "ref": "Lecture 9 PDF pp. 17–19",
+      "visual": "md-shift",
+      "id": "l9-m-009"
+    },
+    {
+      "topic": "l9-mdshifts",
+      "q": "A payment innovation lets households conduct the same purchases while holding less money. Which lecture category is most relevant?",
+      "opts": [
+        "Financial technology shifting money demand",
+        "A movement caused by higher nominal r necessarily",
+        "A money-supply shift",
+        "Quantity theory alone"
+      ],
+      "ans": 0,
+      "why": "Financial technology is a listed MD shifter.",
+      "ref": "Lecture 9 PDF p. 19",
+      "visual": "md-shift",
+      "id": "l9-m-010"
+    },
+    {
+      "topic": "l9-ms",
+      "q": "Why is the short-run money-supply curve vertical on a given day in the lecture?",
+      "opts": [
+        "The chosen quantity supplied is fixed independently of r",
+        "Money demand is fixed",
+        "Bond prices cannot change",
+        "GDP is always fixed"
+      ],
+      "ans": 0,
+      "why": "Supply is controlled/set by banking/central-bank actions on the day.",
+      "ref": "Lecture 9 PDF pp. 20–21",
+      "visual": "money-market",
+      "id": "l9-m-011"
+    },
+    {
+      "topic": "l9-ms",
+      "q": "Suppose Ms=$1.00T and r=6%, while Md=$0.98T. The market has:",
+      "opts": [
+        "$0.02T excess demand for money",
+        "$0.02T excess supply of money",
+        "No imbalance",
+        "$1.98T excess money"
+      ],
+      "ans": 1,
+      "why": "Supply exceeds desired holdings by 0.02T.",
+      "ref": "Lecture 9 PDF pp. 16, 24",
+      "visual": "money-market",
+      "id": "l9-m-012"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "From a 6% starting interest rate with excess money supply, which adjustment chain is correct?",
+      "opts": [
+        "Buy bonds → bond price rises → r falls → Md rises",
+        "Sell bonds → bond price falls → r rises → Md falls",
+        "Buy bonds → bond price falls → r rises",
+        "Sell bonds → bond price rises → r falls"
+      ],
+      "ans": 0,
+      "why": "This is the p. 24 equilibrium mechanism.",
+      "ref": "Lecture 9 PDF pp. 23–24",
+      "visual": "bond-adjust",
+      "id": "l9-m-013"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "From a 4% starting interest rate with excess money demand, which chain is correct?",
+      "opts": [
+        "Buy bonds → bond price rises → r falls",
+        "Sell bonds → bond price falls → r rises → Md falls",
+        "Sell bonds → bond price rises → r falls",
+        "Buy bonds → price falls → r rises"
+      ],
+      "ans": 1,
+      "why": "This is the p. 25 correction mechanism.",
+      "ref": "Lecture 9 PDF pp. 23, 25",
+      "visual": "bond-adjust",
+      "id": "l9-m-014"
+    },
+    {
+      "topic": "l9-adjustment",
+      "q": "A bond pays a fixed $50 interest per year. If its price rises, what happens to the bond's interest rate according to the lecture logic?",
+      "opts": [
+        "It rises",
+        "It falls",
+        "It is unchanged",
+        "It becomes the inflation rate"
+      ],
+      "ans": 1,
+      "why": "Fixed dollar interest divided by a higher bond price gives a lower rate.",
+      "ref": "Lecture 9 PDF p. 23 (application)",
+      "visual": "bond-formula",
+      "id": "l9-m-015"
+    },
+    {
+      "topic": "l9-centralbank",
+      "q": "The central bank wants a lower nominal rate in the short run. Which money-market action matches Lecture 9?",
+      "opts": [
+        "Decrease Ms",
+        "Increase Ms",
+        "Shift Md left by law",
+        "Increase the price level directly"
+      ],
+      "ans": 1,
+      "why": "The p. 27 mechanism uses higher money supply to lower r.",
+      "ref": "Lecture 9 PDF p. 27",
+      "visual": "ms-shift",
+      "id": "l9-m-016"
+    },
+    {
+      "topic": "l9-centralbank",
+      "q": "Which sequence best matches the professor's short-run recession note?",
+      "opts": [
+        "Ms ↑ → r ↓ → cost of using money ↓ → C/I ↑ → AD ↑",
+        "Ms ↑ → r ↑ → C/I ↓ → AD ↓",
+        "Ms ↓ → r ↓ → AD ↑",
+        "Ms ↓ → P falls one-for-one immediately"
+      ],
+      "ans": 0,
+      "why": "The annotated slide links lower r to stronger C/I and AD.",
+      "ref": "Lecture 9 PDF pp. 5, 27",
+      "visual": "monetary-transmission",
+      "id": "l9-m-017"
+    },
+    {
+      "topic": "l9-centralbank",
+      "q": "A contractionary monetary move decreases Ms. In the money market, the immediate interest-rate direction is:",
+      "opts": [
+        "Down",
+        "Up",
+        "No change",
+        "Ambiguous by definition"
+      ],
+      "ans": 1,
+      "why": "A lower vertical Ms intersects MD at higher r.",
+      "ref": "Lecture 9 PDF p. 27",
+      "visual": "ms-shift",
+      "id": "l9-m-018"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "Starting at long-run equilibrium, the lecture raises money supply from $1.0T to $1.1T. What happens to P?",
+      "opts": [
+        "Falls from 1.00 to 0.90",
+        "Rises from 1.00 to 1.10",
+        "Stays 1.00",
+        "Rises to 2.00"
+      ],
+      "ans": 1,
+      "why": "The lecture's example states a 10% price-level rise to 1.10.",
+      "ref": "Lecture 9 PDF pp. 31–32",
+      "visual": "long-run-money",
+      "id": "l9-m-019"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "In that same long-run adjustment, real GDP:",
+      "opts": [
+        "Rises 10% permanently",
+        "Falls 10%",
+        "Remains at potential GDP",
+        "Equals money supply"
+      ],
+      "ans": 2,
+      "why": "Long-run output is fixed at potential in the model.",
+      "ref": "Lecture 9 PDF pp. 29–33",
+      "visual": "long-run-money",
+      "id": "l9-m-020"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "If P rises, the value of money 1/P:",
+      "opts": [
+        "Rises",
+        "Falls",
+        "Is unchanged",
+        "Becomes M×V"
+      ],
+      "ans": 1,
+      "why": "Value of money is inverse to P.",
+      "ref": "Lecture 9 PDF p. 30",
+      "visual": "value-money",
+      "id": "l9-m-021"
+    },
+    {
+      "topic": "l9-longrun",
+      "q": "Why does the professor say price rather than GDP adjusts in the long run?",
+      "opts": [
+        "Real GDP is taken to be at potential/full employment",
+        "Money demand disappears",
+        "Bond prices are fixed",
+        "M1 equals M2"
+      ],
+      "ans": 0,
+      "why": "The long-run model fixes real output at Yf.",
+      "ref": "Lecture 9 PDF p. 29",
+      "visual": "long-run-money",
+      "id": "l9-m-022"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "In MV=PY, which variable is velocity?",
+      "opts": [
+        "M",
+        "V",
+        "P",
+        "Y"
+      ],
+      "ans": 1,
+      "why": "V is velocity of circulation.",
+      "ref": "Lecture 9 PDF pp. 34–35",
+      "visual": "quantity-theory",
+      "id": "l9-m-023"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "If V and Y are fixed in the long run and M rises 8%, the quantity-theory prediction is approximately:",
+      "opts": [
+        "P rises 8%",
+        "P falls 8%",
+        "Y rises 8%",
+        "V rises 8%"
+      ],
+      "ans": 0,
+      "why": "With V,Y constant, P is proportional to M.",
+      "ref": "Lecture 9 PDF pp. 34–36",
+      "visual": "quantity-theory",
+      "id": "l9-m-024"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "If M=2, V=5, and Y=5 in a simple application of MV=PY, P equals:",
+      "opts": [
+        "1",
+        "2",
+        "5",
+        "10"
+      ],
+      "ans": 1,
+      "why": "P=(M×V)/Y=(2×5)/5=2.",
+      "ref": "Lecture 9 PDF pp. 34–36 (application)",
+      "visual": "formula",
+      "id": "l9-m-025"
+    },
+    {
+      "topic": "l9-quantitytheory",
+      "q": "Which assumptions turn the equation of exchange into the lecture's long-run prediction? I. Y equals potential GDP and is independent of M. II. V is relatively stable. III. r must be fixed at 5% forever.",
+      "opts": [
+        "I only",
+        "II and III only",
+        "I and II only",
+        "I, II and III"
+      ],
+      "ans": 2,
+      "why": "The lecture uses fixed Y and stable V; 5% was a short-run example, not a permanent assumption.",
+      "ref": "Lecture 9 PDF p. 36",
+      "visual": "quantity-theory",
+      "id": "l9-m-026"
+    },
+    {
+      "topic": "l9-synthesis",
+      "q": "Which statement best separates a short-run money-supply increase from the long-run quantity-theory result?",
+      "opts": [
+        "Short run emphasizes lower r; long run emphasizes higher P with Y at potential",
+        "Both horizons require Y to rise one-for-one with M",
+        "Short run changes only P; long run changes only r",
+        "There is no difference"
+      ],
+      "ans": 0,
+      "why": "This is the lecture's central horizon distinction.",
+      "ref": "Lecture 9 PDF pp. 27, 29–36",
+      "visual": "synthesis",
+      "id": "l9-m-027"
+    },
+    {
+      "topic": "l9-synthesis",
+      "q": "Which existing Final Mock idea is most aligned with Lecture 9's long-run conclusion?",
+      "opts": [
+        "Monetary policy is an important determinant of long-run inflation",
+        "Fiscal deficits always lower interest rates",
+        "Higher r always raises money demand",
+        "Taxes determine M1"
+      ],
+      "ans": 0,
+      "why": "The mock's long-run monetary/inflation style aligns with Lecture 9's quantity-theory content.",
+      "ref": "Lecture 9 PDF pp. 34–36 + mock style",
+      "visual": "quantity-theory",
+      "id": "l9-m-028"
+    },
+    {
+      "topic": "l9-synthesis",
+      "q": "A question says Ms decreases and asks for the short-run chain before price-level adjustment. Which is best?",
+      "opts": [
+        "r rises → interest-sensitive spending tends to fall",
+        "r falls → spending rises",
+        "P rises one-for-one immediately by assumption",
+        "Y is fixed at potential in every short-run question"
+      ],
+      "ans": 0,
+      "why": "The short-run money-market effect is higher nominal r; the long-run price-level result is a separate step.",
+      "ref": "Lecture 9 PDF pp. 27, 29",
+      "visual": "monetary-transmission",
+      "id": "l9-m-029"
+    },
+    {
+      "topic": "l9-synthesis",
+      "q": "Which statements are supported? I. Bond price and r are inversely related. II. Ms ↑ lowers r in the short run. III. In the long run with stable V and fixed Y, P is proportional to M.",
+      "opts": [
+        "I only",
+        "I and II only",
+        "II and III only",
+        "I, II and III"
+      ],
+      "ans": 3,
+      "why": "All three are explicit Lecture 9 mechanisms.",
+      "ref": "Lecture 9 PDF pp. 23, 27, 36",
+      "visual": "synthesis",
+      "id": "l9-m-030"
+    }
+  ],
+  "references": {
+    "primary": "Uploaded EC214 Lecture 9 Money and Inflation, 37 PDF pages, including professor annotations.",
+    "style": "Existing Lecture 5–8 quizzes and Final Mock Q12, Q21, Q22, Q23, Q29 used only as style/difficulty references. New questions stay within Lecture 9 PDF scope; Final Mock is not modified."
+  }
+};
