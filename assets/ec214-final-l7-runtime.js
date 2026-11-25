@@ -176,7 +176,10 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
  '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
  '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 7 PDF controls the content. Earlier lecture quizzes and the existing 30-question Final Mock are question-format and difficulty references only, not substitute lecture sources.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>';
+ '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 7 PDF controls the content. Earlier lecture quizzes and the existing 30-question Final Mock are question-format and difficulty references only, not substitute lecture sources.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 8 · Fiscal Policy</h3>'+
+ '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with budget/tax tables, AD–AS fiscal-policy graphs, crowding effects and automatic stabilisers. Lecture 8 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l8/summary/">Read Lecture 8 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l8/quiz/">Lecture 8 Quiz</a></div></div>';
 }
 
 function buildOutline(){
