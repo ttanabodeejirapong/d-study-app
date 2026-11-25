@@ -193,7 +193,10 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="mock">Practice Final Mock →</button></div></div>'+
  '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 6 · Business Cycle</h3>'+
  '<p>8 summary sections, 30 Reviewing and 30 Mastering questions, with AD–AS and Phillips curve visuals. Lecture 6 saves its own progress and quiz attempts, keeping Lecture 5 data intact.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l6/summary/">Read Lecture 6 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l6/quiz/">Lecture 6 Quiz</a></div></div>';
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l6/summary/">Read Lecture 6 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l6/quiz/">Lecture 6 Quiz</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 7 · Expenditure Multipliers</h3>'+
+ '<p>13 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with graphs and tables for MPC, AE equilibrium, inventories, the multiplier and deriving AD. Lecture 7 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l7/summary/">Read Lecture 7 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l7/quiz/">Lecture 7 Quiz</a></div></div>';
 }
 
 function buildOutline(){
