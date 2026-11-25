@@ -176,7 +176,7 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
  '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
  '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 8 Fiscal Policy PDF controls the content. Earlier lecture quizzes and Final Mock Q13, Q14, Q17 and Q30 are style/difficulty references only; the Lecture 8 PDF controls the content.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>';
+ '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 8 Fiscal Policy PDF controls the content. Earlier lecture quizzes and Final Mock Q13, Q14, Q17 and Q30 are style/difficulty references only; the Lecture 8 PDF controls the content.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/l7/">← Lecture 7</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>';
 }
 
 function buildOutline(){
