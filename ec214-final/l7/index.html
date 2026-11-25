@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="color-scheme" content="light dark"><title>EC214 Final Exams · D Study App</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Merriweather:wght@400;700&family=Nunito+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/d-study-app/assets/app-v13.3.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ux-v13.5.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ux-v13.6.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/tu101-v13.16.min.css">
+ <link rel="stylesheet" href="/d-study-app/assets/ui-v14.css?v=14.3">
+ <link rel="stylesheet" href="/d-study-app/assets/ec214-final-v1.css?v=14.11">
+</head>
+<body>
+<section id="finalAuth" class="final-hidden">
+ <div class="final-locked">
+  <div class="final-eyebrow">D STUDY APP · FINAL EXAMS</div>
+  <h2 id="finalAuthTitle">Unlock EC214 Final Exams</h2>
+  <p id="finalAuthText">EC214 Final Exams is a new subject with independent study progress.</p>
+  <div id="finalUnlockArea">
+   <label for="finalTokenInput" class="final-mini">EC214 Final token (unlock once per local profile)</label>
+   <input id="finalTokenInput" class="final-input" type="password" autocomplete="off" placeholder="Enter Final Exam token">
+   <div id="finalTokenError" role="alert" style="color:#db7075;font-size:13px;min-height:22px;margin-top:8px"></div>
+   <button type="button" id="finalTokenBtn" class="final-primary">Unlock Final Exams →</button>
+  </div>
+  <div class="final-actions">
+   <a id="finalLoginLink" href="/d-study-app/login/" class="final-primary final-hidden">Sign in to D Study App</a>
+   <button id="finalBackAuth" class="final-action" type="button">← Subjects</button>
+  </div>
+  <p class="final-mini">Access remains local to your browser profile, as in the existing D Study App. Keep your token private.</p>
+ </div>
+</section>
+<div id="finalShell" class="final-hidden">
+ <header>
+  <div class="final-wrap final-header-row">
+   <div><h1>D Study App • EC214 Final Exams</h1><p>Professor-first study · Lecture 7 · Expenditure Multipliers · Independent progress and quiz history</p></div>
+   <div class="final-header-actions"><span id="finalUser" class="userchip"></span><button id="finalReturnSubjects" class="secondary">← Subjects</button></div>
+  </div>
+ </header>
+ <div class="final-wrap">
+  <div class="final-topnote">Final Exams · EC214 Introductory Macroeconomics · Faculty of Economics, Thammasat University · Asst. Prof. Dr. Winai Homsombat</div>
+  <div class="final-actions" aria-label="Lecture selection">
+   <a href="/d-study-app/ec214-final/progress/" class="final-action">Lecture 5 · AD–AS</a>
+   <a href="/d-study-app/ec214-final/l6/" class="final-action">Lecture 6 · Business Cycle</a>
+   <a href="/d-study-app/ec214-final/l7/" class="final-action active" aria-current="page">Lecture 7 · Expenditure Multipliers</a>
+  </div>
+  <nav class="final-nav" aria-label="Lecture 7 navigation">
+   <a data-f-tab="progress" href="/d-study-app/ec214-final/l7/progress/">📚 Progress</a>
+   <a data-f-tab="summary" href="/d-study-app/ec214-final/l7/summary/">📖 Summary</a>
+   <a data-f-tab="quiz" href="/d-study-app/ec214-final/l7/quiz/">🧠 Quiz</a>
+   <a href="/d-study-app/ec214-final/mock/">📝 Final Mock (30)</a>
+   <a data-f-tab="flashcards" href="/d-study-app/ec214-final/l7/flashcards/">🗂️ Flashcards</a>
+   <a data-f-tab="notes" href="/d-study-app/ec214-final/l7/notes/">📝 Notes</a>
+   <a data-f-tab="history" href="/d-study-app/ec214-final/l7/history/">📊 History</a>
+   <a data-f-tab="prompt" href="/d-study-app/ec214-final/l7/prompt/">💬 ChatGPT Prompt</a>
+   <a data-f-tab="settings" href="/d-study-app/ec214-final/l7/settings/">⚙️ Settings</a>
+  </nav>
+  <main>
+   <section class="final-panel" id="f-progress"><div id="finalProgress"></div></section>
+   <section class="final-panel" id="f-summary">
+    <div class="final-heading"><div class="final-eyebrow">PROFESSOR LECTURE 7 · 48 PDF PAGES</div><h2>Expenditure Multipliers</h2><p>13 source-grounded lessons. Read in order or jump to the exact topic you need from a quiz hint. Includes expenditure plans, consumption and MPC, AE equilibrium, inventories, multiplier examples, and deriving AD.</p></div>
+    <div class="final-actions final-summary-return"><button type="button" class="final-action" data-final-go="quiz">← Lecture 7 Quiz</button><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div>
+    <div class="final-card" style="margin-bottom:16px"><div class="final-actions"><b>Lecture 7 Summary Mastery</b><span class="final-metric" style="font-size:22px" id="finalSummaryPct">0%</span></div><p class="final-mini">Mark each section as Learning, Reviewed or Mastered. Lecture 7 progress is separate from Lecture 5.</p></div>
+    <div class="final-card final-search-box"><label for="finalSummarySearch"><b>🔎 Search all Lecture 7 summary context</b></label><p class="final-mini">Search aggregate expenditure, MPC, saving, 45° AE graphs, multiplier formulas, spending rounds and source examples.</p><div class="final-search-line"><input class="final-input" id="finalSummarySearch" type="search" autocomplete="off" placeholder="Search MPC, multiplier, imports, inventory, AE–AD…"><button id="finalSummaryClear" type="button" class="final-action">Clear</button></div><div class="final-mini" id="finalSummarySearchStatus" aria-live="polite">Searches all 13 Lecture 7 sections</div><div id="finalSummarySearchResults" class="final-search-results"></div></div>
+    <div class="final-sum-layout"><aside class="final-card final-toc"><h3>Contents · Lecture 7</h3><div class="final-topics" id="finalTopics"></div></aside><div id="finalSections"></div></div>
+   </section>
+   <section class="final-panel" id="f-quiz"><div id="finalQuiz"></div></section>
+   
+   <section class="final-panel" id="f-flashcards"><div id="finalFlashcards"></div></section>
+   <section class="final-panel" id="f-notes"><div id="finalNotes"></div></section>
+   <section class="final-panel" id="f-history"><div id="finalHistory"></div></section>
+   <section class="final-panel" id="f-prompt"><div id="finalPrompt"></div></section>
+   <section class="final-panel" id="f-settings"><div id="finalSettings"></div></section>
+  </main>
+  <div id="finalStatus" aria-live="polite" class="final-mini"></div>
+  <footer class="final-footer">D Study App v14.11 · EC214 Final Exams · Professor Lecture 7 · Private academic data remains local in your browser</footer>
+ </div>
+</div>
+<script>
+/* EC214 Lecture 7 — professor-first summaries and original Reviewing/Mastering practice. Source: user-supplied 48-page annotated PDF. No mock modifications. */
+window.D_STUDY_FINAL_L7={
+  "id": "l7",
+  "title": "Lecture 7 · Expenditure Multipliers",
+  "subtitle": "Professor: Asst. Prof. Dr. Winai Homsombat · EC214 · 2026-2 Afternoon",
+  "lecture": 7,
+  "sourcePages": 48,
+  "sections": [
+    {
+      "id": "l7-motivation",
+      "title": "01 · From output gaps to expenditure multipliers",
+      "pages": "PDF pp. 3–9",
+      "priority": "Core concept",
+      "fig": "gap-context",
+      "html": "<p class=\"lead\">Lecture 7 connects the AD–AS output-gap diagnosis to <b>short-run fiscal policy and aggregate expenditure (AE)</b>. If real GDP is below potential GDP, there is a recessionary gap; if real GDP is above potential GDP, there is an inflationary gap (annotated PDF p. 3).</p><p>The multiplier effect means that an initial change in autonomous spending can trigger a larger final change in equilibrium real GDP. The professor's example starts with higher government spending, followed by induced household consumption as incomes rise (PDF p. 4).</p><div class=\"final-focus\"><b>Professor's four learning outcomes, PDF p. 7:</b> (1) explain expenditure plans; (2) explain adjustment to equilibrium expenditure; (3) explain the multiplier; (4) derive the AD curve from equilibrium expenditure.</div>"
+    },
+    {
+      "id": "l7-ae-components",
+      "title": "02 · Aggregate expenditure and its four components",
+      "pages": "PDF pp. 10–12",
+      "priority": "Core definition",
+      "fig": "ae-components",
+      "html": "<p><b>Aggregate planned expenditure:</b> AE = C + I + G + NX, where <b>NX = X − M</b> (PDF p. 10). C is consumption, I investment, G government purchases of goods and services, and X−M net exports.</p><p>AE refers to <b>planned expenditure</b>; it need not initially equal actual production. When they differ, firms experience unplanned inventory changes and adjust output.</p><div class=\"final-focus\">Common exam distinction: an income-dependent rise in household spending after the initial shock is <b>induced</b> expenditure, while the original policy or investment shock is a change in <b>autonomous</b> expenditure.</div>"
+    },
+    {
+      "id": "l7-autonomous",
+      "title": "03 · Autonomous versus induced expenditure",
+      "pages": "PDF pp. 11–12, 21",
+      "priority": "Core concept",
+      "fig": "ae-split",
+      "html": "<p><b>Autonomous</b> expenditure does not vary with current real GDP (the lecture's examples include I, G and X, plus autonomous portions of C and M). <b>Induced</b> expenditure varies with real GDP (notably C and imports M).</p><p>The professor's annotated PDF p. 12 emphasizes the mechanism: a first-round increase in G becomes income for households, which raises induced consumption in subsequent rounds. Import spending, by contrast, is a leakage from domestic spending.</p><div class=\"final-focus\">PDF p. 11 contains visibly reversed phrases in parentheses (“depends on RGDP” next to autonomous and “does NOT depend” next to induced); the listed definitions and the professor's annotated p. 12 diagram agree that <b>autonomous = not income-dependent</b> and <b>induced = income-dependent</b>. This summary follows those definitions.</div>"
+    },
+    {
+      "id": "l7-consumption",
+      "title": "04 · Consumption function, disposable income and saving",
+      "pages": "PDF pp. 13–16",
+      "priority": "Exam priority",
+      "fig": "consumption",
+      "html": "<p><b>Disposable income:</b> Yd = Y − net taxes. Net taxes are taxes paid minus transfer payments received (PDF p. 13). Consumption expenditure depends on disposable income, holding other influences constant.</p><p>The illustrated consumption function starts with <b>autonomous consumption of $2 trillion at Yd = 0</b> (PDF p. 14). Above the 45° line C &gt; Yd, so saving is negative; at the intersection saving is zero; below the line saving is positive (PDF p. 15).</p><p>An annotated simplification on PDF p. 16 models C = a + bYd, where a is autonomous consumption and b is the slope. This helps link consumption to AE.</p>"
+    },
+    {
+      "id": "l7-mpc",
+      "title": "05 · Marginal propensity to consume (MPC)",
+      "pages": "PDF pp. 17–20",
+      "priority": "Exam priority",
+      "fig": "mpc-slope",
+      "html": "<p><b>MPC = ΔC / ΔYd</b>, the fraction of an additional unit of disposable income spent on consumption. In the professor's example, ΔYd = $3 trillion and ΔC = $2 trillion, so <b>MPC = 2/3 ≈ 0.67</b> (PDF pp. 17, 19).</p><p>The MPC is the <b>slope</b> of the consumption schedule, not total consumption divided by total income. At the same disposable income, a lower real interest rate, higher wealth, or higher expected future income can shift the whole consumption function upward; opposite changes can shift it downward (PDF p. 20).</p>"
+    },
+    {
+      "id": "l7-imports",
+      "title": "06 · Imports and the marginal propensity to import",
+      "pages": "PDF p. 21",
+      "priority": "High priority",
+      "fig": "import-leakage",
+      "html": "<p>Imports M are the other major <b>induced</b> component. In the short run, imports generally rise when real GDP rises.</p><p><b>MPI = ΔM / ΔY</b>, the fraction of a change in real GDP spent on imports. An increase in imports reduces net exports NX = X − M, limiting the additional domestic spending generated by an initial stimulus.</p><p>The simple closed-economy multiplier later excludes imports and income taxes; do not apply that formula without checking the model assumptions.</p>"
+    },
+    {
+      "id": "l7-turtle",
+      "title": "07 · Turtle Island: identify autonomous spending and MPC",
+      "pages": "PDF pp. 22, 30–31",
+      "priority": "Worked example",
+      "fig": "turtle",
+      "html": "<p>The professor's Turtle Island example assumes <b>no international sector, no income taxes, and a fixed price level</b>. Its graph shows autonomous planned spending <b>$2 billion</b> (including I + G) and a rise in AE from <b>$2 billion at Y = 0 to $5.6 billion at Y = $6 billion</b> (PDF pp. 22, 30).</p><p>Therefore the slope is <b>(5.6 − 2) / 6 = 0.60</b>. A convenient reconstructed equation is <b>AE = 2 + 0.60Y</b>, in billions. At Y = 4, AE = 4.4; at Y = 6, AE = 5.6. These give opposite signs of unplanned inventory adjustment.</p><p>The graph is redrawn for practice, not a scan of the professor's figure.</p>"
+    },
+    {
+      "id": "l7-equilibrium",
+      "title": "08 · Equilibrium expenditure and the 45° line",
+      "pages": "PDF pp. 24–27",
+      "priority": "High priority",
+      "fig": "ae-equilibrium",
+      "html": "<p>Equilibrium planned expenditure occurs where the <b>AE schedule intersects the 45° line AE = Y</b> (PDF p. 26). On the 45° line, each unit of real GDP is matched by a unit of planned spending.</p><p>The illustrative schedule on PDF p. 24 contains: Y = 12, AE = 12.5; Y = 13, AE = 13; Y = 14, AE = 13.5 (trillions). The equilibrium is therefore <b>Y = $13 trillion</b>, where planned spending equals real output.</p><div class=\"final-focus\">The wording “AE is equal to disposable income” on PDF pp. 24, 26 appears alongside the graphical equilibrium condition. For the AE–real GDP diagram, the operational condition used on the slides is <b>AE = real GDP</b>.</div>"
+    },
+    {
+      "id": "l7-inventory",
+      "title": "09 · Inventory signals and convergence",
+      "pages": "PDF pp. 26–31",
+      "priority": "High priority",
+      "fig": "inventory-cross",
+      "html": "<p><b>AE &gt; Y:</b> firms sell more than produced, causing unplanned inventory <b>decreases</b>. Firms expand production, raising Y toward equilibrium (PDF pp. 27–28).</p><p><b>AE &lt; Y:</b> firms produce more than customers plan to buy, causing unplanned inventory <b>increases</b>. Firms cut production, lowering Y toward equilibrium.</p><p><b>AE = Y:</b> no unplanned inventory change; real GDP is at equilibrium expenditure. This is an adjustment through the production process at a fixed price level, not by shifting the 45° line.</p>"
+    },
+    {
+      "id": "l7-multiplier",
+      "title": "10 · How successive spending rounds magnify GDP",
+      "pages": "PDF pp. 4, 33–37",
+      "priority": "High priority",
+      "fig": "rounds",
+      "html": "<p>The multiplier is the ratio of the <b>final change in equilibrium expenditure/real GDP</b> to the <b>initial change in autonomous spending</b> (PDF pp. 33, 39).</p><p>An increase in autonomous investment or government purchases first directly adds spending, then households receiving income spend a fraction on consumption, generating additional rounds.</p><p><b>Professor's p. 37 illustration:</b> autonomous investment increases by $0.5 trillion, AE shifts up $0.5 trillion, and equilibrium Y rises from $13T to $15T. Thus the multiplier is <b>$2T / $0.5T = 4</b>.</p>"
+    },
+    {
+      "id": "l7-fiscal",
+      "title": "11 · Government purchases versus transfer-payment rounds",
+      "pages": "PDF pp. 35–36",
+      "priority": "Worked comparison",
+      "fig": "fiscal-table",
+      "html": "<p>The professor's two-round classroom illustration compares an original <b>$5 million</b> budget allocated to government purchases versus a transfer payment (PDF pp. 35–36).</p><table class=\"final-table\"><thead><tr><th>Spending route</th><th>Round 1 GDP</th><th>Round 2 GDP</th><th>Two-round total</th></tr></thead><tbody><tr><td>Government purchases</td><td>$5.00m</td><td>$3.50m</td><td>$8.50m</td></tr><tr><td>Transfer payment</td><td>$3.50m</td><td>$2.45m</td><td>$5.95m</td></tr></tbody></table><p>With an implied MPC of 0.70, these <b>partial two-round totals</b> give $8.5m/$5m = 1.70 versus $5.95m/$5m = 1.19 per dollar of initial government budget. Do <b>not</b> mistake these finite-round examples for the fully accumulated infinite-series multiplier.</p>"
+    },
+    {
+      "id": "l7-math",
+      "title": "12 · Multiplier formula and model assumptions",
+      "pages": "PDF pp. 37–43",
+      "priority": "Exam priority",
+      "fig": "formula",
+      "html": "<p>In the basic <b>closed-economy, no-import, no-income-tax</b> setting used for the simple derivation (PDF pp. 40–41):</p><p><b>ΔY = ΔC + ΔI</b>, with <b>ΔC = MPC · ΔY</b>. Rearranging gives <b>ΔY / ΔI = 1 / (1 − MPC)</b>.</p><p>For <b>MPC = 0.75</b>, the multiplier is <b>4</b>, so a $0.5T autonomous rise generates a $2T equilibrium rise (PDF pp. 37, 41). The annotated PDF p. 42 also shows that changes in investment and government purchases use the same simple expenditure multiplier under these assumptions.</p><p>With income taxes and imports, additional leakages reduce induced domestic expenditure (PDF p. 43). Treat the simple formula as <b>conditional</b>, not a universal rule.</p>"
+    },
+    {
+      "id": "l7-ae-ad",
+      "title": "13 · Derive aggregate demand from the AE model",
+      "pages": "PDF pp. 44–47",
+      "priority": "High priority",
+      "fig": "ae-ad",
+      "html": "<p><b>AE curve:</b> planned expenditure versus real GDP at fixed other influences. <b>AD curve:</b> quantity of real GDP demanded versus the price level at fixed other influences (PDF p. 44).</p><p>Professor's worked correspondence (PDF pp. 45–46):</p><table class=\"final-table\"><thead><tr><th>Price level P</th><th>AE schedule</th><th>Equilibrium real GDP</th></tr></thead><tbody><tr><td>130</td><td>AE₁ (lower)</td><td>$13T</td></tr><tr><td>110</td><td>AE₀</td><td>$14T</td></tr><tr><td>90</td><td>AE₂ (higher)</td><td>$15T</td></tr></tbody></table><p>A higher <b>P</b> shifts the relevant AE schedule down and produces a lower equilibrium Y; translating these points gives a <b>downward-sloping AD curve</b>. Do not confuse a <b>movement along AD caused by P</b> with a shift of AD from a change in spending determinants.</p>"
+    }
+  ]
+};
+window.D_STUDY_FINAL_L7_QUIZZES={
+  "lecture": 7,
+  "reviewing": [
+    {
+      "topic": "l7-ae-components",
+      "q": "The professor defines aggregate planned expenditure as:",
+      "opts": [
+        "C + I + G + (X − M)",
+        "C + saving + taxes",
+        "Nominal GDP divided by P",
+        "C + I − G − exports"
+      ],
+      "ans": 0,
+      "why": "AE adds planned consumption, investment, government goods/service purchases and net exports.",
+      "ref": "Lecture 7 PDF p. 10",
+      "visual": "ae-components",
+      "id": "l7-r-001"
+    },
+    {
+      "topic": "l7-ae-components",
+      "q": "In the AE identity, NX is:",
+      "opts": [
+        "Domestic investment minus government spending",
+        "Exports minus imports",
+        "Taxes minus transfers",
+        "Nominal GDP minus real GDP"
+      ],
+      "ans": 1,
+      "why": "Net exports equals X − M.",
+      "ref": "Lecture 7 PDF p. 10",
+      "visual": "ae-components",
+      "id": "l7-r-002"
+    },
+    {
+      "topic": "l7-autonomous",
+      "q": "Which category is unchanged by a change in current real GDP, all else fixed?",
+      "opts": [
+        "Induced consumption",
+        "Induced imports",
+        "Autonomous expenditure",
+        "Marginal propensity to consume"
+      ],
+      "ans": 2,
+      "why": "Autonomous planned spending is independent of current GDP.",
+      "ref": "Lecture 7 PDF pp. 11–12",
+      "visual": "ae-split",
+      "id": "l7-r-003"
+    },
+    {
+      "topic": "l7-autonomous",
+      "q": "Which pair is emphasized as induced, income-dependent expenditure?",
+      "opts": [
+        "Government spending and investment",
+        "Exports and government spending",
+        "Investment and autonomous consumption",
+        "Consumption and imports"
+      ],
+      "ans": 3,
+      "why": "Consumption and imports are the main induced spending components.",
+      "ref": "Lecture 7 PDF pp. 11–12, 21",
+      "visual": "ae-split",
+      "id": "l7-r-004"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "Disposable income is GDP minus:",
+      "opts": [
+        "Net taxes",
+        "Gross imports",
+        "The price level",
+        "Autonomous investment"
+      ],
+      "ans": 0,
+      "why": "Net taxes equal taxes paid less transfers.",
+      "ref": "Lecture 7 PDF p. 13",
+      "visual": "",
+      "id": "l7-r-005"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "In the consumption diagram, the 45° line represents:",
+      "opts": [
+        "C equals government spending",
+        "Consumption equals disposable income",
+        "Imports equal exports",
+        "Autonomous consumption equals zero"
+      ],
+      "ans": 1,
+      "why": "Along the 45° line C = Yd.",
+      "ref": "Lecture 7 PDF p. 15",
+      "visual": "consumption",
+      "id": "l7-r-006"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "When the consumption function is above the 45° line:",
+      "opts": [
+        "Saving is positive",
+        "Consumption equals income",
+        "Saving is negative",
+        "MPC must equal zero"
+      ],
+      "ans": 2,
+      "why": "Spending exceeds disposable income, so dissaving occurs.",
+      "ref": "Lecture 7 PDF p. 15",
+      "visual": "consumption",
+      "id": "l7-r-007"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "Point A in the lecture's consumption graph shows autonomous consumption of:",
+      "opts": [
+        "$0T",
+        "$1T",
+        "$6T",
+        "$2T"
+      ],
+      "ans": 3,
+      "why": "The intercept is $2 trillion at zero disposable income.",
+      "ref": "Lecture 7 PDF p. 14",
+      "visual": "consumption",
+      "id": "l7-r-008"
+    },
+    {
+      "topic": "l7-mpc",
+      "q": "MPC is calculated as:",
+      "opts": [
+        "Change in consumption divided by change in disposable income",
+        "Consumption divided by total GDP at a point",
+        "Disposable income divided by the price level",
+        "Change in investment divided by change in consumption"
+      ],
+      "ans": 0,
+      "why": "MPC measures the share of marginal disposable income consumed.",
+      "ref": "Lecture 7 PDF pp. 17–19",
+      "visual": "mpc-slope",
+      "id": "l7-r-009"
+    },
+    {
+      "topic": "l7-mpc",
+      "q": "In the professor's example, ΔC = $2T and ΔYd = $3T. MPC equals:",
+      "opts": [
+        "3/2",
+        "2/3",
+        "1/3",
+        "5/3"
+      ],
+      "ans": 1,
+      "why": "Divide 2 by 3, approximately 0.67.",
+      "ref": "Lecture 7 PDF p. 19",
+      "visual": "mpc-table",
+      "id": "l7-r-010"
+    },
+    {
+      "topic": "l7-imports",
+      "q": "What is the other major income-induced component besides consumption?",
+      "opts": [
+        "Government purchases",
+        "Fixed investment",
+        "Imports",
+        "Exports treated as autonomous"
+      ],
+      "ans": 2,
+      "why": "Imports rise with real GDP in the short run.",
+      "ref": "Lecture 7 PDF p. 21",
+      "visual": "import-leakage",
+      "id": "l7-r-011"
+    },
+    {
+      "topic": "l7-imports",
+      "q": "Marginal propensity to import (MPI) is:",
+      "opts": [
+        "Change in exports divided by change in imports",
+        "Change in GDP divided by change in imports",
+        "Total imports divided by total saving",
+        "Change in imports divided by change in real GDP"
+      ],
+      "ans": 3,
+      "why": "MPI = ΔM/ΔY.",
+      "ref": "Lecture 7 PDF p. 21",
+      "visual": "import-leakage",
+      "id": "l7-r-012"
+    },
+    {
+      "topic": "l7-turtle",
+      "q": "In Turtle Island, autonomous expenditure from the AE graph is:",
+      "opts": [
+        "$2 billion",
+        "$3.6 billion",
+        "$5.6 billion",
+        "$6 billion"
+      ],
+      "ans": 0,
+      "why": "The vertical intercept is $2 billion.",
+      "ref": "Lecture 7 PDF p. 22",
+      "visual": "turtle",
+      "id": "l7-r-013"
+    },
+    {
+      "topic": "l7-turtle",
+      "q": "When Y rises from 0 to $6b, AE rises from $2b to $5.6b. The slope (MPC) is:",
+      "opts": [
+        "0.40",
+        "0.60",
+        "1.00",
+        "1.50"
+      ],
+      "ans": 1,
+      "why": "(5.6 − 2)/6 = 0.60.",
+      "ref": "Lecture 7 PDF p. 22",
+      "visual": "turtle-table",
+      "id": "l7-r-014"
+    },
+    {
+      "topic": "l7-equilibrium",
+      "q": "In the AE diagram, equilibrium expenditure occurs where:",
+      "opts": [
+        "AE crosses an LRAS line",
+        "Planned investment reaches zero",
+        "AE intersects the 45° line",
+        "Real GDP equals potential GDP necessarily"
+      ],
+      "ans": 2,
+      "why": "Equilibrium expenditure is AE = Y, read at the intersection.",
+      "ref": "Lecture 7 PDF p. 26",
+      "visual": "ae-equilibrium",
+      "id": "l7-r-015"
+    },
+    {
+      "topic": "l7-equilibrium",
+      "q": "Using the professor's table, at what real GDP does AE equal Y?",
+      "opts": [
+        "$12T",
+        "$14T",
+        "$15T",
+        "$13T"
+      ],
+      "ans": 3,
+      "why": "The table shows Y = 13 and AE = 13 (trillions).",
+      "ref": "Lecture 7 PDF p. 24",
+      "visual": "ae-table",
+      "id": "l7-r-016"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "If AE is greater than real GDP, firms face:",
+      "opts": [
+        "Unplanned inventory decreases",
+        "Unplanned inventory increases",
+        "No inventory change",
+        "A guaranteed lower MPC"
+      ],
+      "ans": 0,
+      "why": "Sales exceed current production; inventory is drawn down.",
+      "ref": "Lecture 7 PDF p. 27",
+      "visual": "inventory-cross",
+      "id": "l7-r-017"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "If AE is less than real GDP, firms tend to:",
+      "opts": [
+        "Increase production",
+        "Cut production",
+        "Immediately raise imports to infinity",
+        "Keep production fixed forever"
+      ],
+      "ans": 1,
+      "why": "Unplanned inventory accumulates and producers reduce output.",
+      "ref": "Lecture 7 PDF pp. 27–28",
+      "visual": "inventory-cross",
+      "id": "l7-r-018"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "At equilibrium AE = real GDP, unplanned inventory changes are:",
+      "opts": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Always rising with prices"
+      ],
+      "ans": 2,
+      "why": "All planned expenditure is matched by output.",
+      "ref": "Lecture 7 PDF p. 27",
+      "visual": "ae-equilibrium",
+      "id": "l7-r-019"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "The Lecture 7 AE model holds the price level:",
+      "opts": [
+        "Continuously rising",
+        "Continuously falling",
+        "Equal to inflation",
+        "Fixed"
+      ],
+      "ans": 3,
+      "why": "In the short-run expenditure model the price level is taken as fixed.",
+      "ref": "Lecture 7 PDF pp. 22, 29",
+      "visual": "",
+      "id": "l7-r-020"
+    },
+    {
+      "topic": "l7-multiplier",
+      "q": "The expenditure multiplier compares final equilibrium GDP change with:",
+      "opts": [
+        "Initial autonomous expenditure change",
+        "Final price-level change",
+        "Change in the unemployment rate",
+        "Total taxes divided by imports"
+      ],
+      "ans": 0,
+      "why": "Multiplier = Δ equilibrium Y / Δ autonomous expenditure.",
+      "ref": "Lecture 7 PDF pp. 33, 39",
+      "visual": "formula",
+      "id": "l7-r-021"
+    },
+    {
+      "topic": "l7-multiplier",
+      "q": "An investment rise of $0.5T produces a $2T rise in equilibrium Y. Multiplier equals:",
+      "opts": [
+        "2",
+        "4",
+        "0.25",
+        "8"
+      ],
+      "ans": 1,
+      "why": "2 / 0.5 = 4.",
+      "ref": "Lecture 7 PDF p. 37",
+      "visual": "ae-shift",
+      "id": "l7-r-022"
+    },
+    {
+      "topic": "l7-math",
+      "q": "In the simple closed-economy model without imports and income taxes, the multiplier is:",
+      "opts": [
+        "MPC/(1+MPC)",
+        "1+MPC",
+        "1/(1−MPC)",
+        "1−MPC"
+      ],
+      "ans": 2,
+      "why": "Derive from ΔY = MPC·ΔY + ΔI.",
+      "ref": "Lecture 7 PDF pp. 40–41",
+      "visual": "formula",
+      "id": "l7-r-023"
+    },
+    {
+      "topic": "l7-math",
+      "q": "When MPC = 0.75, the simple multiplier equals:",
+      "opts": [
+        "1.33",
+        "2",
+        "3",
+        "4"
+      ],
+      "ans": 3,
+      "why": "1/(1−0.75)=4.",
+      "ref": "Lecture 7 PDF p. 41",
+      "visual": "formula",
+      "id": "l7-r-024"
+    },
+    {
+      "topic": "l7-fiscal",
+      "q": "With the professor's two-round illustration, $5m government purchases contribute how much total GDP?",
+      "opts": [
+        "$8.50m",
+        "$5.95m",
+        "$3.50m",
+        "$2.45m"
+      ],
+      "ans": 0,
+      "why": "First-round $5m + second-round $3.5m = $8.5m.",
+      "ref": "Lecture 7 PDF pp. 35–36",
+      "visual": "fiscal-table",
+      "id": "l7-r-025"
+    },
+    {
+      "topic": "l7-fiscal",
+      "q": "In the same two-round example, $5m transfer payments contribute:",
+      "opts": [
+        "$8.50m",
+        "$5.95m",
+        "$5.00m",
+        "$2.45m"
+      ],
+      "ans": 1,
+      "why": "First-round consumer spending $3.5m + second-round $2.45m.",
+      "ref": "Lecture 7 PDF pp. 35–36",
+      "visual": "fiscal-table",
+      "id": "l7-r-026"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "The aggregate demand curve relates quantity of real GDP demanded to:",
+      "opts": [
+        "Disposable income alone",
+        "The money wage rate",
+        "The price level",
+        "The marginal propensity to import"
+      ],
+      "ans": 2,
+      "why": "AD relates quantity of real GDP demanded and P.",
+      "ref": "Lecture 7 PDF p. 44",
+      "visual": "ad-schedule",
+      "id": "l7-r-027"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "At P = 110, the example's AE₀ equilibrium GDP is:",
+      "opts": [
+        "$12T",
+        "$13T",
+        "$15T",
+        "$14T"
+      ],
+      "ans": 3,
+      "why": "The slide states P110 corresponds to Y14T.",
+      "ref": "Lecture 7 PDF p. 45",
+      "visual": "ad-schedule",
+      "id": "l7-r-028"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "When P increases from 110 to 130 in the lecture example, equilibrium GDP:",
+      "opts": [
+        "Falls from $14T to $13T",
+        "Rises from $13T to $14T",
+        "Rises from $14T to $15T",
+        "Stays at $14T"
+      ],
+      "ans": 0,
+      "why": "At higher P, AE shifts down and AD quantity demanded decreases.",
+      "ref": "Lecture 7 PDF pp. 45–46",
+      "visual": "ae-ad",
+      "id": "l7-r-029"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "At P = 90, the corresponding equilibrium GDP in the AD derivation is:",
+      "opts": [
+        "$13T",
+        "$15T",
+        "$14T",
+        "$11T"
+      ],
+      "ans": 1,
+      "why": "P90 goes with AE₂ and Y15T.",
+      "ref": "Lecture 7 PDF p. 46",
+      "visual": "ad-schedule",
+      "id": "l7-r-030"
+    }
+  ],
+  "mastering": [
+    {
+      "topic": "l7-ae-components",
+      "q": "An increase in government purchases first raises AE, then higher income raises consumption. Which classification is correct?",
+      "opts": [
+        "G is induced; the second-round C is autonomous",
+        "Both increases are autonomous",
+        "G is the autonomous shock; the second-round C is induced",
+        "Both increases are induced imports"
+      ],
+      "ans": 2,
+      "why": "The first round comes from G; following C varies with income.",
+      "ref": "Lecture 7 PDF pp. 4, 12",
+      "visual": "rounds",
+      "id": "l7-m-001"
+    },
+    {
+      "topic": "l7-autonomous",
+      "q": "Which statement is consistent with the professor's expenditure decomposition? I. Exports are treated as autonomous in the simple lecture setup. II. Imports can rise with Y. III. All consumption is always autonomous.",
+      "opts": [
+        "I and III only",
+        "II and III only",
+        "I, II and III",
+        "I and II only"
+      ],
+      "ans": 3,
+      "why": "I and II match slides. Consumption includes an induced component.",
+      "ref": "Lecture 7 PDF pp. 11–12, 21",
+      "visual": "ae-split",
+      "id": "l7-m-002"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "At Yd = $3T, the consumption schedule shown has C = $4T. Saving equals:",
+      "opts": [
+        "−$1T",
+        "+$1T",
+        "$0T",
+        "+$4T"
+      ],
+      "ans": 0,
+      "why": "Saving = Yd − C = 3 − 4 = −1 trillion.",
+      "ref": "Lecture 7 PDF pp. 14–15",
+      "visual": "consumption",
+      "id": "l7-m-003"
+    },
+    {
+      "topic": "l7-consumption",
+      "q": "At Yd = $9T, the graph shows C = $8T. Which claim is correct?",
+      "opts": [
+        "Saving is −$1T",
+        "Saving is +$1T",
+        "Saving is zero",
+        "MPC is 8/9 by definition"
+      ],
+      "ans": 1,
+      "why": "Saving = 9−8 = +1 trillion; 8/9 is not the marginal propensity.",
+      "ref": "Lecture 7 PDF pp. 14–15",
+      "visual": "consumption",
+      "id": "l7-m-004"
+    },
+    {
+      "topic": "l7-mpc",
+      "q": "The consumption table reports Yd rising from $6T to $9T and C from $6T to $8T. Which is the MPC?",
+      "opts": [
+        "1/3",
+        "3/2",
+        "2/3",
+        "1"
+      ],
+      "ans": 2,
+      "why": "Use ΔC/ΔYd = 2/3, not C/Yd.",
+      "ref": "Lecture 7 PDF pp. 17–19",
+      "visual": "mpc-table",
+      "id": "l7-m-005"
+    },
+    {
+      "topic": "l7-mpc",
+      "q": "At unchanged Yd, the real interest rate rises. Which shift is consistent with the lecture's consumption determinants?",
+      "opts": [
+        "Consumption curve shifts upward",
+        "Movement up a fixed consumption schedule",
+        "The slope necessarily doubles",
+        "Consumption curve shifts downward"
+      ],
+      "ans": 3,
+      "why": "A higher real rate discourages consumption holding income fixed.",
+      "ref": "Lecture 7 PDF p. 20",
+      "visual": "consumption-shift",
+      "id": "l7-m-006"
+    },
+    {
+      "topic": "l7-mpc",
+      "q": "If wealth rises and expected future income rises at unchanged Yd, what does the diagram predict?",
+      "opts": [
+        "An upward shift in consumption plans",
+        "A movement left on the same consumption line",
+        "A fall in autonomous spending",
+        "A necessary increase in imports at fixed GDP"
+      ],
+      "ans": 0,
+      "why": "Higher wealth/expected income shift consumption plans up.",
+      "ref": "Lecture 7 PDF p. 20",
+      "visual": "consumption-shift",
+      "id": "l7-m-007"
+    },
+    {
+      "topic": "l7-imports",
+      "q": "Y rises by $10b and imports rise by $2b. Under the lecture's definition, MPI equals:",
+      "opts": [
+        "0.8",
+        "0.2",
+        "5",
+        "2.0"
+      ],
+      "ans": 1,
+      "why": "MPI = 2/10 = 0.2; amounts are an application, not a copied slide example.",
+      "ref": "Lecture 7 PDF p. 21 (application)",
+      "visual": "import-table",
+      "id": "l7-m-008"
+    },
+    {
+      "topic": "l7-turtle",
+      "q": "Turtle Island: AE = 2 + 0.60Y, in billions. What is planned AE when Y = $4b?",
+      "opts": [
+        "$2.4b",
+        "$4.0b",
+        "$4.4b",
+        "$5.6b"
+      ],
+      "ans": 2,
+      "why": "AE = 2 + 0.6×4 = $4.4b.",
+      "ref": "Lecture 7 PDF pp. 22, 30–31",
+      "visual": "turtle",
+      "id": "l7-m-009"
+    },
+    {
+      "topic": "l7-turtle",
+      "q": "At Turtle Island Y = $6b and AE = $5.6b. What happens to unplanned inventories?",
+      "opts": [
+        "Decrease by $0.4b",
+        "Remain unchanged",
+        "Decrease by $6b",
+        "Increase by $0.4b"
+      ],
+      "ans": 3,
+      "why": "Production exceeds planned spending by $0.4b, so inventories accumulate.",
+      "ref": "Lecture 7 PDF pp. 30–31",
+      "visual": "turtle",
+      "id": "l7-m-010"
+    },
+    {
+      "topic": "l7-equilibrium",
+      "q": "A schedule has Y = 12T with AE = 12.5T, Y = 13T with AE = 13T, and Y = 14T with AE = 13.5T. Equilibrium is:",
+      "opts": [
+        "Y = 13T",
+        "Y = 12T",
+        "Y = 14T",
+        "All three outputs"
+      ],
+      "ans": 0,
+      "why": "Only at 13T does AE equal Y.",
+      "ref": "Lecture 7 PDF p. 24",
+      "visual": "ae-table",
+      "id": "l7-m-011"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "At Y = $12T, AE = $12.5T in the professor's schedule. Which sequence is most likely?",
+      "opts": [
+        "Inventories rise; firms cut output",
+        "Inventories fall; firms expand output",
+        "Inventories unchanged; Y stays $12T",
+        "Firms lower output despite excess demand"
+      ],
+      "ans": 1,
+      "why": "Planned spending exceeds production by $0.5T, depleting inventories.",
+      "ref": "Lecture 7 PDF pp. 24, 27–28",
+      "visual": "ae-table",
+      "id": "l7-m-012"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "At Y = $14T, AE = $13.5T in the same schedule. The economy adjusts through:",
+      "opts": [
+        "Inventory decumulation and higher output",
+        "Higher imports with fixed production only",
+        "Inventory accumulation and lower output",
+        "A necessary rise in the price level in the fixed-P model"
+      ],
+      "ans": 2,
+      "why": "Excess production accumulates as stock, prompting firms to cut output.",
+      "ref": "Lecture 7 PDF pp. 24, 27–28",
+      "visual": "ae-table",
+      "id": "l7-m-013"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "In an AE cross, planned expenditure is above the 45° line at output Y₁. Which statement best fits?",
+      "opts": [
+        "Inventories accumulate and output falls",
+        "The economy is already at equilibrium",
+        "Planned expenditure is below output",
+        "Inventories are drawn down and output tends to rise"
+      ],
+      "ans": 3,
+      "why": "Above the line AE>Y; unexpected stock depletion encourages more production.",
+      "ref": "Lecture 7 PDF pp. 26–28",
+      "visual": "inventory-cross",
+      "id": "l7-m-014"
+    },
+    {
+      "topic": "l7-inventory",
+      "q": "Why can real GDP change by more than the initial gap between AE and Y as firms converge?",
+      "opts": [
+        "Spending plans partly rise with income through induced consumption",
+        "Because the 45° line moves down after every purchase",
+        "Because MPC must exceed one",
+        "Because the price level always falls first"
+      ],
+      "ans": 0,
+      "why": "Income-induced spending changes while output responds by a larger amount.",
+      "ref": "Lecture 7 PDF p. 28",
+      "visual": "ae-equilibrium",
+      "id": "l7-m-015"
+    },
+    {
+      "topic": "l7-multiplier",
+      "q": "A $40b autonomous spending reduction produces a $200b equilibrium GDP decrease. What is the implied multiplier?",
+      "opts": [
+        "0.2",
+        "5",
+        "−5",
+        "4"
+      ],
+      "ans": 1,
+      "why": "Magnitude of multiplier is 200/40=5; both changes are negative.",
+      "ref": "Lecture 7 PDF pp. 33, 39 (application)",
+      "visual": "multiplier-table",
+      "id": "l7-m-016"
+    },
+    {
+      "topic": "l7-math",
+      "q": "A simple multiplier is 5. What MPC is consistent with the closed-economy formula?",
+      "opts": [
+        "0.2",
+        "0.5",
+        "0.8",
+        "0.6"
+      ],
+      "ans": 2,
+      "why": "5 = 1/(1−MPC) ⇒ MPC = 0.8.",
+      "ref": "Lecture 7 PDF pp. 40–41 (application)",
+      "visual": "formula",
+      "id": "l7-m-017"
+    },
+    {
+      "topic": "l7-math",
+      "q": "With MPC = 0.60, a $10b rise in autonomous investment generates what equilibrium GDP increase under the simple assumptions?",
+      "opts": [
+        "$6b",
+        "$10b",
+        "$16b",
+        "$25b"
+      ],
+      "ans": 3,
+      "why": "Multiplier 1/(1−0.6)=2.5; ΔY = $25b.",
+      "ref": "Lecture 7 PDF pp. 40–41 (application)",
+      "visual": "formula",
+      "id": "l7-m-018"
+    },
+    {
+      "topic": "l7-multiplier",
+      "q": "The professor's AE graph shows an initial +$0.5T investment shift and equilibrium Y from $13T to $15T. What explains why Y changes by $2T?",
+      "opts": [
+        "Induced expenditure rounds amplify the autonomous shift",
+        "Potential GDP automatically grows $2T",
+        "The change in the price level is $2T",
+        "Government transfers necessarily equal $2T"
+      ],
+      "ans": 0,
+      "why": "Additional C rounds magnify the initial investment increase.",
+      "ref": "Lecture 7 PDF p. 37",
+      "visual": "ae-shift",
+      "id": "l7-m-019"
+    },
+    {
+      "topic": "l7-fiscal",
+      "q": "In the professor's two-round comparison, which route contributes more to GDP per $5m budget, and why?",
+      "opts": [
+        "Transfer, because all transfers directly enter G",
+        "Government purchases, because the full $5m enters first-round demand",
+        "Equal, because every $1 budget is immediately purchased",
+        "Transfer, because MPC = 1"
+      ],
+      "ans": 1,
+      "why": "Government purchases are full direct spending in round 1; transfer recipients spend 70% first.",
+      "ref": "Lecture 7 PDF pp. 35–36",
+      "visual": "fiscal-table",
+      "id": "l7-m-020"
+    },
+    {
+      "topic": "l7-fiscal",
+      "q": "A learner reads 1.70 for the two-round government example and claims the fully accumulated multiplier must be 1.70. Why is that invalid?",
+      "opts": [
+        "Because G is not part of AE",
+        "Because imports must be positive",
+        "Because the table includes only two rounds and not all later induced spending",
+        "Because 1.70 is an inflation rate"
+      ],
+      "ans": 2,
+      "why": "The slide's 1.70 is its finite-round budget ratio, not the infinite sum.",
+      "ref": "Lecture 7 PDF pp. 35–36",
+      "visual": "fiscal-table",
+      "id": "l7-m-021"
+    },
+    {
+      "topic": "l7-fiscal",
+      "q": "The transfer illustration starts with $5m government budget, households spend 70% of each receipt. What is round-two GDP contribution?",
+      "opts": [
+        "$5.00m",
+        "$3.50m",
+        "$1.50m",
+        "$2.45m"
+      ],
+      "ans": 3,
+      "why": "Round 1 spend 0.7×5=3.5; round 2 spend 0.7×3.5=2.45.",
+      "ref": "Lecture 7 PDF pp. 35–36",
+      "visual": "fiscal-table",
+      "id": "l7-m-022"
+    },
+    {
+      "topic": "l7-math",
+      "q": "Which statements are correct under the lecture's simple derivation? I. ΔY = ΔC + ΔI. II. ΔC = MPC·ΔY. III. ΔY/ΔI = 1/(1+MPC).",
+      "opts": [
+        "I and II only",
+        "I and III only",
+        "II and III only",
+        "I, II and III"
+      ],
+      "ans": 0,
+      "why": "I–II are slide equations; denominator is (1−MPC), not (1+MPC).",
+      "ref": "Lecture 7 PDF pp. 40–41",
+      "visual": "formula",
+      "id": "l7-m-023"
+    },
+    {
+      "topic": "l7-math",
+      "q": "If MPC changes from 0.60 to 0.80 while simple-model assumptions remain, how does the multiplier change?",
+      "opts": [
+        "Falls from 5 to 2.5",
+        "Rises from 2.5 to 5",
+        "Stays at 4",
+        "Rises from 0.6 to 0.8 only"
+      ],
+      "ans": 1,
+      "why": "1/0.4=2.5 then 1/0.2=5.",
+      "ref": "Lecture 7 PDF pp. 40–41 (application)",
+      "visual": "formula",
+      "id": "l7-m-024"
+    },
+    {
+      "topic": "l7-imports",
+      "q": "When income-dependent import spending becomes larger, why is the simple closed-economy multiplier not generally applicable?",
+      "opts": [
+        "Imports are part of autonomous I",
+        "Net exports necessarily rise with imports",
+        "Imports are a leakage from demand for domestic output",
+        "The price level must always be falling"
+      ],
+      "ans": 2,
+      "why": "Higher induced imports subtract from NX and reduce domestic expenditure feedback.",
+      "ref": "Lecture 7 PDF pp. 21, 43",
+      "visual": "import-leakage",
+      "id": "l7-m-025"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "When the price level rises from 110 to 130, which AE/AD description matches the professor's illustration?",
+      "opts": [
+        "AE shifts up; AD shifts right",
+        "AE stays constant; AD shifts left",
+        "Equilibrium real GDP rises to $15T",
+        "AE shifts down to AE₁; the economy moves along AD toward Y=$13T"
+      ],
+      "ans": 3,
+      "why": "The slide explicitly distinguishes shifting the relevant AE schedule and moving along AD.",
+      "ref": "Lecture 7 PDF pp. 45–46",
+      "visual": "ae-ad",
+      "id": "l7-m-026"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "At P=90, Y=$15T; at P=130, Y=$13T. What is the best interpretation?",
+      "opts": [
+        "A downward-sloping AD schedule of real GDP demanded",
+        "An upward-sloping AD schedule because P and Y rise together",
+        "A vertical AD line at $14T",
+        "A Phillips curve"
+      ],
+      "ans": 0,
+      "why": "Lower P corresponds to higher quantity of real GDP demanded on AD.",
+      "ref": "Lecture 7 PDF pp. 45–46",
+      "visual": "ad-schedule",
+      "id": "l7-m-027"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "Which change is a movement along a fixed AD curve rather than an autonomous spending shift?",
+      "opts": [
+        "A rise in government purchases at fixed P",
+        "A change in the overall price level from 110 to 90 with other determinants held fixed",
+        "Higher expected future income at fixed P",
+        "A change in technology shifting AS"
+      ],
+      "ans": 1,
+      "why": "The corresponding AE schedule changes with P, producing a movement along the AD relation.",
+      "ref": "Lecture 7 PDF pp. 44–46",
+      "visual": "ae-ad",
+      "id": "l7-m-028"
+    },
+    {
+      "topic": "l7-ae-ad",
+      "q": "A question supplies P=110 and asks for the point on AD implied by the AE₀ equilibrium. Which pair should you plot?",
+      "opts": [
+        "(Y=13T, P=130)",
+        "(Y=15T, P=90)",
+        "(Y=14T, P=110)",
+        "(Y=14T, P=90)"
+      ],
+      "ans": 2,
+      "why": "Point B is Y14T at price level 110.",
+      "ref": "Lecture 7 PDF p. 45",
+      "visual": "ae-ad",
+      "id": "l7-m-029"
+    },
+    {
+      "topic": "l7-turtle",
+      "q": "Under the Turtle Island reconstructed AE equation 2+0.6Y, what is the equilibrium Y?",
+      "opts": [
+        "$3b",
+        "$4b",
+        "$4.4b",
+        "$5b"
+      ],
+      "ans": 3,
+      "why": "Y=2+0.6Y ⇒ 0.4Y=2 ⇒ Y=$5b.",
+      "ref": "Lecture 7 PDF pp. 22, 26–31 (application)",
+      "visual": "turtle",
+      "id": "l7-m-030"
+    }
+  ],
+  "references": {
+    "primary": "Uploaded EC214 Lecture 7 Expenditure Multipliers, 48 PDF pages (includes annotated slides).",
+    "style": "Existing Lecture 5/6 quizzes; 30-question Final Mock Q4–8, 11, 18 as question-style and difficulty references only. No separate senior exam verified. New questions, lecture scope only."
+  }
+};
+
+</script>
+<script>
+/* EC214 Lecture 7 conceptual redraws from the uploaded annotated slides (PDF pp. 10–46).
+ * Charts and tables are generated here, not screenshots of the professor's PDF.
+ * Values labeled illustrative are exercises, never attributed to the professor.
+ */
+(function(){
+"use strict";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const blue="#317bb5",green="#238b73",rose="#c45d7d",purple="#8269ae",orange="#c18a38";
+const text=(x,y,t,c="currentColor",anchor="start",size=12)=>'<text x="'+x+'" y="'+y+'" fill="'+c+'" font-size="'+size+'" text-anchor="'+anchor+'">'+esc(t)+'</text>';
+const path=(d,c="currentColor",w=2,dash="")=>'<path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="'+w+'" stroke-linecap="round" '+(dash?'stroke-dasharray="'+dash+'"':'')+'/>';
+const circle=(x,y,r=4,c="currentColor")=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+c+'"/>';
+const svg=(body,caption,view="0 0 500 272")=>'<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+view+'" role="img" aria-label="'+esc(caption)+'">'+body+'</svg>';
+const fig=(body,caption)=>'<figure class="final-chart final-question-visual">'+body+'<figcaption>'+esc(caption)+'</figcaption></figure>';
+const axes=(xLabel,yLabel)=>path("M64 27 V230 H478","currentColor",1.7)+text(12,16,yLabel)+text(475,255,xLabel,"currentColor","end");
+const table=(heads,rows,cap)=>fig('<div class="final-visual-table-scroll"><table class="final-table final-visual-table"><thead><tr>'+heads.map(h=>'<th scope="col">'+esc(h)+'</th>').join("")+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(cell=>'<td>'+esc(cell)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>',cap);
+const simple=(t,body)=>fig('<div class="final-lecture7-equation">'+body+'</div>',t);
+function consumer(kind){
+ const X=y=>78+28*y,Y=c=>228-16*c;
+ let lines=axes("Disposable income (Yd)","Consumption (C)")+path("M"+X(0)+" "+Y(0)+" L"+X(12)+" "+Y(12),"currentColor",1.4,"5 4");
+ for(const y of [0,3,6,9,12])lines+=text(X(y),247,String(y),"currentColor","middle",11);
+ for(const c of [0,2,4,6,8,10,12])lines+=text(66,Y(c)+4,String(c),"currentColor","end",10);
+ const cy=y=>2+(2/3)*y;
+ if(kind==="consumption-shift"){
+  for(const [d,label,color] of [[-2,"CF₂",rose],[0,"CF₀",blue],[2,"CF₁",green]]){lines+=path("M"+X(0)+" "+Y(cy(0)+d)+" L"+X(12)+" "+Y(cy(12)+d),color,3)+text(X(12)+5,Y(cy(12)+d)+4,label,color)}
+ }else{
+  lines+=path("M"+X(0)+" "+Y(cy(0))+" L"+X(12)+" "+Y(cy(12)),blue,3.5);
+  [0,3,6,9,12].forEach((x,i)=>{lines+=circle(X(x),Y(cy(x)),4,blue)+text(X(x)+6,Y(cy(x))-8,"ABCDE"[i],blue)});
+  if(kind==="mpc-slope"){lines+=path("M"+X(6)+" "+Y(6)+" H"+X(9)+" V"+Y(8),rose,2.5)+text(X(6)+43,Y(6)-8,"ΔYd = 3",rose)+text(X(9)+9,Y(7),"ΔC = 2",rose)}
+  if(kind==="consumption"){lines+=text(164,211,"C > Yd: dissaving",rose)+text(322,214,"C < Yd: saving",green)}
+  lines+=text(405,44,"45°",purple);
+ }
+ const cap=kind==="mpc-slope"?"Professor's consumption schedule, PDF pp. 17–19: ΔYd = 3, ΔC = 2, MPC = 2/3."
+ :kind==="consumption-shift"?"Other influences shift the entire consumption function at unchanged disposable income, PDF p. 20."
+ :"Professor's consumption graph: intercept $2T, 45° saving benchmark, PDF pp. 14–15.";
+ return fig(svg(lines,cap),cap);
+}
+function turtle(){
+ const x=y=>75+29*y,y=c=>230-29*c,ae=v=>2+0.6*v;let a=axes("Real GDP ($b)","Planned AE ($b)");
+ a+=path("M"+x(0)+" "+y(0)+" L"+x(8)+" "+y(8),"currentColor",1.5,"5 4");
+ a+=path("M"+x(0)+" "+y(ae(0))+" L"+x(8)+" "+y(ae(8)),rose,3.5);
+ [0,2,4,5,6,8].forEach(v=>{a+=text(x(v),246,v,"currentColor","middle",11)});
+ [0,2,4,6,8].forEach(v=>a+=text(65,y(v)+3,v,"currentColor","end",11));
+ for(const v of [0,2,4,6,8]){a+=circle(x(v),y(ae(v)),3.6,rose)}
+ a+=circle(x(5),y(5),5,green)+text(x(5)+9,y(5)-8,"E: Y = 5",green);
+ a+=text(x(6)+8,y(5.6)-7,"(6, 5.6)",rose);
+ const cap="Turtle Island AE = 2 + 0.6Y ($b), reconstructed from the professor's example on PDF pp. 22, 30–31.";
+ return fig(svg(a,cap),cap);
+}
+function ae(kind){
+ const x=y=>75+45*(y-11),vy=y=>227-36*(y-11);
+ const cross=val=>path("M"+x(11)+" "+vy(11)+" L"+x(16)+" "+vy(16),"currentColor",1.5,"5 4");
+ const am=val=>13+0.5*(val-13);
+ let s=axes("Real GDP ($T)","Planned AE ($T)")+cross();
+ for(const v of [11,12,13,14,15,16]){s+=text(x(v),247,v,"currentColor","middle",11)}
+ for(const v of [11,13,15])s+=text(65,vy(v)+4,v,"currentColor","end",11);
+ if(kind==="ae-shift"){
+  const fn=(Y,index)=>13+(index?0.75:0.75)*(Y-13)+(index?0.5:0);
+  for(const [i,col,label] of [[0,blue,"AE₀"],[1,rose,"AE₁"]]){
+   s+=path("M"+x(11)+" "+vy(fn(11,i))+" L"+x(16)+" "+vy(fn(16,i)),col,3)+text(x(16)+5,vy(fn(16,i))+4,label,col);
+  }
+  for(const [v,col,n] of [[13,blue,"E₀"],[15,rose,"E₁"]]){
+   s+=circle(x(v),vy(v),4.5,col)+text(x(v)+7,vy(v)-9,n,col);
+   s+=path("M"+x(v)+" "+vy(v)+" V230","currentColor",1,"4 5");
+  }
+  const cap="Autonomous investment +$0.5T shifts AE upward; equilibrium GDP rises $13T to $15T (multiplier 4), PDF p. 37.";
+  return fig(svg(s,cap),cap);
+ }
+ if(kind==="inventory-cross"){
+  s+=path("M"+x(11)+" "+vy(am(11))+" L"+x(16)+" "+vy(am(16)),blue,3.3);
+  s+=circle(x(13),vy(13),4.5,green)+text(x(13)+9,vy(13)-11,"E",green);
+  s+=circle(x(12),vy(am(12)),3.7,rose)+circle(x(14),vy(am(14)),3.7,rose);
+  s+=text(88,62,"AE > Y: inventories ↓",green)+text(275,204,"AE < Y: inventories ↑",rose);
+ }else{
+  s+=path("M"+x(11)+" "+vy(am(11))+" L"+x(16)+" "+vy(am(16)),blue,3.3);
+  s+=circle(x(13),vy(13),4.7,green)+text(x(13)+9,vy(13)-9,"E (13, 13)",green);
+ }
+ const cap=kind==="inventory-cross"?"Planned spending above/below the 45° line gives opposite inventory signals, PDF pp. 26–28."
+ :"Lecture 7's AE intersection at $13T equilibrium output, PDF pp. 24, 26.";
+ return fig(svg(s,cap),cap);
+}
+function aeAd(){
+ const left=80,xx=y=>left+(y-11)*67, yy=val=>245-(val-11)*33;
+ let s=path("M65 28 V245 H500","currentColor",1.5)+text(10,19,"AE ($T)")+text(493,262,"Real GDP (Y)","currentColor","end");
+ const cross=val=>val;
+ s+=path("M"+xx(11)+" "+yy(11)+" L"+xx(16)+" "+yy(16),"currentColor",1.4,"5 4");
+ const eq=[13,14,15];
+ for(let i=0;i<3;i++){
+  const color=[rose,blue,green][i],val=eq[i],f=y=>val+0.5*(y-val);
+  s+=path("M"+xx(11)+" "+yy(f(11))+" L"+xx(16)+" "+yy(f(16)),color,3)+text(xx(16)+6,yy(f(16))+3,"AE"+["₁","₀","₂"][i],color);
+  s+=circle(xx(val),yy(val),4.5,color)+text(xx(val)+8,yy(val)-8,""+["A","B","C"][i],color);
+  s+=path("M"+xx(val)+" "+yy(val)+" V245","currentColor",1,"3 5");
+ }
+ const adY=p=>495-(p-70)*1.45;
+ s+=path("M65 303 V500 H500","currentColor",1.5)+text(12,293,"P (price index)")+text(495,525,"Real GDP (Y)","currentColor","end");
+ s+=path("M"+xx(13)+" "+adY(130)+" L"+xx(15)+" "+adY(90),blue,3.5);
+ for(const [p,y,label,col] of [[130,13,"A",rose],[110,14,"B",blue],[90,15,"C",green]]){
+  s+=circle(xx(y),adY(p),4.5,col)+text(xx(y)+7,adY(p)-8,label,col)+text(61,adY(p)+4,String(p),"currentColor","end")+
+   path("M65 "+adY(p)+" H"+xx(y)+" V500","currentColor",1,"4 4")+text(xx(y),516,String(y),"currentColor","middle");
+ }
+ s+=text(xx(15)+11,adY(90)+9,"AD",blue);
+ const caption="AE–AD derivation: P130→Y13T, P110→Y14T, P90→Y15T, professor PDF pp. 45–46. Curves redrawn.";
+ return fig(svg(s,caption,"0 0 550 545"),caption);
+}
+function rounds(){
+ const c=axes("Successive spending rounds","Spending added ($m)");
+ const vals=[5,3.5,2.45,1.715];
+ let s=c;
+ vals.forEach((v,i)=>{let x=105+i*94,h=v*26;s+='<rect x="'+x+'" y="'+(230-h)+'" width="52" height="'+h+'" rx="5" fill="'+[blue,green,orange,purple][i]+'"/>'+text(x+26,230-h-7,v.toFixed(2),"currentColor","middle")+text(x+26,246,"Round "+(i+1),"currentColor","middle",10)});
+ return fig(svg(s,"Illustrative expenditure rounds with MPC 0.70; later rounds shown for mechanism."),"Illustrative propagation with MPC 0.70, based on PDF pp. 4, 35–36; not the source's two-round fiscal table.");
+}
+function gap(){
+ let s=axes("Real GDP (Y)","Price level (P)")+path("M110 175 L380 58",green,3)+path("M110 62 L385 179",blue,3)+path("M310 27 V230",purple,2.2,"5 5");
+ s+=text(392,179,"AD",blue)+text(387,58,"AS",green)+text(318,36,"Yᶠ",purple)+circle(246,120,4.5,rose)+text(227,110,"Yₑ",rose);
+ return fig(svg(s,"Aggregate-demand and supply concept map comparing actual and potential GDP."),"Output-gap context from annotated PDF p. 3; conceptual redraw, not a quiz answer key.");
+}
+function render(kind){
+ if(!kind)return "";
+ if(kind==="ae-components")return table(["AE component","Meaning"],[["C","Consumption"],["I","Investment"],["G","Government goods/services"],["NX = X − M","Net exports"]],"AE = C + I + G + (X − M), Lecture 7 PDF p. 10.");
+ if(kind==="ae-split")return table(["Autonomous (not dependent on current Y)","Induced (changes with current Y)"],[["Investment I","Consumption C (induced part)"],["Government purchases G","Imports M"],["Exports X","Autonomous parts of C/M also possible"]],"Classification in the annotated PDF pp. 11–12.");
+ if(["consumption","mpc-slope","consumption-shift"].includes(kind))return consumer(kind);
+ if(kind==="mpc-table")return table(["Disposable income ($T)","Consumption ($T)"],[[0,2],[3,4],[6,6],[9,8],[12,10]],"The professor's consumption schedule (PDF pp. 14, 17–19): ΔC/ΔYd = 2/3.");
+ if(kind==="import-leakage")return simple("Income-dependent imports, PDF p. 21",'<b>MPI = ΔM / ΔY</b><p>Imports increase when domestic real GDP increases and subtract from net exports.</p>');
+ if(kind==="import-table")return table(["Observed change (illustrative)","Amount"],[["Δ real GDP","+$10 billion"],["Δ imports","+$2 billion"]],"Original practice data applying professor's MPI definition (PDF p. 21).");
+ if(kind==="turtle")return turtle();
+ if(kind==="turtle-table")return table(["Real GDP ($b)","Planned AE ($b)"],[[0,2],[2,3.2],[4,4.4],[6,5.6],[8,6.8]],"Turtle Island reconstructed AE = 2 + 0.6Y (PDF pp. 22, 30–31).");
+ if(kind==="ae-table")return table(["Real GDP Y ($T)","AE ($T)","AE − Y ($T)"],[[12,12.5,"+0.5"],[13,13,"0"],[14,13.5,"−0.5"],[15,14,"−1.0"]],"Professor's planned expenditure schedule (PDF p. 24).");
+ if(["ae-equilibrium","inventory-cross","ae-shift"].includes(kind))return ae(kind);
+ if(kind==="rounds")return rounds();
+ if(kind==="fiscal-table")return table(["Route, $5m budget","Round 1 GDP","Round 2 GDP","Two rounds"],[["Government purchases","$5.00m","$3.50m","$8.50m"],["Transfer payment","$3.50m","$2.45m","$5.95m"]],"Professor's *two-round* classroom example (PDF pp. 35–36), not the full infinite-series multiplier.");
+ if(kind==="formula")return simple("Simple expenditure multiplier, PDF pp. 40–41",'<p><b>ΔY = ΔC + ΔI</b></p><p><b>ΔC = MPC × ΔY</b></p><p><b>Multiplier = 1 / (1 − MPC)</b></p><small>Only the stated closed-economy case without imports/income taxes.</small>');
+ if(kind==="multiplier-table")return table(["Change (practice scenario)","Amount"],[["Δ autonomous spending","−$40 billion"],["Δ equilibrium GDP","−$200 billion"]],"Original practice amounts, following the professor's multiplier definition (PDF p. 39).");
+ if(kind==="ae-ad")return aeAd();
+ if(kind==="ad-schedule")return table(["P","AE curve","Equilibrium real GDP"],[[130,"AE₁","$13T"],[110,"AE₀","$14T"],[90,"AE₂","$15T"]],"Professor's AE-to-AD points, PDF pp. 45–46.");
+ if(kind==="gap-context")return gap();
+ return "";
+}
+window.D_STUDY_FINAL_L7_RENDER_FIG=render;
+window.D_STUDY_FINAL_L7_RENDER_VISUAL=id=>{
+ const bank=window.D_STUDY_FINAL_L7_QUIZZES;
+ if(!bank)return "";
+ const q=[...bank.reviewing,...bank.mastering].find(x=>x.id===id);
+ return render(q&&q.visual);
+};
+})();
+
+</script>
+<script src="/d-study-app/assets/ec214-final-l7-runtime.js?v=14.11"></script>
+<script src="/d-study-app/assets/ui-v14.js?v=14.0"></script>
+</body></html>
