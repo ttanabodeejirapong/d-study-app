@@ -591,7 +591,7 @@ function renderQuiz(){
   modeBar+partBar+reviewSummary+resultBanner+
   '<details class="final-study-tools"><summary>🔎 Search questions & learning-points guide (optional)</summary>'+rubric+
   '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>Search all three '+quizMode+' parts</b></label>'+
-  '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search business cycle, stagflation, Phillips curve…" autocomplete="off">'+
+  '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search AE, MPC, multiplier, inventories, imports…" autocomplete="off">'+
   '<div id="finalQuizSearchResults" class="final-search-results"></div></div></details>'+
   '<div class="final-quiz-tools"><span class="final-mini"><b>'+partLabel(quizMode,quizPart)+'</b> · Answered '+answered+'/'+bank.length+
   ' · Not sure '+unsure+' · Guessed '+guessed+' · Saved flags '+flagged+'</span>'+
