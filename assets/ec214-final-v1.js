@@ -196,7 +196,10 @@ function renderProgress(){
  '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l6/summary/">Read Lecture 6 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l6/quiz/">Lecture 6 Quiz</a></div></div>'+
  '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 7 · Expenditure Multipliers</h3>'+
  '<p>13 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with graphs and tables for MPC, AE equilibrium, inventories, the multiplier and deriving AD. Lecture 7 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l7/summary/">Read Lecture 7 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l7/quiz/">Lecture 7 Quiz</a></div></div>';
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l7/summary/">Read Lecture 7 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l7/quiz/">Lecture 7 Quiz</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 8 · Fiscal Policy</h3>'+
+ '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with budget/tax tables, AD–AS fiscal-policy graphs, crowding effects and automatic stabilisers. Lecture 8 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l8/summary/">Read Lecture 8 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l8/quiz/">Lecture 8 Quiz</a></div></div>';
 }
 
 function buildOutline(){

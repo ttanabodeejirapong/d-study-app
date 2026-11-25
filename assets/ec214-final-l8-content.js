@@ -1,0 +1,1017 @@
+/* EC214 Lecture 8 Fiscal Policy — professor-first summaries and original Reviewing/Mastering practice. No Final Mock modifications. */
+window.D_STUDY_FINAL_L8={
+  "id": "l8",
+  "title": "Lecture 8 · Fiscal Policy",
+  "subtitle": "Professor: Asst. Prof. Dr. Winai Homsombat · EC214 · 2026-2 Afternoon",
+  "lecture": 8,
+  "sourcePages": 33,
+  "sections": [
+    {
+      "id": "l8-overview",
+      "title": "01 · Fiscal policy: definition, role and tools",
+      "pages": "PDF pp. 4–7",
+      "priority": "Core definition",
+      "fig": "tools",
+      "html": "<p class=\"lead\">The lecture defines <b>fiscal policy</b> as the government's choices about the overall level of <b>government purchases or taxes</b>. In the long run it influences saving, investment and growth; in the short run it primarily affects <b>aggregate demand</b>.</p><p>The professor groups the toolkit around the <b>government budget</b>, taxation, expenditure and public debt. The learning outcomes ask you to describe the budget and explain how fiscal policy works through the AD–AS model.</p><div class=\"final-focus\"><b>Exam distinction:</b> changing government spending, taxes and transfers is fiscal policy; changing the money supply is monetary policy.</div>"
+    },
+    {
+      "id": "l8-budget",
+      "title": "02 · Government budget: deficit, surplus and balance",
+      "pages": "PDF pp. 8–10",
+      "priority": "High priority",
+      "fig": "budget",
+      "html": "<p>A budget is a detailed plan of operations for a future period. The lecture compares <b>government spending plus transfers</b> with <b>tax collection</b>.</p><table class=\"final-table\"><thead><tr><th>Budget type</th><th>Condition in the lecture</th></tr></thead><tbody><tr><td>Budget deficit</td><td>G + transfers &gt; tax collection</td></tr><tr><td>Budget surplus</td><td>G + transfers &lt; tax collection</td></tr><tr><td>Balanced budget</td><td>G + transfers = tax collection</td></tr></tbody></table><p>The professor then simplifies the policy discussion by focusing mainly on changes in <b>G</b>: deficit/greater spending is associated with expansionary policy, while surplus/lower spending is associated with contractionary policy.</p>"
+    },
+    {
+      "id": "l8-tax",
+      "title": "03 · Taxation and government revenue",
+      "pages": "PDF pp. 11–12",
+      "priority": "Core concept",
+      "fig": "tax-table",
+      "html": "<p>The lecture divides taxation into <b>direct taxes on income</b> and <b>indirect taxes on consumption</b>. Examples of direct taxes include individual income tax, corporate tax and wealth tax. Indirect taxes include excise tax, VAT, service tax and customs duties.</p><p>The slide also lists example Thai rates current to its source material (for example VAT 7% of price and corporate income tax 20% of net profit). Treat those rates as <b>slide examples</b>, not timeless legal rules.</p><p>Page 12 adds other sources of government revenue, including state-owned enterprises and other agencies.</p>"
+    },
+    {
+      "id": "l8-debt",
+      "title": "04 · Public expenditure and financing a deficit",
+      "pages": "PDF pp. 13–15",
+      "priority": "High priority",
+      "fig": "debt",
+      "html": "<p>Public expenditure covers collective needs and wants such as pensions, provision and infrastructure. The lecture distinguishes <b>revenue expenditure</b> from <b>capital expenditure</b>.</p><p>A budget deficit can be financed through <b>internal borrowing</b> (for example treasury bills, government bonds and borrowing from the central bank) and <b>external borrowing</b> (foreign sources, international organisations such as the World Bank/IMF, and market borrowing).</p><div class=\"final-focus\">Borrowing matters for the later crowding-out mechanism because a deficit can affect the loanable-funds market and real interest rates.</div>"
+    },
+    {
+      "id": "l8-implementation",
+      "title": "05 · Fiscal-policy implementation: identify the gap first",
+      "pages": "PDF pp. 16–18",
+      "priority": "High priority",
+      "fig": "gap-choice",
+      "html": "<p>The professor's implementation sequence starts with the AD–AS diagnosis: compare <b>actual equilibrium GDP</b> with <b>potential GDP</b>.</p><ul><li><b>Recessionary gap:</b> actual GDP below potential GDP → policy objective is to raise GDP.</li><li><b>Inflationary gap:</b> actual GDP above potential GDP → policy objective is to reduce excessive demand/output.</li></ul><p>Then choose the degree of intervention. <b>Direct/discretionary intervention</b> deliberately changes spending/taxes. <b>Indirect/automatic intervention</b> uses stabilisers such as income taxes and transfers that respond to economic conditions.</p>"
+    },
+    {
+      "id": "l8-discretionary",
+      "title": "06 · Discretionary versus automatic fiscal policy",
+      "pages": "PDF pp. 19, 29",
+      "priority": "Core distinction",
+      "fig": "disc-auto",
+      "html": "<p><b>Discretionary fiscal policy</b> intentionally changes tax rates or government spending to achieve macroeconomic objectives. <b>Automatic fiscal policy</b> is triggered by the state of the economy.</p><p>Examples from the lecture: in a recession tax receipts fall as incomes fall and unemployment payments rise; during stronger income growth, income-tax payments rise automatically.</p><div class=\"final-focus\">Discretionary = deliberate new policy choice. Automatic stabiliser = built-in response without a new policy decision each time.</div>"
+    },
+    {
+      "id": "l8-expansionary",
+      "title": "07 · Expansionary fiscal policy and a recessionary gap",
+      "pages": "PDF pp. 20–21",
+      "priority": "Exam priority",
+      "fig": "expansionary",
+      "html": "<p><b>Objective:</b> close a recessionary gap. The government can <b>increase spending</b> or <b>decrease taxes</b>, raising disposable income, consumption and aggregate demand.</p><p>Professor's graph on p. 21 starts at potential GDP <b>$13T</b> and actual GDP <b>$12T</b>, a <b>$1T recessionary gap</b>. An increase in G or a tax cut increases expenditure by ΔE, the multiplier increases induced expenditure, and AD shifts right to AD₁. The graph ends at real GDP <b>$13T</b> and price level <b>110</b>.</p><p>The policy raises real GDP and lowers unemployment, but the price level also rises.</p>"
+    },
+    {
+      "id": "l8-crowdingout",
+      "title": "08 · Multiplier effect versus crowding-out effect",
+      "pages": "PDF pp. 22–24",
+      "priority": "High priority",
+      "fig": "crowding-out",
+      "html": "<p>The lecture contrasts two simultaneous forces after expansionary fiscal policy.</p><ul><li><b>Multiplier effect:</b> the initial increase in spending generates additional induced spending, magnifying the increase in AD.</li><li><b>Crowding-out effect:</b> a larger budget deficit raises demand for loanable funds, which can raise the real interest rate and reduce private investment.</li></ul><p>The professor treats crowding out as a negative consequence of expansionary fiscal policy because some private spending is displaced. In the annotated sequence, the final increase in AD is therefore smaller than it would be from the multiplier alone.</p>"
+    },
+    {
+      "id": "l8-contractionary",
+      "title": "09 · Contractionary fiscal policy and an inflationary gap",
+      "pages": "PDF pp. 25–27",
+      "priority": "Exam priority",
+      "fig": "contractionary",
+      "html": "<p><b>Objective:</b> handle an inflationary gap. The government <b>decreases spending</b> or <b>increases taxes</b>, lowering aggregate demand.</p><p>The result is lower output and less inflationary pressure, but unemployment can rise. The professor's annotated p. 27 diagram also discusses a <b>crowding-in effect</b>: a budget surplus can increase the supply of loanable funds / reduce borrowing pressure, lower the real interest rate, increase investment, and partially offset the intended fall in AD.</p><div class=\"final-focus\">Expansionary fiscal policy ↔ recessionary gap. Contractionary fiscal policy ↔ inflationary gap. This pairing also appears in the existing Final Mock style reference.</div>"
+    },
+    {
+      "id": "l8-limitations",
+      "title": "10 · Limitations of discretionary fiscal policy",
+      "pages": "PDF p. 28",
+      "priority": "High priority",
+      "fig": "limits",
+      "html": "<p>The lecture lists four problems that can hamper discretionary fiscal policy:</p><ol><li><b>Law-making time lag</b>.</li><li><b>Shrinking area of law-maker discretion</b>.</li><li><b>Estimating potential GDP and economic forecasting</b>.</li><li><b>Crowding-out effect versus multiplier effect</b>.</li></ol><p>These limitations explain why even correctly directed fiscal policy can arrive late, be the wrong size, or have a smaller net effect than a simple multiplier calculation suggests.</p>"
+    },
+    {
+      "id": "l8-automatic",
+      "title": "11 · Automatic stabilisers: how income tax dampens fluctuations",
+      "pages": "PDF pp. 29–32",
+      "priority": "Exam priority",
+      "fig": "automatic",
+      "html": "<p>Automatic fiscal policy uses programs that adjust taxes and transfers automatically with economic activity. The key example is the <b>income tax</b>.</p><p>When GDP/income rises, tax payments rise, so disposable income and consumption rise by less than they otherwise would. The resulting increase in AD is smaller. When GDP/income falls, tax payments fall, cushioning disposable income and consumption, so AD falls by less.</p><p>The professor's annotated diagrams describe this as making the economy <b>less fluctuated</b>: automatic stabilisers reduce the amplitude of expansions and contractions rather than eliminating all movement.</p>"
+    },
+    {
+      "id": "l8-synthesis",
+      "title": "12 · Policy synthesis: tools, gaps and side effects",
+      "pages": "PDF pp. 17–32",
+      "priority": "Mastering synthesis",
+      "fig": "matrix",
+      "html": "<p>For exam problems, organise the lecture into a decision chain:</p><table class=\"final-table\"><thead><tr><th>Economic condition</th><th>Policy direction</th><th>Direct tools</th><th>AD effect</th><th>Important side effect</th></tr></thead><tbody><tr><td>Recessionary gap</td><td>Expansionary</td><td>G ↑ or taxes ↓</td><td>AD → right</td><td>Crowding out can reduce private I</td></tr><tr><td>Inflationary gap</td><td>Contractionary</td><td>G ↓ or taxes ↑</td><td>AD → left</td><td>Crowding in can partially offset the fall in AD</td></tr></tbody></table><p>Automatic stabilisers work in both directions without requiring a fresh discretionary policy decision.</p>"
+    }
+  ]
+};
+window.D_STUDY_FINAL_L8_QUIZZES={
+  "lecture": 8,
+  "reviewing": [
+    {
+      "topic": "l8-overview",
+      "q": "Fiscal policy refers primarily to government choices about:",
+      "opts": [
+        "The money supply and reserve requirement",
+        "Government purchases and taxes",
+        "Only exchange rates",
+        "Only private investment"
+      ],
+      "ans": 1,
+      "why": "The lecture definition focuses on government purchases and taxes.",
+      "ref": "Lecture 8 PDF p. 7",
+      "visual": "tools",
+      "id": "l8-r-001"
+    },
+    {
+      "topic": "l8-overview",
+      "q": "In the short run, fiscal policy primarily affects:",
+      "opts": [
+        "Aggregate demand",
+        "Long-run aggregate supply only",
+        "The natural unemployment rate permanently",
+        "The money multiplier directly"
+      ],
+      "ans": 0,
+      "why": "The slide states that short-run fiscal policy primarily affects AD.",
+      "ref": "Lecture 8 PDF p. 7",
+      "visual": "tools",
+      "id": "l8-r-002"
+    },
+    {
+      "topic": "l8-overview",
+      "q": "Which is NOT a direct fiscal-policy tool in the lecture?",
+      "opts": [
+        "Taxes",
+        "Government purchases",
+        "Transfer payments",
+        "Changing the money supply"
+      ],
+      "ans": 3,
+      "why": "Money-supply changes belong to monetary policy, not direct fiscal policy.",
+      "ref": "Lecture 8 PDF pp. 7–8",
+      "visual": "tools",
+      "id": "l8-r-003"
+    },
+    {
+      "topic": "l8-budget",
+      "q": "A budget deficit occurs when:",
+      "opts": [
+        "Tax collection exceeds G plus transfers",
+        "G plus transfers exceeds tax collection",
+        "G plus transfers equals tax collection",
+        "Exports exceed imports"
+      ],
+      "ans": 1,
+      "why": "The lecture defines deficit as spending plus transfers above tax collection.",
+      "ref": "Lecture 8 PDF p. 8",
+      "visual": "budget",
+      "id": "l8-r-004"
+    },
+    {
+      "topic": "l8-budget",
+      "q": "A budget surplus occurs when:",
+      "opts": [
+        "G plus transfers is below tax collection",
+        "G plus transfers exceeds tax collection",
+        "Taxes are zero",
+        "Government debt is zero"
+      ],
+      "ans": 0,
+      "why": "Surplus means revenue exceeds the spending-plus-transfer measure used in the lecture.",
+      "ref": "Lecture 8 PDF p. 8",
+      "visual": "budget",
+      "id": "l8-r-005"
+    },
+    {
+      "topic": "l8-budget",
+      "q": "A balanced budget occurs when:",
+      "opts": [
+        "Taxes are larger than GDP",
+        "G is zero",
+        "G plus transfers equals tax collection",
+        "Government debt equals taxes"
+      ],
+      "ans": 2,
+      "why": "The slide defines balance by equality of those flows.",
+      "ref": "Lecture 8 PDF p. 8",
+      "visual": "budget",
+      "id": "l8-r-006"
+    },
+    {
+      "topic": "l8-tax",
+      "q": "Which is classified as a direct tax in the lecture?",
+      "opts": [
+        "VAT",
+        "Excise tax",
+        "Custom duty",
+        "Personal income tax"
+      ],
+      "ans": 3,
+      "why": "Personal income tax is listed under direct taxes on income.",
+      "ref": "Lecture 8 PDF p. 11",
+      "visual": "tax-table",
+      "id": "l8-r-007"
+    },
+    {
+      "topic": "l8-tax",
+      "q": "Which is classified as an indirect tax on consumption?",
+      "opts": [
+        "VAT",
+        "Corporate income tax",
+        "Wealth tax",
+        "Personal income tax"
+      ],
+      "ans": 0,
+      "why": "VAT is in the indirect-tax list.",
+      "ref": "Lecture 8 PDF p. 11",
+      "visual": "tax-table",
+      "id": "l8-r-008"
+    },
+    {
+      "topic": "l8-tax",
+      "q": "The lecture's example VAT rate shown on the slide is:",
+      "opts": [
+        "20%",
+        "7%",
+        "35%",
+        "11.23%"
+      ],
+      "ans": 1,
+      "why": "The table on p. 11 shows VAT at 7% of price as the slide's example.",
+      "ref": "Lecture 8 PDF p. 11",
+      "visual": "tax-table",
+      "id": "l8-r-009"
+    },
+    {
+      "topic": "l8-debt",
+      "q": "Which is an example of internal borrowing?",
+      "opts": [
+        "World Bank loan",
+        "IMF borrowing",
+        "Government bonds sold domestically",
+        "Foreign direct investment"
+      ],
+      "ans": 2,
+      "why": "Treasury bills and government bonds are listed under internal borrowing.",
+      "ref": "Lecture 8 PDF p. 13",
+      "visual": "debt",
+      "id": "l8-r-010"
+    },
+    {
+      "topic": "l8-debt",
+      "q": "Which is listed as a possible external borrowing source?",
+      "opts": [
+        "A household's saving account only",
+        "World Bank or IMF",
+        "VAT receipts",
+        "Corporate income tax"
+      ],
+      "ans": 1,
+      "why": "International organisations are listed under external borrowing.",
+      "ref": "Lecture 8 PDF p. 13",
+      "visual": "debt",
+      "id": "l8-r-011"
+    },
+    {
+      "topic": "l8-implementation",
+      "q": "A recessionary gap means actual equilibrium GDP is:",
+      "opts": [
+        "Above potential GDP",
+        "Equal to potential GDP",
+        "Below potential GDP",
+        "Necessarily zero"
+      ],
+      "ans": 2,
+      "why": "The professor begins fiscal-policy choice by comparing actual with potential GDP.",
+      "ref": "Lecture 8 PDF pp. 17–18",
+      "visual": "gap-choice",
+      "id": "l8-r-012"
+    },
+    {
+      "topic": "l8-implementation",
+      "q": "An inflationary gap means actual equilibrium GDP is:",
+      "opts": [
+        "Above potential GDP",
+        "Below potential GDP",
+        "Always equal to potential GDP",
+        "Below nominal GDP only"
+      ],
+      "ans": 0,
+      "why": "Output is above potential in the inflationary-gap diagram.",
+      "ref": "Lecture 8 PDF pp. 17–18",
+      "visual": "gap-choice",
+      "id": "l8-r-013"
+    },
+    {
+      "topic": "l8-discretionary",
+      "q": "Discretionary fiscal policy requires:",
+      "opts": [
+        "An intentional change in taxes or government spending",
+        "No government decision at all",
+        "A central-bank interest-rate change",
+        "Only automatic income-tax collections"
+      ],
+      "ans": 0,
+      "why": "Discretionary policy is an intentional policy choice.",
+      "ref": "Lecture 8 PDF p. 19",
+      "visual": "disc-auto",
+      "id": "l8-r-014"
+    },
+    {
+      "topic": "l8-discretionary",
+      "q": "Which is an automatic fiscal-policy response?",
+      "opts": [
+        "Parliament passes a new stimulus law",
+        "Government announces a new infrastructure project",
+        "The central bank cuts its policy rate",
+        "Tax receipts fall automatically when incomes fall"
+      ],
+      "ans": 3,
+      "why": "Automatic policy is triggered by the economy without a new discretionary action.",
+      "ref": "Lecture 8 PDF p. 19",
+      "visual": "disc-auto",
+      "id": "l8-r-015"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "Expansionary fiscal policy is used primarily to address:",
+      "opts": [
+        "An inflationary gap",
+        "A recessionary gap",
+        "A trade surplus",
+        "A high natural unemployment rate permanently"
+      ],
+      "ans": 1,
+      "why": "The objective on p. 20 is to handle a recessionary gap.",
+      "ref": "Lecture 8 PDF pp. 20–21",
+      "visual": "expansionary",
+      "id": "l8-r-016"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "Which combination is expansionary fiscal policy?",
+      "opts": [
+        "G decreases or taxes increase",
+        "G increases or taxes decrease",
+        "G decreases and taxes decrease necessarily",
+        "Taxes and G both fixed"
+      ],
+      "ans": 1,
+      "why": "The slide lists higher spending or lower taxes.",
+      "ref": "Lecture 8 PDF p. 20",
+      "visual": "expansionary",
+      "id": "l8-r-017"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "In the professor's expansionary graph, potential GDP is:",
+      "opts": [
+        "$12T",
+        "$13T",
+        "$14T",
+        "$15T"
+      ],
+      "ans": 1,
+      "why": "Potential GDP is labeled $13T.",
+      "ref": "Lecture 8 PDF p. 21",
+      "visual": "expansionary",
+      "id": "l8-r-018"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "The initial recessionary gap in the professor's graph is:",
+      "opts": [
+        "$0.5T",
+        "$2T",
+        "$1T",
+        "$13T"
+      ],
+      "ans": 2,
+      "why": "Actual output is $12T versus potential $13T.",
+      "ref": "Lecture 8 PDF p. 21",
+      "visual": "expansionary",
+      "id": "l8-r-019"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "After the expansionary policy in the slide, real GDP becomes:",
+      "opts": [
+        "$12T",
+        "$14T",
+        "$15T",
+        "$13T"
+      ],
+      "ans": 3,
+      "why": "The recessionary gap is closed at $13T.",
+      "ref": "Lecture 8 PDF p. 21",
+      "visual": "expansionary",
+      "id": "l8-r-020"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "Crowding out means increased government spending can:",
+      "opts": [
+        "Raise private investment through lower real rates",
+        "Reduce private-sector spending through a higher real interest rate",
+        "Eliminate all taxes",
+        "Make the multiplier infinite"
+      ],
+      "ans": 1,
+      "why": "The slide defines crowding out as lower private spending caused by higher real rates.",
+      "ref": "Lecture 8 PDF p. 22",
+      "visual": "crowding-out",
+      "id": "l8-r-021"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "The lecture treats crowding out as a negative consequence of:",
+      "opts": [
+        "Contractionary monetary policy only",
+        "Automatic stabilisers",
+        "Expansionary fiscal policy",
+        "Balanced-budget accounting only"
+      ],
+      "ans": 2,
+      "why": "It is presented as a negative consequence of expansionary fiscal policy.",
+      "ref": "Lecture 8 PDF p. 22",
+      "visual": "crowding-out",
+      "id": "l8-r-022"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "Contractionary fiscal policy is used to handle:",
+      "opts": [
+        "A recessionary gap",
+        "An inflationary gap",
+        "A balanced budget only",
+        "A fall in potential GDP necessarily"
+      ],
+      "ans": 1,
+      "why": "The objective on p. 25 is to address an inflationary gap.",
+      "ref": "Lecture 8 PDF pp. 25–27",
+      "visual": "contractionary",
+      "id": "l8-r-023"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "Which combination is contractionary?",
+      "opts": [
+        "G increases or taxes fall",
+        "G falls or taxes rise",
+        "G rises and taxes rise by the same amount necessarily",
+        "The money supply falls"
+      ],
+      "ans": 1,
+      "why": "Lower spending or higher taxes reduces AD.",
+      "ref": "Lecture 8 PDF p. 25",
+      "visual": "contractionary",
+      "id": "l8-r-024"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "A contractionary policy can lead to:",
+      "opts": [
+        "Higher output and lower unemployment",
+        "Lower output and higher unemployment",
+        "Higher AD and lower unemployment",
+        "No change in AD"
+      ],
+      "ans": 1,
+      "why": "The slide says output falls and unemployment can rise.",
+      "ref": "Lecture 8 PDF p. 25",
+      "visual": "contractionary",
+      "id": "l8-r-025"
+    },
+    {
+      "topic": "l8-limitations",
+      "q": "Which is listed as a limitation of discretionary fiscal policy?",
+      "opts": [
+        "Instant law-making",
+        "Perfect GDP forecasting",
+        "Law-making time lag",
+        "No multiplier effects"
+      ],
+      "ans": 2,
+      "why": "The lecture explicitly lists a law-making time lag.",
+      "ref": "Lecture 8 PDF p. 28",
+      "visual": "limits",
+      "id": "l8-r-026"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "Automatic stabilisers are designed to:",
+      "opts": [
+        "Increase the size of every shock",
+        "Reduce economic fluctuations",
+        "Fix the price level permanently",
+        "Replace all discretionary policy"
+      ],
+      "ans": 1,
+      "why": "The lecture says they stabilise the economy during fluctuations.",
+      "ref": "Lecture 8 PDF p. 29",
+      "visual": "automatic",
+      "id": "l8-r-027"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "When income rises, an income-tax automatic stabiliser causes tax payments to:",
+      "opts": [
+        "Fall",
+        "Stay fixed by definition",
+        "Rise",
+        "Become transfers"
+      ],
+      "ans": 2,
+      "why": "Income tax collections rise as income rises.",
+      "ref": "Lecture 8 PDF pp. 29–31",
+      "visual": "automatic",
+      "id": "l8-r-028"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "When income falls in a recession, automatic tax receipts generally:",
+      "opts": [
+        "Fall",
+        "Rise",
+        "Remain fixed",
+        "Become government purchases"
+      ],
+      "ans": 0,
+      "why": "Tax receipts decrease as incomes fall.",
+      "ref": "Lecture 8 PDF p. 19",
+      "visual": "automatic",
+      "id": "l8-r-029"
+    },
+    {
+      "topic": "l8-synthesis",
+      "q": "Which pairing is correct?",
+      "opts": [
+        "Expansionary—recessionary gap; contractionary—inflationary gap",
+        "Expansionary—inflationary gap; contractionary—recessionary gap",
+        "Both policies target only recessions",
+        "Both policies shift AS rather than AD"
+      ],
+      "ans": 0,
+      "why": "This is the central fiscal stabilisation pairing in the lecture.",
+      "ref": "Lecture 8 PDF pp. 20–27",
+      "visual": "matrix",
+      "id": "l8-r-030"
+    }
+  ],
+  "mastering": [
+    {
+      "topic": "l8-overview",
+      "q": "Which statements match Lecture 8? I. Fiscal policy includes government spending/tax choices. II. Short-run fiscal policy primarily affects AD. III. Changing the money supply is a fiscal tool.",
+      "opts": [
+        "I and II only",
+        "I and III only",
+        "II and III only",
+        "I, II and III"
+      ],
+      "ans": 0,
+      "why": "I and II are lecture points; money supply belongs to monetary policy.",
+      "ref": "Lecture 8 PDF p. 7",
+      "visual": "tools",
+      "id": "l8-m-001"
+    },
+    {
+      "topic": "l8-budget",
+      "q": "Government spending plus transfers is 120 while tax collection is 100. Under the lecture's definition, the budget is:",
+      "opts": [
+        "Balanced",
+        "Surplus of 20",
+        "Deficit of 20",
+        "Impossible to classify"
+      ],
+      "ans": 2,
+      "why": "Spending-plus-transfers exceeds tax collection by 20.",
+      "ref": "Lecture 8 PDF p. 8 (application)",
+      "visual": "budget",
+      "id": "l8-m-002"
+    },
+    {
+      "topic": "l8-budget",
+      "q": "Tax collection is 150 and G plus transfers is 130. Which combination best fits the professor's simplified policy discussion?",
+      "opts": [
+        "Budget deficit, typically expansionary",
+        "Budget surplus, typically contractionary",
+        "Balanced budget, expansionary",
+        "Budget deficit, contractionary"
+      ],
+      "ans": 1,
+      "why": "A surplus is revenue above spending; the lecture associates the simplified surplus case with contractionary policy.",
+      "ref": "Lecture 8 PDF pp. 8–9",
+      "visual": "budget",
+      "id": "l8-m-003"
+    },
+    {
+      "topic": "l8-tax",
+      "q": "Which set contains only indirect taxes from the lecture? I. VAT II. Excise tax III. Corporate income tax",
+      "opts": [
+        "I only",
+        "III only",
+        "I and II only",
+        "I, II and III"
+      ],
+      "ans": 2,
+      "why": "VAT and excise are indirect; corporate income tax is direct.",
+      "ref": "Lecture 8 PDF p. 11",
+      "visual": "tax-table",
+      "id": "l8-m-004"
+    },
+    {
+      "topic": "l8-tax",
+      "q": "A slide lists VAT at 7%. What is the safest exam interpretation?",
+      "opts": [
+        "It is a permanent universal VAT rate",
+        "It is the example rate shown in the professor's source table",
+        "VAT is a direct income tax",
+        "It proves all indirect tax rates are 7%"
+      ],
+      "ans": 1,
+      "why": "The rate belongs to the slide's source material and should not be universalised.",
+      "ref": "Lecture 8 PDF p. 11",
+      "visual": "tax-table",
+      "id": "l8-m-005"
+    },
+    {
+      "topic": "l8-debt",
+      "q": "A government finances a deficit by selling domestic treasury bills. This is:",
+      "opts": [
+        "Internal borrowing",
+        "External borrowing",
+        "Indirect taxation",
+        "An automatic stabiliser"
+      ],
+      "ans": 0,
+      "why": "Treasury bills are in the internal-borrowing list.",
+      "ref": "Lecture 8 PDF p. 13",
+      "visual": "debt",
+      "id": "l8-m-006"
+    },
+    {
+      "topic": "l8-implementation",
+      "q": "The economy begins at Y = 11 while potential GDP is 13. Which policy direction matches the lecture?",
+      "opts": [
+        "Contractionary fiscal policy",
+        "Expansionary fiscal policy",
+        "Automatic monetary tightening",
+        "No intervention can be considered"
+      ],
+      "ans": 1,
+      "why": "Output below potential is a recessionary gap; expansionary policy is the direct discretionary response.",
+      "ref": "Lecture 8 PDF pp. 17–21",
+      "visual": "gap-choice",
+      "id": "l8-m-007"
+    },
+    {
+      "topic": "l8-implementation",
+      "q": "The economy begins above potential GDP. Which direct discretionary choice is consistent with Lecture 8?",
+      "opts": [
+        "Increase G or cut taxes",
+        "Decrease G or raise taxes",
+        "Increase the money supply",
+        "Increase transfer payments to magnify AD"
+      ],
+      "ans": 1,
+      "why": "Inflationary gap calls for contractionary fiscal policy.",
+      "ref": "Lecture 8 PDF pp. 17–18, 25",
+      "visual": "gap-choice",
+      "id": "l8-m-008"
+    },
+    {
+      "topic": "l8-discretionary",
+      "q": "Which scenario is automatic rather than discretionary?",
+      "opts": [
+        "Government passes a temporary tax cut",
+        "Government launches a new stimulus package",
+        "Income falls and tax receipts decline under existing tax rules",
+        "Government raises G by a voted appropriation"
+      ],
+      "ans": 2,
+      "why": "The tax response occurs automatically with the state of the economy.",
+      "ref": "Lecture 8 PDF p. 19",
+      "visual": "disc-auto",
+      "id": "l8-m-009"
+    },
+    {
+      "topic": "l8-discretionary",
+      "q": "Unemployment increases and benefit payments rise under existing law. This is best classified as:",
+      "opts": [
+        "Automatic fiscal policy",
+        "A new discretionary tax law",
+        "Monetary policy",
+        "Crowding out"
+      ],
+      "ans": 0,
+      "why": "The lecture lists unemployment payments as an automatic response.",
+      "ref": "Lecture 8 PDF p. 19",
+      "visual": "disc-auto",
+      "id": "l8-m-010"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "In the professor's p. 21 graph, the economy moves from Y=12T to Y=13T while P rises to 110. Which mechanism is shown?",
+      "opts": [
+        "Contractionary fiscal policy shifts AD left",
+        "Expansionary policy plus multiplier shifts AD right",
+        "A positive AS shock only",
+        "Automatic tax increases shift AD left"
+      ],
+      "ans": 1,
+      "why": "Government spending/tax cut and induced spending shift AD toward potential output.",
+      "ref": "Lecture 8 PDF p. 21",
+      "visual": "expansionary",
+      "id": "l8-m-011"
+    },
+    {
+      "topic": "l8-expansionary",
+      "q": "Suppose the initial government expenditure change raises AD, then induced consumption creates an additional AD increase. The second effect is:",
+      "opts": [
+        "The multiplier effect",
+        "Crowding out",
+        "Crowding in",
+        "An automatic stabiliser"
+      ],
+      "ans": 0,
+      "why": "Induced spending magnifies the initial fiscal impulse.",
+      "ref": "Lecture 8 PDF pp. 21–24",
+      "visual": "expansionary",
+      "id": "l8-m-012"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "A larger deficit increases demand for loanable funds and the real interest rate. Which private component is most directly reduced?",
+      "opts": [
+        "Government purchases",
+        "Private investment",
+        "Tax revenue",
+        "Transfers"
+      ],
+      "ans": 1,
+      "why": "Higher borrowing costs can reduce interest-sensitive investment.",
+      "ref": "Lecture 8 PDF pp. 22–24",
+      "visual": "crowding-out",
+      "id": "l8-m-013"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "Which sequence best captures crowding out in the lecture?",
+      "opts": [
+        "Budget deficit → LF demand ↑ → real interest rate ↑ → private I ↓",
+        "Budget deficit → LF supply ↑ → real interest rate ↓ → private I ↑",
+        "Budget surplus → LF demand ↑ → real interest rate ↑ → private I ↓",
+        "Tax cut → LRAS immediately shifts right"
+      ],
+      "ans": 0,
+      "why": "This is the annotated mechanism on pp. 22–23.",
+      "ref": "Lecture 8 PDF pp. 22–23",
+      "visual": "loanable-deficit",
+      "id": "l8-m-014"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "Multiplier and crowding out occur together after expansionary fiscal policy. Relative to the multiplier alone, crowding out tends to make the final AD increase:",
+      "opts": [
+        "Larger",
+        "Smaller",
+        "Exactly zero in every case",
+        "A shift of AS instead"
+      ],
+      "ans": 1,
+      "why": "Reduced private investment offsets part of the fiscal expansion.",
+      "ref": "Lecture 8 PDF pp. 22–24",
+      "visual": "crowding-out",
+      "id": "l8-m-015"
+    },
+    {
+      "topic": "l8-crowdingout",
+      "q": "Which existing Final Mock idea is most directly echoed by this lecture?",
+      "opts": [
+        "A deficit that raises market interest rates can crowd out private investment",
+        "Money supply changes are fiscal policy",
+        "A tax cut necessarily shifts AS left",
+        "A balanced budget eliminates all cycles"
+      ],
+      "ans": 0,
+      "why": "The old mock's crowding-out scenario is aligned with the professor's Lecture 8 mechanism.",
+      "ref": "Lecture 8 PDF p. 22 + mock-style reference",
+      "visual": "loanable-deficit",
+      "id": "l8-m-016"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "An inflationary gap exists. Government reduces G. What is the first direct AD effect?",
+      "opts": [
+        "AD shifts right",
+        "AD shifts left",
+        "AS shifts right",
+        "Potential GDP falls immediately"
+      ],
+      "ans": 1,
+      "why": "Lower government purchases reduce aggregate demand.",
+      "ref": "Lecture 8 PDF pp. 25–27",
+      "visual": "contractionary",
+      "id": "l8-m-017"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "Which chain best represents the crowding-in mechanism annotated on p. 27?",
+      "opts": [
+        "Budget surplus → less borrowing pressure / more LF supply → r ↓ → I ↑",
+        "Budget surplus → LF demand ↑ → r ↑ → I ↓",
+        "Budget deficit → r ↓ → I ↑",
+        "Tax rise → AS automatically shifts right"
+      ],
+      "ans": 0,
+      "why": "The professor's annotation shows lower rates and higher investment partially offsetting contraction.",
+      "ref": "Lecture 8 PDF p. 27",
+      "visual": "loanable-surplus",
+      "id": "l8-m-018"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "Why can crowding in make contractionary fiscal policy's final AD decline smaller than the direct multiplier effect suggests?",
+      "opts": [
+        "Lower real rates can encourage private investment",
+        "Higher real rates always eliminate investment",
+        "Tax receipts become transfers",
+        "Potential GDP necessarily rises"
+      ],
+      "ans": 0,
+      "why": "A lower real rate supports I, offsetting part of the contraction.",
+      "ref": "Lecture 8 PDF p. 27",
+      "visual": "contractionary",
+      "id": "l8-m-019"
+    },
+    {
+      "topic": "l8-contractionary",
+      "q": "Which outcome is consistent with successful contractionary policy against an inflationary gap?",
+      "opts": [
+        "Output moves toward potential and inflation pressure decreases",
+        "Output moves farther above potential",
+        "AD shifts right and unemployment falls",
+        "The money supply must rise"
+      ],
+      "ans": 0,
+      "why": "The policy lowers excessive AD, moving output back toward potential.",
+      "ref": "Lecture 8 PDF pp. 25–27",
+      "visual": "contractionary",
+      "id": "l8-m-020"
+    },
+    {
+      "topic": "l8-limitations",
+      "q": "Why does a law-making time lag matter?",
+      "opts": [
+        "Policy can take effect after the economy has already changed",
+        "It guarantees the multiplier is larger",
+        "It removes crowding out",
+        "It makes automatic stabilisers discretionary"
+      ],
+      "ans": 0,
+      "why": "Implementation delays can make fiscal action late.",
+      "ref": "Lecture 8 PDF p. 28",
+      "visual": "limits",
+      "id": "l8-m-021"
+    },
+    {
+      "topic": "l8-limitations",
+      "q": "Why is estimating potential GDP a fiscal-policy problem?",
+      "opts": [
+        "The chosen gap and size of intervention can be mismeasured",
+        "Potential GDP is a tax rate",
+        "It determines VAT mechanically",
+        "It eliminates the need for forecasting"
+      ],
+      "ans": 0,
+      "why": "Misjudging Yf means misdiagnosing the gap or policy size.",
+      "ref": "Lecture 8 PDF p. 28",
+      "visual": "limits",
+      "id": "l8-m-022"
+    },
+    {
+      "topic": "l8-limitations",
+      "q": "Which combination appears together in the professor's limitations list?",
+      "opts": [
+        "Law-making lag and economic forecasting",
+        "Exchange-rate targeting and money-supply targeting",
+        "Only public debt and customs duties",
+        "VAT and import tariffs only"
+      ],
+      "ans": 0,
+      "why": "Both are explicitly listed on p. 28.",
+      "ref": "Lecture 8 PDF p. 28",
+      "visual": "limits",
+      "id": "l8-m-023"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "GDP rises sharply. With an income-tax stabiliser, which sequence dampens the expansion?",
+      "opts": [
+        "Income ↑ → tax payment ↑ → disposable income rises less → C and AD rise less",
+        "Income ↑ → tax payment ↓ → disposable income ↑ more → AD rises more",
+        "Income ↑ → G automatically doubles",
+        "Income ↑ → LRAS shifts left"
+      ],
+      "ans": 0,
+      "why": "Higher taxes siphon off part of the income increase.",
+      "ref": "Lecture 8 PDF pp. 30–31",
+      "visual": "automatic",
+      "id": "l8-m-024"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "GDP falls. How does the income-tax stabiliser cushion the downturn?",
+      "opts": [
+        "Tax payments fall, cushioning disposable income and consumption",
+        "Tax payments rise, cutting disposable income further",
+        "Government purchases automatically fall one-for-one",
+        "Interest rates are legally fixed"
+      ],
+      "ans": 0,
+      "why": "Lower taxes soften the decline in Yd, C and AD.",
+      "ref": "Lecture 8 PDF pp. 31–32",
+      "visual": "automatic",
+      "id": "l8-m-025"
+    },
+    {
+      "topic": "l8-automatic",
+      "q": "Which is the best statement about automatic stabilisers?",
+      "opts": [
+        "They remove all economic fluctuations",
+        "They reduce the size of fluctuations without requiring a new policy action each time",
+        "They are identical to discretionary stimulus packages",
+        "They always create a budget surplus"
+      ],
+      "ans": 1,
+      "why": "The lecture's aim is a less-fluctuating economy, not zero fluctuations.",
+      "ref": "Lecture 8 PDF pp. 29–32",
+      "visual": "automatic",
+      "id": "l8-m-026"
+    },
+    {
+      "topic": "l8-synthesis",
+      "q": "A recessionary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "opts": [
+        "Expansionary; G↑ or taxes↓; AD right; possible crowding out",
+        "Contractionary; G↓ or taxes↑; AD left; crowding out",
+        "Expansionary; money supply↑; AS right",
+        "Automatic; G fixed; AD left"
+      ],
+      "ans": 0,
+      "why": "This combines the lecture's direction, tools, AD effect and side effect.",
+      "ref": "Lecture 8 PDF pp. 20–24",
+      "visual": "matrix",
+      "id": "l8-m-027"
+    },
+    {
+      "topic": "l8-synthesis",
+      "q": "An inflationary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "opts": [
+        "Expansionary; G↑; AD right",
+        "Contractionary; G↓ or taxes↑; AD left; possible crowding in",
+        "Monetary expansion; taxes↓",
+        "Automatic transfers↑ necessarily"
+      ],
+      "ans": 1,
+      "why": "This is the lecture's contractionary fiscal-policy chain.",
+      "ref": "Lecture 8 PDF pp. 25–27",
+      "visual": "matrix",
+      "id": "l8-m-028"
+    },
+    {
+      "topic": "l8-synthesis",
+      "q": "Which statements are true? I. Crowding out can offset expansionary fiscal policy. II. Crowding in can offset contractionary fiscal policy. III. Automatic stabilisers require a fresh law every time GDP changes.",
+      "opts": [
+        "I only",
+        "II and III only",
+        "I and II only",
+        "I, II and III"
+      ],
+      "ans": 2,
+      "why": "I and II follow the lecture; III contradicts automatic policy.",
+      "ref": "Lecture 8 PDF pp. 22–32",
+      "visual": "matrix",
+      "id": "l8-m-029"
+    },
+    {
+      "topic": "l8-synthesis",
+      "q": "A fiscal-policy question asks for the first step before choosing G or taxes. What should you determine?",
+      "opts": [
+        "Whether actual GDP is above or below potential GDP",
+        "Whether VAT is exactly 7% forever",
+        "Whether the money supply is growing",
+        "Whether exports equal imports"
+      ],
+      "ans": 0,
+      "why": "The professor starts with economic-problem identification: recessionary or inflationary gap.",
+      "ref": "Lecture 8 PDF pp. 17–18",
+      "visual": "gap-choice",
+      "id": "l8-m-030"
+    }
+  ],
+  "references": {
+    "primary": "Uploaded EC214 Lecture 8 Fiscal Policy, 33 PDF pages, including professor annotations.",
+    "style": "Existing Lecture 5–7 quizzes and Final Mock Q13, Q14, Q17, Q30 used only for style/difficulty. New questions stay inside Lecture 8 source scope; Final Mock is not modified."
+  }
+};
