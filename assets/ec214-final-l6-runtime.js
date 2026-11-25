@@ -176,7 +176,10 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
  '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
  '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The professor’s Lecture 6 PDF controls the content. Earlier lecture quizzes and the existing 30-question Final Mock are difficulty and style references only.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>';
+ '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The professor’s Lecture 6 PDF controls the content. Earlier lecture quizzes and the existing 30-question Final Mock are difficulty and style references only.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 7 · Expenditure Multipliers</h3>'+
+ '<p>13 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with graphs and tables for MPC, AE equilibrium, inventories, the multiplier and deriving AD. Lecture 7 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l7/summary/">Read Lecture 7 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l7/quiz/">Lecture 7 Quiz</a></div></div>';
 }
 
 function buildOutline(){
