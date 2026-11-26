@@ -25,6 +25,9 @@ function market(kind){
  const X=q=>100+(q-.96)*900,Y=r=>225-(r-3.5)*55;
  const demand=()=>path("M"+X(.975)+" "+Y(6.5)+" L"+X(1.035)+" "+Y(3.7),blue,3)+tx(X(1.035)+6,Y(3.7)+4,"MD",blue);
  const supply=(q,label,col)=>path("M"+X(q)+" "+Y(6.7)+" V"+Y(3.6),col,3)+tx(X(q)+6,Y(6.65),label,col);
+ for(const r of [6,5,4]){b+=path("M62 "+Y(r)+" H68","currentColor",1)+tx(56,Y(r)+4,String(r),"currentColor","end",11)}
+ for(const q of [.98,1.00,1.02]){b+=path("M"+X(q)+" 235 V241","currentColor",1)+tx(X(q),257,q.toFixed(2),"currentColor","middle",11)}
+ for(const [r,q] of [[6,.98],[5,1.00],[4,1.02]]){b+=path("M68 "+Y(r)+" H"+X(q),"currentColor",.8,"3 5")+path("M"+X(q)+" "+Y(r)+" V235","currentColor",.8,"3 5")}
  b+=demand();
  if(kind==="ms-shift"){b+=supply(.98,"MS₀",rose)+supply(1.00,"MS₁",blue)+supply(1.02,"MS₂",green)+tx(X(.98)-4,Y(6)-8,"6%",rose,"end")+tx(X(1.00)-5,Y(5)-8,"5%",blue,"end")+tx(X(1.02)+7,Y(4)-8,"4%",green);}
  else {b+=supply(1.00,"MS",purple);for(const [r,q,l,col] of [[6,.98,"A",rose],[5,1.00,"E",green],[4,1.02,"C",orange]])b+=circ(X(q),Y(r),4.5,col)+tx(X(q)+8,Y(r)-8,l,col);}
