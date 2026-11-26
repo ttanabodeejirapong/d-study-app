@@ -176,7 +176,10 @@ function renderProgress(){
  '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
  '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
  '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 9 Money and Inflation PDF controls the content. Earlier lecture quizzes and Final Mock monetary questions (especially Q12, Q21–23 and Q29) are style/difficulty references only; the Lecture 9 PDF controls the content.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/l8/">← Lecture 8</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>';
+ '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 9 Money and Inflation PDF controls the content. Earlier lecture quizzes and Final Mock monetary questions (especially Q12, Q21–23 and Q29) are style/difficulty references only; the Lecture 9 PDF controls the content.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/l8/">← Lecture 8</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 10 · Monetary Policy</h3>'+
+ '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with central-bank tool maps, transmission channels, policy chains and short-run trade-off visuals. Lecture 10 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l10/summary/">Read Lecture 10 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l10/quiz/">Lecture 10 Quiz</a></div></div>';
 }
 
 function buildOutline(){

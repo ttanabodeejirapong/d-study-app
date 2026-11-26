@@ -179,7 +179,10 @@ function renderProgress(){
  '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The uploaded professor Lecture 8 Fiscal Policy PDF controls the content. Earlier lecture quizzes and Final Mock Q13, Q14, Q17 and Q30 are style/difficulty references only; the Lecture 8 PDF controls the content.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/l7/">← Lecture 7</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>'+
  '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 9 · Money and Inflation</h3>'+
  '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with money-demand/market graphs, bond adjustment, central-bank money-supply shifts and long-run quantity-theory visuals. Lecture 9 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l9/summary/">Read Lecture 9 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l9/quiz/">Lecture 9 Quiz</a></div></div>';
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l9/summary/">Read Lecture 9 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l9/quiz/">Lecture 9 Quiz</a></div></div>'+
+ '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 10 · Monetary Policy</h3>'+
+ '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with central-bank tool maps, transmission channels, policy chains and short-run trade-off visuals. Lecture 10 keeps its own attempts, notes and progress.</p>'+
+ '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l10/summary/">Read Lecture 10 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l10/quiz/">Lecture 10 Quiz</a></div></div>';
 }
 
 function buildOutline(){
