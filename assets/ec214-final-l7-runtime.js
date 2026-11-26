@@ -151,8 +151,17 @@ function progressPct(){
  const done=BOOK.sections.reduce((n,s)=>n+({notstarted:0,learning:25,reviewed:75,mastered:100}[state.lectureStates.l7[s.id]||"notstarted"]||0),0);
  return Math.round(done/BOOK.sections.length);
 }
+function quizProgressInfo(){
+ const attempts=state.quizHistory.filter(h=>h.lecture==="l7"&&(h.mode==="reviewing"||h.mode==="mastering"));
+ const partIds=[...new Set([...(PARTS.reviewing||[]),...(PARTS.mastering||[])].map(p=>p.id))];
+ if(!partIds.length)return {pct:0,done:0,total:0};
+ if(attempts.some(h=>(h.partId||"full")==="full"))return {pct:100,done:partIds.length,total:partIds.length};
+ const done=new Set(attempts.map(h=>h.partId).filter(id=>partIds.includes(id)));
+ return {pct:Math.round(done.size*100/partIds.length),done:done.size,total:partIds.length};
+}
+
 function renderProgress(){
- const pct=progressPct(),attempts=state.quizHistory.filter(x=>x.lecture==="l7");
+ const quizProgress=quizProgressInfo(),pct=quizProgress.pct,attempts=state.quizHistory.filter(x=>x.lecture==="l7");
  const r=modeStats("reviewing"),m=modeStats("mastering"),latest=attempts.at(-1);
  const latestLearn=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":latest?"not tracked":"—";
  const masteryTopics=new Set(Object.entries(state.quizTopicStats||{})
@@ -160,9 +169,9 @@ function renderProgress(){
   .map(([k])=>k.split("::").at(-1))).size;
  $("finalProgress").innerHTML=
  '<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • 2026–2</div><h2>Final Exam Study Dashboard</h2>'+
- '<p>Track Lecture 7 summary progress, confidence-weighted quiz points, retakes and mistakes. Each lecture keeps independent academic progress, attempts and notes.</p></div>'+
+ '<p>Track Lecture 7 quiz-based progress, confidence-weighted quiz points, retakes and mistakes. Each lecture keeps independent academic progress, attempts and notes.</p></div>'+
  '<div class="final-grid">'+
- '<article class="final-card"><span class="final-mini">Summary mastery · Lecture 7</span><span class="final-metric">'+pct+'%</span><div class="final-meter"><span style="width:'+pct+'%"></span></div><span class="final-mini">'+BOOK.sections.length+' detailed sections</span></article>'+
+ '<article class="final-card"><span class="final-mini">Overall lecture progress · Lecture 7</span><span class="final-metric">'+pct+'%</span><div class="final-meter"><span style="width:'+pct+'%"></span></div><span class="final-mini">Quiz parts complete '+quizProgress.done+'/'+quizProgress.total+' · either Reviewing or Mastering counts</span></article>'+
  '<article class="final-card"><span class="final-mini">Reviewing · Completed</span><span class="final-metric">'+r.count+' ×</span><span class="final-mini">Best learning '+(r.best===null?"—":r.best+"%")+' · Clean 100% × '+r.perfect+'</span></article>'+
  '<article class="final-card"><span class="final-mini">Mastering · Completed</span><span class="final-metric">'+m.count+' ×</span><span class="final-mini">Best learning '+(m.best===null?"—":m.best+"%")+' · Clean 100% × '+m.perfect+'</span></article></div>'+
  '<div class="final-grid final-grid-two"><article class="final-card"><h3>Most recent attempt</h3><div class="final-metric">'+(latest?latest.score+"/"+latest.total:"—")+'</div>'+
