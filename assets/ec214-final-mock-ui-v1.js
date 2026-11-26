@@ -1,11 +1,11 @@
-/* EC214 Final — 30-question screenshot-based mock engine (v14.5).
+/* EC214 Final — 30-question final mock + separate Extra 15 engine (v14.25).
    Independent academic keys; professor screenshot sources stay private.
    Answers are INFERRED (not an official Google Form answer key).
  */
 (function(){
 "use strict";
 const BANK=window.D_STUDY_FINAL_MOCK_V1;
-if(!BANK||!Array.isArray(BANK.questions)||BANK.questions.length!==30)return;
+if(!BANK||!Array.isArray(BANK.questions)||BANK.questions.length!==45)return;
 const SUBJECT="ec214final",EXAM=BANK.id,PARTS=BANK.parts;
 const $=id=>document.getElementById(id);
 const escape=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;",'"':"&quot;"}[c]));
@@ -106,7 +106,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   const current=readDraft(id);
   const answered=byPart(id).filter(q=>Number.isInteger(current.answers[q.id])).length;
   return {tries:results.length,best:results.length?Math.max(...results.map(x=>x.learningPercent??0)):null,answered,
-   perfect:results.filter(h=>h.score===10&&h.learningPercent===100).length};
+   perfect:results.filter(h=>h.score===byPart(id).length&&h.learningPercent===100).length};
  }
  function explanation(q){
   const answer=currentDraft.answers[q.id],correct=answer===q.ans;
@@ -120,13 +120,14 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
  function partChooser(){
   const saved=currentDraft;
   const already=byPart(currentPart).filter(q=>Number.isInteger(saved.answers[q.id])).length>0;
-  return '<details class="final-parts-menu" '+(already?"":"open")+'><summary><b>Original '+currentPart.toUpperCase()+
-   ' · 10 questions</b><span>Choose part ▾</span></summary><div class="final-mock-parts">'+PARTS.map(p=>{
+  const active=PARTS.find(p=>p.id===currentPart),activeN=byPart(currentPart).length;
+  return '<details class="final-parts-menu" '+(already?"":"open")+'><summary><b>'+escape(active?.title||currentPart.toUpperCase())+
+   ' · '+activeN+' questions</b><span>Choose set ▾</span></summary><div class="final-mock-parts">'+PARTS.map(p=>{
     const s=counts(p.id);return '<button type="button" data-mock-part="'+p.id+'" class="final-part-card '+(p.id===currentPart?"active":"")+'" aria-pressed="'+(p.id===currentPart)+'">'+
-     '<span class="final-part-name">Part '+p.id.slice(1)+' <span>10 Q</span></span><b>'+escape(p.title)+'</b>'+
-     '<span class="final-part-desc">Questions '+p.range[0]+'–'+p.range[1]+' of 30</span>'+
-     '<span class="final-part-progress">'+(s.tries?("Done "+s.tries+"× · Best learning "+s.best+"%"):s.answered?("Continue "+s.answered+"/10"):"Not started")+
-     '</span><span class="final-part-meter"><i style="width:'+(s.answered*10)+'%"></i></span></button>';
+     '<span class="final-part-name">'+escape(p.collection||"Practice set")+' <span>'+byPart(p.id).length+' Q</span></span><b>'+escape(p.title)+'</b>'+
+     '<span class="final-part-desc">Questions '+p.range[0]+'–'+p.range[1]+' · kept separate from the other source set</span>'+
+     '<span class="final-part-progress">'+(s.tries?("Done "+s.tries+"× · Best learning "+s.best+"%"):s.answered?("Continue "+s.answered+"/"+byPart(p.id).length):"Not started")+
+     '</span><span class="final-part-meter"><i style="width:'+(100*s.answered/Math.max(1,byPart(p.id).length))+'%"></i></span></button>';
    }).join("")+'</div></details>';
  }
  function render(){
@@ -140,10 +141,10 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   const q=bank[index],submitted=currentDraft.submitted,answer=currentDraft.answers[q.id],confidence=currentDraft.confidence[q.id]||"confident";
   const answered=bank.filter(x=>Number.isInteger(currentDraft.answers[x.id])).length;
   const done=counts(currentPart),mark=String(state.questionNotes[q.id]||"").trim();
-  const header='<div class="final-heading"><div class="final-eyebrow">USER-SUPPLIED FINAL EXAM MOCK</div>'+
-    '<h2>Macroeconomic Test — Final Part</h2>'+
-    '<p>30 original questions in three short sets of 10. Your responses, notes, retakes and confidence scores are stored separately from Lecture 5 quizzes.</p></div>'+
-    '<div class="final-mock-disclaimer" role="note">Practice answers are inferred from macroeconomic concepts; the supplied Google Form screenshots do not include an official answer key. The original screenshot files remain in private storage.</div>';
+  const header='<div class="final-heading"><div class="final-eyebrow">USER-SUPPLIED EXAM PRACTICE</div>'+
+    '<h2>Final Mock 30 + Extra 15</h2>'+
+    '<p>The original 30-question final mock remains in three sets of 10. Your earlier 15-question quiz is added as a separate set, so the two sources never get mixed.</p></div>'+
+    '<div class="final-mock-disclaimer" role="note">Practice answers are inferred from macroeconomic concepts; no official answer key was supplied. Original screenshots remain private and are not shipped with the public app.</div>';
   const nums='<div class="final-questionbar" aria-label="Question numbers">'+bank.map((x,i)=>
    '<button type="button" data-mock-index="'+i+'" class="final-qnum '+(i===index?"current ":"")+
    (Number.isInteger(currentDraft.answers[x.id])?"answered ":"")+
@@ -213,7 +214,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
     '<input id="finalMockSearch" class="final-input" type="search" autocomplete="off" placeholder="Search money supply, multiplier, fiscal policy…">'+
     '<div id="finalMockResults" class="final-search-results"></div></details>'+
     '<div class="final-mock-questionbar"><b>Part '+currentPart.slice(1)+' · '+answered+'/10 answered</b>'+
-     '<span>Question '+(index+1)+' of 10 · '+done.tries+' completed attempt'+(done.tries===1?"":"s")+'</span></div>'+
+     '<span>Question '+(index+1)+' of '+bank.length+' · '+done.tries+' completed attempt'+(done.tries===1?"":"s")+'</span></div>'+
    nums+question+actions+history;
   const note=$("finalMockNote");note.value=state.questionNotes[q.id]||"";
   note.oninput=e=>{state.questionNotes[q.id]=e.target.value;saveState();
@@ -229,8 +230,8 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   });
   $("finalMockFlag").onclick=()=>{if(submitted)return;currentDraft.flags[q.id]=!currentDraft.flags[q.id];saveDraft();render()};
   $("finalMockHint").onclick=()=>{const n=$("finalMockHintBody");n.hidden=!n.hidden;$("finalMockHint").setAttribute("aria-expanded",String(!n.hidden))};
-  $("finalMockPrev").onclick=()=>{index=clamp(index-1,0,9);saveDraft();render()};
-  $("finalMockNext").onclick=()=>{index=clamp(index+1,0,9);saveDraft();render()};
+  $("finalMockPrev").onclick=()=>{index=clamp(index-1,0,bank.length-1);saveDraft();render()};
+  $("finalMockNext").onclick=()=>{index=clamp(index+1,0,bank.length-1);saveDraft();render()};
   $("finalMockSubmit").onclick=submit;
   $("finalMockReset").onclick=reset;
   root.querySelectorAll("[data-mock-summary]").forEach(el=>el.onclick=e=>{
@@ -263,7 +264,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
  function submit(){
   if(currentDraft.submitted)return;
   const bank=byPart(currentPart);
-  if(bank.some(q=>!Number.isInteger(currentDraft.answers[q.id]))){alert("Please answer all 10 questions first.");return}
+  if(bank.some(q=>!Number.isInteger(currentDraft.answers[q.id]))){alert("Please answer all "+bank.length+" questions in this set first.");return}
   let score=0,pts=0,guessed=0,unsure=0;
   const reviewItems=[];
   for(const q of bank){
@@ -278,8 +279,8 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   const at=stamp();
   const result={
    id:"final-mock-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
-   subjectId:SUBJECT,profileId:userId,mockId:EXAM,partId:currentPart,at,score,total:10,
-   rawPercent:score*10,learningPoints:Number(pts.toFixed(2)),learningPercent:Math.round(pts*10),
+   subjectId:SUBJECT,profileId:userId,mockId:EXAM,partId:currentPart,at,score,total:bank.length,
+   rawPercent:Math.round(100*score/bank.length),learningPoints:Number(pts.toFixed(2)),learningPercent:Math.round(100*pts/bank.length),
    guessed,unsure,answers:{...currentDraft.answers},confidence:{...currentDraft.confidence},flags:{...currentDraft.flags},
    reviewItems,questionSnapshot:bank.map(q=>({id:q.id,q:q.q,opts:q.opts.slice(),ans:q.ans,explanation:q.explanation,source:q.source}))
   };
@@ -288,14 +289,14 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
   const review=$("finalMockReviewSummary");if(review){review.scrollIntoView({behavior:"smooth",block:"start"});review.setAttribute("tabindex","-1");review.focus({preventScroll:true})}
  }
  function reset(){
-  if(!confirm("Start a new attempt for this 10-question part? Completed history and notes will be preserved."))return;
+  if(!confirm("Start a new attempt for this set? Completed history and notes will be preserved."))return;
   currentDraft=newDraft(currentPart);index=0;saveDraft();render();
  }
  function renderHistory(){
   const h=state.history.slice().reverse();
   return '<details class="final-card final-mock-history"><summary>📊 Mock History · '+h.length+' completed part'+(h.length===1?"":"s")+'</summary>'+
    (h.length?h.map(result=>
-    '<details class="final-history-details"><summary>Part '+result.partId.slice(1)+' · '+result.score+'/10 raw · '+result.learningPercent+'% learning · '+
+    '<details class="final-history-details"><summary>'+escape(PARTS.find(p=>p.id===result.partId)?.title||result.partId)+' · '+result.score+'/'+result.total+' raw · '+result.learningPercent+'% learning · '+
     escape(new Date(result.at).toLocaleString())+'</summary>'+
     '<div class="final-mock-review">'+result.questionSnapshot.map((q,i)=>{
      const given=result.answers[q.id],ok=given===q.ans,conf=result.confidence[q.id]||"confident";

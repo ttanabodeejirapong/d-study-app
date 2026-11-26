@@ -1,36 +1,48 @@
-/* EC214 Final Mock screenshot-transcribed source bank. Screenshots are PRIVATE, this public bank is a study reconstruction. The answer key is inferred, not supplied by the form. */
+/* EC214 Final Mock study reconstruction. Private screenshots are not shipped. Answer keys are inferred practice keys, not official form keys. */
 window.D_STUDY_FINAL_MOCK_V1={
   "id": "final-mock-2026-user",
   "course": "EC214 Final Exams",
-  "title": "Macroeconomic Test — Final Part",
-  "subtitle": "User-provided Google Form mock • 30 questions • 3 original sets",
-  "sourceType": "17 private screenshots (IMG_4356–IMG_4372)",
+  "title": "Final Mock + Earlier Quiz",
+  "subtitle": "Original 30-question final mock + separate Extra 15 earlier quiz",
+  "sourceType": "Private user-provided screenshots; public app contains reconstructed study text only",
   "officialKeyProvided": false,
   "answerKeyStatus": "Inferred practice answers (not an official marked key)",
   "parts": [
     {
       "id": "p1",
-      "title": "Original Part 1",
+      "title": "Final Mock · Part 1",
       "range": [
         1,
         10
-      ]
+      ],
+      "collection": "Final Mock 30"
     },
     {
       "id": "p2",
-      "title": "Original Part 2",
+      "title": "Final Mock · Part 2",
       "range": [
         11,
         20
-      ]
+      ],
+      "collection": "Final Mock 30"
     },
     {
       "id": "p3",
-      "title": "Original Part 3",
+      "title": "Final Mock · Part 3",
       "range": [
         21,
         30
-      ]
+      ],
+      "collection": "Final Mock 30"
+    },
+    {
+      "id": "e15",
+      "title": "Extra 15 · Earlier Quiz",
+      "range": [
+        31,
+        45
+      ],
+      "collection": "Earlier Quiz 15"
     }
   ],
   "questions": [
@@ -634,6 +646,261 @@ window.D_STUDY_FINAL_MOCK_V1={
       "explanation": "Government borrowing that raises market interest rates can reduce interest-sensitive private investment (crowding out).",
       "source": "IMG_4372(1).png",
       "summaryId": "ad-shifts"
+    },
+    {
+      "id": "extra15-q01",
+      "partId": "e15",
+      "number": 31,
+      "q": "An economy has the following planned expenditure: C = 500, I = 200, G = 300, X = 150, M = 100. If current real GDP is 1,200, what is the likely adjustment process?",
+      "opts": [
+        "Firms increase production due to excess demand",
+        "Firms decrease production due to excess supply",
+        "Imports will automatically decrease",
+        "The economy is at equilibrium"
+      ],
+      "ans": 1,
+      "topic": "AE adjustment",
+      "explanation": "Planned expenditure is 500 + 200 + 300 + 150 − 100 = 1,050. Because planned expenditure is below output of 1,200, inventories accumulate unexpectedly and firms reduce production.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q02",
+      "partId": "e15",
+      "number": 32,
+      "q": "Suppose MPC = 0.75 and autonomous investment increases by 100. In the simple model, what is the total change in equilibrium GDP?",
+      "opts": [
+        "400",
+        "100",
+        "75",
+        "300"
+      ],
+      "ans": 0,
+      "topic": "Simple multiplier",
+      "explanation": "The simple multiplier is 1/(1−0.75)=4, so a 100 increase in autonomous investment raises equilibrium GDP by 400.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q03",
+      "partId": "e15",
+      "number": 33,
+      "q": "An increase in expected future income shifts the consumption function upward. What is the most likely macroeconomic outcome?",
+      "opts": [
+        "Increase in imports only",
+        "Increase in aggregate expenditure and GDP",
+        "Decrease in aggregate expenditure and GDP",
+        "No change in equilibrium"
+      ],
+      "ans": 1,
+      "topic": "Consumption expectations",
+      "explanation": "Higher expected future income raises desired consumption at a given current income, shifting planned aggregate expenditure upward and increasing equilibrium GDP.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q04",
+      "partId": "e15",
+      "number": 34,
+      "q": "If aggregate planned expenditure exceeds real GDP, which of the following best describes what happens next?",
+      "opts": [
+        "Firms experience falling inventories and increase output",
+        "Firms accumulate inventories and reduce output",
+        "Government reduces spending",
+        "Consumption automatically decreases"
+      ],
+      "ans": 0,
+      "topic": "AE inventory adjustment",
+      "explanation": "When planned spending exceeds output, unintended inventory decumulation signals firms to expand production.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q05",
+      "partId": "e15",
+      "number": 35,
+      "q": "A country has a high marginal propensity to import. How does this affect the size of the expenditure multiplier?",
+      "opts": [
+        "Multiplier becomes smaller",
+        "Multiplier becomes negative",
+        "Multiplier becomes larger",
+        "Multiplier is unchanged"
+      ],
+      "ans": 0,
+      "topic": "Import leakage",
+      "explanation": "Imports are a leakage from domestic spending. A higher marginal propensity to import reduces induced domestic expenditure and makes the multiplier smaller.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q06",
+      "partId": "e15",
+      "number": 36,
+      "q": "An economy is experiencing a recessionary gap. Which policy mix would most directly close the gap?",
+      "opts": [
+        "Reduce taxes and increase government spending",
+        "Reduce both taxes and government spending",
+        "Increase taxes and reduce government spending",
+        "Increase interest rates"
+      ],
+      "ans": 0,
+      "topic": "Expansionary fiscal policy",
+      "explanation": "Expansionary fiscal policy raises aggregate demand through higher government purchases and/or lower taxes.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q07",
+      "partId": "e15",
+      "number": 37,
+      "q": "The government increases spending significantly, but private investment falls because market interest rates rise. What concept best explains this situation?",
+      "opts": [
+        "Multiplier effect",
+        "Budget surplus",
+        "Automatic stabilizers",
+        "Crowding-out effect"
+      ],
+      "ans": 3,
+      "topic": "Crowding out",
+      "explanation": "Government borrowing can raise real interest rates and displace some private investment; this is the crowding-out effect.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q08",
+      "partId": "e15",
+      "number": 38,
+      "q": "During an economic boom, tax revenues increase automatically without new legislation. This is an example of:",
+      "opts": [
+        "Contractionary monetary policy",
+        "Expansionary fiscal policy",
+        "Automatic fiscal policy",
+        "Discretionary fiscal policy"
+      ],
+      "ans": 2,
+      "topic": "Automatic stabilizers",
+      "explanation": "A built-in change in tax receipts caused by the economy itself is an automatic stabilizer, not a new discretionary policy decision.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q09",
+      "partId": "e15",
+      "number": 39,
+      "q": "If the government aims to reduce inflation but wants to minimize the increase in unemployment, which policy choice is most appropriate among these options?",
+      "opts": [
+        "Large increase in government spending",
+        "Gradual reduction in government spending",
+        "Sharp increase in taxes only",
+        "Decrease in interest rates"
+      ],
+      "ans": 1,
+      "topic": "Inflation-unemployment policy tradeoff",
+      "explanation": "Among the listed choices, a gradual contraction reduces aggregate demand less abruptly than a sharp tax increase, limiting the short-run employment cost while moving against inflation.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q10",
+      "partId": "e15",
+      "number": 40,
+      "q": "Suppose the government implements a tax cut to stimulate the economy, but households save most of the additional disposable income. What is the most likely outcome?",
+      "opts": [
+        "Small multiplier effect",
+        "Decrease in consumption",
+        "Immediate inflation",
+        "Large increase in GDP"
+      ],
+      "ans": 0,
+      "topic": "Tax multiplier",
+      "explanation": "If households save most of the extra income, the MPC is low, so little induced consumption follows the initial tax cut and the multiplier is small.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q11",
+      "partId": "e15",
+      "number": 41,
+      "q": "An economy is initially in long-run equilibrium. The central bank increases the money supply by 10%, while a structural change permanently increases velocity. According to the quantity theory, what is the most likely long-run consequence?",
+      "opts": [
+        "Real GDP will increase permanently to absorb the extra liquidity",
+        "The price level will increase by exactly 10%",
+        "The price level will increase by more than 10%",
+        "The nominal interest rate will decrease permanently to offset velocity"
+      ],
+      "ans": 2,
+      "topic": "Quantity theory of money",
+      "explanation": "With long-run real output at potential, MV = PY implies that both higher M and higher V raise nominal spending; therefore the price level must rise by more than the 10% money increase alone would imply.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q12",
+      "partId": "e15",
+      "number": 42,
+      "q": "If the nominal interest rate is currently above money-market equilibrium and there is an excess supply of money, which adjustment mechanism moves the market toward equilibrium?",
+      "opts": [
+        "People buy bonds, bond prices rise, and the interest rate falls",
+        "Money demand automatically shifts right to meet supply",
+        "The price level immediately drops to raise real balances",
+        "People sell bonds, bond prices fall, and the interest rate rises"
+      ],
+      "ans": 0,
+      "topic": "Money-market adjustment",
+      "explanation": "With excess money balances, people buy bonds. Bond prices rise and yields/interest rates fall toward money-market equilibrium.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q13",
+      "partId": "e15",
+      "number": 43,
+      "q": "A new instant-payment technology sharply reduces the cash and checking balances people want to hold for transactions. How does this structural change affect the money market, other things equal?",
+      "opts": [
+        "Money supply shifts right as the central bank reacts automatically",
+        "Money demand shifts left, lowering the equilibrium interest rate",
+        "Money demand shifts right, raising the equilibrium interest rate",
+        "There is only a movement upward along money demand"
+      ],
+      "ans": 1,
+      "topic": "Financial technology and money demand",
+      "explanation": "A technology that reduces desired money balances is a non-interest-rate determinant of money demand, so the money-demand curve shifts left and the equilibrium interest rate falls at a fixed money supply.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q14",
+      "partId": "e15",
+      "number": 44,
+      "q": "If a central bank conducts an open-market sale of government bonds, what is the immediate impact on the money market and interest rates?",
+      "opts": [
+        "Money supply shifts right and remains vertical",
+        "Money demand shifts left and interest rates fall",
+        "Money supply shifts right and interest rates fall",
+        "Money supply shifts left and interest rates rise"
+      ],
+      "ans": 3,
+      "topic": "Open-market sale",
+      "explanation": "An open-market sale withdraws money from the public/banking system, shifting the vertical money-supply curve left and raising the equilibrium interest rate.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
+    },
+    {
+      "id": "extra15-q15",
+      "partId": "e15",
+      "number": 45,
+      "q": "In the money-demand diagram, how would a significant increase in the general price level affect the curve, other things equal?",
+      "opts": [
+        "Money demand shifts right because more nominal money is needed for transactions",
+        "Money demand shifts left because money is worth less",
+        "Money demand is unaffected; only money supply changes",
+        "There is a movement downward along the same curve"
+      ],
+      "ans": 0,
+      "topic": "Price level and money demand",
+      "explanation": "A higher general price level increases the nominal balances needed to carry out a given volume of transactions, shifting money demand to the right.",
+      "source": "Earlier 15-question quiz · user-provided screenshot",
+      "summaryId": null
     }
   ]
 };
