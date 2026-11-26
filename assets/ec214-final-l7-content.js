@@ -572,11 +572,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "An increase in government purchases first raises AE, then higher income raises consumption. Which classification is correct?",
       "opts": [
         "G is induced; the second-round C is autonomous",
-        "Both increases are autonomous",
         "G is the autonomous shock; the second-round C is induced",
+        "Both increases are autonomous",
         "Both increases are induced imports"
       ],
-      "ans": 2,
+      "ans": 1,
       "why": "The first round comes from G; following C varies with income.",
       "ref": "Lecture 7 PDF pp. 4, 12",
       "visual": "rounds",
@@ -617,11 +617,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "At Yd = $9T, the graph shows C = $8T. Which claim is correct?",
       "opts": [
         "Saving is −$1T",
-        "Saving is +$1T",
         "Saving is zero",
+        "Saving is +$1T",
         "MPC is 8/9 by definition"
       ],
-      "ans": 1,
+      "ans": 2,
       "why": "Saving = 9−8 = +1 trillion; 8/9 is not the marginal propensity.",
       "ref": "Lecture 7 PDF pp. 14–15",
       "visual": "consumption",
@@ -646,12 +646,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-mpc",
       "q": "At unchanged Yd, the real interest rate rises. Which shift is consistent with the lecture's consumption determinants?",
       "opts": [
+        "Consumption curve shifts downward",
         "Consumption curve shifts upward",
         "Movement up a fixed consumption schedule",
-        "The slope necessarily doubles",
-        "Consumption curve shifts downward"
+        "The slope necessarily doubles"
       ],
-      "ans": 3,
+      "ans": 0,
       "why": "A higher real rate discourages consumption holding income fixed.",
       "ref": "Lecture 7 PDF p. 20",
       "visual": "consumption-shift",
@@ -661,12 +661,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-mpc",
       "q": "If wealth rises and expected future income rises at unchanged Yd, what does the diagram predict?",
       "opts": [
-        "An upward shift in consumption plans",
         "A movement left on the same consumption line",
         "A fall in autonomous spending",
-        "A necessary increase in imports at fixed GDP"
+        "A necessary increase in imports at fixed GDP",
+        "An upward shift in consumption plans"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "Higher wealth/expected income shift consumption plans up.",
       "ref": "Lecture 7 PDF p. 20",
       "visual": "consumption-shift",
@@ -691,12 +691,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-turtle",
       "q": "Turtle Island: AE = 2 + 0.60Y, in billions. What is planned AE when Y = $4b?",
       "opts": [
+        "$4.4b",
         "$2.4b",
         "$4.0b",
-        "$4.4b",
         "$5.6b"
       ],
-      "ans": 2,
+      "ans": 0,
       "why": "AE = 2 + 0.6×4 = $4.4b.",
       "ref": "Lecture 7 PDF pp. 22, 30–31",
       "visual": "turtle",
@@ -721,12 +721,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-equilibrium",
       "q": "A schedule has Y = 12T with AE = 12.5T, Y = 13T with AE = 13T, and Y = 14T with AE = 13.5T. Equilibrium is:",
       "opts": [
-        "Y = 13T",
         "Y = 12T",
+        "Y = 13T",
         "Y = 14T",
         "All three outputs"
       ],
-      "ans": 0,
+      "ans": 1,
       "why": "Only at 13T does AE equal Y.",
       "ref": "Lecture 7 PDF p. 24",
       "visual": "ae-table",
@@ -737,11 +737,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "At Y = $12T, AE = $12.5T in the professor's schedule. Which sequence is most likely?",
       "opts": [
         "Inventories rise; firms cut output",
-        "Inventories fall; firms expand output",
         "Inventories unchanged; Y stays $12T",
+        "Inventories fall; firms expand output",
         "Firms lower output despite excess demand"
       ],
-      "ans": 1,
+      "ans": 2,
       "why": "Planned spending exceeds production by $0.5T, depleting inventories.",
       "ref": "Lecture 7 PDF pp. 24, 27–28",
       "visual": "ae-table",
@@ -751,12 +751,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-inventory",
       "q": "At Y = $14T, AE = $13.5T in the same schedule. The economy adjusts through:",
       "opts": [
+        "Inventory accumulation and lower output",
         "Inventory decumulation and higher output",
         "Higher imports with fixed production only",
-        "Inventory accumulation and lower output",
         "A necessary rise in the price level in the fixed-P model"
       ],
-      "ans": 2,
+      "ans": 0,
       "why": "Excess production accumulates as stock, prompting firms to cut output.",
       "ref": "Lecture 7 PDF pp. 24, 27–28",
       "visual": "ae-table",
@@ -768,10 +768,10 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "opts": [
         "Inventories accumulate and output falls",
         "The economy is already at equilibrium",
-        "Planned expenditure is below output",
-        "Inventories are drawn down and output tends to rise"
+        "Inventories are drawn down and output tends to rise",
+        "Planned expenditure is below output"
       ],
-      "ans": 3,
+      "ans": 2,
       "why": "Above the line AE>Y; unexpected stock depletion encourages more production.",
       "ref": "Lecture 7 PDF pp. 26–28",
       "visual": "inventory-cross",
@@ -781,12 +781,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-inventory",
       "q": "Why can real GDP change by more than the initial gap between AE and Y as firms converge?",
       "opts": [
-        "Spending plans partly rise with income through induced consumption",
         "Because the 45° line moves down after every purchase",
         "Because MPC must exceed one",
-        "Because the price level always falls first"
+        "Because the price level always falls first",
+        "Spending plans partly rise with income through induced consumption"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "Income-induced spending changes while output responds by a larger amount.",
       "ref": "Lecture 7 PDF p. 28",
       "visual": "ae-equilibrium",
@@ -812,11 +812,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "A simple multiplier is 5. What MPC is consistent with the closed-economy formula?",
       "opts": [
         "0.2",
-        "0.5",
         "0.8",
+        "0.5",
         "0.6"
       ],
-      "ans": 2,
+      "ans": 1,
       "why": "5 = 1/(1−MPC) ⇒ MPC = 0.8.",
       "ref": "Lecture 7 PDF pp. 40–41 (application)",
       "visual": "formula",
@@ -826,12 +826,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-math",
       "q": "With MPC = 0.60, a $10b rise in autonomous investment generates what equilibrium GDP increase under the simple assumptions?",
       "opts": [
+        "$25b",
         "$6b",
         "$10b",
-        "$16b",
-        "$25b"
+        "$16b"
       ],
-      "ans": 3,
+      "ans": 0,
       "why": "Multiplier 1/(1−0.6)=2.5; ΔY = $25b.",
       "ref": "Lecture 7 PDF pp. 40–41 (application)",
       "visual": "formula",
@@ -841,12 +841,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-multiplier",
       "q": "The professor's AE graph shows an initial +$0.5T investment shift and equilibrium Y from $13T to $15T. What explains why Y changes by $2T?",
       "opts": [
-        "Induced expenditure rounds amplify the autonomous shift",
         "Potential GDP automatically grows $2T",
         "The change in the price level is $2T",
+        "Induced expenditure rounds amplify the autonomous shift",
         "Government transfers necessarily equal $2T"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "Additional C rounds magnify the initial investment increase.",
       "ref": "Lecture 7 PDF p. 37",
       "visual": "ae-shift",
@@ -857,11 +857,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "In the professor's two-round comparison, which route contributes more to GDP per $5m budget, and why?",
       "opts": [
         "Transfer, because all transfers directly enter G",
-        "Government purchases, because the full $5m enters first-round demand",
         "Equal, because every $1 budget is immediately purchased",
-        "Transfer, because MPC = 1"
+        "Transfer, because MPC = 1",
+        "Government purchases, because the full $5m enters first-round demand"
       ],
-      "ans": 1,
+      "ans": 3,
       "why": "Government purchases are full direct spending in round 1; transfer recipients spend 70% first.",
       "ref": "Lecture 7 PDF pp. 35–36",
       "visual": "fiscal-table",
@@ -871,12 +871,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-fiscal",
       "q": "A learner reads 1.70 for the two-round government example and claims the fully accumulated multiplier must be 1.70. Why is that invalid?",
       "opts": [
+        "Because the table includes only two rounds and not all later induced spending",
         "Because G is not part of AE",
         "Because imports must be positive",
-        "Because the table includes only two rounds and not all later induced spending",
         "Because 1.70 is an inflation rate"
       ],
-      "ans": 2,
+      "ans": 0,
       "why": "The slide's 1.70 is its finite-round budget ratio, not the infinite sum.",
       "ref": "Lecture 7 PDF pp. 35–36",
       "visual": "fiscal-table",
@@ -887,11 +887,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "The transfer illustration starts with $5m government budget, households spend 70% of each receipt. What is round-two GDP contribution?",
       "opts": [
         "$5.00m",
+        "$2.45m",
         "$3.50m",
-        "$1.50m",
-        "$2.45m"
+        "$1.50m"
       ],
-      "ans": 3,
+      "ans": 1,
       "why": "Round 1 spend 0.7×5=3.5; round 2 spend 0.7×3.5=2.45.",
       "ref": "Lecture 7 PDF pp. 35–36",
       "visual": "fiscal-table",
@@ -901,12 +901,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-math",
       "q": "Which statements are correct under the lecture's simple derivation? I. ΔY = ΔC + ΔI. II. ΔC = MPC·ΔY. III. ΔY/ΔI = 1/(1+MPC).",
       "opts": [
-        "I and II only",
         "I and III only",
         "II and III only",
-        "I, II and III"
+        "I, II and III",
+        "I and II only"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "I–II are slide equations; denominator is (1−MPC), not (1+MPC).",
       "ref": "Lecture 7 PDF pp. 40–41",
       "visual": "formula",
@@ -917,11 +917,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "If MPC changes from 0.60 to 0.80 while simple-model assumptions remain, how does the multiplier change?",
       "opts": [
         "Falls from 5 to 2.5",
-        "Rises from 2.5 to 5",
         "Stays at 4",
+        "Rises from 2.5 to 5",
         "Rises from 0.6 to 0.8 only"
       ],
-      "ans": 1,
+      "ans": 2,
       "why": "1/0.4=2.5 then 1/0.2=5.",
       "ref": "Lecture 7 PDF pp. 40–41 (application)",
       "visual": "formula",
@@ -932,11 +932,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "When income-dependent import spending becomes larger, why is the simple closed-economy multiplier not generally applicable?",
       "opts": [
         "Imports are part of autonomous I",
-        "Net exports necessarily rise with imports",
         "Imports are a leakage from demand for domestic output",
+        "Net exports necessarily rise with imports",
         "The price level must always be falling"
       ],
-      "ans": 2,
+      "ans": 1,
       "why": "Higher induced imports subtract from NX and reduce domestic expenditure feedback.",
       "ref": "Lecture 7 PDF pp. 21, 43",
       "visual": "import-leakage",
@@ -948,10 +948,10 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "opts": [
         "AE shifts up; AD shifts right",
         "AE stays constant; AD shifts left",
-        "Equilibrium real GDP rises to $15T",
-        "AE shifts down to AE₁; the economy moves along AD toward Y=$13T"
+        "AE shifts down to AE₁; the economy moves along AD toward Y=$13T",
+        "Equilibrium real GDP rises to $15T"
       ],
-      "ans": 3,
+      "ans": 2,
       "why": "The slide explicitly distinguishes shifting the relevant AE schedule and moving along AD.",
       "ref": "Lecture 7 PDF pp. 45–46",
       "visual": "ae-ad",
@@ -977,11 +977,11 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "q": "Which change is a movement along a fixed AD curve rather than an autonomous spending shift?",
       "opts": [
         "A rise in government purchases at fixed P",
-        "A change in the overall price level from 110 to 90 with other determinants held fixed",
         "Higher expected future income at fixed P",
-        "A change in technology shifting AS"
+        "A change in technology shifting AS",
+        "A change in the overall price level from 110 to 90 with other determinants held fixed"
       ],
-      "ans": 1,
+      "ans": 3,
       "why": "The corresponding AE schedule changes with P, producing a movement along the AD relation.",
       "ref": "Lecture 7 PDF pp. 44–46",
       "visual": "ae-ad",
@@ -1006,12 +1006,12 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "topic": "l7-turtle",
       "q": "Under the Turtle Island reconstructed AE equation 2+0.6Y, what is the equilibrium Y?",
       "opts": [
+        "$5b",
         "$3b",
         "$4b",
-        "$4.4b",
-        "$5b"
+        "$4.4b"
       ],
-      "ans": 3,
+      "ans": 0,
       "why": "Y=2+0.6Y ⇒ 0.4Y=2 ⇒ Y=$5b.",
       "ref": "Lecture 7 PDF pp. 22, 26–31 (application)",
       "visual": "turtle",
