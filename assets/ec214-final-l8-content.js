@@ -591,7 +591,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-budget",
-      "q": "Tax collection is 150 and G plus transfers is 130. Which combination best fits the professor's simplified policy discussion?",
+      "q": "Government accounts show tax collection of 150 and G plus transfers of 130. Which label best fits both the budget position and the lecture's simplified policy direction?",
       "opts": [
         "Budget deficit, typically expansionary",
         "Budget surplus, typically contractionary",
@@ -651,7 +651,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-implementation",
-      "q": "The economy begins at Y = 11 while potential GDP is 13. Which policy direction matches the lecture?",
+      "q": "An AD–AS dashboard shows actual GDP at 11 and potential GDP at 13. What fiscal stance is appropriate if policymakers intervene directly?",
       "opts": [
         "Contractionary fiscal policy",
         "Expansionary fiscal policy",
@@ -666,7 +666,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-implementation",
-      "q": "The economy begins above potential GDP. Which direct discretionary choice is consistent with Lecture 8?",
+      "q": "The AD–AS intersection lies to the right of potential GDP. Which deliberate fiscal action would move demand back toward potential?",
       "opts": [
         "Increase G or cut taxes",
         "Decrease G or raise taxes",
@@ -756,7 +756,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-crowdingout",
-      "q": "Which sequence best captures crowding out in the lecture?",
+      "q": "A deficit-financed stimulus puts upward pressure on the real interest rate. Which causal path matches the lecture's crowding-out mechanism?",
       "opts": [
         "Budget deficit → LF demand ↑ → real interest rate ↑ → private I ↓",
         "Budget deficit → LF supply ↑ → real interest rate ↓ → private I ↑",
@@ -816,7 +816,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-contractionary",
-      "q": "Which chain best represents the crowding-in mechanism annotated on p. 27?",
+      "q": "After fiscal tightening, government borrowing pressure falls and private investment begins to recover. Which chain matches the lecture's crowding-in mechanism?",
       "opts": [
         "Budget surplus → less borrowing pressure / more LF supply → r ↓ → I ↑",
         "Budget surplus → LF demand ↑ → r ↑ → I ↓",
@@ -861,7 +861,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-limitations",
-      "q": "Why does a law-making time lag matter?",
+      "q": "A stimulus law is approved only after the recession has largely passed. Which limitation of discretionary fiscal policy does this illustrate?",
       "opts": [
         "Policy can take effect after the economy has already changed",
         "It guarantees the multiplier is larger",
@@ -876,7 +876,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-limitations",
-      "q": "Why is estimating potential GDP a fiscal-policy problem?",
+      "q": "Policymakers misjudge potential GDP and therefore choose the wrong size of intervention. Which limitation from the lecture is being illustrated?",
       "opts": [
         "The chosen gap and size of intervention can be mismeasured",
         "Potential GDP is a tax rate",
@@ -906,7 +906,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-automatic",
-      "q": "GDP rises sharply. With an income-tax stabiliser, which sequence dampens the expansion?",
+      "q": "During a strong expansion, incomes rise under an unchanged income-tax system. Which automatic sequence dampens the boom?",
       "opts": [
         "Income ↑ → tax payment ↑ → disposable income rises less → C and AD rise less",
         "Income ↑ → tax payment ↓ → disposable income ↑ more → AD rises more",
@@ -921,7 +921,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-automatic",
-      "q": "GDP falls. How does the income-tax stabiliser cushion the downturn?",
+      "q": "During a downturn, incomes fall under the existing tax system. Which automatic response cushions consumption?",
       "opts": [
         "Tax payments fall, cushioning disposable income and consumption",
         "Tax payments rise, cutting disposable income further",
@@ -951,7 +951,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-synthesis",
-      "q": "A recessionary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "q": "Actual GDP is below potential. Which package correctly combines policy direction, tool, AD movement and an important side effect?",
       "opts": [
         "Expansionary; G↑ or taxes↓; AD right; possible crowding out",
         "Contractionary; G↓ or taxes↑; AD left; crowding out",
@@ -966,7 +966,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-synthesis",
-      "q": "An inflationary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "q": "Actual GDP is above potential. Which package correctly combines policy direction, tool, AD movement and an important side effect?",
       "opts": [
         "Expansionary; G↑; AD right",
         "Contractionary; G↓ or taxes↑; AD left; possible crowding in",

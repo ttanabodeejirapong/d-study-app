@@ -614,7 +614,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-consumption",
-      "q": "At Yd = $9T, the graph shows C = $8T. Which claim is correct?",
+      "q": "At Yd = $9T and C = $8T, what entry belongs in the saving column for that point?",
       "opts": [
         "Saving is −$1T",
         "Saving is +$1T",
@@ -734,7 +734,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-inventory",
-      "q": "At Y = $12T, AE = $12.5T in the professor's schedule. Which sequence is most likely?",
+      "q": "A firm is producing $12T while planned AE is $12.5T. Which inventory/output response should follow?",
       "opts": [
         "Inventories rise; firms cut output",
         "Inventories fall; firms expand output",
@@ -749,7 +749,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-inventory",
-      "q": "At Y = $14T, AE = $13.5T in the same schedule. The economy adjusts through:",
+      "q": "A firm is producing $14T while planned AE is only $13.5T. Which adjustment is consistent with the AE model?",
       "opts": [
         "Inventory decumulation and higher output",
         "Higher imports with fixed production only",
@@ -854,7 +854,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-fiscal",
-      "q": "In the professor's two-round comparison, which route contributes more to GDP per $5m budget, and why?",
+      "q": "Two policies use the same $5m government budget. In the professor's two-round illustration, which route produces the larger GDP contribution, and why?",
       "opts": [
         "Transfer, because all transfers directly enter G",
         "Government purchases, because the full $5m enters first-round demand",
@@ -944,7 +944,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-ae-ad",
-      "q": "When the price level rises from 110 to 130, which AE/AD description matches the professor's illustration?",
+      "q": "The economy is initially at P=110 on the professor's AD construction. If only the price level rises to 130, which AE/AD outcome should you trace?",
       "opts": [
         "AE shifts up; AD shifts right",
         "AE stays constant; AD shifts left",
@@ -974,7 +974,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
     },
     {
       "topic": "l7-ae-ad",
-      "q": "Which change is a movement along a fixed AD curve rather than an autonomous spending shift?",
+      "q": "Only one change below represents movement along the existing AD curve. Which one is it?",
       "opts": [
         "A rise in government purchases at fixed P",
         "A change in the overall price level from 110 to 90 with other determinants held fixed",
