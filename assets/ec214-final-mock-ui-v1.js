@@ -168,8 +168,9 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
    '</div><div id="finalMockHintBody" class="final-hint-body" hidden><b>'+escape(q.topic)+'</b>'+
    '<p class="final-mini">Think about this concept before selecting an answer. This hint does not reveal the answer.</p>'+
    (q.summaryId?'<p class="final-mini">The linked Lecture 5 section is related; this mock may also draw on later lectures.</p>':"")+'</div>';
-  const question='<div class="final-card final-q final-mock-question"><div class="final-eyebrow">Original question '+q.number+' of 30 · Part '+currentPart.slice(1)+
-   ', question '+(index+1)+' of 10</div><h3>'+escape(q.q)+'</h3>'+
+  const setTitle=PARTS.find(p=>p.id===currentPart)?.title||currentPart;
+  const question='<div class="final-card final-q final-mock-question"><div class="final-eyebrow">'+escape(setTitle)+
+   ' · Question '+(index+1)+' of '+bank.length+'</div><h3>'+escape(q.q)+'</h3>'+
     visuals(q)+hint+options+confButtons+
     '<div class="final-actions"><button type="button" id="finalMockFlag" class="final-action '+(currentDraft.flags[q.id]?"active":"")+
      '" '+(submitted?"disabled":"")+'>'+(currentDraft.flags[q.id]?"★ Flagged for review":"☆ Flag to review")+'</button></div>'+
@@ -179,7 +180,7 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
     '<label for="finalMockNote" class="final-mini">Your question note (autosaved; purple dot on number)</label>'+
     '<textarea class="final-input" id="finalMockNote" rows="3" placeholder="Write why you were unsure or what to review…"></textarea></div>';
   const result=submitted&&currentDraft.lastResult?'<div class="final-card final-mock-result">'+
-    '<div class="final-score-grid"><div class="final-score-card"><small>Raw</small><b>'+currentDraft.lastResult.score+'/10</b></div>'+
+    '<div class="final-score-grid"><div class="final-score-card"><small>Raw</small><b>'+currentDraft.lastResult.score+'/'+bank.length+'</b></div>'+
     '<div class="final-score-card"><small>Learning score</small><b>'+currentDraft.lastResult.learningPercent+'%</b></div>'+
     '<div class="final-score-card"><small>Times completed</small><b>'+done.tries+' ×</b></div>'+
     '<div class="final-score-card"><small>Best learning</small><b>'+done.best+'%</b></div></div>'+
@@ -191,8 +192,8 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
    const flagged=bank.filter(x=>currentDraft.flags[x.id]);
    const needs=bank.filter(x=>wrong.includes(x)||uncertain.includes(x)||flagged.includes(x));
    return '<section class="final-card final-mock-result" id="finalMockReviewSummary" aria-label="Submission summary">'+
-    '<h3>Study review — Part '+escape(currentPart.slice(1))+'</h3>'+
-    '<p><b>'+res.score+'/10 correct</b> · '+(10-res.score)+' incorrect · '+res.learningPercent+'% confidence-adjusted learning score</p>'+
+    '<h3>Study review — '+escape(setTitle)+'</h3>'+
+    '<p><b>'+res.score+'/'+bank.length+' correct</b> · '+(bank.length-res.score)+' incorrect · '+res.learningPercent+'% confidence-adjusted learning score</p>'+
     '<p class="final-mini">Review priority: '+wrong.length+' incorrect, '+uncertain.length+' uncertain or guessed, '+flagged.length+' flagged. Categories can overlap. Practice key is inferred, not official.</p>'+
     (needs.length?'<h4>Questions to revisit</h4><div class="final-mock-review">'+needs.map(x=>{
       const n=bank.indexOf(x)+1,chosen=currentDraft.answers[x.id];
@@ -203,17 +204,17 @@ window.DStudyCreateFinalMock=function({user,onSummary}){
        '<p>'+escape(x.explanation)+'</p>'+
        '<button type="button" class="final-action" data-mock-review-index="'+(n-1)+'">Review this question</button></div>';
      }).join("")+'</div>':'<p>All answers were correct and none were marked uncertain or flagged.</p>')+
-    '<p class="final-mini">Use the numbered questions below to review all ten answers and their explanations.</p></section>';
+    '<p class="final-mini">Use the numbered questions below to review every answer and explanation in this set.</p></section>';
   })():"";
-  const actions='<div class="final-actions"><button type="button" class="final-primary" id="finalMockSubmit" '+(submitted||answered<10?"disabled":"")+'>'+
-   (submitted?"Already submitted":answered<10?("Answer "+(10-answered)+" more to submit"):"Submit this 10-question part")+
-   '</button><button type="button" class="final-action" id="finalMockReset">New attempt for Part '+currentPart.slice(1)+'</button></div>';
+  const actions='<div class="final-actions"><button type="button" class="final-primary" id="finalMockSubmit" '+(submitted||answered<bank.length?"disabled":"")+'>'+
+   (submitted?"Already submitted":answered<bank.length?("Answer "+(bank.length-answered)+" more to submit"):"Submit this set")+
+   '</button><button type="button" class="final-action" id="finalMockReset">New attempt · '+escape(setTitle)+'</button></div>';
   const history=renderHistory();
   root.innerHTML=header+partChooser()+result+reviewSummary+
-   '<details class="final-study-tools final-mock-tools"><summary>🔎 Search all 30 mock questions (optional)</summary>'+
+   '<details class="final-study-tools final-mock-tools"><summary>🔎 Search all 45 practice questions (optional)</summary>'+
     '<input id="finalMockSearch" class="final-input" type="search" autocomplete="off" placeholder="Search money supply, multiplier, fiscal policy…">'+
     '<div id="finalMockResults" class="final-search-results"></div></details>'+
-    '<div class="final-mock-questionbar"><b>Part '+currentPart.slice(1)+' · '+answered+'/10 answered</b>'+
+    '<div class="final-mock-questionbar"><b>'+escape(setTitle)+' · '+answered+'/'+bank.length+' answered</b>'+
      '<span>Question '+(index+1)+' of '+bank.length+' · '+done.tries+' completed attempt'+(done.tries===1?"":"s")+'</span></div>'+
    nums+question+actions+history;
   const note=$("finalMockNote");note.value=state.questionNotes[q.id]||"";
