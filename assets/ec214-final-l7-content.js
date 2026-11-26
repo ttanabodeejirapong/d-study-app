@@ -594,7 +594,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "ans": 3,
       "why": "I and II match slides. Consumption includes an induced component.",
       "ref": "Lecture 7 PDF pp. 11–12, 21",
-      "visual": "ae-split",
+      "visual": "",
       "id": "l7-m-002"
     },
     {
@@ -879,7 +879,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "ans": 2,
       "why": "The slide's 1.70 is its finite-round budget ratio, not the infinite sum.",
       "ref": "Lecture 7 PDF pp. 35–36",
-      "visual": "fiscal-table",
+      "visual": "",
       "id": "l7-m-021"
     },
     {
@@ -894,7 +894,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "ans": 3,
       "why": "Round 1 spend 0.7×5=3.5; round 2 spend 0.7×3.5=2.45.",
       "ref": "Lecture 7 PDF pp. 35–36",
-      "visual": "fiscal-table",
+      "visual": "",
       "id": "l7-m-022"
     },
     {
@@ -909,7 +909,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "ans": 0,
       "why": "I–II are slide equations; denominator is (1−MPC), not (1+MPC).",
       "ref": "Lecture 7 PDF pp. 40–41",
-      "visual": "formula",
+      "visual": "",
       "id": "l7-m-023"
     },
     {
@@ -939,7 +939,7 @@ window.D_STUDY_FINAL_L7_QUIZZES={
       "ans": 2,
       "why": "Higher induced imports subtract from NX and reduce domestic expenditure feedback.",
       "ref": "Lecture 7 PDF pp. 21, 43",
-      "visual": "import-leakage",
+      "visual": "",
       "id": "l7-m-025"
     },
     {
