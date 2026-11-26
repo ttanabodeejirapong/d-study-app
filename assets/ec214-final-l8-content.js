@@ -646,7 +646,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Treasury bills are in the internal-borrowing list.",
       "ref": "Lecture 8 PDF p. 13",
-      "visual": "debt",
+      "visual": "",
       "id": "l8-m-006"
     },
     {
@@ -706,7 +706,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "The lecture lists unemployment payments as an automatic response.",
       "ref": "Lecture 8 PDF p. 19",
-      "visual": "disc-auto",
+      "visual": "",
       "id": "l8-m-010"
     },
     {
@@ -751,7 +751,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 1,
       "why": "Higher borrowing costs can reduce interest-sensitive investment.",
       "ref": "Lecture 8 PDF pp. 22–24",
-      "visual": "crowding-out",
+      "visual": "",
       "id": "l8-m-013"
     },
     {
@@ -766,7 +766,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "This is the annotated mechanism on pp. 22–23.",
       "ref": "Lecture 8 PDF pp. 22–23",
-      "visual": "loanable-deficit",
+      "visual": "",
       "id": "l8-m-014"
     },
     {
@@ -796,7 +796,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "The old mock's crowding-out scenario is aligned with the professor's Lecture 8 mechanism.",
       "ref": "Lecture 8 PDF p. 22 + mock-style reference",
-      "visual": "loanable-deficit",
+      "visual": "",
       "id": "l8-m-016"
     },
     {
@@ -826,7 +826,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "The professor's annotation shows lower rates and higher investment partially offsetting contraction.",
       "ref": "Lecture 8 PDF p. 27",
-      "visual": "loanable-surplus",
+      "visual": "",
       "id": "l8-m-018"
     },
     {
@@ -871,7 +871,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Implementation delays can make fiscal action late.",
       "ref": "Lecture 8 PDF p. 28",
-      "visual": "limits",
+      "visual": "",
       "id": "l8-m-021"
     },
     {
@@ -886,7 +886,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Misjudging Yf means misdiagnosing the gap or policy size.",
       "ref": "Lecture 8 PDF p. 28",
-      "visual": "limits",
+      "visual": "",
       "id": "l8-m-022"
     },
     {
@@ -901,7 +901,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Both are explicitly listed on p. 28.",
       "ref": "Lecture 8 PDF p. 28",
-      "visual": "limits",
+      "visual": "",
       "id": "l8-m-023"
     },
     {
@@ -916,7 +916,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Higher taxes siphon off part of the income increase.",
       "ref": "Lecture 8 PDF pp. 30–31",
-      "visual": "automatic",
+      "visual": "",
       "id": "l8-m-024"
     },
     {
@@ -931,7 +931,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "Lower taxes soften the decline in Yd, C and AD.",
       "ref": "Lecture 8 PDF pp. 31–32",
-      "visual": "automatic",
+      "visual": "",
       "id": "l8-m-025"
     },
     {
@@ -946,7 +946,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 1,
       "why": "The lecture's aim is a less-fluctuating economy, not zero fluctuations.",
       "ref": "Lecture 8 PDF pp. 29–32",
-      "visual": "automatic",
+      "visual": "",
       "id": "l8-m-026"
     },
     {
@@ -961,7 +961,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 0,
       "why": "This combines the lecture's direction, tools, AD effect and side effect.",
       "ref": "Lecture 8 PDF pp. 20–24",
-      "visual": "matrix",
+      "visual": "",
       "id": "l8-m-027"
     },
     {
@@ -976,7 +976,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 1,
       "why": "This is the lecture's contractionary fiscal-policy chain.",
       "ref": "Lecture 8 PDF pp. 25–27",
-      "visual": "matrix",
+      "visual": "",
       "id": "l8-m-028"
     },
     {
@@ -991,7 +991,7 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "ans": 2,
       "why": "I and II follow the lecture; III contradicts automatic policy.",
       "ref": "Lecture 8 PDF pp. 22–32",
-      "visual": "matrix",
+      "visual": "",
       "id": "l8-m-029"
     },
     {
