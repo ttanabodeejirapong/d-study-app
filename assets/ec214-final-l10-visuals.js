@@ -132,12 +132,12 @@ const safe={
  "l10-r-008":"rr-dr","l10-r-009":"rr-dr",
  "l10-r-017":"interest-asset",
  "l10-r-019":"exchange-credit","l10-r-021":"exchange-credit","l10-r-022":"exchange-credit",
- "l10-r-028":"tradeoff","l10-r-029":"tradeoff","l10-r-030":"longrun",
+ "l10-r-030":"longrun",
  "l10-m-003":"rr-dr","l10-m-004":"rr-dr","l10-m-005":"rr-dr",
  "l10-m-012":"interest-asset",
  "l10-m-015":"exchange-credit",
- "l10-m-025":"tradeoff","l10-m-027":"longrun",
+ "l10-m-027":"longrun",
  "l10-m-028":"exchange-credit"
-}
+};
 window.D_STUDY_FINAL_L10_RENDER_VISUAL=id=>render(safe[id]||"");
 })();
