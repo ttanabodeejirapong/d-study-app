@@ -561,7 +561,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
   "mastering": [
     {
       "topic": "l9-overview",
-      "q": "Which pairing is correct? I. Short run: nominal interest rate adjusts. II. Long run: price level adjusts. III. Long run: real GDP changes one-for-one with money supply.",
+      "q": "A student summarizes Lecture 9 this way: short-run money-market adjustment changes the nominal interest rate, while long-run monetary adjustment changes the price level. Which statement set is supported?",
       "opts": [
         "I and II only",
         "I and III only",
@@ -591,7 +591,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-m1m2",
-      "q": "Which set is ordered from narrower to broader official money measure?",
+      "q": "You are sorting official money measures from the narrower category to the broader one. Which ordering is correct?",
       "opts": [
         "M2 then M1",
         "M1 then M2",
@@ -606,7 +606,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-m1m2",
-      "q": "Which statement is most careful about M2?",
+      "q": "A savings deposit belongs to M2 but may not be as immediately spendable as currency. Which description best captures the lecture's treatment of M2?",
       "opts": [
         "Every M2 component is instantly spendable",
         "No M2 component counts as money",
@@ -651,7 +651,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-md",
-      "q": "Why is the money-demand curve downward sloping with respect to nominal r?",
+      "q": "Imagine the nominal interest rate rises while other money-demand determinants stay fixed. Why would households and firms choose to hold less money?",
       "opts": [
         "Higher r increases the opportunity cost of holding money",
         "Higher r makes money supply larger automatically",
@@ -681,7 +681,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-mdshifts",
-      "q": "Which statements are correct? I. r changes quantity demanded along MD. II. Real GDP can shift MD. III. Financial technology can shift MD.",
+      "q": "Consider three claims about money demand: I. A change in r moves along MD. II. Real GDP can shift MD. III. Financial technology can shift MD. Which evaluation is correct?",
       "opts": [
         "I only",
         "I and II only",
@@ -741,7 +741,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-adjustment",
-      "q": "From a 6% starting interest rate with excess money supply, which adjustment chain is correct?",
+      "q": "The market starts at r=6% with more money supplied than people want to hold. What sequence moves the market back toward equilibrium?",
       "opts": [
         "Buy bonds → bond price rises → r falls → Md rises",
         "Sell bonds → bond price falls → r rises → Md falls",
@@ -756,7 +756,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-adjustment",
-      "q": "From a 4% starting interest rate with excess money demand, which chain is correct?",
+      "q": "The market starts at r=4% with desired money holdings above the amount supplied. What bond-market response restores equilibrium?",
       "opts": [
         "Buy bonds → bond price rises → r falls",
         "Sell bonds → bond price falls → r rises → Md falls",
@@ -801,7 +801,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-centralbank",
-      "q": "Which sequence best matches the professor's short-run recession note?",
+      "q": "The central bank expands money supply during a weak economy. Which transmission path best matches the professor's short-run logic?",
       "opts": [
         "Ms ↑ → r ↓ → cost of using money ↓ → C/I ↑ → AD ↑",
         "Ms ↑ → r ↑ → C/I ↓ → AD ↓",
@@ -876,7 +876,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-longrun",
-      "q": "Why does the professor say price rather than GDP adjusts in the long run?",
+      "q": "In the long-run model, the professor lets the price level absorb the monetary adjustment instead of real GDP. What assumption makes that possible?",
       "opts": [
         "Real GDP is taken to be at potential/full employment",
         "Money demand disappears",
@@ -936,7 +936,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-quantitytheory",
-      "q": "Which assumptions turn the equation of exchange into the lecture's long-run prediction? I. Y equals potential GDP and is independent of M. II. V is relatively stable. III. r must be fixed at 5% forever.",
+      "q": "To move from MV=PY to the lecture's long-run quantity-theory prediction, which assumptions are required? I. Y is fixed at potential. II. V is relatively stable. III. r is permanently fixed at 5%.",
       "opts": [
         "I only",
         "II and III only",
@@ -951,7 +951,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-synthesis",
-      "q": "Which statement best separates a short-run money-supply increase from the long-run quantity-theory result?",
+      "q": "Compare the same money-supply increase across horizons. Which contrast correctly separates the short-run and long-run outcomes?",
       "opts": [
         "Short run emphasizes lower r; long run emphasizes higher P with Y at potential",
         "Both horizons require Y to rise one-for-one with M",
@@ -981,7 +981,7 @@ window.D_STUDY_FINAL_L9_QUIZZES={
     },
     {
       "topic": "l9-synthesis",
-      "q": "A question says Ms decreases and asks for the short-run chain before price-level adjustment. Which is best?",
+      "q": "The central bank reduces money supply. Before any long-run price-level adjustment, what is the most direct short-run consequence?",
       "opts": [
         "r rises → interest-sensitive spending tends to fall",
         "r falls → spending rises",
