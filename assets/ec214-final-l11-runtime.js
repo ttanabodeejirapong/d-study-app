@@ -659,7 +659,7 @@ function renderQuiz(){
   '</div>':"";
  const root=$("finalQuiz");
  root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 11</div><h2>Reviewing & Mastering Quizzes</h2>'+
-  '<p>Follow the professor's three-question lecture flow. Each 10-question part stays in slide order, with causal-chain diagrams on graph and policy questions. Progress is autosaved.</p></div>'+
+  '<p>Follow the professor’s three-question lecture flow. Each 10-question part stays in slide order, with causal-chain diagrams on graph and policy questions. Progress is autosaved.</p></div>'+
   modeBar+'<article class="final-card" style="margin:14px 0"><div class="final-eyebrow">LECTURE 11 FLOW</div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px"><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>1 · Q1</b><br><span class="final-mini">BOP → NX → FDI → reserves → GDP</span></div><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>2 · Q2</b><br><span class="final-mini">Pᵂ vs P₀ → export/import → Qˢ & Qᴰ</span></div><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>3 · Q3</b><br><span class="final-mini">USD D/S → ฿/$ → appreciation/depreciation → X/M → GDP</span></div></div></article>'+partBar+reviewSummary+resultBanner+
   '<details class="final-study-tools"><summary>🔎 Search questions & learning-points guide (optional)</summary>'+rubric+
   '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>Search all three '+quizMode+' parts</b></label>'+
