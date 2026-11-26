@@ -17,9 +17,9 @@ const qsets={reviewing:QB.reviewing,mastering:QB.mastering};
 // Small, fixed parts retain every existing L5 question ID and professor topic.
 // R: 12 / 10 / 11 / 10; M: 11 / 11 / 10 / 10.
 const PARTS=Object.fromEntries(["reviewing","mastering"].map(mode=>[mode,[
- {id:"p1",title:"Trade & finance",description:"Balance of payments, trade, investment and reserves",from:0,to:10},
- {id:"p2",title:"World prices & trade",description:"Exporting and importing country models",from:10,to:20},
- {id:"p3",title:"Exchange rates & policy",description:"Currency market equilibrium and policy shocks",from:20,to:30}
+ {id:"p1",title:"Q1 · BOP, trade & finance",description:"Lecture flow pp. 3–20: BOP → NX → FDI → reserves → GDP",from:0,to:10},
+ {id:"p2",title:"Q2 · Why countries trade",description:"Lecture flow pp. 21–24: compare Pᵂ with P₀ → export/import graph",from:10,to:20},
+ {id:"p3",title:"Q3 · Foreign exchange",description:"Lecture flow pp. 25–34: USD demand/supply → equilibrium → depreciation → NX → GDP",from:20,to:30}
 ]]));
 const validPart=(mode,part)=>part==="full"||!!PARTS[mode]?.some(p=>p.id===part);
 const partInfo=(mode,part)=>PARTS[mode]?.find(p=>p.id===part);
@@ -658,9 +658,9 @@ function renderQuiz(){
    '<div class="final-topic-results">'+resultData.topicResults.map(t=>'<div><b>'+esc(t.topic)+'</b><span>Raw '+t.raw+'% · Learning '+t.learning+'% · '+esc(t.status)+'</span></div>').join("")+'</div></details>':"")+
   '</div>':"";
  const root=$("finalQuiz");
- root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 10</div><h2>Reviewing & Mastering Quizzes</h2>'+
-  '<p>Three manageable parts per mode (10 questions each). Hints and direct links to the matching Lecture Summary topic are available for every question. Progress is autosaved.</p></div>'+
-  modeBar+partBar+reviewSummary+resultBanner+
+ root.innerHTML='<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • LECTURE 11</div><h2>Reviewing & Mastering Quizzes</h2>'+
+  '<p>Follow the professor's three-question lecture flow. Each 10-question part stays in slide order, with causal-chain diagrams on graph and policy questions. Progress is autosaved.</p></div>'+
+  modeBar+'<article class="final-card" style="margin:14px 0"><div class="final-eyebrow">LECTURE 11 FLOW</div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px"><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>1 · Q1</b><br><span class="final-mini">BOP → NX → FDI → reserves → GDP</span></div><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>2 · Q2</b><br><span class="final-mini">Pᵂ vs P₀ → export/import → Qˢ & Qᴰ</span></div><div style="padding:12px;border:1px solid var(--final-border);border-radius:12px"><b>3 · Q3</b><br><span class="final-mini">USD D/S → ฿/$ → appreciation/depreciation → X/M → GDP</span></div></div></article>'+partBar+reviewSummary+resultBanner+
   '<details class="final-study-tools"><summary>🔎 Search questions & learning-points guide (optional)</summary>'+rubric+
   '<div class="final-card final-quiz-search-box"><label for="finalQuizSearch"><b>Search all three '+quizMode+' parts</b></label>'+
   '<input id="finalQuizSearch" class="final-input" type="search" placeholder="Search reserve ratio, OMO, QE, exchange rate, transmission…" autocomplete="off">'+
