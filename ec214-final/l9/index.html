@@ -11,7 +11,7 @@
  <link rel="stylesheet" href="/d-study-app/assets/ux-v13.6.min.css">
  <link rel="stylesheet" href="/d-study-app/assets/tu101-v13.16.min.css">
  <link rel="stylesheet" href="/d-study-app/assets/ui-v14.css?v=14.3">
- <link rel="stylesheet" href="/d-study-app/assets/ec214-final-v1.css?v=14.17">
+ <link rel="stylesheet" href="/d-study-app/assets/ec214-final-v1.css?v=14.18">
 </head>
 <body>
 <section id="finalAuth" class="final-hidden">
@@ -78,7 +78,7 @@
    <section class="final-panel" id="f-settings"><div id="finalSettings"></div></section>
   </main>
   <div id="finalStatus" aria-live="polite" class="final-mini"></div>
-  <footer class="final-footer">D Study App v14.17 · EC214 Final Exams · Professor Lecture 9 · Private academic data remains local in your browser</footer>
+  <footer class="final-footer">D Study App v14.18 · EC214 Final Exams · Professor Lecture 9 · Private academic data remains local in your browser</footer>
  </div>
 </div>
 <script>
@@ -1120,8 +1120,8 @@ function md(kind){
  let b=axes("Quantity of money ($T)","Nominal interest rate (%)");
  const X=q=>100+(q-0.96)*900,Y=r=>225-(r-3.5)*55;
  const line=(shift=0,label="MD",col=blue)=>path("M"+X(.975+shift)+" "+Y(6.5)+" L"+X(1.035+shift)+" "+Y(3.7),col,3)+tx(X(1.035+shift)+5,Y(3.7)+3,label,col);
- if(kind==="md-shift"){line(0,"MD₀",blue);line(.025,"MD₁",rose);b+=tx(112,48,"P or Y ↑ → MD right",rose);}
- else {line();for(const [r,q,l] of [[6,.98,"A"],[5,1.00,"B"],[4,1.02,"C"]]){b+=circ(X(q),Y(r),4.5,blue)+tx(X(q)+8,Y(r)-8,l,blue)+tx(61,Y(r)+4,String(r),"currentColor","end",11)+tx(X(q),251,q.toFixed(2),"currentColor","middle",11)}}
+ if(kind==="md-shift"){b+=line(0,"MD₀",blue)+line(.025,"MD₁",rose)+tx(112,48,"P or Y ↑ → MD right",rose);}
+ else {b+=line();for(const [r,q,l] of [[6,.98,"A"],[5,1.00,"B"],[4,1.02,"C"]]){b+=circ(X(q),Y(r),4.5,blue)+tx(X(q)+8,Y(r)-8,l,blue)+tx(61,Y(r)+4,String(r),"currentColor","end",11)+tx(X(q),251,q.toFixed(2),"currentColor","middle",11)}}
  return fig(svg(b,kind==="md-shift"?"Money-demand shift from a non-interest-rate influence, based on professor PDF pp. 18–19.":"Professor's money-demand schedule: r 6%→Md .98T, 5%→1.00T, 4%→1.02T, PDF pp. 15–17."),kind==="md-shift"?"Money demand shifts when price level, real GDP or financial technology changes.":"Money demand and the opportunity cost of holding money.");
 }
 function market(kind){
@@ -1129,9 +1129,9 @@ function market(kind){
  const X=q=>100+(q-.96)*900,Y=r=>225-(r-3.5)*55;
  const demand=()=>path("M"+X(.975)+" "+Y(6.5)+" L"+X(1.035)+" "+Y(3.7),blue,3)+tx(X(1.035)+6,Y(3.7)+4,"MD",blue);
  const supply=(q,label,col)=>path("M"+X(q)+" "+Y(6.7)+" V"+Y(3.6),col,3)+tx(X(q)+6,Y(6.65),label,col);
- demand();
- if(kind==="ms-shift"){supply(.98,"MS₀",rose);supply(1.00,"MS₁",blue);supply(1.02,"MS₂",green);b+=tx(X(.98)-4,Y(6)-8,"6%",rose,"end")+tx(X(1.00)-5,Y(5)-8,"5%",blue,"end")+tx(X(1.02)+7,Y(4)-8,"4%",green);}
- else {supply(1.00,"MS",purple);for(const [r,q,l,col] of [[6,.98,"A",rose],[5,1.00,"E",green],[4,1.02,"C",orange]])b+=circ(X(q),Y(r),4.5,col)+tx(X(q)+8,Y(r)-8,l,col);}
+ b+=demand();
+ if(kind==="ms-shift"){b+=supply(.98,"MS₀",rose)+supply(1.00,"MS₁",blue)+supply(1.02,"MS₂",green)+tx(X(.98)-4,Y(6)-8,"6%",rose,"end")+tx(X(1.00)-5,Y(5)-8,"5%",blue,"end")+tx(X(1.02)+7,Y(4)-8,"4%",green);}
+ else {b+=supply(1.00,"MS",purple);for(const [r,q,l,col] of [[6,.98,"A",rose],[5,1.00,"E",green],[4,1.02,"C",orange]])b+=circ(X(q),Y(r),4.5,col)+tx(X(q)+8,Y(r)-8,l,col);}
  return fig(svg(b,kind==="ms-shift"?"Central-bank money-supply changes and nominal interest rate, professor PDF p. 27.":"Money-market equilibrium at approximately r=5% and M=$1.00T, professor PDF p. 22."),kind==="ms-shift"?"Increase MS → r falls; decrease MS → r rises.":"Short-run money-market equilibrium.");
 }
 function bond(){
@@ -1182,6 +1182,6 @@ window.D_STUDY_FINAL_L9_RENDER_VISUAL=id=>{
 };
 })();
 </script>
-<script src="/d-study-app/assets/ec214-final-l9-runtime.js?v=14.17"></script>
+<script src="/d-study-app/assets/ec214-final-l9-runtime.js?v=14.18"></script>
 <script src="/d-study-app/assets/ui-v14.js?v=14.0"></script>
 </body></html>
