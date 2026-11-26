@@ -172,25 +172,82 @@ function quizProgressInfo(){
  return {pct:Math.round(done.size*100/partIds.length),done:done.size,total:partIds.length};
 }
 
+function progressDashboardInfo(){
+ const attempts=state.quizHistory.filter(h=>h.lecture==="l5"&&(h.mode==="reviewing"||h.mode==="mastering"));
+ const reviewParts=PARTS.reviewing||[],masterParts=PARTS.mastering||[];
+ const partIds=[...new Set([...reviewParts,...masterParts].map(p=>p.id))];
+ const rows=partIds.map((id,idx)=>{
+  const review=attempts.filter(h=>h.mode==="reviewing"&&(h.partId||"full")===id);
+  const mastery=attempts.filter(h=>h.mode==="mastering"&&(h.partId||"full")===id);
+  const hasReview=review.length>0,hasMastery=mastery.length>0,done=hasReview||hasMastery;
+  const draftActive=["reviewing","mastering"].some(mode=>{
+   const raw=storeGet(quizDraftKey(mode,id)),d=raw?parse(raw):null;
+   return !!(d&&!d.submitted&&d.answers&&Object.keys(d.answers).length);
+  });
+  const all=[...review,...mastery];
+  const bestRaw=all.length?Math.max(...all.map(h=>Number.isFinite(h.percent)?h.percent:Math.round(100*(h.score||0)/(h.total||1)))):null;
+  const tracked=all.filter(h=>Number.isFinite(h.adjustedPercent));
+  const bestLearning=tracked.length?Math.max(...tracked.map(h=>h.adjustedPercent)):null;
+  const rp=reviewParts.find(p=>p.id===id),mp=masterParts.find(p=>p.id===id);
+  const title=rp&&mp&&rp.title!==mp.title?rp.title+" / "+mp.title:(rp||mp||{}).title||("Part "+(idx+1));
+  let status="notstarted",label="Not started";
+  if(hasReview&&hasMastery){status="both";label="Review + Mastery complete"}
+  else if(hasMastery){status="mastery";label="Mastering complete"}
+  else if(hasReview){status="review";label="Reviewing complete"}
+  else if(draftActive){status="learning";label="Currently learning"}
+  return {id,index:idx+1,title,hasReview,hasMastery,done,draftActive,bestRaw,bestLearning,status,label,
+   reviewCount:review.length,masteryCount:mastery.length};
+ });
+ if(attempts.some(h=>(h.partId||"full")==="full"))rows.forEach(r=>{r.done=true;if(r.status==="notstarted"){r.status="review";r.label="Completed in previous full quiz"}});
+ const done=rows.filter(r=>r.done).length,total=rows.length,pct=total?Math.round(done*100/total):0;
+ const latest=attempts.at(-1)||null;
+ const dist={
+  notstarted:rows.filter(r=>r.status==="notstarted").length,
+  learning:rows.filter(r=>r.status==="learning").length,
+  review:rows.filter(r=>r.status==="review").length,
+  mastery:rows.filter(r=>r.status==="mastery").length,
+  both:rows.filter(r=>r.status==="both").length
+ };
+ return {rows,done,total,pct,latest,dist};
+}
+function progressDashboardMarkup(d){
+ const latest=d.latest,latestPart=latest?(latest.partId==="full"?"Previous full quiz":partLabel(latest.mode,latest.partId)):"—";
+ const latestTitle=latest&&latest.partId!=="full"?(partInfo(latest.mode,latest.partId)?.title||""):"";
+ const latestLearning=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":"—";
+ const latestGuessed=latest?Number(latest.guessed||0):0,latestUnsure=latest?Number(latest.unsure||0):0;
+ const completed=d.done,inProgress=d.dist.learning,notStarted=d.dist.notstarted;
+ const rows=d.rows.map(r=>{
+  const score=r.bestRaw===null?"—":r.bestRaw+"%";
+  const learn=r.bestLearning===null?"—":r.bestLearning+"%";
+  return '<div class="final-progress-part-row"><div class="final-progress-part-copy"><b>Part '+r.index+' · '+esc(r.title)+'</b>'+
+   '<span class="final-mini">Best raw '+score+' · Best learning '+learn+' · Review '+r.reviewCount+'× · Master '+r.masteryCount+'×</span></div>'+
+   '<span class="final-progress-status '+r.status+'">'+esc(r.label)+'</span></div>';
+ }).join("");
+ const bar=(label,count,cls)=>{
+  const width=d.total?Math.round(count*100/d.total):0;
+  return '<div class="final-progress-dist-row"><span>'+label+'</span><div class="final-progress-dist-track"><i class="'+cls+'" style="width:'+width+'%"></i></div><b>'+count+'</b></div>';
+ };
+ return '<div class="final-progress-old-hero">'+
+  '<article class="final-card final-progress-welcome"><span class="final-eyebrow">EC214 STUDY DASHBOARD</span><h2>Welcome back, '+esc(user.username||"student")+'.</h2>'+
+   '<p>Use Summary for recall, Reviewing for a first pass, or Mastering when you want harder exam-style practice. Completing either quiz mode counts that part toward overall lecture progress.</p>'+
+   '<div class="final-actions"><button class="final-primary" data-final-go="summary">Continue Summary</button><button class="final-action" data-final-go="quiz">Open Quiz</button><button class="final-action" data-final-go="notes">Open All Notes</button></div></article>'+
+  '<article class="final-card final-progress-ring-card"><span class="final-mini">Overall learning progress</span><div class="final-progress-ring" style="--progress:'+d.pct+'"><div><strong>'+d.pct+'%</strong><small>quiz parts</small></div></div></article>'+
+  '<article class="final-card final-progress-snapshot"><h3>Current snapshot</h3><dl>'+
+   '<div><dt>Latest quiz</dt><dd>'+(latest?esc(latestPart+(latestTitle?" · "+latestTitle:"")+" · "+(latest.mode==="mastering"?"Mastering":"Reviewing")):"Not started")+'</dd></div>'+
+   '<div><dt>Latest learning score</dt><dd>'+latestLearning+'</dd></div>'+
+   '<div><dt>Confidence flags</dt><dd>'+latestGuessed+' guessed · '+latestUnsure+' unsure</dd></div></dl></article></div>'+
+  '<div class="final-progress-stat-grid">'+
+   '<article class="final-card"><strong>'+d.pct+'%</strong><span>Overall progress</span></article>'+
+   '<article class="final-card"><strong>'+completed+'</strong><span>Completed parts</span></article>'+
+   '<article class="final-card"><strong>'+inProgress+'</strong><span>Currently learning</span></article>'+
+   '<article class="final-card"><strong>'+notStarted+'</strong><span>Not started</span></article></div>'+
+  '<article class="final-card final-progress-distribution"><h3>Status distribution</h3><p class="final-mini">A part is complete when either Reviewing or Mastering has been submitted. Both modes never double-count.</p>'+
+   bar("Not started",d.dist.notstarted,"notstarted")+bar("Learning",d.dist.learning,"learning")+bar("Reviewed & practiced",d.dist.review,"review")+bar("Mastering only",d.dist.mastery,"mastery")+bar("Review + Mastery",d.dist.both,"both")+'</article>'+
+  '<article class="final-card final-progress-part-list"><div class="final-progress-part-head"><div><h3>Lecture '+"5"+' quiz parts</h3><p class="final-mini">'+d.done+' of '+d.total+' parts complete · either mode counts</p></div><span class="final-progress-pill">'+d.pct+'%</span></div>'+rows+'</article>';
+}
 function renderProgress(){
- const quizProgress=quizProgressInfo(),pct=quizProgress.pct,attempts=state.quizHistory.filter(x=>x.lecture==="l5");
- const r=modeStats("reviewing"),m=modeStats("mastering"),latest=attempts.at(-1);
- const latestLearn=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":latest?"not tracked":"—";
- const masteryTopics=new Set(Object.entries(state.quizTopicStats||{})
-  .filter(([k,v])=>k.startsWith("l5::mastering::")&&v&&v.status==="Mastered")
-  .map(([k])=>k.split("::").at(-1))).size;
- $("finalProgress").innerHTML=
- '<div class="final-heading"><div class="final-eyebrow">EC214 FINAL • 2026–2</div><h2>Final Exam Study Dashboard</h2>'+
- '<p>Track Lecture 5 quiz-based progress, confidence-weighted quiz points, retakes and mistakes. Future professor lectures will be added here without resetting your records.</p></div>'+
- '<div class="final-grid">'+
- '<article class="final-card"><span class="final-mini">Overall lecture progress · Lecture 5</span><span class="final-metric">'+pct+'%</span><div class="final-meter"><span style="width:'+pct+'%"></span></div><span class="final-mini">Quiz parts complete '+quizProgress.done+'/'+quizProgress.total+' · either Reviewing or Mastering counts</span></article>'+
- '<article class="final-card"><span class="final-mini">Reviewing · Completed</span><span class="final-metric">'+r.count+' ×</span><span class="final-mini">Best learning '+(r.best===null?"—":r.best+"%")+' · Clean 100% × '+r.perfect+'</span></article>'+
- '<article class="final-card"><span class="final-mini">Mastering · Completed</span><span class="final-metric">'+m.count+' ×</span><span class="final-mini">Best learning '+(m.best===null?"—":m.best+"%")+' · Clean 100% × '+m.perfect+'</span></article></div>'+
- '<div class="final-grid final-grid-two"><article class="final-card"><h3>Most recent attempt</h3><div class="final-metric">'+(latest?latest.score+"/"+latest.total:"—")+'</div>'+
- '<p class="final-mini">Raw accuracy: '+(latest?latest.percent+"%":"—")+' · Learning: '+latestLearn+
- ' · '+(latest?esc(latest.mode):"Not started")+'</p></article>'+
- '<article class="final-card"><h3>Practice & mastery</h3><div class="final-metric">'+masteryTopics+'</div>'+
- '<p class="final-mini">Mastered topic results (two clean Mastering passes required). Existing older attempts remain recorded without invented learning points.</p></article></div>'+
+ const d=progressDashboardInfo();
+ $("finalProgress").innerHTML=progressDashboardMarkup(d)+
  '<div class="final-card"><h3>📘 Lecture 5 · Aggregate Demand and Aggregate Supply</h3><p>'+
  BOOK.sections.length+' in-depth summary sections · '+QB.reviewing.length+' Reviewing questions · '+
  QB.mastering.length+' Mastering questions. Includes professor graphs, numerical examples and long-run wage adjustment.</p>'+

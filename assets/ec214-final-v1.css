@@ -585,3 +585,90 @@ body.dark #f-mock .final-qnum.noted::after{background:#ae9aff}
  flex-direction:column;justify-content:center;font-size:clamp(1rem,2vw,1.2rem)
 }
 #f-summary .final-lecture7-equation p,#f-quiz .final-lecture7-equation p{margin:4px 0}
+
+
+/* v14.20 · Classic D Study progress dashboard layout for EC214 quiz-based progress. */
+.final-progress-old-hero{
+ display:grid;grid-template-columns:minmax(0,1.35fr) minmax(210px,.8fr) minmax(0,1fr);
+ gap:12px;margin:14px 0 12px;align-items:stretch
+}
+.final-progress-old-hero>.final-card{margin:0;min-height:100%}
+.final-progress-welcome h2{font-size:2em;margin:5px 0 7px;line-height:1.08}
+.final-progress-welcome p{margin:0 0 12px}
+.final-progress-ring-card{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.final-progress-ring{
+ --progress:0;width:132px;aspect-ratio:1;border-radius:50%;
+ display:grid;place-items:center;margin:10px auto 2px;position:relative;
+ background:conic-gradient(var(--final-accent) calc(var(--progress)*1%),color-mix(in srgb,var(--final-accent) 14%,var(--soft)) 0)
+}
+.final-progress-ring:before{
+ content:"";position:absolute;inset:13px;border-radius:50%;background:var(--card);
+ box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--final-border) 80%,transparent)
+}
+.final-progress-ring>div{position:relative;z-index:1;display:grid;gap:0;place-items:center}
+.final-progress-ring strong{font-size:1.7em;line-height:1;color:var(--ink)}
+.final-progress-ring small{font-size:.72em;color:var(--final-muted);margin-top:5px}
+.final-progress-snapshot h3{margin-bottom:9px}
+.final-progress-snapshot dl{margin:0;display:grid}
+.final-progress-snapshot dl>div{padding:9px 0;border-bottom:1px solid var(--final-border)}
+.final-progress-snapshot dl>div:last-child{border-bottom:0}
+.final-progress-snapshot dt{font-size:.78em;color:var(--final-muted)}
+.final-progress-snapshot dd{margin:2px 0 0;font-weight:750;line-height:1.35}
+.final-progress-stat-grid{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 12px
+}
+.final-progress-stat-grid .final-card{padding:13px 15px;display:grid;gap:2px}
+.final-progress-stat-grid strong{font-size:1.55em;color:var(--ink);line-height:1}
+.final-progress-stat-grid span{font-size:.83em;color:var(--final-muted)}
+.final-progress-distribution{margin:0 0 12px}
+.final-progress-distribution h3{margin-bottom:2px}
+.final-progress-dist-row{
+ display:grid;grid-template-columns:minmax(140px,210px) minmax(120px,1fr) 28px;
+ gap:10px;align-items:center;margin:9px 0;font-size:.86em
+}
+.final-progress-dist-row>b{text-align:right}
+.final-progress-dist-track{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.final-progress-dist-track i{display:block;height:100%;border-radius:inherit;background:var(--final-accent);min-width:0}
+.final-progress-dist-track i.notstarted{background:color-mix(in srgb,var(--final-muted) 45%,var(--soft))}
+.final-progress-dist-track i.learning{background:color-mix(in srgb,var(--final-accent) 45%,#efb64b)}
+.final-progress-dist-track i.review{background:color-mix(in srgb,var(--final-accent) 72%,white)}
+.final-progress-dist-track i.mastery{background:color-mix(in srgb,var(--final-accent) 76%,#786fd0)}
+.final-progress-dist-track i.both{background:var(--final-accent)}
+.final-progress-part-list{margin:0 0 14px}
+.final-progress-part-head{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px
+}
+.final-progress-part-head h3{margin-bottom:2px}
+.final-progress-pill{
+ display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:7px 10px;
+ border-radius:12px;background:color-mix(in srgb,var(--final-accent) 13%,var(--card));
+ border:1px solid color-mix(in srgb,var(--final-accent) 32%,var(--final-border));
+ color:var(--final-accent);font-weight:850
+}
+.final-progress-part-row{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;
+ padding:13px 2px;border-top:1px solid var(--final-border)
+}
+.final-progress-part-copy{display:grid;gap:3px;min-width:0}
+.final-progress-part-copy>b{line-height:1.35}
+.final-progress-status{
+ display:inline-flex;align-items:center;white-space:nowrap;padding:6px 9px;border-radius:10px;
+ border:1px solid var(--final-border);font-size:.76em;font-weight:750;background:var(--soft);color:var(--final-muted)
+}
+.final-progress-status.learning{color:#96650d;background:color-mix(in srgb,#efb64b 12%,var(--card));border-color:color-mix(in srgb,#efb64b 35%,var(--final-border))}
+.final-progress-status.review{color:var(--final-accent);background:color-mix(in srgb,var(--final-accent) 9%,var(--card));border-color:color-mix(in srgb,var(--final-accent) 28%,var(--final-border))}
+.final-progress-status.mastery{color:#6f5bb7;background:color-mix(in srgb,#786fd0 10%,var(--card));border-color:color-mix(in srgb,#786fd0 30%,var(--final-border))}
+.final-progress-status.both{color:#18745f;background:color-mix(in srgb,#2c9a7d 10%,var(--card));border-color:color-mix(in srgb,#2c9a7d 30%,var(--final-border))}
+@media(max-width:900px){
+ .final-progress-old-hero{grid-template-columns:1fr 1fr}
+ .final-progress-welcome{grid-column:1/-1}
+ .final-progress-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .final-progress-old-hero{grid-template-columns:1fr}
+ .final-progress-welcome{grid-column:auto}
+ .final-progress-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .final-progress-dist-row{grid-template-columns:110px minmax(80px,1fr) 24px;gap:7px}
+ .final-progress-part-row{grid-template-columns:1fr;gap:7px}
+ .final-progress-status{justify-self:start}
+}
