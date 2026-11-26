@@ -563,12 +563,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-overview",
       "q": "Which statements match Lecture 8? I. Fiscal policy includes government spending/tax choices. II. Short-run fiscal policy primarily affects AD. III. Changing the money supply is a fiscal tool.",
       "opts": [
-        "I and II only",
         "I and III only",
         "II and III only",
+        "I and II only",
         "I, II and III"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "I and II are lecture points; money supply belongs to monetary policy.",
       "ref": "Lecture 8 PDF p. 7",
       "visual": "tools",
@@ -578,12 +578,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-budget",
       "q": "Government spending plus transfers is 120 while tax collection is 100. Under the lecture's definition, the budget is:",
       "opts": [
+        "Deficit of 20",
         "Balanced",
         "Surplus of 20",
-        "Deficit of 20",
         "Impossible to classify"
       ],
-      "ans": 2,
+      "ans": 0,
       "why": "Spending-plus-transfers exceeds tax collection by 20.",
       "ref": "Lecture 8 PDF p. 8 (application)",
       "visual": "budget",
@@ -594,11 +594,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "Tax collection is 150 and G plus transfers is 130. Which combination best fits the professor's simplified policy discussion?",
       "opts": [
         "Budget deficit, typically expansionary",
-        "Budget surplus, typically contractionary",
         "Balanced budget, expansionary",
-        "Budget deficit, contractionary"
+        "Budget deficit, contractionary",
+        "Budget surplus, typically contractionary"
       ],
-      "ans": 1,
+      "ans": 3,
       "why": "A surplus is revenue above spending; the lecture associates the simplified surplus case with contractionary policy.",
       "ref": "Lecture 8 PDF pp. 8–9",
       "visual": "budget",
@@ -609,11 +609,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "Which set contains only indirect taxes from the lecture? I. VAT II. Excise tax III. Corporate income tax",
       "opts": [
         "I only",
-        "III only",
         "I and II only",
+        "III only",
         "I, II and III"
       ],
-      "ans": 2,
+      "ans": 1,
       "why": "VAT and excise are indirect; corporate income tax is direct.",
       "ref": "Lecture 8 PDF p. 11",
       "visual": "tax-table",
@@ -638,12 +638,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-debt",
       "q": "A government finances a deficit by selling domestic treasury bills. This is:",
       "opts": [
-        "Internal borrowing",
         "External borrowing",
         "Indirect taxation",
-        "An automatic stabiliser"
+        "An automatic stabiliser",
+        "Internal borrowing"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "Treasury bills are in the internal-borrowing list.",
       "ref": "Lecture 8 PDF p. 13",
       "visual": "debt",
@@ -653,12 +653,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-implementation",
       "q": "The economy begins at Y = 11 while potential GDP is 13. Which policy direction matches the lecture?",
       "opts": [
-        "Contractionary fiscal policy",
         "Expansionary fiscal policy",
+        "Contractionary fiscal policy",
         "Automatic monetary tightening",
         "No intervention can be considered"
       ],
-      "ans": 1,
+      "ans": 0,
       "why": "Output below potential is a recessionary gap; expansionary policy is the direct discretionary response.",
       "ref": "Lecture 8 PDF pp. 17–21",
       "visual": "gap-choice",
@@ -669,11 +669,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "The economy begins above potential GDP. Which direct discretionary choice is consistent with Lecture 8?",
       "opts": [
         "Increase G or cut taxes",
-        "Decrease G or raise taxes",
         "Increase the money supply",
+        "Decrease G or raise taxes",
         "Increase transfer payments to magnify AD"
       ],
-      "ans": 1,
+      "ans": 2,
       "why": "Inflationary gap calls for contractionary fiscal policy.",
       "ref": "Lecture 8 PDF pp. 17–18, 25",
       "visual": "gap-choice",
@@ -685,10 +685,10 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "opts": [
         "Government passes a temporary tax cut",
         "Government launches a new stimulus package",
-        "Income falls and tax receipts decline under existing tax rules",
-        "Government raises G by a voted appropriation"
+        "Government raises G by a voted appropriation",
+        "Income falls and tax receipts decline under existing tax rules"
       ],
-      "ans": 2,
+      "ans": 3,
       "why": "The tax response occurs automatically with the state of the economy.",
       "ref": "Lecture 8 PDF p. 19",
       "visual": "disc-auto",
@@ -698,12 +698,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-discretionary",
       "q": "Unemployment increases and benefit payments rise under existing law. This is best classified as:",
       "opts": [
-        "Automatic fiscal policy",
         "A new discretionary tax law",
+        "Automatic fiscal policy",
         "Monetary policy",
         "Crowding out"
       ],
-      "ans": 0,
+      "ans": 1,
       "why": "The lecture lists unemployment payments as an automatic response.",
       "ref": "Lecture 8 PDF p. 19",
       "visual": "disc-auto",
@@ -713,12 +713,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-expansionary",
       "q": "In the professor's p. 21 graph, the economy moves from Y=12T to Y=13T while P rises to 110. Which mechanism is shown?",
       "opts": [
-        "Contractionary fiscal policy shifts AD left",
         "Expansionary policy plus multiplier shifts AD right",
+        "Contractionary fiscal policy shifts AD left",
         "A positive AS shock only",
         "Automatic tax increases shift AD left"
       ],
-      "ans": 1,
+      "ans": 0,
       "why": "Government spending/tax cut and induced spending shift AD toward potential output.",
       "ref": "Lecture 8 PDF p. 21",
       "visual": "expansionary",
@@ -728,12 +728,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-expansionary",
       "q": "Suppose the initial government expenditure change raises AD, then induced consumption creates an additional AD increase. The second effect is:",
       "opts": [
-        "The multiplier effect",
         "Crowding out",
         "Crowding in",
+        "The multiplier effect",
         "An automatic stabiliser"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "Induced spending magnifies the initial fiscal impulse.",
       "ref": "Lecture 8 PDF pp. 21–24",
       "visual": "expansionary",
@@ -744,11 +744,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "A larger deficit increases demand for loanable funds and the real interest rate. Which private component is most directly reduced?",
       "opts": [
         "Government purchases",
-        "Private investment",
         "Tax revenue",
+        "Private investment",
         "Transfers"
       ],
-      "ans": 1,
+      "ans": 2,
       "why": "Higher borrowing costs can reduce interest-sensitive investment.",
       "ref": "Lecture 8 PDF pp. 22–24",
       "visual": "crowding-out",
@@ -756,14 +756,14 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-crowdingout",
-      "q": "Which sequence best captures crowding out in the lecture?",
+      "q": "A government stimulus is financed by a larger deficit. Before private investment responds, which loanable-funds sequence matches the lecture?",
       "opts": [
-        "Budget deficit → LF demand ↑ → real interest rate ↑ → private I ↓",
         "Budget deficit → LF supply ↑ → real interest rate ↓ → private I ↑",
         "Budget surplus → LF demand ↑ → real interest rate ↑ → private I ↓",
-        "Tax cut → LRAS immediately shifts right"
+        "Tax cut → LRAS immediately shifts right",
+        "Budget deficit → LF demand ↑ → real interest rate ↑ → private I ↓"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "This is the annotated mechanism on pp. 22–23.",
       "ref": "Lecture 8 PDF pp. 22–23",
       "visual": "loanable-deficit",
@@ -804,11 +804,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "An inflationary gap exists. Government reduces G. What is the first direct AD effect?",
       "opts": [
         "AD shifts right",
-        "AD shifts left",
         "AS shifts right",
-        "Potential GDP falls immediately"
+        "Potential GDP falls immediately",
+        "AD shifts left"
       ],
-      "ans": 1,
+      "ans": 3,
       "why": "Lower government purchases reduce aggregate demand.",
       "ref": "Lecture 8 PDF pp. 25–27",
       "visual": "contractionary",
@@ -816,14 +816,14 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-contractionary",
-      "q": "Which chain best represents the crowding-in mechanism annotated on p. 27?",
+      "q": "A contractionary fiscal policy creates a budget surplus. Which loanable-funds response could partially offset the fall in aggregate demand?",
       "opts": [
-        "Budget surplus → less borrowing pressure / more LF supply → r ↓ → I ↑",
         "Budget surplus → LF demand ↑ → r ↑ → I ↓",
         "Budget deficit → r ↓ → I ↑",
+        "Budget surplus → less borrowing pressure / more LF supply → r ↓ → I ↑",
         "Tax rise → AS automatically shifts right"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "The professor's annotation shows lower rates and higher investment partially offsetting contraction.",
       "ref": "Lecture 8 PDF p. 27",
       "visual": "loanable-surplus",
@@ -848,12 +848,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-contractionary",
       "q": "Which outcome is consistent with successful contractionary policy against an inflationary gap?",
       "opts": [
-        "Output moves toward potential and inflation pressure decreases",
         "Output moves farther above potential",
+        "Output moves toward potential and inflation pressure decreases",
         "AD shifts right and unemployment falls",
         "The money supply must rise"
       ],
-      "ans": 0,
+      "ans": 1,
       "why": "The policy lowers excessive AD, moving output back toward potential.",
       "ref": "Lecture 8 PDF pp. 25–27",
       "visual": "contractionary",
@@ -863,12 +863,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-limitations",
       "q": "Why does a law-making time lag matter?",
       "opts": [
-        "Policy can take effect after the economy has already changed",
         "It guarantees the multiplier is larger",
         "It removes crowding out",
+        "Policy can take effect after the economy has already changed",
         "It makes automatic stabilisers discretionary"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "Implementation delays can make fiscal action late.",
       "ref": "Lecture 8 PDF p. 28",
       "visual": "limits",
@@ -878,12 +878,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-limitations",
       "q": "Why is estimating potential GDP a fiscal-policy problem?",
       "opts": [
-        "The chosen gap and size of intervention can be mismeasured",
         "Potential GDP is a tax rate",
+        "The chosen gap and size of intervention can be mismeasured",
         "It determines VAT mechanically",
         "It eliminates the need for forecasting"
       ],
-      "ans": 0,
+      "ans": 1,
       "why": "Misjudging Yf means misdiagnosing the gap or policy size.",
       "ref": "Lecture 8 PDF p. 28",
       "visual": "limits",
@@ -891,14 +891,14 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-limitations",
-      "q": "Which combination appears together in the professor's limitations list?",
+      "q": "A student remembers two items from the professor's limitations slide. Which pair could both be correct?",
       "opts": [
-        "Law-making lag and economic forecasting",
         "Exchange-rate targeting and money-supply targeting",
         "Only public debt and customs duties",
-        "VAT and import tariffs only"
+        "VAT and import tariffs only",
+        "Law-making lag and economic forecasting"
       ],
-      "ans": 0,
+      "ans": 3,
       "why": "Both are explicitly listed on p. 28.",
       "ref": "Lecture 8 PDF p. 28",
       "visual": "limits",
@@ -923,12 +923,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-automatic",
       "q": "GDP falls. How does the income-tax stabiliser cushion the downturn?",
       "opts": [
-        "Tax payments fall, cushioning disposable income and consumption",
         "Tax payments rise, cutting disposable income further",
         "Government purchases automatically fall one-for-one",
+        "Tax payments fall, cushioning disposable income and consumption",
         "Interest rates are legally fixed"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "Lower taxes soften the decline in Yd, C and AD.",
       "ref": "Lecture 8 PDF pp. 31–32",
       "visual": "automatic",
@@ -939,11 +939,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "Which is the best statement about automatic stabilisers?",
       "opts": [
         "They remove all economic fluctuations",
-        "They reduce the size of fluctuations without requiring a new policy action each time",
         "They are identical to discretionary stimulus packages",
-        "They always create a budget surplus"
+        "They always create a budget surplus",
+        "They reduce the size of fluctuations without requiring a new policy action each time"
       ],
-      "ans": 1,
+      "ans": 3,
       "why": "The lecture's aim is a less-fluctuating economy, not zero fluctuations.",
       "ref": "Lecture 8 PDF pp. 29–32",
       "visual": "automatic",
@@ -951,14 +951,14 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-synthesis",
-      "q": "A recessionary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "q": "Real GDP is below potential GDP. Which policy package and side effect best match Lecture 8?",
       "opts": [
-        "Expansionary; G↑ or taxes↓; AD right; possible crowding out",
         "Contractionary; G↓ or taxes↑; AD left; crowding out",
+        "Expansionary; G↑ or taxes↓; AD right; possible crowding out",
         "Expansionary; money supply↑; AS right",
         "Automatic; G fixed; AD left"
       ],
-      "ans": 0,
+      "ans": 1,
       "why": "This combines the lecture's direction, tools, AD effect and side effect.",
       "ref": "Lecture 8 PDF pp. 20–24",
       "visual": "matrix",
@@ -966,14 +966,14 @@ window.D_STUDY_FINAL_L8_QUIZZES={
     },
     {
       "topic": "l8-synthesis",
-      "q": "An inflationary gap is diagnosed. Which bundle best matches Lecture 8?",
+      "q": "Real GDP is above potential GDP. Which policy package and side effect best match Lecture 8?",
       "opts": [
-        "Expansionary; G↑; AD right",
         "Contractionary; G↓ or taxes↑; AD left; possible crowding in",
+        "Expansionary; G↑; AD right",
         "Monetary expansion; taxes↓",
         "Automatic transfers↑ necessarily"
       ],
-      "ans": 1,
+      "ans": 0,
       "why": "This is the lecture's contractionary fiscal-policy chain.",
       "ref": "Lecture 8 PDF pp. 25–27",
       "visual": "matrix",
@@ -984,11 +984,11 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "q": "Which statements are true? I. Crowding out can offset expansionary fiscal policy. II. Crowding in can offset contractionary fiscal policy. III. Automatic stabilisers require a fresh law every time GDP changes.",
       "opts": [
         "I only",
-        "II and III only",
         "I and II only",
+        "II and III only",
         "I, II and III"
       ],
-      "ans": 2,
+      "ans": 1,
       "why": "I and II follow the lecture; III contradicts automatic policy.",
       "ref": "Lecture 8 PDF pp. 22–32",
       "visual": "matrix",
@@ -998,12 +998,12 @@ window.D_STUDY_FINAL_L8_QUIZZES={
       "topic": "l8-synthesis",
       "q": "A fiscal-policy question asks for the first step before choosing G or taxes. What should you determine?",
       "opts": [
-        "Whether actual GDP is above or below potential GDP",
         "Whether VAT is exactly 7% forever",
         "Whether the money supply is growing",
+        "Whether actual GDP is above or below potential GDP",
         "Whether exports equal imports"
       ],
-      "ans": 0,
+      "ans": 2,
       "why": "The professor starts with economic-problem identification: recessionary or inflationary gap.",
       "ref": "Lecture 8 PDF pp. 17–18",
       "visual": "gap-choice",
