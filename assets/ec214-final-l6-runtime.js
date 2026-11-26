@@ -160,101 +160,95 @@ function quizProgressInfo(){
  return {pct:Math.round(done.size*100/partIds.length),done:done.size,total:partIds.length};
 }
 
-function progressDashboardInfo(){
- const attempts=state.quizHistory.filter(h=>h.lecture==="l6"&&(h.mode==="reviewing"||h.mode==="mastering"));
- const reviewParts=PARTS.reviewing||[],masterParts=PARTS.mastering||[];
- const partIds=[...new Set([...reviewParts,...masterParts].map(p=>p.id))];
- const rows=partIds.map((id,idx)=>{
-  const review=attempts.filter(h=>h.mode==="reviewing"&&(h.partId||"full")===id);
-  const mastery=attempts.filter(h=>h.mode==="mastering"&&(h.partId||"full")===id);
-  const hasReview=review.length>0,hasMastery=mastery.length>0,done=hasReview||hasMastery;
-  const draftActive=["reviewing","mastering"].some(mode=>{
-   const raw=storeGet(quizDraftKey(mode,id)),d=raw?parse(raw):null;
-   return !!(d&&!d.submitted&&d.answers&&Object.keys(d.answers).length);
+
+function combinedProgressInfo(){
+ const cfg=[
+  {id:"l5",n:5,title:"Aggregate Demand and Aggregate Supply",parts:["p1","p2","p3","p4"],base:"/d-study-app/ec214-final/"},
+  {id:"l6",n:6,title:"Business Cycle",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l6/"},
+  {id:"l7",n:7,title:"Expenditure Multipliers",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l7/"},
+  {id:"l8",n:8,title:"Fiscal Policy",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l8/"},
+  {id:"l9",n:9,title:"Money and Inflation",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l9/"},
+  {id:"l10",n:10,title:"Monetary Policy",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l10/"},
+  {id:"l11",n:11,title:"Lecture 11",parts:[],base:""}
+ ];
+ const stateKey=id=>id==="l5"?"d-study-ec214-final-state::"+user.id:"d-study-ec214-final-"+id+"-state::"+user.id;
+ const draftKey=(id,mode,part)=>"d-study-ec214-final-draft::"+user.id+"::"+id+"::"+mode+"::"+part;
+ let latest=null,total=0,done=0,learning=0;
+ const dist={notstarted:0,learning:0,review:0,mastery:0,both:0};
+ const lectures=cfg.map(c=>{
+  if(!c.parts.length)return {...c,comingSoon:true,pct:null,done:0,total:0,status:"coming",label:"Coming soon",reviewParts:0,masteryParts:0,draftParts:0,best:null};
+  const raw=storeGet(stateKey(c.id)),st=raw?parse(raw):null;
+  const history=st&&Array.isArray(st.quizHistory)?st.quizHistory.filter(h=>h&&h.lecture===c.id&&(h.mode==="reviewing"||h.mode==="mastering")):[];
+  for(const h of history){
+   if(!latest||String(h.at||"")>String(latest.at||""))latest={...h,lectureNo:c.n,lectureTitle:c.title,base:c.base};
+  }
+  const hasFull=history.some(h=>(h.partId||"full")==="full");
+  let reviewParts=0,masteryParts=0,draftParts=0,lectureDone=0;
+  const partRows=c.parts.map(id=>{
+   const r=hasFull||history.some(h=>h.mode==="reviewing"&&(h.partId||"full")===id);
+   const m=hasFull||history.some(h=>h.mode==="mastering"&&(h.partId||"full")===id);
+   let draft=false;
+   if(!r&&!m){
+    for(const mode of ["reviewing","mastering"]){
+     const dRaw=storeGet(draftKey(c.id,mode,id)),d=dRaw?parse(dRaw):null;
+     if(d&&!d.submitted&&d.answers&&Object.keys(d.answers).length){draft=true;break}
+    }
+   }
+   if(r)reviewParts++;if(m)masteryParts++;if(draft)draftParts++;
+   let status="notstarted";
+   if(r&&m)status="both";else if(m)status="mastery";else if(r)status="review";else if(draft)status="learning";
+   dist[status]++;
+   if(r||m)lectureDone++;
+   return {id,status};
   });
-  const all=[...review,...mastery];
-  const bestRaw=all.length?Math.max(...all.map(h=>Number.isFinite(h.percent)?h.percent:Math.round(100*(h.score||0)/(h.total||1)))):null;
-  const tracked=all.filter(h=>Number.isFinite(h.adjustedPercent));
-  const bestLearning=tracked.length?Math.max(...tracked.map(h=>h.adjustedPercent)):null;
-  const rp=reviewParts.find(p=>p.id===id),mp=masterParts.find(p=>p.id===id);
-  const title=rp&&mp&&rp.title!==mp.title?rp.title+" / "+mp.title:(rp||mp||{}).title||("Part "+(idx+1));
-  let status="notstarted",label="Not started";
-  if(hasReview&&hasMastery){status="both";label="Review + Mastery complete"}
-  else if(hasMastery){status="mastery";label="Mastering complete"}
-  else if(hasReview){status="review";label="Reviewing complete"}
-  else if(draftActive){status="learning";label="Currently learning"}
-  return {id,index:idx+1,title,hasReview,hasMastery,done,draftActive,bestRaw,bestLearning,status,label,
-   reviewCount:review.length,masteryCount:mastery.length};
+  total+=c.parts.length;done+=lectureDone;learning+=draftParts;
+  const tracked=history.filter(h=>Number.isFinite(h.adjustedPercent));
+  const best=tracked.length?Math.max(...tracked.map(h=>h.adjustedPercent)):null;
+  const pct=Math.round(lectureDone*100/c.parts.length);
+  const status=lectureDone===c.parts.length?"complete":(lectureDone||draftParts)?"learning":"notstarted";
+  const label=status==="complete"?"Complete":status==="learning"?"In progress":"Not started";
+  return {...c,comingSoon:false,pct,done:lectureDone,total:c.parts.length,status,label,reviewParts,masteryParts,draftParts,best,partRows};
  });
- if(attempts.some(h=>(h.partId||"full")==="full"))rows.forEach(r=>{r.done=true;if(r.status==="notstarted"){r.status="review";r.label="Completed in previous full quiz"}});
- const done=rows.filter(r=>r.done).length,total=rows.length,pct=total?Math.round(done*100/total):0;
- const latest=attempts.at(-1)||null;
- const dist={
-  notstarted:rows.filter(r=>r.status==="notstarted").length,
-  learning:rows.filter(r=>r.status==="learning").length,
-  review:rows.filter(r=>r.status==="review").length,
-  mastery:rows.filter(r=>r.status==="mastery").length,
-  both:rows.filter(r=>r.status==="both").length
- };
- return {rows,done,total,pct,latest,dist};
+ return {lectures,total,done,learning,pct:total?Math.round(done*100/total):0,dist,latest};
 }
-function progressDashboardMarkup(d){
- const latest=d.latest,latestPart=latest?(latest.partId==="full"?"Previous full quiz":partLabel(latest.mode,latest.partId)):"—";
- const latestTitle=latest&&latest.partId!=="full"?(partInfo(latest.mode,latest.partId)?.title||""):"";
- const latestLearning=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":"—";
+function combinedProgressMarkup(d){
+ const latest=d.latest;
+ const latestLearn=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":"—";
  const latestGuessed=latest?Number(latest.guessed||0):0,latestUnsure=latest?Number(latest.unsure||0):0;
- const completed=d.done,inProgress=d.dist.learning,notStarted=d.dist.notstarted;
- const rows=d.rows.map(r=>{
-  const score=r.bestRaw===null?"—":r.bestRaw+"%";
-  const learn=r.bestLearning===null?"—":r.bestLearning+"%";
-  return '<div class="final-progress-part-row"><div class="final-progress-part-copy"><b>Part '+r.index+' · '+esc(r.title)+'</b>'+
-   '<span class="final-mini">Best raw '+score+' · Best learning '+learn+' · Review '+r.reviewCount+'× · Master '+r.masteryCount+'×</span></div>'+
-   '<span class="final-progress-status '+r.status+'">'+esc(r.label)+'</span></div>';
+ const next=d.lectures.find(x=>!x.comingSoon&&x.done<x.total)||d.lectures.find(x=>!x.comingSoon);
+ const rows=d.lectures.map(l=>{
+  if(l.comingSoon)return '<div class="final-progress-lecture-row coming"><div class="final-progress-lecture-copy"><b>Lecture 11 · Coming soon</b><span class="final-mini">Reserved for the next professor lecture · not counted in overall % yet</span></div><span class="final-progress-status notstarted">Coming soon</span></div>';
+  const best=l.best===null?"—":l.best+"%";
+  return '<div class="final-progress-lecture-row"><div class="final-progress-lecture-copy"><div class="final-progress-lecture-title"><b>Lecture '+l.n+' · '+esc(l.title)+'</b><span>'+l.done+'/'+l.total+' parts</span></div>'+
+   '<div class="final-progress-lecture-meter"><i style="width:'+l.pct+'%"></i></div>'+
+   '<span class="final-mini">Best learning '+best+' · Reviewing '+l.reviewParts+' parts · Mastering '+l.masteryParts+' parts'+(l.draftParts?' · '+l.draftParts+' draft':'')+'</span></div>'+
+   '<div class="final-progress-lecture-side"><strong>'+l.pct+'%</strong><span class="final-progress-status '+l.status+'">'+l.label+'</span>'+
+   '<a class="final-action" href="'+l.base+'quiz/">Open</a></div></div>';
  }).join("");
  const bar=(label,count,cls)=>{
   const width=d.total?Math.round(count*100/d.total):0;
   return '<div class="final-progress-dist-row"><span>'+label+'</span><div class="final-progress-dist-track"><i class="'+cls+'" style="width:'+width+'%"></i></div><b>'+count+'</b></div>';
  };
  return '<div class="final-progress-old-hero">'+
-  '<article class="final-card final-progress-welcome"><span class="final-eyebrow">EC214 STUDY DASHBOARD</span><h2>Welcome back, '+esc(user.username||"student")+'.</h2>'+
-   '<p>Use Summary for recall, Reviewing for a first pass, or Mastering when you want harder exam-style practice. Completing either quiz mode counts that part toward overall lecture progress.</p>'+
-   '<div class="final-actions"><button class="final-primary" data-final-go="summary">Continue Summary</button><button class="final-action" data-final-go="quiz">Open Quiz</button><button class="final-action" data-final-go="notes">Open All Notes</button></div></article>'+
-  '<article class="final-card final-progress-ring-card"><span class="final-mini">Overall learning progress</span><div class="final-progress-ring" style="--progress:'+d.pct+'"><div><strong>'+d.pct+'%</strong><small>quiz parts</small></div></div></article>'+
+  '<article class="final-card final-progress-welcome"><span class="final-eyebrow">EC214 STUDY DASHBOARD · LECTURES 5–11</span><h2>Welcome back, '+esc(user.username||"student")+'.</h2>'+
+   '<p>One combined view for the final-exam lectures. A quiz part counts once when either Reviewing or Mastering is submitted. Lecture 11 is reserved but does not lower your percentage until its quiz exists.</p>'+
+   '<div class="final-actions">'+(next?'<a class="final-primary" href="'+next.base+'quiz/">Continue Quiz</a><a class="final-action" href="'+next.base+'summary/">Open Summary</a>':'')+'<a class="final-action" href="/d-study-app/ec214-final/mock/">Final Mock</a></div></article>'+
+  '<article class="final-card final-progress-ring-card"><span class="final-mini">Overall learning progress</span><div class="final-progress-ring" style="--progress:'+d.pct+'"><div><strong>'+d.pct+'%</strong><small>'+d.done+' / '+d.total+' parts</small></div></div></article>'+
   '<article class="final-card final-progress-snapshot"><h3>Current snapshot</h3><dl>'+
-   '<div><dt>Latest quiz</dt><dd>'+(latest?esc(latestPart+(latestTitle?" · "+latestTitle:"")+" · "+(latest.mode==="mastering"?"Mastering":"Reviewing")):"Not started")+'</dd></div>'+
-   '<div><dt>Latest learning score</dt><dd>'+latestLearning+'</dd></div>'+
+   '<div><dt>Latest quiz</dt><dd>'+(latest?'Lecture '+latest.lectureNo+' · '+(latest.mode==="mastering"?"Mastering":"Reviewing")+' · '+esc(latest.partId||"full"):'Not started')+'</dd></div>'+
+   '<div><dt>Latest learning score</dt><dd>'+latestLearn+'</dd></div>'+
    '<div><dt>Confidence flags</dt><dd>'+latestGuessed+' guessed · '+latestUnsure+' unsure</dd></div></dl></article></div>'+
   '<div class="final-progress-stat-grid">'+
    '<article class="final-card"><strong>'+d.pct+'%</strong><span>Overall progress</span></article>'+
-   '<article class="final-card"><strong>'+completed+'</strong><span>Completed parts</span></article>'+
-   '<article class="final-card"><strong>'+inProgress+'</strong><span>Currently learning</span></article>'+
-   '<article class="final-card"><strong>'+notStarted+'</strong><span>Not started</span></article></div>'+
-  '<article class="final-card final-progress-distribution"><h3>Status distribution</h3><p class="final-mini">A part is complete when either Reviewing or Mastering has been submitted. Both modes never double-count.</p>'+
+   '<article class="final-card"><strong>'+d.done+'</strong><span>Completed parts</span></article>'+
+   '<article class="final-card"><strong>'+d.learning+'</strong><span>Currently learning</span></article>'+
+   '<article class="final-card"><strong>'+(d.total-d.done-d.learning)+'</strong><span>Not started</span></article></div>'+
+  '<article class="final-card final-progress-distribution"><h3>Status distribution · all active lecture parts</h3><p class="final-mini">Lectures 5–10 currently contain '+d.total+' quiz parts. Lecture 11 will join automatically when built.</p>'+
    bar("Not started",d.dist.notstarted,"notstarted")+bar("Learning",d.dist.learning,"learning")+bar("Reviewed & practiced",d.dist.review,"review")+bar("Mastering only",d.dist.mastery,"mastery")+bar("Review + Mastery",d.dist.both,"both")+'</article>'+
-  '<article class="final-card final-progress-part-list"><div class="final-progress-part-head"><div><h3>Lecture '+"6"+' quiz parts</h3><p class="final-mini">'+d.done+' of '+d.total+' parts complete · either mode counts</p></div><span class="final-progress-pill">'+d.pct+'%</span></div>'+rows+'</article>';
+  '<article class="final-card final-progress-lecture-list"><div class="final-progress-part-head"><div><h3>Lecture progress · 5–11</h3><p class="final-mini">Combined from each lecture’s existing saved quiz history; records stay in their original lecture storage.</p></div><span class="final-progress-pill">'+d.pct+'%</span></div>'+rows+'</article>';
 }
 function renderProgress(){
- const d=progressDashboardInfo();
- $("finalProgress").innerHTML=progressDashboardMarkup(d)+
- '<div class="final-card"><h3>📘 Lecture 6 · Business Cycle</h3><p>'+
- BOOK.sections.length+' in-depth summary sections · '+QB.reviewing.length+' Reviewing questions · '+
- QB.mastering.length+' Mastering questions. Includes annotated AD–AS graphs, business-cycle diagrams and Phillips curves.</p>'+
- '<div class="final-actions"><button class="final-primary" data-final-go="summary">Search / Read Summary →</button>'+
- '<button class="final-action" data-final-go="quiz">Practice Quiz</button>'+
- '<button class="final-action" data-final-go="history">View Attempt History</button></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>Study references</h3><p>The professor’s Lecture 6 PDF controls the content. Earlier lecture quizzes and the existing 30-question Final Mock are difficulty and style references only.</p><div class="final-actions"><a class="final-action" href="/d-study-app/ec214-final/progress/">← Lecture 5</a><a class="final-action" href="/d-study-app/ec214-final/mock/">Existing Final Mock reference</a></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 7 · Expenditure Multipliers</h3>'+
- '<p>13 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with graphs and tables for MPC, AE equilibrium, inventories, the multiplier and deriving AD. Lecture 7 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l7/summary/">Read Lecture 7 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l7/quiz/">Lecture 7 Quiz</a></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 8 · Fiscal Policy</h3>'+
- '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with budget/tax tables, AD–AS fiscal-policy graphs, crowding effects and automatic stabilisers. Lecture 8 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l8/summary/">Read Lecture 8 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l8/quiz/">Lecture 8 Quiz</a></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 9 · Money and Inflation</h3>'+
- '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with money-demand/market graphs, bond adjustment, central-bank money-supply shifts and long-run quantity-theory visuals. Lecture 9 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l9/summary/">Read Lecture 9 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l9/quiz/">Lecture 9 Quiz</a></div></div>'+
- '<div class="final-card" style="margin-top:14px"><h3>📘 Lecture 10 · Monetary Policy</h3>'+
- '<p>12 source-grounded summary sections, 30 Reviewing and 30 Mastering questions, with central-bank tool maps, transmission channels, policy chains and short-run trade-off visuals. Lecture 10 keeps its own attempts, notes and progress.</p>'+
- '<div class="final-actions"><a class="final-primary" href="/d-study-app/ec214-final/l10/summary/">Read Lecture 10 Summary →</a><a class="final-action" href="/d-study-app/ec214-final/l10/quiz/">Lecture 10 Quiz</a></div></div>';
+ $("finalProgress").innerHTML=combinedProgressMarkup(combinedProgressInfo());
 }
 
 function buildOutline(){
