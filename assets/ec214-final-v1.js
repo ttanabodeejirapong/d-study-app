@@ -181,7 +181,7 @@ function combinedProgressInfo(){
   {id:"l8",n:8,title:"Fiscal Policy",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l8/"},
   {id:"l9",n:9,title:"Money and Inflation",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l9/"},
   {id:"l10",n:10,title:"Monetary Policy",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l10/"},
-  {id:"l11",n:11,title:"Lecture 11",parts:[],base:""}
+  {id:"l11",n:11,title:"International Economics",parts:["p1","p2","p3"],base:"/d-study-app/ec214-final/l11/"}
  ];
  const stateKey=id=>id==="l5"?"d-study-ec214-final-state::"+user.id:"d-study-ec214-final-"+id+"-state::"+user.id;
  const draftKey=(id,mode,part)=>"d-study-ec214-final-draft::"+user.id+"::"+id+"::"+mode+"::"+part;
@@ -243,7 +243,7 @@ function combinedProgressMarkup(d){
  };
  return '<div class="final-progress-old-hero">'+
   '<article class="final-card final-progress-welcome"><span class="final-eyebrow">EC214 STUDY DASHBOARD · LECTURES 5–11</span><h2>Welcome back, '+esc(user.username||"student")+'.</h2>'+
-   '<p>One combined view for the final-exam lectures. A quiz part counts once when either Reviewing or Mastering is submitted. Lecture 11 is reserved but does not lower your percentage until its quiz exists.</p>'+
+   '<p>One combined view for the final-exam lectures. A quiz part counts once when either Reviewing or Mastering is submitted. Lectures 5–11 are included.</p>'+
    '<div class="final-actions">'+(next?'<a class="final-primary" href="'+next.base+'quiz/">Continue Quiz</a><a class="final-action" href="'+next.base+'summary/">Open Summary</a>':'')+'<a class="final-action" href="/d-study-app/ec214-final/mock/">Final Mock</a></div></article>'+
   '<article class="final-card final-progress-ring-card"><span class="final-mini">Overall learning progress</span><div class="final-progress-ring" style="--progress:'+d.pct+'"><div><strong>'+d.pct+'%</strong><small>'+d.done+' / '+d.total+' parts</small></div></div></article>'+
   '<article class="final-card final-progress-snapshot"><h3>Current snapshot</h3><dl>'+
@@ -255,7 +255,7 @@ function combinedProgressMarkup(d){
    '<article class="final-card"><strong>'+d.done+'</strong><span>Completed parts</span></article>'+
    '<article class="final-card"><strong>'+d.learning+'</strong><span>Currently learning</span></article>'+
    '<article class="final-card"><strong>'+(d.total-d.done-d.learning)+'</strong><span>Not started</span></article></div>'+
-  '<article class="final-card final-progress-distribution"><h3>Status distribution · all active lecture parts</h3><p class="final-mini">Lectures 5–10 currently contain '+d.total+' quiz parts. Lecture 11 will join automatically when built.</p>'+
+  '<article class="final-card final-progress-distribution"><h3>Status distribution · all active lecture parts</h3><p class="final-mini">Lectures 5–11 currently contain '+d.total+' quiz parts.</p>'+
    bar("Not started",d.dist.notstarted,"notstarted")+bar("Learning",d.dist.learning,"learning")+bar("Reviewed & practiced",d.dist.review,"review")+bar("Mastering only",d.dist.mastery,"mastery")+bar("Review + Mastery",d.dist.both,"both")+'</article>'+
   '<article class="final-card final-progress-lecture-list"><div class="final-progress-part-head"><div><h3>Lecture progress · 5–11</h3><p class="final-mini">Combined from each lecture’s existing saved quiz history; records stay in their original lecture storage.</p></div><span class="final-progress-pill">'+d.pct+'%</span></div>'+rows+'</article>';
 }
