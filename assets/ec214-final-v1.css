@@ -672,3 +672,29 @@ body.dark #f-mock .final-qnum.noted::after{background:#ae9aff}
  .final-progress-part-row{grid-template-columns:1fr;gap:7px}
  .final-progress-status{justify-self:start}
 }
+
+
+/* v14.21 · Combined EC214 Lecture 5–11 progress list. */
+.final-progress-lecture-list{margin-bottom:14px}
+.final-progress-lecture-row{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;
+ padding:15px 2px;border-top:1px solid var(--final-border)
+}
+.final-progress-lecture-row:first-of-type{border-top:0}
+.final-progress-lecture-row.coming{opacity:.78}
+.final-progress-lecture-copy{display:grid;gap:7px;min-width:0}
+.final-progress-lecture-title{display:flex;gap:10px;align-items:baseline;justify-content:space-between}
+.final-progress-lecture-title>b{line-height:1.35}
+.final-progress-lecture-title>span{font-size:.78em;color:var(--final-muted);white-space:nowrap}
+.final-progress-lecture-meter{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.final-progress-lecture-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--final-accent),color-mix(in srgb,var(--final-accent) 68%,#786fd0))}
+.final-progress-lecture-side{display:grid;grid-template-columns:auto auto;gap:7px;align-items:center;justify-items:end}
+.final-progress-lecture-side>strong{font-size:1.25em;color:var(--ink)}
+.final-progress-lecture-side>.final-action{grid-column:1/-1;padding:6px 10px;font-size:.78em}
+.final-progress-status.complete{color:#18745f;background:color-mix(in srgb,#2c9a7d 10%,var(--card));border-color:color-mix(in srgb,#2c9a7d 30%,var(--final-border))}
+@media(max-width:600px){
+ .final-progress-lecture-row{grid-template-columns:1fr}
+ .final-progress-lecture-side{grid-template-columns:auto 1fr auto;justify-items:start}
+ .final-progress-lecture-side>.final-action{grid-column:auto}
+ .final-progress-lecture-title{align-items:flex-start}
+}
