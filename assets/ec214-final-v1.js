@@ -214,7 +214,7 @@ function progressDashboardMarkup(d){
  const latest=d.latest,latestPart=latest?(latest.partId==="full"?"Previous full quiz":partLabel(latest.mode,latest.partId)):"—";
  const latestTitle=latest&&latest.partId!=="full"?(partInfo(latest.mode,latest.partId)?.title||""):"";
  const latestLearning=latest&&Number.isFinite(latest.adjustedPercent)?latest.adjustedPercent+"%":"—";
- const latestFlags=latest?(Number(latest.guessed||0)+Number(latest.unsure||0)):0;
+ const latestGuessed=latest?Number(latest.guessed||0):0,latestUnsure=latest?Number(latest.unsure||0):0;
  const completed=d.done,inProgress=d.dist.learning,notStarted=d.dist.notstarted;
  const rows=d.rows.map(r=>{
   const score=r.bestRaw===null?"—":r.bestRaw+"%";
@@ -235,7 +235,7 @@ function progressDashboardMarkup(d){
   '<article class="final-card final-progress-snapshot"><h3>Current snapshot</h3><dl>'+
    '<div><dt>Latest quiz</dt><dd>'+(latest?esc(latestPart+(latestTitle?" · "+latestTitle:"")+" · "+(latest.mode==="mastering"?"Mastering":"Reviewing")):"Not started")+'</dd></div>'+
    '<div><dt>Latest learning score</dt><dd>'+latestLearning+'</dd></div>'+
-   '<div><dt>Confidence flags</dt><dd>'+latestFlags+' guessed / unsure</dd></div></dl></article></div>'+
+   '<div><dt>Confidence flags</dt><dd>'+latestGuessed+' guessed · '+latestUnsure+' unsure</dd></div></dl></article></div>'+
   '<div class="final-progress-stat-grid">'+
    '<article class="final-card"><strong>'+d.pct+'%</strong><span>Overall progress</span></article>'+
    '<article class="final-card"><strong>'+completed+'</strong><span>Completed parts</span></article>'+
